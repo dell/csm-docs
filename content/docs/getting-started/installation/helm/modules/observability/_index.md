@@ -10,9 +10,9 @@ description: >
 
 The following third-party components are required in the same Kubernetes cluster where Container Storage Modules Observability has been deployed:
 
-* [Prometheus](#prometheus)
-* [Grafana](#grafana)
-* [Other Deployment Methods](#other-deployment-methods)
+* [Prometheus](../postinstallation#prometheus)
+* [Grafana](../postinstallation#grafana)
+* [Other Deployment Methods](../postinstallation#other-deployment-methods)
 
 There are various ways to deploy these components. We recommend following the Helm deployments according to the specifications defined below.
 
@@ -22,9 +22,9 @@ There are various ways to deploy these components. We recommend following the He
 
 Prometheus and Container Storage Modules Observability services run on the same Kubernetes cluster, with Container Storage Modules sending metrics to the OpenTelemetry Collector, which Prometheus then scrapes for data.
 
-| Supported Version | Image                   | Helm Chart                                                   |
-| ----------------- | ----------------------- | ------------------------------------------------------------ |
-| 2.34.0           | prom/prometheus:v2.34.0 | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
+| Supported Version | Image                   | Helm Chart                                                                                               |
+| ----------------- | ----------------------- | -------------------------------------------------------------------------------------------------------- |
+| 2.34.0            | prom/prometheus:v2.34.0 | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
 
 **Note**: It is the user's responsibility to provide persistent storage for Prometheus if they want to preserve historical data.
 
@@ -115,6 +115,7 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
         tls_config:
           insecure_skip_verify: true
    ```
+
   {{< /hide  >}}
   {{< hide class="2" >}}
    To scrape the KubeVirt metrics, include the following scrape config to the `prometheus-values.yaml` configuration file.
@@ -143,6 +144,7 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
         tls_config:
           insecure_skip_verify: true
    ```
+
   {{< /hide  >}}
   {{< hide class="4" >}}
    To scrape the KubeVirt metrics, include the following scrape config to the `prometheus-values.yaml` configuration file.
@@ -171,12 +173,13 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
         tls_config:
           insecure_skip_verify: true
    ```
+
   {{< /hide  >}}
   {{< hide class="2" >}}
-   To scrape powerstore metrics using Powerstore Exporter Metrics, add the following configurations to prometheus-values.yaml. More details can be found [here](https://github.com/dell/powerstore-metrics-exporter/tree/main/templates/prometheus)
+   To scrape powerstore metrics using Powerstore Metrics Exporter, add the following configurations to prometheus-values.yaml. More details can be found [here](https://github.com/dell/powerstore-metrics-exporter/tree/main/templates/prometheus)
 
    ```yaml
-      - job_name: powerstore_10.0.0.1_cluster
+        - job_name: powerstore_10.0.0.1_cluster
           honor_timestamps: true
           scrape_interval: 15m
           scrape_timeout: 3m
@@ -267,6 +270,7 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
             - targets:
                 - 127.0.0.1:9010
    ```
+
    Replace 10.0.0.1 with the powerstore array IP.
   {{< /hide >}}
 
@@ -313,14 +317,14 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
 
 The Grafana dashboards require Grafana to be deployed in the same Kubernetes cluster as Container Storage Modules Observability.  Below are the configuration details required to properly set up Grafana to work with Container Storage Modules Observability.
 
-| Supported Version | Helm Chart                                                |
-| ----------------- | --------------------------------------------------------- |
-| 11.x      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
+| Supported Version | Helm Chart                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------- |
+| 11.x              | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
 
 Grafana must be configured with the following data sources/plugins:
 
-| Name                   | Additional Information                                                     |
-| ---------------------- | -------------------------------------------------------------------------- |
+| Name                   | Additional Information                                                                               |
+| ---------------------- | ---------------------------------------------------------------------------------------------------- |
 | Prometheus data source | [Prometheus data source](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)   |
 
 Settings for the Grafana Prometheus data source:
@@ -429,179 +433,182 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     On your terminal, run the commands below:
 
     ```terminal
-
     helm install grafana grafana/grafana -n [CSM_NAMESPACE] -f grafana-values.yaml
     ```
 
 ### Other Deployment Methods
 
-- [Grafana Labs Operator Deployment](https://grafana.com/docs/grafana-cloud/kubernetes/prometheus/prometheus_operator/)
-- [Rancher Monitoring and Alerting Deployment](https://rancher.com/docs/rancher/v2.6/en/monitoring-alerting/)
+* [Grafana Labs Operator Deployment](https://grafana.com/docs/grafana-cloud/kubernetes/prometheus/prometheus_operator/)
+
+* [Rancher Monitoring and Alerting Deployment](https://ranchermanager.docs.rancher.com/integrations-in-rancher/monitoring-and-alerting)
 
 ## Importing Container Storage Modules for Observability Dashboards
 
 Once Grafana is properly configured, you can import the pre-built observability dashboards. Log into Grafana and click the + icon in the side menu. Then click Import. From here you can upload the JSON files or paste the JSON text directly into the text area.  Below are the locations of the dashboards that can be imported:
 
 {{< hide class="1" >}}
+
 | Dashboard | Description |
-|-----------|-------------|
-| [PowerFlex: I/O Performance by Kubernetes Node](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/sdc_io_metrics.json)                       | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by Kubernetes node                                                                     |
-| [PowerFlex: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/volume_io_metrics.json)                 | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume                                                                              |
-| [PowerFlex: Storage Pool Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/storage_consumption.json)              | Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct                                        |  
-| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
-<br>
+| --------- | ----------- |
+| [PowerFlex: I/O Performance by Kubernetes Node](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/sdc_io_metrics.json) | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by Kubernetes node |
+| [PowerFlex: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/volume_io_metrics.json) | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume |
+| [PowerFlex: Storage Pool Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/storage_consumption.json) | Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct |  
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json) | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
 
 ### Scalable Kubernetes Metrics for Observability and Visualization
 
 To visualize Dell CSI driver provisioned metrics from multiple clusters in a single Grafana dashboard, users can create multiple data sources by navigating to Data Sources in the left-hand menu and selecting `Add new Data Source`. Provide the exposed Prometheus URL from each cluster along with the required authentication details.
-Karavi Observability includes sample dashboards with drill-down capabilities to help kick-start a unified observability experience across multiple Kubernetes clusters.<br>
+Karavi Observability provides pre-built sample dashboards with drill-down capabilities, enabling users to quickly establish a unified observability experience across multiple Kubernetes clusters.
 
 Sample dashboards for KubeVirt volumes are available in Karavi Observability for each supported platform. To use these dashboards, first install KubeVirt by following the official [KubeVirt documentation](https://kubevirt.io/user-guide/cluster_admin/installation/#installing-kubevirt-on-kubernetes). Once KubeVirt pods are running, install CDI using the [CDI installation guide](https://kubevirt.io/user-guide/storage/containerized_data_importer/#containerized-data-importer). Ensure that `kube-state-metrics` is enabled and scraped by Prometheus, as these metrics are required for writing join PromQL queries that power the drill-downs in the sample Grafana dashboards. Below are the locations of the dashboards that can be imported to visualize KubeVirt metrics:
 
-
 | Dashboard | Description |
-|-----------|-------------|
-| [KubeVirt VM Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_vm_metric.json)                       | Provides the information about kubevirt volumes in the selected cluster                                                                     |
-| [PowerFlex Volume IO Metrics with kubevirt details](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_powerflex_metrics.json)                    | Provides visibility into Virtual Machine status and associated disk details, while also capturing I/O performance metrics for volumes provisioned by Dell CSI PowerFlex that are used by the VMs                                |
-
+| --------- | ----------- |
+| [KubeVirt VM Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_vm_metric.json) | Provides the information about kubevirt volumes in the selected cluster |
+| [PowerFlex Volume IO Metrics with kubevirt details](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_powerflex_metrics.json) | Provides visibility into Virtual Machine status and associated disk details, while also capturing I/O performance metrics for volumes provisioned by Dell CSI PowerFlex that are used by the VMs |
 
 In order to clone the dashboard, user can import the dashboard in Grafana, then click on `Edit` button on top right of dashboard, click on `Save as Copy` and provide appropriate title before saving it.
 
 To add custom panels to the sample dashboard, import the dashboard into Grafana and click `Edit` in the top-right corner. Then select `Add` and choose the visualization panel. User can configure the panel by writing PromQL join queries to retrieve customized metrics. For example, to visualize PVC-to-VM mapping, use the following query:
+
  ```terminal
 kubevirt_vmi_info * on(vmi_pod, namespace) group_left(persistentvolumeclaim) label_replace(kube_pod_spec_volumes_persistentvolumeclaims_info, "vmi_pod", "$1", "pod", "(.*)")
 ```
-This query performs a join between two metrics: kubevirt_vmi_info (providing VirtualMachineInstance details) and kube_pod_spec_volumes_persistentvolumeclaims_info (providing pod-to-PVC mapping). Using label_replace and PromQL’s on(...) group_left(...) matching, it enriches VMI data with PVC information from the pod specification. 
+
+This query performs a join between two metrics: kubevirt_vmi_info (providing VirtualMachineInstance details) and kube_pod_spec_volumes_persistentvolumeclaims_info (providing pod-to-PVC mapping). Using label_replace and PromQL’s on(...) group_left(...) matching, it enriches VMI data with PVC information from the pod specification.
 
 More details on metrics exported by kubevirt can be found [here](https://kubevirt.io/monitoring/metrics.html#containerized-data-importer) and metrics for kube-state-metrics can be found [here](https://github.com/kubernetes/kube-state-metrics/tree/main/docs/metrics).
 
-
 The following sample dashboards enable users to visualize joined metrics from kube-state-metrics and natively exposed Dell storage array metrics:
 
 | Dashboard | Description |
-|-----------|-------------|
-| [Topology Dashboard with Kube State Metrics Join Queries](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/topology.json)                       | Provides visibility into volumes and its topology details which are provisioned by Dell CSI (Container Storage Interface) driver using join queries on kube-state-metrics                                                                      |
-| [Kube State Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/kube_state_metrics.json)                    | Provides a comprehensive overview of the state and performance of Kubernetes resources within a cluster                                |
+| --------- | ----------- |
+| [Topology Dashboard with Kube State Metrics Join Queries](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/topology.json) | Provides visibility into volumes and its topology details which are provisioned by Dell CSI (Container Storage Interface) driver using join queries on kube-state-metrics |
+| [Kube State Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/kube_state_metrics.json) | Provides a comprehensive overview of the state and performance of Kubernetes resources within a cluster |
+
 {{< /hide >}}
 
 {{< hide class="2" >}}
-| Dashboard | Description |
-|-----------|-------------|
-| [PowerStore: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/volume_io_metrics.json)               | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume                                                                              |
-| [PowerStore: I/O Performance by File System](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/filesystem_io_metrics.json)                  | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by filesystem                                                                          |
-| [PowerStore: Array and Storage Class Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/storage_consumption.json) | Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct                                        |  
-| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
 
+| Dashboard | Description |
+| --------- | ----------- |
+| [PowerStore: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/volume_io_metrics.json) | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume |
+| [PowerStore: I/O Performance by File System](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/filesystem_io_metrics.json) | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by filesystem |
+| [PowerStore: Array and Storage Class Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/storage_consumption.json) | Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct |  
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json) | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
 
 ### Scalable Kubernetes Metrics for Observability and Visualization
 
-To visualize Dell CSI driver–provisioned metrics from multiple clusters in a single Grafana dashboard, users can create multiple data sources by navigating to Data Sources in the left-hand menu and selecting `Add new Data Source`. Provide the exposed Prometheus URL from each cluster along with the required authentication details.
-Karavi Observability includes sample dashboards with drill-down capabilities to help kick-start a unified observability experience across multiple Kubernetes clusters. <br>
+To visualize Dell CSI driver provisioned metrics from multiple clusters in a single Grafana dashboard, users can create multiple data sources by navigating to Data Sources in the left-hand menu and selecting `Add new Data Source`. Provide the exposed Prometheus URL from each cluster along with the required authentication details.
+Karavi Observability provides pre-built sample dashboards with drill-down capabilities, enabling users to quickly establish a unified observability experience across multiple Kubernetes clusters.
 
 Sample dashboards for KubeVirt volumes are available in Karavi Observability for each supported platform. To use these dashboards, first install KubeVirt by following the official [KubeVirt documentation](https://kubevirt.io/user-guide/cluster_admin/installation/#installing-kubevirt-on-kubernetes). Once KubeVirt pods are running, install CDI using the [CDI installation guide](https://kubevirt.io/user-guide/storage/containerized_data_importer/#containerized-data-importer). Ensure that `kube-state-metrics` is enabled and scraped by Prometheus, as these metrics are required for writing join PromQL queries that power the drill-downs in the sample Grafana dashboards. Below are the locations of the dashboards that can be imported to visualize KubeVirt metrics:
 
-
 | Dashboard | Description |
-|-----------|-------------|
-| [KubeVirt VM Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_vm_metric.json)                       | Provides the information about kubevirt volumes in the selected cluster                                                                     |
-| [Powerstore Volume Performance metrics for Kubevirt Workloads](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_powerstore_metrics.json)              | Provides visibility into the overall capacity of volumes provisioned by Dell CSI PowerStore driver that are consumed by Virtual Machines, along with detailed insights into storage groups and volume IOPS. Also provides a drill-down that enables users to select and analyze the performance of individual volumes.  |
+| --------- | ----------- |
+| [KubeVirt VM Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_vm_metric.json) | Provides the information about kubevirt volumes in the selected cluster |
+| [Powerstore Volume Performance metrics for Kubevirt Workloads](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_powerstore_metrics.json) | Provides visibility into the overall capacity of volumes provisioned by Dell CSI PowerStore driver that are consumed by Virtual Machines, along with detailed insights into storage groups and volume IOPS. Also provides a drill-down that enables users to select and analyze the performance of individual volumes. |
 
+In order to clone the dashboard, user can import the dashboard in Grafana, then click on `Edit` button on top right of dashboard, click on `Save as Copy` and provide appropriate title before saving it.
 
-In order to clone the dashboard, user can import the dashboard in Grafana, then click on `Edit` button on top right of dashboard, click on `Save as Copy` and provide appropriate title before saving it. <br>
+To add custom panels to the sample dashboard, import the dashboard into Grafana and click `Edit` in the top-right corner. Then select `Add` and choose the visualization panel. User can configure the panel by writing PromQL join queries to retrieve customized metrics. For example, to visualize PVC-to-VM mapping, use the following query:
 
-To add custom panels to the sample dashboard, import the dashboard into Grafana and click `Edit` in the top-right corner. Then select `Add` and choose the visualization panel. User can configure the panel by writing PromQL join queries to retrieve customized metrics. For example, to visualize PVC-to-VM mapping, use the following query: <br>
  ```terminal
 kubevirt_vmi_info * on(vmi_pod, namespace) group_left(persistentvolumeclaim) label_replace(kube_pod_spec_volumes_persistentvolumeclaims_info, "vmi_pod", "$1", "pod", "(.*)")
 ```
-This query performs a join between two metrics: kubevirt_vmi_info (providing VirtualMachineInstance details) and kube_pod_spec_volumes_persistentvolumeclaims_info (providing pod-to-PVC mapping). Using label_replace and PromQL’s on(...) group_left(...) matching, it enriches VMI data with PVC information from the pod specification. <br>
 
-More details on metrics exported by kubevirt can be found [here](https://kubevirt.io/monitoring/metrics.html#containerized-data-importer) and metrics for kube-state-metrics can be found [here](https://github.com/kubernetes/kube-state-metrics/tree/main/docs/metrics). <br>
+This query performs a join between two metrics: kubevirt_vmi_info (providing VirtualMachineInstance details) and kube_pod_spec_volumes_persistentvolumeclaims_info (providing pod-to-PVC mapping). Using label_replace and PromQL’s on(...) group_left(...) matching, it enriches VMI data with PVC information from the pod specification.
+
+More details on metrics exported by kubevirt can be found [here](https://kubevirt.io/monitoring/metrics.html#containerized-data-importer) and metrics for kube-state-metrics can be found [here](https://github.com/kubernetes/kube-state-metrics/tree/main/docs/metrics).
 
 The following sample dashboards enable users to visualize joined metrics from kube-state-metrics and natively exposed Dell storage array metrics:
 
 | Dashboard | Description |
-|-----------|-------------|
-| [Topology Dashboard with Kube State Metrics Join Queries](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/topology.json)                       | Provides visibility into volumes and its topology details which are provisioned by Dell CSI (Container Storage Interface) driver using join queries on kube-state-metrics                                                                      |
-| [Kube State Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/kube_state_metrics.json)                    | Provides a comprehensive overview of the state and performance of Kubernetes resources within a cluster                                |
-| [Volume Performance metrics for Powerstore](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/ksm_powerstore_metrics_exporter.json)                    | Provides an insight on the performance of volumes provisioned by Dell CSI powerstore driver. Also provides a drill-down that enables users to select and analyze the performance of individual volumes                                |
+| --------- | ----------- |
+| [Topology Dashboard with Kube State Metrics Join Queries](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/topology.json) | Provides visibility into volumes and its topology details which are provisioned by Dell CSI (Container Storage Interface) driver using join queries on kube-state-metrics |
+| [Kube State Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/kube_state_metrics.json) | Provides a comprehensive overview of the state and performance of Kubernetes resources within a cluster |
+| [Volume Performance metrics for Powerstore](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/ksm_powerstore_metrics_exporter.json) | Provides an insight on the performance of volumes provisioned by Dell CSI powerstore driver. Also provides a drill-down that enables users to select and analyze the performance of individual volumes |
 
 {{< /hide >}}
 
 {{< hide class="3" >}}
+
 | Dashboard | Description |
-|-----------|-------------|
-| [PowerScale: I/O Performance by Cluster](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/cluster_io_metrics.json)                         | Provides visibility into the I/O performance metrics (IOPS, bandwidth) by cluster                                                                                      |
-| [PowerScale: Capacity by Cluster](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/cluster_capacity.json)                                  | Provides visibility into the total, used, available capacity and directory quota capacity by cluster                                                                   |
-| [PowerScale: Capacity by Quota](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/volume_capacity.json)                                     | Provides visibility into the subscribed, remaining capacity and usage by quota                                                                                         |  
-| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
-<br>
+| --------- | ----------- |
+| [PowerScale: I/O Performance by Cluster](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/cluster_io_metrics.json)| Provides visibility into the I/O performance metrics (IOPS, bandwidth) by cluster |
+| [PowerScale: Capacity by Cluster](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/cluster_capacity.json) | Provides visibility into the total, used, available capacity and directory quota capacity by cluster |
+| [PowerScale: Capacity by Quota](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/volume_capacity.json) | Provides visibility into the subscribed, remaining capacity and usage by quota |  
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json) | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
 
 ### Scalable Kubernetes Metrics for Observability and Visualization
 
-To visualize Dell CSI driver–provisioned metrics from multiple clusters in a single Grafana dashboard, users can create multiple data sources by navigating to Data Sources in the left-hand menu and selecting `Add new Data Source`. Provide the exposed Prometheus URL from each cluster along with the required authentication details.
-Karavi Observability includes sample dashboards with drill-down capabilities to help kick-start a unified observability experience across multiple Kubernetes clusters.<br>
-
-The following sample dashboards enable users to visualize joined metrics from kube-state-metrics and natively exposed Dell storage array metrics:<br>
-
-| Dashboard | Description |
-|-----------|-------------|
-| [Topology Dashboard with Kube State Metrics Join Queries](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/topology.json)                       | Provides visibility into volumes and its topology details which are provisioned by Dell CSI (Container Storage Interface) driver using join queries on kube-state-metrics                                                                      |
-| [Kube State Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/kube_state_metrics.json)                    | Provides a comprehensive overview of the state and performance of Kubernetes resources within a cluster                                |
-{{< /hide >}}
-
-{{< hide class="4" >}}
-| Dashboard | Description |
-|-----------|-------------|
-| [PowerMax: PowerMax Capacity](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax/storage_consumption.json)                                    | Provides visibility into the subscribed, used, available capacity for a storage class and associated underlying storage construct                                      |
-| [PowerMax: PowerMax Performance](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax/performance.json)                                         | Provides visibility into the I/O performance metrics (IOPS, bandwidth) by storage group and volume                                                                     |  
-| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
-
-
-### Scalable Kubernetes Metrics for Observability and Visualization
-
-To visualize Dell CSI driver–provisioned metrics from multiple clusters in a single Grafana dashboard, users can create multiple data sources by navigating to Data Sources in the left-hand menu and selecting `Add new Data Source`. Provide the exposed Prometheus URL from each cluster along with the required authentication details.
-Karavi Observability includes sample dashboards with drill-down capabilities to help kick-start a unified observability experience across multiple Kubernetes clusters.<br>
-
-Sample dashboards for KubeVirt volumes are available in Karavi Observability for each supported platform. To use these dashboards, first install KubeVirt by following the official [KubeVirt documentation](https://kubevirt.io/user-guide/cluster_admin/installation/#installing-kubevirt-on-kubernetes). Once KubeVirt pods are running, install CDI using the [CDI installation guide](https://kubevirt.io/user-guide/storage/containerized_data_importer/#containerized-data-importer). Ensure that `kube-state-metrics` is enabled and scraped by Prometheus, as these metrics are required for writing join PromQL queries that power the drill-downs in the sample Grafana dashboards. Below are the locations of the dashboards that can be imported to visualize KubeVirt metrics:<br>
-
-| Dashboard | Description |
-|-----------|-------------|
-| [KubeVirt VM Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_vm_metric.json)                       | Provides the information about kubevirt volumes in the selected cluster                                                                     |
-| [PowerMax Performance Metrics for Kubevirt Loads](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_powermax_metrics.json)                     | Provides visibility into the summary of capacity of volumes provisioned by Dell CSI PowerMax driver that are consumed by Virtual Machines. Also, it captures the storage group and volume IOPs. Also provides a drill-down that enables users to select and analyze the performance of individual volumes                     |
-<br>
-
-In order to clone the dashboard, user can import the dashboard in Grafana, then click on `Edit` button on top right of dashboard, click on `Save as Copy` and provide appropriate title before saving it.<br>
-
-To add custom panels to the sample dashboard, import the dashboard into Grafana and click `Edit` in the top-right corner. Then select `Add` and choose the visualization panel. User can configure the panel by writing PromQL join queries to retrieve customized metrics. For example, to visualize PVC-to-VM mapping, use the following query:<br>
- ```terminal
-kubevirt_vmi_info * on(vmi_pod, namespace) group_left(persistentvolumeclaim) label_replace(kube_pod_spec_volumes_persistentvolumeclaims_info, "vmi_pod", "$1", "pod", "(.*)")
-```
-This query performs a join between two metrics: kubevirt_vmi_info (providing VirtualMachineInstance details) and kube_pod_spec_volumes_persistentvolumeclaims_info (providing pod-to-PVC mapping). Using label_replace and PromQL’s on(...) group_left(...) matching, it enriches VMI data with PVC information from the pod specification. 
-<br>
-
-More details on metrics exported by kubevirt can be found [here](https://kubevirt.io/monitoring/metrics.html#containerized-data-importer) and metrics for kube-state-metrics can be found [here](https://github.com/kubernetes/kube-state-metrics/tree/main/docs/metrics).<br>
+To visualize Dell CSI driver provisioned metrics from multiple clusters in a single Grafana dashboard, users can create multiple data sources by navigating to Data Sources in the left-hand menu and selecting `Add new Data Source`. Provide the exposed Prometheus URL from each cluster along with the required authentication details.
+Karavi Observability provides pre-built sample dashboards with drill-down capabilities, enabling users to quickly establish a unified observability experience across multiple Kubernetes clusters.
 
 The following sample dashboards enable users to visualize joined metrics from kube-state-metrics and natively exposed Dell storage array metrics:
 
 | Dashboard | Description |
-|-----------|-------------|
-| [Topology Dashboard with Kube State Metrics Join Queries](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/topology.json)                       | Provides visibility into volumes and its topology details which are provisioned by Dell CSI (Container Storage Interface) driver using join queries on kube-state-metrics                                                                      |
-| [Kube State Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/kube_state_metrics.json)                    | Provides a comprehensive overview of the state and performance of Kubernetes resources within a cluster                                |
+| --------- | ----------- |
+| [Topology Dashboard with Kube State Metrics Join Queries](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/topology.json) | Provides visibility into volumes and its topology details which are provisioned by Dell CSI (Container Storage Interface) driver using join queries on kube-state-metrics |
+| [Kube State Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/kube_state_metrics.json) | Provides a comprehensive overview of the state and performance of Kubernetes resources within a cluster |
+
 {{< /hide >}}
 
+{{< hide class="4" >}}
+
+| Dashboard | Description |
+| --------- | ----------- |
+| [PowerMax: PowerMax Capacity](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax/storage_consumption.json) | Provides visibility into the subscribed, used, available capacity for a storage class and associated underlying storage construct |
+| [PowerMax: PowerMax Performance](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax/performance.json) | Provides visibility into the I/O performance metrics (IOPS, bandwidth) by storage group and volume |  
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json) | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
+
+### Scalable Kubernetes Metrics for Observability and Visualization
+
+To visualize Dell CSI driver provisioned metrics from multiple clusters in a single Grafana dashboard, users can create multiple data sources by navigating to Data Sources in the left-hand menu and selecting `Add new Data Source`. Provide the exposed Prometheus URL from each cluster along with the required authentication details.
+Karavi Observability provides pre-built sample dashboards with drill-down capabilities, enabling users to quickly establish a unified observability experience across multiple Kubernetes clusters.
+
+Sample dashboards for KubeVirt volumes are available in Karavi Observability for each supported platform. To use these dashboards, first install KubeVirt by following the official [KubeVirt documentation](https://kubevirt.io/user-guide/cluster_admin/installation/#installing-kubevirt-on-kubernetes). Once KubeVirt pods are running, install CDI using the [CDI installation guide](https://kubevirt.io/user-guide/storage/containerized_data_importer/#containerized-data-importer). Ensure that `kube-state-metrics` is enabled and scraped by Prometheus, as these metrics are required for writing join PromQL queries that power the drill-downs in the sample Grafana dashboards. Below are the locations of the dashboards that can be imported to visualize KubeVirt metrics:
+
+| Dashboard | Description |
+| --------- | ----------- |
+| [KubeVirt VM Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_vm_metric.json) | Provides the information about kubevirt volumes in the selected cluster |
+| [PowerMax Performance Metrics for Kubevirt Loads](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_powermax_metrics.json) | Provides visibility into the summary of capacity of volumes provisioned by Dell CSI PowerMax driver that are consumed by Virtual Machines. Also, it captures the storage group and volume IOPs. Also provides a drill-down that enables users to select and analyze the performance of individual volumes |
+
+In order to clone the dashboard, user can import the dashboard in Grafana, then click on `Edit` button on top right of dashboard, click on `Save as Copy` and provide appropriate title before saving it.
+
+To add custom panels to the sample dashboard, import the dashboard into Grafana and click `Edit` in the top-right corner. Then select `Add` and choose the visualization panel. User can configure the panel by writing PromQL join queries to retrieve customized metrics. For example, to visualize PVC-to-VM mapping, use the following query:
+
+ ```terminal
+kubevirt_vmi_info * on(vmi_pod, namespace) group_left(persistentvolumeclaim) label_replace(kube_pod_spec_volumes_persistentvolumeclaims_info, "vmi_pod", "$1", "pod", "(.*)")
+```
+
+This query performs a join between two metrics: kubevirt_vmi_info (providing VirtualMachineInstance details) and kube_pod_spec_volumes_persistentvolumeclaims_info (providing pod-to-PVC mapping). Using label_replace and PromQL’s on(...) group_left(...) matching, it enriches VMI data with PVC information from the pod specification.
+
+More details on metrics exported by kubevirt can be found [here](https://kubevirt.io/monitoring/metrics.html#containerized-data-importer) and metrics for kube-state-metrics can be found [here](https://github.com/kubernetes/kube-state-metrics/tree/main/docs/metrics).
+
+The following sample dashboards enable users to visualize joined metrics from kube-state-metrics and natively exposed Dell storage array metrics:
+
+| Dashboard | Description |
+| --------- | ----------- |
+| [Topology Dashboard with Kube State Metrics Join Queries](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/topology.json) | Provides visibility into volumes and its topology details which are provisioned by Dell CSI (Container Storage Interface) driver using join queries on kube-state-metrics |
+| [Kube State Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/k8smetrics/kube_state_metrics.json) | Provides a comprehensive overview of the state and performance of Kubernetes resources within a cluster |
+
+{{< /hide >}}
 
 ## Dynamic Configuration
 
 Some parameters can be configured/updated during runtime without restarting the Container Storage Modules for Observability services. These parameters will be stored in ConfigMaps that can be updated on the Kubernetes cluster. This will automatically change the settings on the services.  
 
 {{< hide class="1" >}}
+
 | ConfigMap | Observability Service | Parameters |
 |-----------|-----------------------|------------|
 | karavi-metrics-powerflex-configmap | karavi-metrics-powerflex | <ul><li>COLLECTOR_ADDR</li><li>PROVISIONER_NAMES</li><li>POWERFLEX_SDC_METRICS_ENABLED</li><li>POWERFLEX_SDC_IO_POLL_FREQUENCY</li><li>POWERFLEX_VOLUME_IO_POLL_FREQUENCY</li><li>POWERFLEX_VOLUME_METRICS_ENABLED</li><li>POWERFLEX_STORAGE_POOL_METRICS_ENABLED</li><li>POWERFLEX_STORAGE_POOL_POLL_FREQUENCY</li><li>POWERFLEX_TOPOLOGY_METRICS_ENABLED</li> <li>POWERFLEX_TOPOLOGY_METRICS_POLL_FREQUENCY</li><li>POWERFLEX_MAX_CONCURRENT_QUERIES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li></ul> |
 
 {{< /hide >}}
 
-{{< hide class="2" >}} 
+{{< hide class="2" >}}
+
 | ConfigMap | Observability Service | Parameters |
 |-----------|-----------------------|------------|
 | karavi-metrics-powerstore-configmap | karavi-metrics-powerstore | <ul><li>COLLECTOR_ADDR</li><li>PROVISIONER_NAMES</li><li>POWERSTORE_VOLUME_METRICS_ENABLED</li><li>POWERSTORE_VOLUME_IO_POLL_FREQUENCY</li><li>POWERSTORE_TOPOLOGY_METRICS_ENABLED</li><li>POWERSTORE_TOPOLOGY_METRICS_POLL_FREQUENCY</li><li>POWERSTORE_SPACE_POLL_FREQUENCY</li><li>POWERSTORE_ARRAY_POLL_FREQUENCY</li><li>POWERSTORE_FILE_SYSTEM_POLL_FREQUENCY</li><li>POWERSTORE_MAX_CONCURRENT_QUERIES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li><li>ZIPKIN_URI</li><li>ZIPKIN_SERVICE_NAME</li><li>ZIPKIN_PROBABILITY</li></ul> |
@@ -609,6 +616,7 @@ Some parameters can be configured/updated during runtime without restarting the 
 {{< /hide >}}
 
 {{< hide class="3" >}}
+
 | ConfigMap | Observability Service | Parameters |
 |-----------|-----------------------|------------|
 | karavi-metrics-powerscale-configmap | karavi-metrics-powerscale | <ul><li>COLLECTOR_ADDR</li> <li>PROVISIONER_NAMES</li> <li>POWERSCALE_MAX_CONCURRENT_QUERIES</li> <li>POWERSCALE_CAPACITY_METRICS_ENABLED</li> <li>POWERSCALE_PERFORMANCE_METRICS_ENABLED</li> <li>POWERSCALE_CLUSTER_CAPACITY_POLL_FREQUENCY</li> <li>POWERSCALE_CLUSTER_PERFORMANCE_POLL_FREQUENCY</li> <li>POWERSCALE_QUOTA_CAPACITY_POLL_FREQUENCY</li><li>POWERSCALE_TOPOLOGY_METRICS_ENABLED</li> <li>POWERSCALE_TOPOLOGY_METRICS_POLL_FREQUENCY</li> <li>POWERSCALE_ISICLIENT_INSECURE</li> <li>POWERSCALE_ISICLIENT_AUTH_TYPE</li> <li>POWERSCALE_ISICLIENT_VERBOSE</li> <li>LOG_LEVEL</li> <li>LOG_FORMAT</li></ul> |
@@ -616,6 +624,7 @@ Some parameters can be configured/updated during runtime without restarting the 
 {{< /hide >}}
 
 {{< hide class="4" >}}
+
 | ConfigMap | Observability Service | Parameters |
 |-----------|-----------------------|------------|
 | karavi-metrics-powermax-configmap | karavi-metrics-powermax | <ul><li>COLLECTOR_ADDR</li> <li>PROVISIONER_NAMES</li> <li>POWERMAX_MAX_CONCURRENT_QUERIES</li> <li>POWERMAX_CAPACITY_METRICS_ENABLED</li> <li>POWERMAX_PERFORMANCE_METRICS_ENABLED</li> <li>POWERMAX_CAPACITY_POLL_FREQUENCY</li> <li>POWERMAX_PERFORMANCE_POLL_FREQUENCY</li><li>POWERMAX_TOPOLOGY_METRICS_ENABLED</li> <li>POWERMAX_TOPOLOGY_METRICS_POLL_FREQUENCY</li> <li>LOG_LEVEL</li> <li>LOG_FORMAT</li></ul> |
@@ -688,23 +697,22 @@ Container Storage Modules Observability is instrumented to report trace data to 
 
 2. Add the Zipkin URI to the Container Storage Modules Observability ConfigMaps. Based on the manifest above, Zipkin will be running on port 9411.
 
-  {{< hide class="1" >}}  __Note__: Zipkin tracing is currently not supported for the collection of PowerFlex metrics. {{< /hide >}}
+    {{< hide class="1" >}}  __Note__: Zipkin tracing is currently not supported for the collection of PowerFlex metrics. {{< /hide >}}
 
-    Update the ConfigMaps from the [table above](#dynamic-configuration). Here is an example updating the karavi-metrics-powerstore-configmap based on the deployment manifest above.
-   
+    Update the ConfigMaps from the [Dynamic Configuration](../postinstallation#dynamic-configuration). Here is an example updating the karavi-metrics-powerstore-configmap based on the deployment manifest above.
+
     ```console
-    
     kubectl edit configmap/karavi-metrics-powerstore-configmap -n [CSM_NAMESPACE]
     ```
-    
+
     Update the ZIPKIN_URI and ZIPKIN_PROBABILITY values and save the ConfigMap.
-   
+
     ```console
     ZIPKIN_URI: "http://zipkin:9411/api/v2/spans"
     ZIPKIN_SERVICE_NAME: "metrics-powerstore"
     ZIPKIN_PROBABILITY: "1.0"
     ```
-    
+
     Once the ConfigMaps are updated, the changes will automatically be applied and tracing can be seen by accessing Zipkin on the exposed port.
 
 ## Updating Storage System Credentials
@@ -722,14 +730,17 @@ All storage system requests by Container Storage Modules Observability will go t
 ##### CSI Driver for PowerFlex
 
 1. Delete the current `proxy-authz-tokens` Secret from the CSM namespace.
+
     ```console
     kubectl delete secret proxy-authz-tokens -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `proxy-authz-tokens` Secret from the CSI Driver for Dell PowerFlex to the CSM namespace.
+
     ```console
     kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+
 {{< /hide >}}
 
 {{< hide class="3" >}}
@@ -737,14 +748,17 @@ All storage system requests by Container Storage Modules Observability will go t
 ##### CSI Driver for PowerScale
 
 1. Delete the current `isilon-proxy-authz-tokens` Secret from the CSM namespace.
+
     ```console
     kubectl delete secret isilon-proxy-authz-tokens -n [CSM_NAMESPACE] 
     ```
 
 2. Copy the `isilon-proxy-authz-tokens` Secret from the CSI Driver for PowerScale namespace to the CSM namespace.
+
     ```console
     kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f
     ```
+
 {{< /hide >}}
 
 {{< hide class="4" >}}
@@ -752,17 +766,21 @@ All storage system requests by Container Storage Modules Observability will go t
 ##### CSI Driver for PowerMax
 
 1. Delete the current `powermax-proxy-authz-tokens` Secret from the CSM namespace.
+
     ```console
     kubectl delete secret powermax-proxy-authz-tokens -n [CSM_NAMESPACE] 
     ```
 
-2. Copy the `powermax-proxy-authz-tokens` Secret from the CSI Driver for PowerMax namespace to the CSM namespace. 
+2. Copy the `powermax-proxy-authz-tokens` Secret from the CSI Driver for PowerMax namespace to the CSM namespace.
+
     ```console
     kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f
     ```
+
 {{< /hide >}}
 
 #### Update Storage Systems
+
 If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update Container Storage Modules Observability to reference the updated systems:
 
 {{< hide class="1">}}
@@ -770,14 +788,17 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
 ##### CSI Driver for PowerFlex
 
 1. Delete the current `karavi-authorization-config` Secret from the CSM namespace.
+
     ```console
     kubectl delete secret karavi-authorization-config -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `karavi-authorization-config` Secret from the CSI Driver for PowerFlex namespace to Container Storage Modules Observability namespace.
+
     ```console
     kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+
 {{< /hide >}}
 
 {{< hide class="3">}}
@@ -785,14 +806,17 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
 ##### CSI Driver for PowerScale
 
 1. Delete the current `isilon-karavi-authorization-config` Secret from the CSM namespace.
+
     ```console
     kubectl delete secret isilon-karavi-authorization-config -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `isilon-karavi-authorization-config` Secret from the CSI Driver for PowerScale namespace to Container Storage Modules Observability namespace.
+
     ```console
     kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | kubectl create -f
     ```
+
 {{< /hide >}}
 
 {{< hide class="4">}}
@@ -800,14 +824,17 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
 ##### CSI Driver for PowerMax
 
 1. Delete the current `powermax-karavi-authorization-config` Secret from the CSM namespace.
+
    ```console
    kubectl delete secret powermax-karavi-authorization-config -n [CSM_NAMESPACE]
    ```
 
 2. Copy `powermax-karavi-authorization-config` Secret from the CSI Driver for PowerMax to the CSM namespace.
+
    ```console
    kubectl get secret karavi-authorization-config proxy-server-root-certificate -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | kubectl create -f - 
    ```
+
 {{< /hide >}}
 
 ### When Container Storage Modules for Observability does not use the Authorization module
@@ -819,19 +846,23 @@ In this case all storage system requests made by Container Storage Modules Obser
 #### CSI Driver for PowerFlex
 
 1. Delete the current `vxflexos-config` Secret from the CSM namespace.
+
     ```console
     kubectl delete secret vxflexos-config -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `vxflexos-config` Secret from the CSI Driver for PowerFlex namespace to the CSM namespace.
+
     ```console
     kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
    If the CSI driver secret name is not the default `vxflexos-config`, please use the following command to copy secret:
+
     ```console
     kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+
 {{< /hide >}}
 
 {{< hide  class="2" >}}
@@ -839,19 +870,23 @@ In this case all storage system requests made by Container Storage Modules Obser
 #### CSI Driver for PowerStore
 
 1. Delete the current `powerstore-config` Secret from the CSM namespace.
+
     ```console
     kubectl delete secret powerstore-config -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `powerstore-config` Secret from the CSI Driver for PowerStore namespace to the CSM namespace.
+
     ```console
     kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
    If the CSI driver secret name is not the default `powerstore-config`, please use the following command to copy secret:
+
     ```console
     kubectl get secret [POWERSTORE-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERSTORE-CONFIG]/name: powerstore-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+
 {{< /hide >}}
 
 {{< hide  class="3">}}
@@ -859,19 +894,23 @@ In this case all storage system requests made by Container Storage Modules Obser
 #### CSI Driver for PowerScale
 
 1. Delete the current `isilon-creds` Secret from the CSM namespace.
+
     ```console
     kubectl delete secret isilon-creds -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `isilon-creds` Secret from the CSI Driver for PowerScale namespace to the CSM namespace.
+
     ```console
     kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-    If the CSI driver secret name is not the default `isilon-creds`, please use the following command to copy secret:  
+    If the CSI driver secret name is not the default `isilon-creds`, please use the following command to copy secret:
+
     ```console
     kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+
 {{< /hide >}}
 
 {{< hide class="4">}}
@@ -879,6 +918,7 @@ In this case all storage system requests made by Container Storage Modules Obser
 #### CSI Driver for PowerMax
 
 1. Delete the Secret `powermax-creds` from the CSM namespace.
+
    ```console
    kubectl delete secret powermax-creds -n [CSM_NAMESPACE]
    ```
