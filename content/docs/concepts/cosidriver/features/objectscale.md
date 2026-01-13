@@ -4,32 +4,40 @@ linktitle: ObjectScale
 weight: 1
 Description: Code features for ObjectScale COSI Driver
 ---
-Fields are specified by their path. Consider the following examples:
-
-1. Field specified by the following path `spec.authenticationType=IAM` is reflected in their resources YAML as the following:
-
-```yaml
-spec:
-  authenticationType: IAM
-```
-
-2. field specified by path `spec.protocols=[Azure,GCS]` is reflected in their resources YAML as the following:
-
-```yaml
-spec:
-  protocols:
-    - Azure
-    - GCS
-```
-
-## Prerequisites
-
-To use the COSI Driver on the ObjectScale platform, you must deploy the following components to your cluster:
-
-- Kubernetes Container Object Storage Interface CRDs
-- Container Object Storage Interface Controller
 
 ## Kubernetes Objects
+
+### Bucket Class
+
+Installation of ObjectScale COSI driver does not create `BucketClass` resource. `BucketClass` represents a class of `Bucket` resources with similar characteristics.
+Dell COSI Driver is a multi-backend driver, meaning that for every platform the specific `BucketClass` should be created. The `BucketClass` resource should contain the name of multi-backend driver and `parameters.id` for specific Object Storage Platform.
+
+The default sample is shown below:
+
+```yaml
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: BucketClass
+metadata:
+  name: my-bucketclass
+driverName: cosi.dellemc.com
+deletionPolicy: Delete
+parameters:
+  id: "my.objectscale"
+```
+
+#### `deletionPolicy`
+
+> ⚠ **WARNING:** this field is case sensitive, and the bucket deletion will fail if policy is not set exactly to *Delete* or *Retain*.
+
+`deletionPolicy` in `BucketClass` resource is used to specify how COSI should handle deletion of the bucket. There are two possible values:
+- **Retain**: Indicates that the bucket should not be deleted from the object store. The underlying bucket is not cleaned up when the Bucket object is deleted. With this option, the bucket is unreachable from Kubernetes level.
+- **Delete**: Indicates that the bucket should be permanently deleted from the object store once all the workloads accessing this bucket are done. The underlying bucket is cleaned up when the Bucket object is deleted.
+
+#### `emptyBucket`
+
+`emptyBucket` field is set in config YAML file passed to the chart during COSI driver installation. If it is set to `true`, then the bucket will be emptied before deletion. If it is set to `false`, then ObjectScale cannot delete the bucket since it is not empty, and it will return an error.
+
+`emptyBucket` has no effect when Deletion Policy is set to `Retain`.
 
 ### Bucket
 
@@ -77,42 +85,12 @@ spec:
 
 - `spec.protocols=[Azure,GCS]` - Protocols are the set of data API this bucket is required to support. From protocols specified by COSI (`v1alpha1`), Dell ObjectScale platform only supports the S3 protocol. Protocols `Azure` and `GCS` MUST NOT be used.
 
-### Bucket Class
 
-Installation of ObjectScale COSI driver does not create `BucketClass` resource. `BucketClass` represents a class of `Bucket` resources with similar characteristics.
-Dell COSI Driver is a multi-backend driver, meaning that for every platform the specific `BucketClass` should be created. The `BucketClass` resource should contain the name of multi-backend driver and `parameters.id` for specific Object Storage Platform.
-
-The default sample is shown below:
-
-```yaml
-apiVersion: objectstorage.k8s.io/v1alpha1
-kind: BucketClass
-metadata:
-  name: my-bucketclass
-driverName: cosi.dellemc.com
-deletionPolicy: Delete
-parameters:
-  id: "my.objectscale"
-```
-
-#### `deletionPolicy`
-
-> ⚠ **WARNING:** this field is case sensitive, and the bucket deletion will fail if policy is not set exactly to *Delete* or *Retain*.
-
-`deletionPolicy` in `BucketClass` resource is used to specify how COSI should handle deletion of the bucket. There are two possible values:
-- **Retain**: Indicates that the bucket should not be deleted from the object store. The underlying bucket is not cleaned up when the Bucket object is deleted. With this option, the bucket is unreachable from Kubernetes level.
-- **Delete**: Indicates that the bucket should be permanently deleted from the object store once all the workloads accessing this bucket are done. The underlying bucket is cleaned up when the Bucket object is deleted.
-
-#### `emptyBucket`
-
-`emptyBucket` field is set in config YAML file passed to the chart during COSI driver installation. If it is set to `true`, then the bucket will be emptied before deletion. If it is set to `false`, then ObjectScale cannot delete the bucket since it is not empty, and it will return an error.
-
-`emptyBucket` has no effect when Deletion Policy is set to `Retain`.
 
 ### Bucket Access Class
 
 Installation of ObjectScale COSI driver does not create `BucketAccessClass` resource. `BucketAccessClass` represents a class of `BucketAccess` resources with similar characteristics.
-Dell COSI Driver is a multi-backend driver, meaning that for every platform the specific `BucketAccessClass` should be created. The `BucketClass` resource should contain the name of multi-backend driver and `parameters.id` for specific Object Storage Platform. 
+Dell COSI Driver is a multi-backend driver, meaning that for every platform the specific `BucketAccessClass` should be created. The `BucketAccessClass` resource should contain the name of multi-backend driver and `parameters.id` for specific Object Storage Platform.
 The default sample is shown below:
 
 ```yaml
@@ -128,13 +106,7 @@ parameters:
 
 #### `authenticationType`
 
-> ⚠ **WARNING:** this field is case sensitive, and the granting access will fail if it is not set exactly to *Key* or *IAM*.
-
-`authenticationType` denotes the style of authentication. The only supported option for COSI Driver is `Key`.
-
-#### Unsupported options
-
-- `authenticationType=IAM` - denotes the style of authentication. The `IAM` value MUST NOT be used, because IAM style authentication is not supported.
+> ⚠ **NOTE:** `authenticationType` denotes the style of authentication. The only supported option for COSI Driver is `Key`.
 
 ### Bucket Access
 
@@ -159,38 +131,34 @@ spec:
 
 `spec.protocol` is the name of the Protocol that this access credential is supposed to support.
 
-#### Unsupported options
-
-- `spec.serviceAccountName=...` - is the name of the serviceAccount that COSI will map to the object storage provider service account when IAM styled authentication is specified. As the IAM style authentication is not supported, this field is also unsupported.
-- `spec.protocol=...` - Protocols are the set of data API this bucket is required to support. From protocols specified by COSI (`v1alpha1`), Dell ObjectScale platform only supports the `S3` protocol. Protocols `Azure` and `GCS` MUST NOT be used.
-
 ## Provisioning Buckets
 
-Each bucket is provisioned using default options:
+Each bucket is created using the default configuration settings. While there are a few optional parameters available for customization, they are not mandatory for provisioning. If needed, these parameters can be defined and managed within the associated BucketClass.
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Category    | Parameter                                   | Description                                                                                                                                                                                                                                                 | Default                                                |
-|-------------|---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
-| Policy      |                                             |                                                                                                                                                                                                                                                             | No policy applied on the bucket.                       |
-| Controls    |                                             |                                                                                                                                                                                                                                                             | No additional controls have been setup for the bucket. |
-| Controls    | Versioning                                  | 1. Enabling versioning allows maintaining multiple versions of same object in same bucket. </br> 2. Bucket Versioning can't be disabled when Object Lock is enabled.                                                                                        | Off                                                    |
-| Controls    | Object Lock                                 | Enabling object lock allows objects to be locked or protected from deletion or overwrite, for a fixed amount of time or indefinitely, depending on the configuration.                                                                                       | Off                                                    |
-| Controls    | Quotas                                      | 1. Block writes at Quota: Represents a hard quota that prevents bucket writes when total object count/size is reached. </br> 2. Notification at Quota: Represents a soft quota value which triggers a notification when total object count/size is reached. | Off                                                    |
-| Controls    | Encryption                                  | If encryption is turned on bucket data will be saved in encrypted form.                                                                                                                                                                                     | Off                                                    |
-| Event Rules |                                             | The notifications will be sent to the destination when the selected type of events occur on the bucket.                                                                                                                                                     | No event rules configured for the bucket.              |
-| Events      | All                                         |                                                                                                                                                                                                                                                             | Off                                                    |
-| Events      | `s3:ObjectCreated:Put`                      |                                                                                                                                                                                                                                                             | Off                                                    |
-| Events      | `s3:ObjectCreated:Copy`                     |                                                                                                                                                                                                                                                             | Off                                                    |
-| Events      | `s3:ObjectCreated:CompleteMultipartUpload`  |                                                                                                                                                                                                                                                             | Off                                                    |
-| Events      | `s3:ObjectCreated:*`                        |                                                                                                                                                                                                                                                             | Off                                                    |
-| Events      | `s3:ObjectRemoved:Delete`                   |                                                                                                                                                                                                                                                             | Off                                                    |
-| Events      | `s3:ObjectRemoved:DeleteMarkerCreated`      |                                                                                                                                                                                                                                                             | Off                                                    |
-| Events      | `s3:ObjectRemoved:*`                        |                                                                                                                                                                                                                                                             | Off                                                    |
-| Events      | `s3:Replication:OperationFailedReplication` |                                                                                                                                                                                                                                                             | Off                                                    |
-| Event Rules | Prefix                                      | Event rule are applied for object names with the given prefix.                                                                                                                                                                                              | Off                                                    |
-| Event Rules | Suffix                                      | Event rule are applied for object names with the given suffix.                                                                                                                                                                                              | Off                                                    |
-| Event Rules | Send To                                     | The notification destination used to send notification for selected events.                                                                                                                                                                                 | Off                                                    |
+| Name                     | Parameter                 |  Details |
+|:-------------------------|:--------------------------|:-----------------------------------------------------------------------------|
+| Replication Group        | replicationGroup          | Name of the replication group to use when creating the bucket. Not required if default Replication Group is set on the namespace.                |
+| Quota Limit              | quotaLimit                | Block size in GB. Cannot be less than 1GB or use decimal values. Can be set to -1 to indicate quota value not defined.                                                            |
+| Quota Warn               | quotaWarn                 | Notification size in GB. Cannot be less than 1GB or use decimal values. Can be set to -1 to indicate quota value not defined.                                                            |
+| Default Retention        | defaultRetention          | Default retention period in seconds                                          |
 {{</table>}}
+
+```bash
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: BucketClass
+metadata:
+  name: my-bucketclass
+driverName: cosi.dellemc.com
+deletionPolicy: Delete
+parameters:
+  id: "my.objectscale"
+  replicationGroup: "rg1"
+  quotaLimit: "100"
+  quotaWarn: "80"
+  defaultRetention: "2592000"
+```
+
 
 ### Kubernetes Administrator Steps
 
@@ -269,7 +237,7 @@ EOF
 
 ## Deleting Buckets
 
-There are a few crucial details regarding bucket deletion. The first one is `deletionPolicy` which is used to specify how COSI should handle deletion of a bucket. It is found in `BucketClass` resource and can be set to `Delete` and `Retain`. The second crucial detail is `emptyBucket` field in the [Helm Chart configuration](../../installation/configuration_file).
+There are a few crucial details regarding bucket deletion. The first one is `deletionPolicy` which is used to specify how COSI should handle deletion of a bucket. It is found in `BucketClass` resource and can be set to `Delete` and `Retain`. The second crucial detail is `emptyBucket` field in the [Helm Chart configuration](../../installation/configuration).
 
 The following example shows how to delete a `BucketClaim`.
 
