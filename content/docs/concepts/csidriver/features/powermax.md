@@ -844,7 +844,9 @@ The CSI PowerMax driver supports dynamic creation of multiple Storage Groups(SGs
 - The driver enforces a soft limit of 4,000 volumes per SG.
 - For new volume requests, it selects the SG with the lowest volume count among all existing SGs to ensure balanced distribution.
 
-Prerequisite: Unisphere version 10.1 or later
+**Prerequisite:** Unisphere version 10.1 or later
+
+**Note:** Support for replicated volumes will be introduced in upcoming releases.
 
 ### How to Enable the feature
 
