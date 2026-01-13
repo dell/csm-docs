@@ -179,7 +179,7 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
    To scrape powerstore metrics using Powerstore Metrics Exporter, add the following configurations to prometheus-values.yaml. More details can be found [here](https://github.com/dell/powerstore-metrics-exporter/tree/main/templates/prometheus)
 
    ```yaml
-      - job_name: powerstore_10.0.0.1_cluster
+        - job_name: powerstore_10.0.0.1_cluster
           honor_timestamps: true
           scrape_interval: 15m
           scrape_timeout: 3m
