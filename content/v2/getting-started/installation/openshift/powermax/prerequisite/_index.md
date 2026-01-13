@@ -227,8 +227,8 @@ The following requirements must be fulfilled in order to successfully use the Fi
     }
     devices {
       device {
-        vendor                   DellEMC
-        product                  PowerMax
+        vendor                   EMC
+        product                  SYMMETRIX
         detect_prio              "yes"
         path_selector            "service-time 0"
         path_grouping_policy     "group_by_prio"
