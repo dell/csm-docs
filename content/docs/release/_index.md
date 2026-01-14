@@ -35,7 +35,10 @@ Description: >
 - Support CSM upgrade via CSM operator using CSM Version
 - Support PowerStore Metro Non-Uniform Host Connectivity
 - Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure.
-- Enhance Powerstore Resiliency defered operations during Site Failure for Metro Configurations
+- Enhance PowerStore Resiliency deferred operations during Site Failure for Metro Configurations
+- Enabled scalable Kubernetes system metrics collection for observability and visualization across PowerFlex, PowerMax, PowerStore, and PowerScale.
+- Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax, and PowerFlex.
+- Synchronized CSM Operator with oc-mirror
 
 ### Fixed Issues
 
@@ -78,6 +81,9 @@ Description: >
 - Modify an NFS export for a NAS server’s file system - repeated Failed Messages
 - Idempotency failure in CSI PowerMax - Controller Publish Volume
 - Fix NFS Volume access logic to enforce only user‑specified external access
+- Remove gorilla/mux dependency from unit tests in observability module
+- Annotations missed as part of Operator version update workflow
+- Migrate deprecated github.com/golang/mock to go.uber.org/mock
 
 ### Known Issues
 
