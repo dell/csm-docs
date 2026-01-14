@@ -29,8 +29,8 @@ extra parameters related to metro replication. A `StorageClass` to create metro 
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: storage-class-metro
-provisioner: driver.dellemc.com
+  name: powermax-metro
+provisioner: csi-powermax.dellemc.com
 parameters:
   SRP: 'SRP_1'
   SYMID: '000000000001'
@@ -41,6 +41,7 @@ parameters:
   replication.storage.dell.com/RemoteRDFGroup: '7' # Optional for Auto SRDF group
   replication.storage.dell.com/RemoteSYMID: '000000000002'
   replication.storage.dell.com/RemoteServiceLevel: 'Bronze'
+  replication.storage.dell.com/RemoteSRP: 'SRP_1'
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 ```
@@ -56,8 +57,8 @@ The snapshots are by default created on the volumes on the R1 side of the SRDF m
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
-  name: sample-snapclass
-driver: driver.dellemc.com
+  name: powermax-snapclass
+driver: csi-powermax.dellemc.com
 deletionPolicy: Delete
 parameters:
   SYMID: '000000000001'
