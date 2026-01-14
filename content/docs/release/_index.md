@@ -84,6 +84,15 @@ Description: >
 - Remove gorilla/mux dependency from unit tests in observability module
 - Annotations missed as part of Operator version update workflow
 - Migrate deprecated github.com/golang/mock to go.uber.org/mock
+- CSI PowerStore : NodeUnstageVolume is failing for NFS volumes
+- Unity Nightly fails on 4.20.8 OCP E2E tests
+- Unity OCP E2E - Fails on OCP 4.20.8
+- Powermax driver is not rounding off the virtualization filesystem perfectly
+- Default replication sidecar version is missing in version-values.yaml
+- Replication - Remote PV does not get MountOptions from SC
+- Powerstore Prepare Storage stage logs is having error but wrongly showing as passed
+- NFS volume Staging and Unstaging were broken.
+- Modify an NFS export for a NAS server’s file system” Repeated Failed Messages
 
 ### Known Issues
 
