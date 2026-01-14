@@ -34,10 +34,10 @@ Description: >
 - Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
 - Support CSM upgrade via CSM operator using CSM Version
 - Support PowerStore Metro Non-Uniform Host Connectivity
-- Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure.
+- Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure
 - Enhance PowerStore Resiliency deferred operations during Site Failure for Metro Configurations
-- Enabled scalable Kubernetes system metrics collection for observability and visualization across PowerFlex, PowerMax, PowerStore, and PowerScale.
-- Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax, and PowerFlex.
+- Enabled scalable Kubernetes system metrics collection for observability and visualization across PowerFlex, PowerMax, PowerStore, and PowerScale
+- Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax, and PowerFlex
 - Synchronized CSM Operator with oc-mirror
 - Unified Logging Framework for CSI drivers (and future CSM modules)
 - CSI PowerStore Async File Replication
