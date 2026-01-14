@@ -27,9 +27,9 @@ Description: >
 
 ### New Features/Changes
 
-- Enable NVMe/TCP Connectivity for PowerFlex Without SDC Requirement
-- Supported SUSE Storage certification process for CSI PowerMax, CSI Powerstore and CSI Powerflex
-- Optimizing Volume Provisioning & Publishing in CSI Driver for PowerMax Unisphere 10.3
+- Enable NVMe/TCP Connectivity for PowerFlex without SDC Requirement
+- Supported SUSE storage certification process for CSI PowerMax, CSI PowerStore and CSI PowerFlex
+- Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
 
 ### Fixed Issues
 
@@ -37,46 +37,41 @@ Description: >
 - No lastSuccessConfigureation for Auth CR
 - Offline bundle testing fails when the ConfigMap includes sidecar images
 - Podmon aborts pod cleanup due to context cancel in ValidateVolumeHostConnectivity for metro volumes
-- Metro volumes not being deleted from array
-- Podmon taints a node if it has lost connectivity to the default array even if the node was not supposed to have connectivity to that array: Non-uniform
-- Installation Failure of CSI-Lightning
-- Module Version Update Workflow Migration to Internal CSM-Operator and Actions
-
-- Latest UBI base image is not getting consumed
+- Podmon taints a node if it has lost connectivity to the default array even if the node was not supposed to have connectivity to that array(Non-uniform)
+- Installation failure of CSI-Lightning
+- Latest UBI base image is not being consumed
 - Unexpected Reference in Logs to csm-application-mobility-controller and velero-plugin Components
-- Idempotency failure in CSI Powermax - Create Volume with Metro
-- csi-powerstore doesn't connect to multiple iscsi networks
-- COSI helm chart missing clusterrole permissions to run on OCP
-- DELL IT: CSI Volume Deletion Bottleneck – SG Removal Delay
-- CSI node pod is crashing while unmounting powerstore luns. This is either caused by a multipath error or causing the error.
+- Idempotency failure in CSI PowerMax - Create Volume with Metro
+- CSI-PowerStore doesn't connect to multiple iSCSI networks
+- COSI Helm chart missing ClusterRole permissions to run on OCP
+- CSI Volume Deletion Bottleneck – SG Removal Delay (Dell IT)
+- CSI node pod crashes while unmounting PowerStore LUNs
 - CSI PowerStore NVMe doesn't work with multiple VLANs
 - Reverse proxy sometimes does not log request ID
-- syntax error in obs_utils.sh
-- CSM module failed with a kube-burner-ocp virtual capacity benchmark test
-- Resiliency Failure
-- Unable to Validate Unauthorized Pool Access via Authorization Module Due to Storage Pool API change in Nairobi
-- Pod Recovery by CSM Resiliency Fails with Panic in CSI PowerMax Controller During Node Failure
+- Syntax error in obs_utils.sh
+- CSM module fais with a kube-burner-ocp virtual capacity benchmark test
+- Resiliency failure
+- Unable to validate unauthorized pool access via Authorization module due to Storage Pool API change in Nairobi
+- Pod Recovery by CSM Resiliency fails with panic in CSI PowerMax controller during node failure
 - Performance Metrics API returns empty results when the comma separated StorageGroupList field is included in the request payload.
 - CSI PowerMax fails to switch to embedded Unisphere during Primary Unisphere failure
 - NodeUnstageVolume reports success even though flushing the volume fails - Unity
 - NodeUnstageVolume reports success even though flushing the volume fails - PowerStore
-- During StageVolume for a FC device the waitForDeviceWWN(), fails to rescan all the SD paths on seeing stale wwid
-- csi-powermax: driver fails to create replicated volume when no SRDF group exists
-- Remove gorilla/mux dependency from unit tests in observability module
-- Inconsistent parameters in observability module in helm and operator
+- During StageVolume for a FC device the waitForDeviceWWN() fails to rescan all the SD paths on seeing stale wwid
+- CSI-PowerMax driver fails to create replicated volume when no SRDF group exists
+- Inconsistent parameters in observability module in Helm and operator
 - Update gopowerstore api client default timeout type to consider it as seconds
-- Migrate deprecated github.com/golang/mock to go.uber.org/mock
 - CSI PowerStore driver does not add topology keys for FC protocol when the first FC initiator has no active session
 - CSM Replication PowerScale - failback operation do not swap PVC
-- PowerStore Metrics Service: Timeout Failures When Fetching Performance Metrics
-- Topology Keys disappeared after restart of CSI node pod in csi-powerstore driver for FC protocol
-- CSI PowerMax Driver: Storage Pool metrics are not collected in a multi availability zone setup
+- PowerStore Metrics Service: Timeout failures when fetching performance metrics
+- Topology keys disappear after restart of CSI node pod in CSI-PowerStore driver for FC protocol
+- CSI PowerMax Driver: Storage pool metrics are not collected in a multi availability zone setup
 - CSM Observability integration PowerStore/Powermax ServiceMonitor
-- Powermax driver is not rounding off the virtualization filesystem perfectly
-- NFS volume Staging and Unstaging were broken.
-- “Modify an NFS export for a NAS server’s file system” Repeated Failed Messages
-- Idempotency failure in CSI Powermax - Controller Publish Volume
-- Fix NFS Volume Access Logic to Enforce Only User‑Specified External Access
+- Powermax driver does not round off the virtualization filesystem correctly
+- NFS volume staging and unstaging were broken.
+- “Modify an NFS export for a NAS server’s file system” repeated Failed Messages
+- Idempotency failure in CSI PowerMax - Controller Publish Volume
+- Fix NFS Volume access logic to enforce only user‑specified external access
 
 ### Known Issues
 
