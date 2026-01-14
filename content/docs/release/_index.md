@@ -39,6 +39,8 @@ Description: >
 - Enabled scalable Kubernetes system metrics collection for observability and visualization across PowerFlex, PowerMax, PowerStore, and PowerScale.
 - Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax, and PowerFlex.
 - Synchronized CSM Operator with oc-mirror
+- Unified Logging Framework for CSI drivers (and future CSM modules)
+- CSI PowerStore Async File Replication
 
 ### Fixed Issues
 
