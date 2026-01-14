@@ -42,6 +42,8 @@ Description: >
 - Unified Logging Framework for CSI drivers (and future CSM modules)
 - CSI PowerStore Async File Replication
 - Support for PowerFlex v5.0 in CSM
+- Streamlined installation of CSI PowerStore via dellctl for CSM Operator
+- Container Object Storage Interface driver compliance for ObjectScale 4.x
 
 ### Fixed Issues
 
