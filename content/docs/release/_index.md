@@ -44,7 +44,7 @@ Description: >
 - Idempotency failure in CSI PowerMax - Create Volume with Metro
 - CSI-PowerStore doesn't connect to multiple iSCSI networks
 - COSI Helm chart missing ClusterRole permissions to run on OCP
-- CSI Volume Deletion Bottleneck – SG Removal Delay (Dell IT)
+- CSI Volume Deletion Bottleneck – SG Removal Delay
 - CSI node pod crashes while unmounting PowerStore LUNs
 - CSI PowerStore NVMe doesn't work with multiple VLANs
 - Reverse proxy sometimes does not log request ID
@@ -69,7 +69,7 @@ Description: >
 - CSM Observability integration PowerStore/Powermax ServiceMonitor
 - Powermax driver does not round off the virtualization filesystem correctly
 - NFS volume staging and unstaging were broken.
-- “Modify an NFS export for a NAS server’s file system” repeated Failed Messages
+- Modify an NFS export for a NAS server’s file system - repeated Failed Messages
 - Idempotency failure in CSI PowerMax - Controller Publish Volume
 - Fix NFS Volume access logic to enforce only user‑specified external access
 
