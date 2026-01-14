@@ -20,6 +20,6 @@ Kubernetes provides a powerful platform for managing containerized applications,
 
     {{< customcard path="content/docs/getting-started/installation/kubernetes/unityxt" link="./unityxt"   imageNumber="3" title="Unity XT"  >}}
 
-    {{< customcard path="content/docs/getting-started/installation/kubernetes/cosi" link="./cosi"   imageNumber="3" title="COSI"  >}}
+    {{< customcard path="content/docs/getting-started/installation/kubernetes/ObjesctScale" link="./cosi"   imageNumber="3" title="COSI"  >}}
 
 {{< /cardcontainer >}}

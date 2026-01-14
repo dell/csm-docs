@@ -1,8 +1,8 @@
 ---
-title: "COSI"
-linkTitle: "COSI"
+title: "ObjectScale"
+linkTitle: "ObjectScale"
 no_list: true
-description: COSI Installation
+description: COSI Driver Installation
 weight: 6
 ---
 
