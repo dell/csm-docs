@@ -33,7 +33,7 @@ Description: >
 
 ### Fixed Issues
 
-- eth_port missing in goowerstore endpoint
+- eth_port missing in gopowerstore endpoint
 - No lastSuccessConfiguration for Auth CR
 - Offline bundle testing fails when the ConfigMap includes sidecar images
 - Podmon aborts pod cleanup due to context cancel in ValidateVolumeHostConnectivity for metro volumes
