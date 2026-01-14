@@ -71,8 +71,8 @@ Description: >
 - PowerStore Metrics Service: Timeout failures when fetching performance metrics
 - Topology keys disappear after restart of CSI node pod in CSI-PowerStore driver for FC protocol
 - CSI PowerMax Driver: Storage pool metrics are not collected in a multi availability zone setup
-- CSM Observability integration PowerStore/Powermax ServiceMonitor
-- Powermax driver does not round off the virtualization filesystem correctly
+- CSM Observability integration PowerStore/PowerMax ServiceMonitor
+- PowerMax driver does not round off the virtualization filesystem correctly
 - NFS volume staging and unstaging were broken.
 - Modify an NFS export for a NAS server’s file system - repeated Failed Messages
 - Fix NFS Volume access logic to enforce only user‑specified external access
@@ -82,10 +82,10 @@ Description: >
 - CSI PowerStore : NodeUnstageVolume is failing for NFS volumes
 - Unity Nightly fails on 4.20.8 OCP E2E tests
 - Unity OCP E2E - Fails on OCP 4.20.8
-- Powermax driver is not rounding off the virtualization filesystem perfectly
+- PowerMax driver is not rounding off the virtualization filesystem perfectly
 - Default replication sidecar version is missing in version-values.yaml
 - Replication - Remote PV does not get MountOptions from SC
-- Powerstore Prepare Storage stage logs is having error but wrongly showing as passed
+- PowerStore Prepare Storage stage logs is having error but wrongly showing as passed
 - NFS volume Staging and Unstaging were broken.
 - Modify an NFS export for a NAS server’s file system” Repeated Failed Messages
 
