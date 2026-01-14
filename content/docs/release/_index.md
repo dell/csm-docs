@@ -33,6 +33,9 @@ Description: >
 - Supported SUSE storage certification process for CSI PowerMax, CSI PowerStore and CSI PowerFlex
 - Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
 - Support CSM upgrade via CSM operator using CSM Version
+- Support PowerStore Metro Non-Uniform Host Connectivity
+- Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure.
+- Enhance Powerstore Resiliency defered operations during Site Failure for Metro Configurations
 
 ### Fixed Issues
 
