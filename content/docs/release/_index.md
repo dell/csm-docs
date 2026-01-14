@@ -27,14 +27,9 @@ Description: >
 
 ### New Features/Changes
 
-- Support K8s secrets as credential store in CSM Authorization Proxy v2
-- Authorization support for PowerStore
-- Observability enhancements to prevent hitting the max login limit in PowerFlex
-- Support Resiliency and Metro - Node failure
-- Deliver restricted SDC access mode support for PowerFlex
-- Embed topology metrics for each storage platform into the storage specific metrics service for Observability
-- CSM Operator support Observability deployments for PowerStore
-- CSM operator supports replication deployment for PowerStore
+- Enable NVMe/TCP Connectivity for PowerFlex Without SDC Requirement
+- Supported SUSE Storage certification process for CSI PowerMax, CSI Powerstore and CSI Powerflex
+- Optimizing Volume Provisioning & Publishing in CSI Driver for PowerMax Unisphere 10.3
 
 ### Fixed Issues
 
