@@ -30,6 +30,7 @@ Description: >
 - Enable NVMe/TCP Connectivity for PowerFlex without SDC Requirement
 - Supported SUSE storage certification process for CSI PowerMax, CSI PowerStore and CSI PowerFlex
 - Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
+- Support CSM upgrade via CSM operator using config Version
 
 ### Fixed Issues
 
