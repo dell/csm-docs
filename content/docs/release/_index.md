@@ -28,6 +28,8 @@ Description: >
 ### New Features/Changes
 
 - Enable NVMe/TCP Connectivity for PowerFlex without SDC Requirement
+- Enable OIDC Support for PowerFlex
+- Enable Multi-SG support for PowerMax 
 - Supported SUSE storage certification process for CSI PowerMax, CSI PowerStore and CSI PowerFlex
 - Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
 - Support CSM upgrade via CSM operator using CSM Version
