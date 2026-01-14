@@ -11,7 +11,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm tdleft">}}
 | Prerequisites    | PowerStore         | PowerScale | PowerFlex | PowerMax | Unity XT | COSI |
 | :--------------: | :----------------: | :--------: | :-------: | :------: | :------: | :--:
-| Version          | 3.6, 4.0, 4.1, 4.2 | OneFS 9.4, 9.5.0.x (x >= 5),<br>9.7, 9.8, 9.9, 9.10, 9.11, 9.12 | 3.6.x, 4.5.x, 4.6.x, 5.0  | Unisphere 10.0, 10.1, 10.2, 10.3 | 5.3.x, 5.4.x, 5.5 | ObjectScale 4.0 |
+| Version          | 3.6, 4.0, 4.1, 4.2 | OneFS 9.4, 9.5.0.x (x >= 5),<br>9.7, 9.8, 9.9, 9.10, 9.11, 9.12, 9.13 | 3.6.x, 4.5.x, 4.6.x, 4.8.x, 5.0  | Unisphere 10.0, 10.1, 10.2, 10.3 | 5.3.x, 5.4.x, 5.5 | ObjectScale 4.0 |
 | OS Dependencies  | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils | nfs-utils | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)<br>nvme-cli | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | iscsi-initiator-utils<br>multipathd<br>nfs-utils | - |
 {{</table>}}
 
@@ -109,12 +109,12 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | OpenShift Version | Operator / CSM Combination |
 |------------------|-------------------|
-| 4.14 | 1.4.4 / 1.10.2 </br> 1.5.1 / 1.10.2 </br> 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1  </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.15.1 |
-| 4.16 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 |
-| 4.17 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 |
-| 4.18 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 |
-| 4.19 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.15.1 |
-| 4.20 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.16.0 |
+| 4.14 | 1.4.4 / 1.10.2 </br> 1.5.1 / 1.10.2 </br> 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1  </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
+| 4.16 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
+| 4.17 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
+| 4.18 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
+| 4.19 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
+| 4.20 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
 {{</ table >}}
 
 **Note:**
