@@ -41,6 +41,7 @@ Description: >
 - Synchronized CSM Operator with oc-mirror
 - Unified Logging Framework for CSI drivers (and future CSM modules)
 - CSI PowerStore Async File Replication
+- Support for PowerFlex v5.0 in CSM
 
 ### Fixed Issues
 
@@ -56,13 +57,12 @@ Description: >
 - CSI node pod crashes while unmounting PowerStore LUNs
 - CSI PowerStore NVMe doesn't work with multiple VLANs
 - Reverse proxy sometimes does not log request ID
-- Unable to validate unauthorized pool access via Authorization module due to Storage Pool API change in Nairobi
 - Pod Recovery by CSM Resiliency fails with panic in CSI PowerMax controller during node failure
-- Performance Metrics API returns empty results when the comma separated StorageGroupList field is included in the request payload.
+- Performance Metrics API returns empty results when the comma separated StorageGroupList field is included in the request payload - PowerMax.
 - CSI PowerMax fails to switch to embedded Unisphere during Primary Unisphere failure
 - NodeUnstageVolume reports success even though flushing the volume fails - Unity
 - NodeUnstageVolume reports success even though flushing the volume fails - PowerStore
-- During StageVolume for a FC device the waitForDeviceWWN() fails to rescan all the SD paths on seeing stale wwid
+- During StageVolume for a FC device the waitForDeviceWWN() fails to rescan all the SD paths on seeing stale wwid - PowerMax
 - CSI-PowerMax driver fails to create replicated volume when no SRDF group exists
 - Inconsistent parameters in observability module in Helm and operator
 - Update gopowerstore api client default timeout type to consider it as seconds
