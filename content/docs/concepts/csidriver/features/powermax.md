@@ -836,7 +836,7 @@ spec:
             - zone1
 ```
 
-## Dynamic Storage Group(SG) Creation with Service Level Objective (SLO) Integration
+## Dynamic Storage Group (SG) Creation with Service Level Objective (SLO) Integration
 
 The CSI PowerMax driver introduces support for dynamic creation and management of multiple Storage Groups under a single StorageClass. This feature enables scaling beyond the volume limit per SG, ensuring optimal utilization of the PowerMax array’s capacity while maintaining consistent performance characteristics.
 
