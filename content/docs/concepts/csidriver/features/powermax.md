@@ -836,14 +836,14 @@ spec:
             - zone1
 ```
 
-## Dynamic Storage Group Creation with SLO Integration
+## Dynamic Storage Group(SG) Creation with Service Level Objective (SLO) Integration
 
-The CSI PowerMax driver introduces support for dynamic creation and management of multiple Storage Groups (SGs) under a single StorageClass (SC). This feature enables scaling beyond the volume limit per SG, ensuring optimal utilization of the PowerMax array’s capacity while maintaining consistent performance characteristics.
+The CSI PowerMax driver introduces support for dynamic creation and management of multiple Storage Groups under a single StorageClass. This feature enables scaling beyond the volume limit per SG, ensuring optimal utilization of the PowerMax array’s capacity while maintaining consistent performance characteristics.
 
-#### Multiple SGs per StorageClass
-- A single StorageClass can have multiple SGs associated with it under the same Service Level Objective (SLO).
+#### Multiple Storage Groups per StorageClass
+- A single StorageClass can have multiple SGs associated with it under the same SLO.
 
-#### Automatic SG Creation
+#### Automatic Storage Group Creation
 - When an existing SG reaches its maximum volume limit, the driver automatically creates a new SG.
 - SG names follow a structured pattern using a base name (derived from StorageClass parameters) and a numeric suffix for uniqueness.
 
@@ -859,4 +859,4 @@ csi-C1-Diamond-SRP_1-SG--2
 #### Soft Limit
 - Each SG has a soft limit of **4,000 volumes**.
 
-**Note:** Support added for non replicated volumes.
+**Note:** Support added only for non-replicated volumes.
