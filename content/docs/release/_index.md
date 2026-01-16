@@ -29,8 +29,8 @@ Description: >
 
 - Enable NVMe/TCP Connectivity for PowerFlex without SDC Requirement
 - Enable OIDC Support for PowerFlex
-- Enable Multi-SG support for PowerMax 
-- Supported SUSE storage certification process for CSI PowerMax, CSI PowerStore and CSI PowerFlex
+- Enable Multi-SG support for PowerMax
+- Support added for SUSE storage Virtualization for CSI PowerMax, CSI PowerStore and CSI PowerFlex 
 - Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
 - Support CSM upgrade via CSM operator using CSM Version
 - Support PowerStore Metro Non-Uniform Host Connectivity
@@ -41,55 +41,28 @@ Description: >
 - Synchronized CSM Operator with oc-mirror
 - Unified Logging Framework for CSI drivers (and future CSM modules)
 - CSI PowerStore Async File Replication
-- Support for PowerFlex v5.0 in CSM
+- Added Support PowerFlex V5.0
+- Added Support for PowerScale 9.13
 - Streamlined installation of CSI PowerStore via dellctl for CSM Operator
 - Container Object Storage Interface driver compliance for ObjectScale 4.x
 
 ### Fixed Issues
 
-- eth_port missing in gopowerstore endpoint
-- No lastSuccessConfiguration for Auth CR
-- Offline bundle testing fails when the ConfigMap includes sidecar images
-- Podmon aborts pod cleanup due to context cancel in ValidateVolumeHostConnectivity for metro volumes
-- Podmon taints a node if it has lost connectivity to the default array even if the node was not supposed to have connectivity to that array(Non-uniform)
-- Unexpected Reference in Logs to csm-application-mobility-controller and velero-plugin Components
-- Idempotency failure in CSI PowerMax - Create Volume with Metro
-- CSI-PowerStore doesn't connect to multiple iSCSI networks
-- CSI Volume Deletion Bottleneck – SG Removal Delay
 - CSI node pod crashes while unmounting PowerStore LUNs
 - CSI PowerStore NVMe doesn't work with multiple VLANs
-- Reverse proxy sometimes does not log request ID
 - Pod Recovery by CSM Resiliency fails with panic in CSI PowerMax controller during node failure
 - Performance Metrics API returns empty results when the comma separated StorageGroupList field is included in the request payload - PowerMax.
 - CSI PowerMax fails to switch to embedded Unisphere during Primary Unisphere failure
 - NodeUnstageVolume reports success even though flushing the volume fails - Unity
 - NodeUnstageVolume reports success even though flushing the volume fails - PowerStore
 - During StageVolume for a FC device the waitForDeviceWWN() fails to rescan all the SD paths on seeing stale wwid - PowerMax
-- CSI-PowerMax driver fails to create replicated volume when no SRDF group exists
-- Inconsistent parameters in observability module in Helm and operator
-- Update gopowerstore api client default timeout type to consider it as seconds
-- CSI PowerStore driver does not add topology keys for FC protocol when the first FC initiator has no active session
 - CSM Replication PowerScale - failback operation do not swap PVC
-- PowerStore Metrics Service: Timeout failures when fetching performance metrics
 - Topology keys disappear after restart of CSI node pod in CSI-PowerStore driver for FC protocol
 - CSI PowerMax Driver: Storage pool metrics are not collected in a multi availability zone setup
-- CSM Observability integration PowerStore/PowerMax ServiceMonitor
-- PowerMax driver does not round off the virtualization filesystem correctly
-- NFS volume staging and unstaging were broken.
 - Modify an NFS export for a NAS server’s file system - repeated Failed Messages
 - Fix NFS Volume access logic to enforce only user‑specified external access
-- Remove gorilla/mux dependency from unit tests in observability module
-- Annotations missed as part of Operator version update workflow
-- Migrate deprecated github.com/golang/mock to go.uber.org/mock
-- CSI PowerStore : NodeUnstageVolume is failing for NFS volumes
-- Unity Nightly fails on 4.20.8 OCP E2E tests
-- Unity OCP E2E - Fails on OCP 4.20.8
-- PowerMax driver is not rounding off the virtualization filesystem perfectly
-- Default replication sidecar version is missing in version-values.yaml
 - Replication - Remote PV does not get MountOptions from SC
-- PowerStore Prepare Storage stage logs is having error but wrongly showing as passed
-- NFS volume Staging and Unstaging were broken.
-- Modify an NFS export for a NAS server’s file system” Repeated Failed Messages
+- Powerstore : Wrong Host is getting parsed from the NodeID
 
 ### Known Issues
 
