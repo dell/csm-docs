@@ -43,7 +43,7 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 > Starting from **CSM version 1.16**, users can utilize the **`version`** parameter (as defined in the `values.yaml` file) for both installation and upgrade. When using this parameter, there are two approaches:  
 >  
 - **ConfigMap Approach:**  
-Create a ConfigMap specifying the required images and apply it to the operator’s namespace. The operator will pull and apply the images defined in the ConfigMap.  
+Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.  
 
    **NOTE:** If a ConfigMap is applied, it takes the highest precedence, and any other image source configuration (such as `customRegistry`) will not be used.  
 
@@ -101,8 +101,8 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
    - **customRegistry** –  When a user wants to pull all images from their own registry, they can set the customRegistry field in the CSM CR. All images will be pulled from this registry using the default names and paths.
 
    - **retainImageRegistryPath** – RetainImageRegistryPath is the boolean flag used to retain image registry path. This value is only used if customRegistry is set.   
-      - When set to false and customRegistry set to my.artifactory-registry.example, a sample image pull be pulled from my.artifactory-registry.example/csi-vxflexos:v2.16.0 
-      - When set to true and customRegistry set to my.artifactory-registry.example, a sample image pull be pulled from my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0   
+      - When set to false and customRegistry set to my.artifactory-registry.example, a sample image will be pulled from my.artifactory-registry.example/csi-vxflexos:v2.16.0 
+      - When set to true and customRegistry set to my.artifactory-registry.example, a sample image will be pulled from my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0<br><br>
 
    **Sample CustomRegistry Configuration:**   
    ```yaml
@@ -114,7 +114,7 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
    spec:
      version: v1.16.0
      customRegistry: my.artifactory-registry.example
-     retainImageRegistryPath: true
+     retainImageRegistryPath: false
      # Add fields here
      driver:
        ....

@@ -77,6 +77,8 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
 
    i. **Create a CR (Custom Resource)** for PowerStore using the sample files provided
 
+   - Starting with CSM version 1.16, the sample CR files includes a new field called spec.version, which specifies the CSM release version. When using this version field, users can provide container images using either the configMap approach or the customRegistry approach, instead of specifying images directly in the Custom Resource (CR). A detailed explanation of both methods is provided in the NOTES section of the [Installation Using Operator](docs/getting-started/installation/kubernetes/powerstore/csmoperator/installationwizard/#installation-using-operator) documentation. **If neither approach is used, or if any images are not specified in the above approaches, the operator will default to pulling the standard images for drivers and modules.**<br><br>
+       
    a. **Minimal Configuration:**
 
    ```yaml
@@ -86,9 +88,9 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
      name: powerstore
      namespace: powerstore
    spec:
+     version: {{< version-docs key="CSM_latestVersion" >}}     
      driver:
        csiDriverType: "powerstore"
-       configVersion: {{< version-docs key="PStore_latestVersion" >}}
        forceRemoveDriver: true
    ```
      [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/minimal-samples/powerstore_{{< version-docs key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
