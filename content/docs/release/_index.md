@@ -59,10 +59,10 @@ Description: >
 - CSM Replication PowerScale - failback operation do not swap PVC
 - Topology keys disappear after restart of CSI node pod in CSI-PowerStore driver for FC protocol
 - CSI PowerMax Driver: Storage pool metrics are not collected in a multi availability zone setup
-- Modify an NFS export for a NAS server’s file system- repeated Failed Messages - Powerstore
-- Fix NFS Volume access logic to enforce only user‑specified external access - Powerstore
+- Modify an NFS export for a NAS server’s file system- repeated Failed Messages - PowerStore
+- Fix NFS Volume access logic to enforce only user‑specified external access - PowerStore
 - Replication - Remote PV does not get MountOptions from SC
-- Powerstore - Incorrect Host is parsed from the NodeID
+- PowerStore - Incorrect Host is parsed from the NodeID
 
 ### Known Issues
 
