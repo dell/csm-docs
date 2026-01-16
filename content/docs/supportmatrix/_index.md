@@ -25,10 +25,10 @@ weight: 1
 ## Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm tdleft">}}
-| Platform                   | Version          |
-|----------------------------|:----------------:|
-| Kubernetes                 | 1.32, 1.33, 1.34 |
-| Red Hat OpenShift          | 4.18, 4.19, 4.20 |
+| Platform                   | Version                |
+|----------------------------|:----------------:      |
+| Kubernetes                 | 1.32, 1.33, 1.34       |
+| Red Hat OpenShift          | 4.17, 4.18, 4.19, 4.20 |
 {{</table>}}
 
 **Notes:**
