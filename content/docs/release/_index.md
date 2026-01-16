@@ -55,7 +55,7 @@ Description: >
 - CSI PowerMax fails to switch to embedded Unisphere during Primary Unisphere failure
 - NodeUnstageVolume reports success even though flushing the volume fails - Unity
 - NodeUnstageVolume reports success even though flushing the volume fails - PowerStore
-- During StageVolume for a FC device the waitForDeviceWWN() fails to rescan all the SD paths on seeing stale wwid - PowerMax
+- FC StageVolume fails to rescan all multipath sd paths when stale WWIDs are present - PowerMax
 - CSM Replication PowerScale - failback operation do not swap PVC
 - Topology keys disappear after restart of CSI node pod in CSI-PowerStore driver for FC protocol
 - CSI PowerMax Driver: Storage pool metrics are not collected in a multi availability zone setup
