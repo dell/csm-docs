@@ -110,7 +110,7 @@ Modify the installation as needed, typically updating driver versions, sidecars,
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: {{< version-v2 key="PFlex-latestVersion" >}}
+        configVersion: {{< version-v2 key="PFlex_latestVersion" >}}
    ```
 {{< alert title="Warning" color="warning" >}}
 Don’t update the original CustomResource manifest file with `kubectl apply -f`. It can overwrite important annotations and cause failures.

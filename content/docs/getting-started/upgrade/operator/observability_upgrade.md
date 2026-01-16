@@ -48,7 +48,7 @@ The Observability module installed by the Dell CSM Operator can be updated like 
 
       - Configure Environment Variables:
 
-          To enable and customize the collection of topology data, add the following environment variables to your custom resource. Or apply the [latest custom resource](https://github.com/dell/csm-operator/blob/main/samples/v2.15.0/). By default, `POWERSCALE_TOPOLOGY_METRICS_ENABLED` is true and `POWERSCALE_TOPOLOGY_METRICS_POLL_FREQUENCY` is 30 seconds.
+          To enable and customize the collection of topology data, add the following environment variables to your custom resource. Or apply the [latest custom resource](https://github.com/dell/csm-operator/blob/main/samples/v2.16.0/). By default, `POWERSCALE_TOPOLOGY_METRICS_ENABLED` is true and `POWERSCALE_TOPOLOGY_METRICS_POLL_FREQUENCY` is 30 seconds.
           ```bash
           - name: "POWERSCALE_TOPOLOGY_METRICS_ENABLED"
             value: "true"
