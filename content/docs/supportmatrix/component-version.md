@@ -21,6 +21,6 @@ weight: 1
 |<div style="text-align:left"> COSI | {{< version-docs key="cosi" >}} |
 {{</table>}}
 
-### Container Storage Modules Certified Operator 1.10.0 Images
+### Container Storage Modules Certified Operator 1.11.0 Images
 
 > **Note:** Upon certification of the Dell Container Storage Modules Operator, a detailed image list will be published to support transparency and component verification. See [Container Storage Modules Operator Certification Policy](../support/certificationpolicy)
