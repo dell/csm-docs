@@ -96,13 +96,16 @@ Create a ConfigMap specifying the required images and apply it to the operator�
    ```
  
 - **Custom Registry Approach:**  
-Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in the configuration. In this case, images will be pulled from the custom registry while retaining the original image path structure.  
+Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in the configuration. The custom registry approach allows you to redirect all container image pulls to a registry of your choice while optionally preserving the original image path structure. This is useful in environments where images must be sourced from a private or enterprise-approved registry.
 
-   - **customRegistry** –  When a user wants to pull all images from their own registry, they can set the customRegistry field in the CSM CR. All images will be pulled from this registry using the default names and paths.
+   - **customRegistry** –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration.
 
-   - **retainImageRegistryPath** – RetainImageRegistryPath is the boolean flag used to retain image registry path. This value is only used if customRegistry is set.   
-      - When set to false and customRegistry set to my.artifactory-registry.example, a sample image will be pulled from my.artifactory-registry.example/csi-vxflexos:v2.16.0 
-      - When set to true and customRegistry set to my.artifactory-registry.example, a sample image will be pulled from my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0<br><br>
+   - **retainImageRegistryPath** – The retainImageRegistryPath field is a boolean flag that determines whether the original image path structure should be preserved when using a custom registry. This parameter is only evaluated when customRegistry is set.
+
+      - retainImageRegistryPath: **false**  
+          When set to false, only the registry hostname is replaced. For example, with customRegistry=my.artifactory-registry.example, an image such as csi-vxflexos:v2.16.0 will be pulled from `my.artifactory-registry.example/csi-vxflexos:v2.16.0`.
+      - retainImageRegistryPath: **true**  
+          When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`. <br><br>
 
    **Sample CustomRegistry Configuration:**   
    ```yaml
