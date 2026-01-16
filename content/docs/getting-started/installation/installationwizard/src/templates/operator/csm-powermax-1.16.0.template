@@ -375,11 +375,6 @@ spec:
           # enabled: Enable/Disable OpenTelemetry Collector
           # Default value: false
           enabled: $OBSERVABILITY_OPERATOR_OTEL
-          envs:
-            # image of nginx proxy image
-            # Allowed values: string
-            - name: "NGINX_PROXY_IMAGE"
-              value: "docker.io/nginxinc/nginx-unprivileged:1.27"
         - name: cert-manager
           # enabled: Enable/Disable cert-manager
           # Allowed values:
