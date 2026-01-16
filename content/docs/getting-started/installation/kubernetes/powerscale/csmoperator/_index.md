@@ -82,6 +82,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    i. **Create a CR (Custom Resource)** for PowerScale using the sample files provided
 
+   - Beginning with CSM version 1.16, the sample Custom Resource (CR) files include a new field, spec.version, which identifies the target CSM release to be deployed. When this field is defined, users can supply container images using either the ConfigMap-based image specification or the custom registry configuration. These approaches eliminate the need to hardcode image references directly within the CR. Detailed guidance for both image management methods is available in the [NOTES](docs/getting-started/installation/kubernetes/powerstore/csmoperator/installationwizard/#installation-using-operator) section of the **Installation Using Operator** documentation. **If neither method is configured or if any images remain unspecified, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules.**<br><br>
+
     a. **Minimal Configuration:**
       ```yaml
       apiVersion: storage.dell.com/v1
@@ -90,9 +92,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         name: isilon
         namespace: isilon
       spec:
+        version: {{< version-docs key="CSM_latestVersion" >}}
         driver:
           csiDriverType: "isilon"
-          configVersion: {{< version-docs key="PScale_latestVersion" >}}
           forceRemoveDriver: true
       ```
     Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
