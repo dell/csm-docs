@@ -62,7 +62,7 @@ Description: >
 - Modify an NFS export for a NAS server’s file system- repeated Failed Messages - Powerstore
 - Fix NFS Volume access logic to enforce only user‑specified external access - Powerstore
 - Replication - Remote PV does not get MountOptions from SC
-- Powerstore : Incorrect Host is parsed from the NodeID
+- Powerstore - Incorrect Host is parsed from the NodeID
 
 ### Known Issues
 
