@@ -51,7 +51,7 @@ Description: >
 - CSI node pod crashes while unmounting PowerStore LUNs
 - CSI PowerStore NVMe doesn't work with multiple VLANs
 - Pod Recovery by CSM Resiliency fails with panic in CSI PowerMax controller during node failure
-- Performance Metrics API returns empty results when the comma separated StorageGroupList field is included in the request payload - PowerMax.
+- Volume metrics API returns no data when optional filtering is applied - Powermax
 - CSI PowerMax fails to switch to embedded Unisphere during Primary Unisphere failure
 - NodeUnstageVolume reports success even though flushing the volume fails - Unity
 - NodeUnstageVolume reports success even though flushing the volume fails - PowerStore
@@ -62,7 +62,7 @@ Description: >
 - Modify an NFS export for a NAS server’s file system- repeated Failed Messages - Powerstore
 - Fix NFS Volume access logic to enforce only user‑specified external access - Powerstore
 - Replication - Remote PV does not get MountOptions from SC
-- Powerstore : Wrong Host is getting parsed from the NodeID
+- Powerstore : Incorrect Host is parsed from the NodeID
 
 ### Known Issues
 
