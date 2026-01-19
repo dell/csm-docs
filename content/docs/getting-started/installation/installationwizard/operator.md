@@ -63,8 +63,7 @@ Create a ConfigMap specifying the required images and apply it to the operatorâ€
            isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.16.0
            powermax: quay.io/dell/container-storage-modules/csi-powermax:v2.16.0
            karavi-authorization-proxy: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.4.0
-           podmon-controller: quay.io/dell/container-storage-modules/podmon:v1.15.0
-           podmon-node: quay.io/dell/container-storage-modules/podmon:v1.15.0
+           podmon: quay.io/dell/container-storage-modules/podmon:v1.15.0
            otel-collector: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.142.0
            metrics-powermax: quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.9.0
            metrics-powerstore: quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.14.0
