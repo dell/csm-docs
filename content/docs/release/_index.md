@@ -23,67 +23,46 @@ Description: >
 > * <span><span/>{{< message text="15" >}}
 > * <span><span/>{{< message text="16" >}}
 
-## Release Notes for v1.15.1
-
-### Fixed Issues
-
-- PowerStore - NodeGetVolumeStats Fails When StorageClass isipath Differs from X_CSI_ISI_PATH Environment Variable
-- PowerFlex - Storage Pool Metrics Not Collected in Multi-AZ Setup Due to Missing SystemID in StorageClass
-- PowerFlex - CSI Driver Panics Intermittently When os.Stat Fails During Volume Operation 
-- PowerStore - CreateVolume Call Violates Idempotency When Multi-NAS Is Configured 
-- PowerMax - Volume Provisioning Fails When Endpoint Is Configured with Trailing Slash 
-- PowerMax - Driver Incorrectly Disables NVMe Support Due to Partial Port Group Accessibility During Startup
-- PowerMax - Driver Crashes with Segmentation Fault Due to Improper Error Handling of Nil Initiators
-
-## Release Notes for v1.15.0
+## Release Notes for v1.16.0
 
 ### New Features/Changes
 
-- Support K8s secrets as credential store in CSM Authorization Proxy v2
-- Authorization support for PowerStore
-- Observability enhancements to prevent hitting the max login limit in PowerFlex
-- Support Resiliency and Metro - Node failure
-- Deliver restricted SDC access mode support for PowerFlex
-- Embed topology metrics for each storage platform into the storage specific metrics service for Observability
-- CSM Operator support Observability deployments for PowerStore
-- CSM operator supports replication deployment for PowerStore
+- Enable NVMe/TCP Connectivity for PowerFlex without SDC Requirement
+- Enable OIDC Support for PowerFlex
+- Enable Multi-SG support for PowerMax
+- Support added for SUSE storage Virtualization for CSI PowerMax, CSI PowerStore and CSI PowerFlex 
+- Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
+- Support CSM upgrade via CSM operator using CSM Version
+- Support PowerStore Metro Non-Uniform Host Connectivity
+- Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure
+- Enhance PowerStore Resiliency deferred operations during Site Failure for Metro Configurations
+- Enabled scalable Kubernetes system metrics collection for observability and visualization across PowerFlex, PowerMax, PowerStore, and PowerScale
+- Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax, and PowerFlex
+- Synchronized CSM Operator with oc-mirror
+- Unified Logging Framework for CSI drivers (and future CSM modules)
+- CSI PowerStore Async File Replication
+- Added Support PowerFlex V5.0
+- Added Support for PowerScale 9.13
+- Streamlined installation of CSI PowerStore via dellctl for CSM Operator
+- Container Object Storage Interface driver compliance for ObjectScale 4.x
 
 ### Fixed Issues
 
-- Incorrect Metro Architecture Diagram Used for PowerStore in Replication
-- Fix NFS Idempotent CreateVolume Request in Driver
-- CSM PowerMax is intermittently left in a failed state
-- Missing skipCertificateValidation Support in PowerStore CSI Driver
-- Not able to pull the images for Offline installation for karavi-observability
-- PowerScale Snapshots of volumes with a prefix different to that of the X_CSI_VOL_PREFIX fail in v2.14
-- After failover with PVC swap, the initial PV does not have a reserved/reserved claim
-- Unity CSI Driver Fails OCP End to End Intermittently
-- Powerstore has unnecessary sharedNFS related codes that affects performance
-- powerflex driver's replication does not search for correct volume name when name + prefix > 31 chars
-- CSM-Operator samples under ocp folder for PowerFlex is pointing to old sha id for SDC image
-- CSM docs - Volume snapshot class mentioned in documentation has indentation issues and failing off
-- Broken referencelink on Support Matrix
-- CSM Authorization: Proxy server deployment is failing
-- CSM Docs - Duplicate entries in Release notes for known issues
-- Repctl Failover Documentation is Unclear
-- replication missing permission in operator
-- Incorrect secret name mentioned for PowerScale installation using operator in OCP environment in CSM Docs
-- Operator does not apply spec.driver.common.envs to driver node
-- Formatting is broken in documentation for night mode
-- CSI PowerFlex driver panics during CreateVolume()
-- node driver crashed on unlocking an unlocked mutex
-- PowerMax client is using PowerFlex methods in CSM authorization
-- Authorization Install docs should use tabs for for storage credential options.
-- Host registration is missing when using metro topology label
-- Operator fails to install PowerStore
-- CSM Docs - Broken links to csm-operator samples in concepts section
-- Powerstore NFS volume usage does not report stats when Volume health Monitoring is enabled
-- Node preferred added for testing resiliency for metro is causing regression in normal set up
-- CSI-PowerScale does not log CSI REQ/REP since 2.14
-- Issue with expansion for PowerStore metro volume
-- invalid topology labels due to delays in initiators login state report from Unity array
-- CSI PowerScale is not able to find the default cluster and failing with error "isilon-node-fntjz"
-- ControllerUnpublish fails to retrieve PV due to tenant prefix mismatch with Auth v2 enabled for powerscale
+- CSI node pod crashes while unmounting PowerStore LUNs
+- CSI PowerStore NVMe doesn't work with multiple VLANs
+- Pod Recovery by CSM Resiliency fails with panic in CSI PowerMax controller during node failure
+- Volume metrics API returns no data when optional filtering is applied - Powermax
+- CSI PowerMax fails to switch to embedded Unisphere during Primary Unisphere failure
+- NodeUnstageVolume reports success even though flushing the volume fails - Unity
+- NodeUnstageVolume reports success even though flushing the volume fails - PowerStore
+- FC StageVolume fails to rescan all multipath sd paths when stale WWIDs are present - PowerMax
+- CSM Replication PowerScale - failback operation do not swap PVC
+- Topology keys disappear after restart of CSI node pod in CSI-PowerStore driver for FC protocol
+- CSI PowerMax Driver: Storage pool metrics are not collected in a multi availability zone setup
+- Modify an NFS export for a NAS server’s file system- repeated Failed Messages - PowerStore
+- Fix NFS Volume access logic to enforce only user‑specified external access - PowerStore
+- Replication - Remote PV does not get MountOptions from SC
+- PowerStore - Incorrect Host is parsed from the NodeID
 
 ### Known Issues
 
