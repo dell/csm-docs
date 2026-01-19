@@ -81,6 +81,18 @@ Create a ConfigMap specifying the required images and apply it to the operatorâ€
            snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v8.4.0
            csi-metadata-retriever: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.11.0
            external-health-monitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.16.0
+           cert-manager-cainjector: quay.io/jetstack/cert-manager-cainjector:v1.11.0
+           cert-manager-controller: quay.io/jetstack/cert-manager-controller:v1.11.0
+           cert-manager-webhook: quay.io/jetstack/cert-manager-webhook:v1.11.0
+           proxy-service: quay.io/dell/container-storage-modules/csm-authorization-proxy:v2.4.0
+           tenant-service: quay.io/dell/container-storage-modules/csm-authorization-tenant:v2.4.0
+           role-service: quay.io/dell/container-storage-modules/csm-authorization-role:v2.4.0
+           storage-service: quay.io/dell/container-storage-modules/csm-authorization-storage:v2.4.0
+           opa: docker.io/openpolicyagent/opa:0.70.0
+           opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:8.5.11
+           authorization-controller: quay.io/dell/container-storage-modules/csm-authorization-controller:v2.4.0
+           redis: redis:8.2.0-alpine
+           commander: docker.io/rediscommander/redis-commander:latest
        - version: v1.15.0
          images:
            powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.15.0
