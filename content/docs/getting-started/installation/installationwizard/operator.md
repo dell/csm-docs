@@ -65,6 +65,7 @@ Create a ConfigMap specifying the required images and apply it to the operatorâ€
            karavi-authorization-proxy: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.4.0
            podmon: quay.io/dell/container-storage-modules/podmon:v1.15.0
            otel-collector: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.142.0
+           nginx-proxy : quay.io/nginx/nginx-unprivileged:1.27
            metrics-powermax: quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.9.0
            metrics-powerstore: quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.14.0
            metrics-powerflex: quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.14.0
