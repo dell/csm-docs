@@ -50,19 +50,9 @@ Operator, you need:
      --type=json -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/hostAliases", "value": [{"ip":"<remote-IP>","hostnames":["<remote-FQDN>"]}]}]'
   ```
 
-### Cloning the GitHub Repository and Building repctl
+### Set up repctl tool
 
-The [csm-replication](https://github.com/dell/csm-replication.git) GitHub
-repository is cloned to your source cluster as part of the installation. On your
-source cluster run the following to clone and build the repctl tool:
-
-```shell
-git clone -b {{< version-docs key="Replication" >}} https://github.com/dell/csm-replication.git
-cd csm-replication/repctl
-make build
-```
-
-Alternately, you can download a pre-built repctl binary from our
+Before you begin, make sure you have the repctl tool available.You can download a pre-built repctl binary from our
 [Releases](https://github.com/dell/csm-replication/releases) page.
 
 ```shell
