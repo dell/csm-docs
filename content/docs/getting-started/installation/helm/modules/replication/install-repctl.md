@@ -24,14 +24,6 @@ mv repctl-linux-amd64 repctl
 chmod +x repctl
 ```
 
-Alternately, if you want to build the binary yourself, you can follow these steps:
-
-```shell
-git clone -b {{< version-docs key="Replication" >}} https://github.com/dell/csm-replication.git
-cd csm-replication/repctl
-make build
-```
-
 ### Installation steps
 
 > **_NOTE:_**  The repctl commands only have to be run from one Kubernetes cluster. Repctl does the appropriate configuration on both clusters, when installing replication with it.

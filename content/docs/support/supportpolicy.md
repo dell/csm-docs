@@ -16,8 +16,8 @@ The following information is designed to help customers and partners effectively
 {{<table "table table-striped table-bordered table-sm">}}
 | Container Storage Modules Version  | GA Date  | EOL Date |
 |------------------------------------|:--------:|:----------------:|
+| 1.16                               |01/30/2026|01/30/2027        |
 | 1.15                               |09/30/2025|09/30/2026        |
 | 1.14                               |05/30/2025|05/30/2026        |
 | 1.13                               |01/31/2025|01/31/2026        |
-| 1.12                               |11/06/2024|10/31/2025        |
 {{</table>}}
