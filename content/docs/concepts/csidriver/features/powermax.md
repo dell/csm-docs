@@ -836,53 +836,27 @@ spec:
             - zone1
 ```
 
-## Support for multiple storage groups with a single storage class
+## Dynamic Storage Group (SG) Creation with Service Level Objective (SLO) Integration
 
-The CSI PowerMax driver introduces support for dynamic creation and management of multiple Storage Groups (SGs) under a single Storage Class (SC). This enhancement enables scaling beyond the volume limit per SG, allowing full utilization of the PowerMax array’s maximum capacity of volumes.
+The CSI PowerMax driver introduces support for dynamic creation and management of multiple Storage Groups under a single StorageClass. This feature enables scaling beyond the volume limit per SG, ensuring optimal utilization of the PowerMax array’s capacity while maintaining consistent performance characteristics.
 
-### Key Highlights:
-- Dynamic SG Creation
-  - Allows multiple SGs to be associated with a single StorageClass under the same SLO.
-  - When an existing SG reaches its maximum volume limit, the driver automatically creates a new SG.
-  - New SGs are named using a base name (derived from SC parameters) as a prefix, followed by a numeric suffix.
+#### Multiple Storage Groups per StorageClass
+- A single StorageClass can have multiple SGs associated with it under the same SLO.
 
-    Example:
-    - csi-C1-Diamond-SRP_1-SG\-\-1
-    - csi-C1-Diamond-SRP_1-SG\-\-2
+#### Automatic Storage Group Creation
+- When an existing SG reaches its maximum volume limit, the driver automatically creates a new SG.
+- SG names follow a structured pattern using a base name (derived from StorageClass parameters) and a numeric suffix for uniqueness.
 
-- For new volume requests, it selects the SG with the lowest volume count among all existing SGs to ensure balanced distribution.
-- The driver enforces a soft limit of 4,000 volumes per SG.
+**Example:**
+```
+csi-C1-Diamond-SRP_1-SG--1
+csi-C1-Diamond-SRP_1-SG--2
+```
 
-**Prerequisite:** Unisphere version 10.1 or later
+#### Balanced Volume Distribution
+- For new volume requests, the driver selects the SG with the lowest volume count to ensure even distribution across SGs.
 
-**Note:** Support for replicated volumes will be introduced in upcoming releases.
+#### Soft Limit
+- Each SG has a soft limit of **4,000 volumes**.
 
-### Role of SLO in SG Creation
-- Service Level Objective (SLO) defines the performance and service characteristics for volumes in PowerMax arrays (e.g., Diamond, Gold, Silver).
-- Each CSI StorageClass specifies an SLO and SRP (Storage Resource Pool).
-- When creating SGs:
-  - The driver uses the SLO defined in the StorageClass to ensure all volumes in the SG meet the required performance tier.
-   - SG names incorporate the SLO and SRP for clarity and consistency.
-   - Example:
-     - For CLUSTER_PREFIX=C1, SLO=Diamond and SRP=SRP_1:
-
-       csi-C1-Diamond-SRP_1-SG
-
-       csi-C1-Diamond-SRP_1-SG\-\-1
-
-- This ensures:
-  - All SGs under the same StorageClass share the same SLO.
-  - Volumes provisioned from the StorageClass maintain consistent performance characteristics.
-
-### How to Enable the feature
-
-- Helm installation:
-
-  Set dynamicSGEnabled: true in values.yaml.
-
-
-- Operator installation:
-
-  Edit the sample file and set X_CSI_DYNAMIC_SG_ENABLED to true.
-
-> Note: By default the feature is disabled.
+**Note:** Support added only for non-replicated volumes.
