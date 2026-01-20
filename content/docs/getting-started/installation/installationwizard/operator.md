@@ -137,6 +137,8 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
    ```
 **If neither approach is used, or if any images are not specified in the above approaches, the operator will default to pulling the standard images for drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.**
 
+   **NOTE: Even if the correct versions and images are provided, if the upgrade still fails, uninstall the existing driver and modules and perform a fresh installation.**
+
 >NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [CSI Driver](../../csmoperator#install-driver), [Resiliency](../../csmoperator/csm-modules/resiliency).
 
 {{< hide id="1" >}}
