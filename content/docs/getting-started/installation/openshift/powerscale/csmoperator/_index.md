@@ -255,6 +255,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     oc create -f csm-isilon.yaml
     ```
 
+    Beginning with CSM version 1.16, the sample Custom Resource (CR) files include a new field, spec.version,      which identifies the target CSM release to be deployed. When this field is defined, users can supply container images using either the ConfigMap-based image specification or the custom registry configuration. These approaches eliminate the need to hardcode image references directly within the CR.<br><br>
+    Detailed guidance for both image management methods is available in the [NOTES](docs/getting-started/installation/kubernetes/powerstore/csmoperator/installationwizard/#installation-using-operator) section of the **Installation Using Operator**  documentation.<br><br>
+    **If neither method is configured or if any images remain unspecified, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules.**<br> 
+
     Example:
     <div style="margin-bottom: -1.8rem">
 
@@ -267,9 +271,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       name: isilon
       namespace: isilon
     spec:
+      version: {{< version-docs key="CSM_latestVersion" >}}
       driver:
         csiDriverType: "isilon"
-        configVersion: {{< version-docs key="PScale_latestVersion" >}}
         authSecret: isilon-creds
         common:
           envs:
