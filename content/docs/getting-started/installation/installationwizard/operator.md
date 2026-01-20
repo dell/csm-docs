@@ -74,6 +74,7 @@ Create a ConfigMap specifying the required images and apply it to the operatorâ€
            dell-replication-controller-manager: quay.io/dell/container-storage-modules/dell-replication-controller:v1.14.0
            csipowermax-reverseproxy: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.0
            sdc: quay.io/dell/storage/powerflex/sdc:5.0
+           sdc-monitor: quay.io/dell/storage/powerflex/sdc:5.0
            provisioner: registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
            attacher: registry.k8s.io/sig-storage/csi-attacher:v4.10.0
            registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.14.0
