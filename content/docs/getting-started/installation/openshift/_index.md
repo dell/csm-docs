@@ -18,6 +18,6 @@ weight: 2
 
     {{< customcard path="content/docs/getting-started/installation/openshift/unityxt" link="./unityxt"   imageNumber="3" title="Unity XT"  >}}
 
-    {{< customcard path="content/docs/getting-started/installation/openshift/ObjectScale" link="./cosi"   imageNumber="3" title="COSI"  >}}
+    {{< customcard path="content/docs/getting-started/installation/openshift/ObjectScale" link="./objectscale"   imageNumber="3" title="COSI"  >}}
 
 {{< /cardcontainer >}}
