@@ -64,7 +64,7 @@ Create a ConfigMap specifying the required images and apply it to the operatorâ€
            powermax: quay.io/dell/container-storage-modules/csi-powermax:v2.16.0
            karavi-authorization-proxy: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.4.0
            podmon: quay.io/dell/container-storage-modules/podmon:v1.15.0
-           otel-collector: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.142.0
+           otel-collector: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.143.1
            nginx-proxy : quay.io/nginx/nginx-unprivileged:1.27
            metrics-powermax: quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.9.0
            metrics-powerstore: quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.14.0
@@ -90,7 +90,7 @@ Create a ConfigMap specifying the required images and apply it to the operatorâ€
            role-service: quay.io/dell/container-storage-modules/csm-authorization-role:v2.4.0
            storage-service: quay.io/dell/container-storage-modules/csm-authorization-storage:v2.4.0
            opa: docker.io/openpolicyagent/opa:0.70.0
-           opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:8.5.11
+           opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.3.0
            authorization-controller: quay.io/dell/container-storage-modules/csm-authorization-controller:v2.4.0
            redis: redis:8.2.0-alpine
            commander: docker.io/rediscommander/redis-commander:latest
@@ -137,7 +137,7 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
    ```
 **If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.**
 
-   **NOTE: If the upgrade using the version flag fails, cleanup the existing resources and proceed with a fresh installation.**
+   **NOTE: If the upgrade using the version flag fails, refer to the Operator Troubleshooting Guide [here](/csm-docs/docs/support/troubleshooting/). If the issue still persists, cleanup the existing resources and perform a reinstallation.**
 
 >NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [CSI Driver](../../csmoperator#install-driver), [Resiliency](../../csmoperator/csm-modules/resiliency).
 
