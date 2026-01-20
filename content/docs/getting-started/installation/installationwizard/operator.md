@@ -135,7 +135,7 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
      driver:
        ....
    ```
-**If neither approach is used, the operator will default to pulling the standard images for drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.**
+**If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.**
 
    **NOTE: If the upgrade using the version flag fails, cleanup the existing resources and proceed with a fresh installation.**
 
