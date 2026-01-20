@@ -147,8 +147,6 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
 5. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
-    i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided  
-
     a. **Minimal Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. If using the secret above, ensure that the secret name of the secret created is `powermax-creds`.
 
     [OR]
@@ -191,9 +189,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
   {{< /collapse >}}
 
-  ii. Confirm that value of `X_CSI_REVPROXY_USE_SECRET` is set to `true`.
+  i. Confirm that value of `X_CSI_REVPROXY_USE_SECRET` is set to `true`.
 
-  iii. **Create PowerMax custom resource**:
+  ii. **Create PowerMax custom resource**:
 
   ```bash
   oc create -f <input_sample_file.yaml>
