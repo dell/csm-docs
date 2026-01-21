@@ -149,6 +149,8 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
     oc create -f csm-powerstore.yaml
     ```
 
+    <span><span/>{{< message text="19" >}}.
+
     Example:
     <div style="margin-bottom: -1.8rem">
 
@@ -161,9 +163,9 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
       name: powerstore
       namespace: powerstore
     spec:
+     version: {{< version-docs key="CSM_latestVersion" >}}
      driver:
        csiDriverType: "powerstore"
-       configVersion: {{< version-docs key="PStore_latestVersion" >}}
        forceRemoveDriver: true
     EOF
     ```
