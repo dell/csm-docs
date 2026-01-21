@@ -16,11 +16,85 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 ## Upgrade Notices:
 
-**CSM v1.16**
+### CSM v1.15 → CSM v1.16 (Authorization v2.3.0 → v2.4.0)
+
+Starting with CSM v1.16 and CSM Authorization v2.4.0, the sample Custom Resource (CR) file introduces a new field, `spec.version`, which specifies the target CSM release for deployment. When this field is set, users can provide container images through either the ConfigMap-based image definitions or a custom registry setup. These methods remove the need to embed image references directly within the CR itself.
+
+Detailed instructions for both image management options are provided in the [ConfigMap & Custom Registry section](/csm-docs/docs/getting-started/installation/operator/image-configuration/).
+
+**If neither method is configured, the operator automatically falls back to using the default image set associated with the Authorization Proxy Server. This fallback only works for CSM 1.16 (Authorization v2.4.0).**
+
+As part of the upgrade, modify the existing CSM object in the `authorization` namespace to include the `spec.version` field. Also, remove the old `spec.configVersion field` and all image references demonstrated by the diff below (remove the red lines and add the green line).
+
+{{< collapse id="1" title="Example CSM Object Edits" card="false" >}}
+```diff
+spec:
++ version: v1.16.0
+  modules:
+    - name: authorization-proxy-server
+      enabled: true
+-     configVersion: v2.3.0
+      forceRemoveModule: true
+      components:
+        - name: nginx
+          enabled: true
+        - name: cert-manager
+          enabled: true
+        - name: proxy-server
+          enabled: true
+-         proxyService: quay.io/dell/container-storage-modules/csm-authorization-proxy:v2.3.0
+          proxyServiceReplicas: 1
+-         tenantService: quay.io/dell/container-storage-modules/csm-authorization-tenant:v2.3.0
+          tenantServiceReplicas: 1
+-         roleService: quay.io/dell/container-storage-modules/csm-authorization-role:v2.3.0
+          roleServiceReplicas: 1
+-         storageService: quay.io/dell/container-storage-modules/csm-authorization-storage:v2.3.0
+          storageServiceReplicas: 1
+-         opa: docker.io/openpolicyagent/opa:0.70.0
+-         opaKubeMgmt: docker.io/openpolicyagent/kube-mgmt:8.5.11
+-         authorizationController: quay.io/dell/container-storage-modules/csm-authorization-controller:v2.3.0
+          authorizationControllerReplicas: 1
+          leaderElection: true
+          controllerReconcileInterval: 5m
+          certificate: ""
+          privateKey: ""
+          hostname: "csm-authorization.com"
+          proxyServerIngress:
+            - ingressClassName: nginx
+              hosts: []
+              annotations: {}
+          openTelemetryCollectorAddress: ""
+        - name: redis
+          redisSecretProviderClass:
+            - secretProviderClassName: ""
+              redisSecretName: ""
+              redisUsernameKey: ""
+              redisPasswordKey: ""
+-         redis: redis:8.2.0-alpine
+-         commander: rediscommander/redis-commander:latest
+          redisName: redis-csm
+          redisCommander: rediscommander
+          sentinel: sentinel
+          redisReplicas: 5
+
+        - name: config
+          configSecretProviderClass:
+            - secretProviderClassName: ""
+              configSecretName: ""
+
+        - name: storage-system-credentials
+          secretProviderClasses:
+            vault:
+              - secret-provider-class-1
+              - secret-provider-class-2
+```
+{{< /collapse >}}
+
+### CSM v1.16
 
 Starting with CSM v1.16 and CSM Authorization v2.4.0, the `karavi-authorization-config` secret is no longer required. However, existing installations that include this secret will continue to function as expected.
 
-**CSM v1.14 → CSM v1.15 (Authorization v2.2.0 → v2.3.0)**
+### CSM v1.14 → CSM v1.15 (Authorization v2.2.0 → v2.3.0)
 
 Starting with CSM v1.15 and CSM Authorization v2.3.0, users must configure storage credentials prior to deployment. This is a mandatory step to ensure proper access to external storage systems.
 
