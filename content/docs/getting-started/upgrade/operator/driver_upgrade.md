@@ -102,7 +102,8 @@ Modify the installation as needed, typically updating driver versions, sidecars,
 * Upgrading the `spec.version`.
 
  </br> <span><span/>{{< message text="19" >}}
-
+ </br> <span><span/>{{< message text="20" >}}
+ 
 **NOTES:**
 
 1. When upgrading the CSI driver from CSM 1.15 to CSM 1.16, the `spec.version` field must be added as part of the CSM 1.16 upgrade process.
