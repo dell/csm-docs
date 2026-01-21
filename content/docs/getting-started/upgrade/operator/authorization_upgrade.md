@@ -23,7 +23,7 @@ Starting with CSM v1.16 and CSM Authorization v2.4.0, the `karavi-authorization-
 ### CSM v1.15 → CSM v1.16 (Authorization v2.3.0 → v2.4.0)
 <span></span>{{< message text="23" >}}
 
-As part of the upgrade, modify the existing CSM object in the `authorization` namespace to include the `spec.version` field. Also, remove the old `spec.configVersion field` and all image references demonstrated by the diff below (remove the red lines and add the green line).
+As part of the upgrade, modify the existing CSM object in the `authorization` namespace to include the `spec.version` field. Also, remove the old `spec.configVersion` field and all image references demonstrated by the diff below (remove the red lines and add the green line).
 
 {{< collapse id="1" title="Example CSM Object Edits" card="false" >}}
 ```diff
