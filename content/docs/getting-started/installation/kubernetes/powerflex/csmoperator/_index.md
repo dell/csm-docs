@@ -199,7 +199,7 @@ ii . **Run this command to create** a PowerFlex custom resource:
 
 <div id="configmap"></div>
 
-{{< collapse id="2" title="ConfigMap & Customer Registery">}}
+{{< collapse id="2" title="ConfigMap & Customer Registry">}}
 
 
 {{< /collapse >}}
