@@ -16,13 +16,12 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 ## Upgrade Notices:
 
+### CSM v1.16
+
+Starting with CSM v1.16 and CSM Authorization v2.4.0, the `karavi-authorization-config` secret is no longer required. However, existing installations that include this secret will continue to function as expected.
+
 ### CSM v1.15 → CSM v1.16 (Authorization v2.3.0 → v2.4.0)
-
-Starting with CSM v1.16 and CSM Authorization v2.4.0, the sample Custom Resource (CR) file introduces a new field, `spec.version`, which specifies the target CSM release for deployment. When this field is set, users can provide container images through either the ConfigMap-based image definitions or a custom registry setup. These methods remove the need to embed image references directly within the CR itself.
-
-Detailed instructions for both image management options are provided in the [ConfigMap & Custom Registry section](/csm-docs/docs/getting-started/installation/operator/image-configuration/).
-
-**If neither method is configured, the operator automatically falls back to using the default image set associated with the Authorization Proxy Server. This fallback only works for CSM 1.16 (Authorization v2.4.0).**
+<span></span>{{< message text="23" >}}
 
 As part of the upgrade, modify the existing CSM object in the `authorization` namespace to include the `spec.version` field. Also, remove the old `spec.configVersion field` and all image references demonstrated by the diff below (remove the red lines and add the green line).
 
@@ -89,10 +88,6 @@ spec:
               - secret-provider-class-2
 ```
 {{< /collapse >}}
-
-### CSM v1.16
-
-Starting with CSM v1.16 and CSM Authorization v2.4.0, the `karavi-authorization-config` secret is no longer required. However, existing installations that include this secret will continue to function as expected.
 
 ### CSM v1.14 → CSM v1.15 (Authorization v2.2.0 → v2.3.0)
 
