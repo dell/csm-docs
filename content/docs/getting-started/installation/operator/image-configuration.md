@@ -6,7 +6,7 @@ description:
 toc_hide: true
 weight: 2
 ---
-> Starting from **CSM version 1.16**, users can utilize the **`version`** parameter (as defined in the `sample.yaml` file) for both installation and upgrade. When using this parameter, there are two approaches:  
+> Starting from **CSM version 1.16**, users can utilize the **`spec.version`** parameter (as defined in the `sample.yaml` file) for both installation and upgrade. When using this parameter, there are two approaches:  
 >  
 - **ConfigMap Approach:**  
 Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.  
