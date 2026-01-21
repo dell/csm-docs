@@ -195,6 +195,15 @@ ii . **Run this command to create** a PowerFlex custom resource:
 **Note** :
    - Snapshotter and resizer sidecars are installed by default.
 
+
+
+<div id="configmap"></div>
+
+{{< collapse id="2" title="ConfigMap & Customer Registery">}}
+
+
+{{< /collapse >}}
+
 {{< /accordion >}}
 
 <br>
