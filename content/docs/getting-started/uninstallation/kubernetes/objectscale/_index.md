@@ -1,6 +1,6 @@
 ---
-title: "COSI"
-linkTitle: "COSI"
+title: "ObjectScale"
+linkTitle: "ObjectScale"
 no_list: true
 weight: 6
 ---

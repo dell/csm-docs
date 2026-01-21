@@ -210,7 +210,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 >Notes:
 - The Operator installs to the `dell-csm-operator` namespace by default
 - Offline bundle installation is only supported with manual installs (without using Operator Lifecycle Manager).
-- Use files from the unpacked offline bundle (dell-csm-operator-bundle.tar.gz) as image tags in the manifests are modified to point to the internal registry.
+- <span></span>{{< message text="21" >}}
 - Offline bundle installs the operator in the default namespace via the install.sh script. Ensure the current context in the kubeconfig file is set to default.
 
 #### Installing Dell CSM Operator on a disconnected OpenShift environment

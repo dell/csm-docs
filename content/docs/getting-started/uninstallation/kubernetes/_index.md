@@ -18,4 +18,7 @@ weight: 1
 
     {{< customcard path="content/docs/getting-started/uninstallation/kubernetes/unityxt" link="./unityxt"   imageNumber="3" title="Unity XT"  >}}
 
+    {{< customcard path="content/docs/getting-started/uninstallation/kubernetes/objectscale" link="./objectscale"   imageNumber="3" title="ObjectScale"  >}}
+
+
 {{< /cardcontainer >}}

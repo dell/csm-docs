@@ -77,6 +77,8 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
 
    i. **Create a CR (Custom Resource)** for PowerStore using the sample files provided
 
+    <span></span>{{< message text="19" >}}
+       
    a. **Minimal Configuration:**
 
    ```yaml
@@ -86,9 +88,9 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
      name: powerstore
      namespace: powerstore
    spec:
+     version: {{< version-docs key="CSM_latestVersion" >}}     
      driver:
        csiDriverType: "powerstore"
-       configVersion: {{< version-docs key="PStore_latestVersion" >}}
        forceRemoveDriver: true
    ```
      [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/minimal-samples/powerstore_{{< version-docs key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
@@ -121,6 +123,7 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
 |<div style="text-align: left"> X_CSI_POWERSTORE_ENABLE_CHAP |<div style="text-align: left"> Set to true if you want to enable iSCSI CHAP feature | No | false |
 {{< /collapse >}}
 
+</ul>
 
    ii. **Create PowerStore custom resource**:
 
@@ -133,19 +136,22 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
       ```bash
       kubectl get all -n powerstore
       ```
-</ul>
 
-1. **Verify the installation** as mentioned below
 
-    * Check if ContainerStorageModule CR is created successfully using the command below:
-        ```bash
-        kubectl get csm/powerstore -n powerstore -o yaml
-        ```
-    * Check the status of the CR to verify if the driver installation is in the `Succeed` state. If the status is not `Succeed`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+  iii. **Verify the installation** as mentioned below
 
-   </br>
 
-2. **Create Storage Class**
+  * Check if ContainerStorageModule CR is created successfully using the command below:
+
+    ```bash
+    kubectl get csm/powerstore -n powerstore -o yaml
+    ```
+   
+  Check the status of the CR to verify if the driver installation is in the `Succeed` state. If the status is not `Succeed`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+
+  </br>
+
+4. **Create Storage Class**
 
    ```yaml
    apiVersion: storage.k8s.io/v1
@@ -168,7 +174,7 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
    kubectl create -f < storage-class.yaml >
    ```
 
-3. **Create Volume Snapshot Class**
+5. **Create Volume Snapshot Class**
    ```yaml
    apiVersion: snapshot.storage.k8s.io/v1
    kind: VolumeSnapshotClass

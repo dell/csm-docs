@@ -18,4 +18,6 @@ weight: 2
 
     {{< customcard path="content/docs/getting-started/uninstallation/openshift/unityxt" link="./unityxt"   imageNumber="3" title="Unity XT"  >}}
 
+    {{< customcard path="content/docs/getting-started/uninstallation/openshift/objectscale" link="./objectscale"   imageNumber="3" title="ObjectScale"  >}}
+
 {{< /cardcontainer >}}

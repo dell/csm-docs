@@ -31,7 +31,6 @@ Description: >
 - Enable OIDC Support for PowerFlex
 - Enable Multi-SG support for PowerMax
 - Support added for SUSE storage Virtualization for CSI PowerMax, CSI PowerStore and CSI PowerFlex 
-- Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
 - Support CSM upgrade via CSM operator using CSM Version
 - Support PowerStore Metro Non-Uniform Host Connectivity
 - Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure
@@ -40,8 +39,9 @@ Description: >
 - Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax, and PowerFlex
 - Synchronized CSM Operator with oc-mirror
 - Unified Logging Framework for CSI drivers (and future CSM modules)
-- CSI PowerStore Async File Replication
-- Added Support PowerFlex V5.0
+- PowerStore Async File Replication
+- Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
+- Added Support for PowerFlex 5.0
 - Added Support for PowerScale 9.13
 - Streamlined installation of CSI PowerStore via dellctl for CSM Operator
 - Container Object Storage Interface driver compliance for ObjectScale 4.x

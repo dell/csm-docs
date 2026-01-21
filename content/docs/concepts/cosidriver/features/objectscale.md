@@ -237,7 +237,7 @@ EOF
 
 ## Deleting Buckets
 
-There are a few crucial details regarding bucket deletion. The first one is `deletionPolicy` which is used to specify how COSI should handle deletion of a bucket. It is found in `BucketClass` resource and can be set to `Delete` and `Retain`. The second crucial detail is `emptyBucket` field in the [Helm Chart configuration](../../installation/configuration).
+There are a few crucial details regarding bucket deletion. The first one is `deletionPolicy` which is used to specify how COSI should handle deletion of a bucket. It is found in `BucketClass` resource and can be set to `Delete` and `Retain`. The second crucial detail is `emptyBucket` field in the [Helm Chart configuration](../../../getting-started/installation/kubernetes/objectscale/helm/).
 
 The following example shows how to delete a `BucketClaim`.
 
