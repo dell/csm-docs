@@ -96,21 +96,20 @@ Modify the installation as needed, typically updating driver versions, sidecars,
 
 3. Refer how to [upgrade](https://infohub.delltechnologies.com/en-us/p/best-practices-for-deployment-and-life-cycle-management-of-dell-csm-modules-1/#:~:text=Upgrades%20with%20Operator) guide if you have more questions </br>
 
-{{< alert title="Warning" color="warning" >}}
- <span><span/>{{< message text="4" >}}
-{{< /alert >}}
-
 #### Supported modifications
 
-* Changing environment variable values for driver
-* Updating the image of the driver
-* Upgrading the driver version
+* Changing environment variable values for driver.
+* Upgrading the `spec.version`.
+
+ </br> <span><span/>{{< message text="19" >}}
 
 **NOTES:**
-1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
+
+1. When upgrading the CSI driver from CSM 1.15 to CSM 1.16, the `spec.version` field must be added as part of the CSM 1.16 upgrade process.
+
    ```yaml
-      driver:
-        configVersion: {{< version-docs key="PFlex_latestVersion" >}}
+      spec:
+        version: {{< version-docs key="CSM_latestVersion" >}}
    ```
 {{< hide class="3" >}}
 2. **NVMe/TCP Migration**: If you are upgrading to use NVMe/TCP, you must disable SDC by setting `X_CSI_SDC_ENABLED` to `false`. Also, if your nodes previously had SDC installed, you must remove the SDC package and the `csi-vxflexos.dellemc.com/<system-id>` label from the nodes. Refer [documentation](../../../../../concepts/csidriver/features/powerflex/#nvmetcp-support) for more details.

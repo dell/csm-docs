@@ -88,17 +88,15 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
     
+    <span></span>{{< message text="19" >}}
+
     a. **Default Configuration:** Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
-    Beginning with CSM version 1.16, the sample Custom Resource (CR) files include a new field, spec.version,      which identifies the target CSM release to be deployed. When this field is defined, users can supply container images using either the ConfigMap-based image specification or the custom registry configuration. These approaches eliminate the need to hardcode image references directly within the CR.<br><br>
-    Detailed guidance for both image management methods is available in the [NOTES](docs/getting-started/installation/kubernetes/powerstore/csmoperator/installationwizard/#installation-using-operator) section of the **Installation Using Operator**  documentation.<br><br>
-    **If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules.**<br>
-
-    c. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+    Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
 <ul>   
 {{< collapse id="1" title="Parameters">}}
