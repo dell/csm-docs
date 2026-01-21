@@ -77,7 +77,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ## Helm Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT | COSI |
+| Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT | ObjectScale |
 | ---------------- | ---------- |------------|-----------|----------|----------|------|
 | Authorization v2 | Yes        | Yes        | Yes       | Yes      | No       | No   |
 | Replication      | Yes        | Yes        | Yes       | Yes      | No       | No   |
@@ -92,7 +92,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ## Operator Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT | COSI |
+| Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT | ObjectScale |
 | ---------------- | ---------- |------------|-----------|----------|----------|------|
 | Authorization v2 | Yes        |  Yes        | Yes      | Yes      | No       | No   |
 | Replication      | Yes        |  Yes        | Yes      | Yes      | No       | No   |
@@ -123,7 +123,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 ### Drivers
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Wizard   | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT | COSI |
+| Wizard   | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT | ObjectScale |
 | -------- | ---------- |------------|-----------|----------|----------|------|
 | Helm     | Yes        |  Yes        | Yes     | Yes       | No       | No   |
 | Operator | Yes        |  Yes        | No      | Yes       | No       | No   |

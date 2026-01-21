@@ -62,7 +62,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    i. **Create a CR (Custom Resource)** for PowerFlex using the sample files provided
 
-      a. **Minimal Configuration:**
+    <span></span>{{< message text="19" >}}
+  
+    a. **Minimal Configuration:**
     ```yaml
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule
@@ -70,9 +72,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       name: vxflexos
       namespace: vxflexos
     spec:
+      version: {{< version-docs key="CSM_latestVersion" >}}
       driver:
         csiDriverType: "powerflex"
-        configVersion: {{< version-docs key="PFlex_latestVersion" >}}
         forceRemoveDriver: true
     ```
      Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
@@ -192,6 +194,15 @@ ii . **Run this command to create** a PowerFlex custom resource:
 
 **Note** :
    - Snapshotter and resizer sidecars are installed by default.
+
+
+
+<div id="configmap"></div>
+
+{{< collapse id="2" title="ConfigMap & Customer Registry">}}
+
+
+{{< /collapse >}}
 
 {{< /accordion >}}
 

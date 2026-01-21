@@ -255,6 +255,8 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     oc create -f csm-isilon.yaml
     ```
 
+   <span><span/>{{< message text="19" >}}.
+
     Example:
     <div style="margin-bottom: -1.8rem">
 
@@ -267,9 +269,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       name: isilon
       namespace: isilon
     spec:
+      version: {{< version-docs key="CSM_latestVersion" >}}
       driver:
         csiDriverType: "isilon"
-        configVersion: {{< version-docs key="PScale_latestVersion" >}}
         authSecret: isilon-creds
         common:
           envs:

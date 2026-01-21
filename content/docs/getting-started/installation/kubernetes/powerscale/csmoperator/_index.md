@@ -82,6 +82,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    i. **Create a CR (Custom Resource)** for PowerScale using the sample files provided
 
+    <span></span>{{< message text="19" >}}
+
     a. **Minimal Configuration:**
       ```yaml
       apiVersion: storage.dell.com/v1
@@ -90,9 +92,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         name: isilon
         namespace: isilon
       spec:
+        version: {{< version-docs key="CSM_latestVersion" >}}
         driver:
           csiDriverType: "isilon"
-          configVersion: {{< version-docs key="PScale_latestVersion" >}}
           forceRemoveDriver: true
       ```
     Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
@@ -144,7 +146,7 @@ ii. **Create PowerScale custom resource**:
         ```bash
         kubectl get csm/isilon -n isilon
         ```
-    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+    Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
 </br>
 

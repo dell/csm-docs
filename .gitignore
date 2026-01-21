@@ -4,4 +4,4 @@ resources/
 .hugo_build.lock
 coverage/
 reports/
-nohup.out
+nohup.outspider.log
