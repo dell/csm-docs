@@ -210,7 +210,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 >Notes:
 - The Operator installs to the `dell-csm-operator` namespace by default
 - Offline bundle installation is only supported with manual installs (without using Operator Lifecycle Manager).
-- Starting with CSM version 1.16, the CR files includes a new field called spec.version, which specifies the CSM release version. When deploying operator in offline environments and using spec.version, users must provide container images using either the configMap approach or the customRegistry approach, instead of specifying images directly in the Custom Resource (CR). A detailed explanation of both methods is provided in the NOTES section of the [Installation Using Operator](docs/getting-started/installation/kubernetes/powerstore/csmoperator/installationwizard/#installation-using-operator) documentation. **This spec.version is currently supported on Powerstore, Powermax, Powerscale and Powerflex platforms.**
+- <span></span>{{< message text="21" >}}
 - Offline bundle installs the operator in the default namespace via the install.sh script. Ensure the current context in the kubeconfig file is set to default.
 
 #### Installing Dell CSM Operator on a disconnected OpenShift environment

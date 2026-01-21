@@ -353,7 +353,7 @@ spec:
 
 1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v230.yaml). This file can be modified to use custom parameters if needed.   
 
-   - Beginning with CSM version 1.16, the sample Custom Resource (CR) files include a new field, spec.version, which identifies the target CSM release to be deployed. When this field is defined, users can supply container images using either the ConfigMap-based image specification or the custom registry configuration. These approaches eliminate the need to hardcode image references directly within the CR. Detailed guidance for both image management methods is available in the [NOTES](docs/getting-started/installation/kubernetes/powerstore/csmoperator/installationwizard/#installation-using-operator) section of the **Installation Using Operator**  documentation. **If neither method is configured or if any images remain unspecified, the operator automatically falls back to using the default image set for Authorization Proxy Server**<br><br>
+   <span></span>{{< message text="22" >}}
 
 2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 
