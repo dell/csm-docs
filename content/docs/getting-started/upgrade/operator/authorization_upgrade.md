@@ -23,7 +23,7 @@ Starting with CSM v1.16 and CSM Authorization v2.4.0, the `karavi-authorization-
 ### CSM v1.15 → CSM v1.16 (Authorization v2.3.0 → v2.4.0)
 <span></span>{{< message text="23" >}}
 
-As part of the upgrade, modify the existing CSM object in the `authorization` namespace to include the `spec.version` field. Also, remove the old `spec.configVersion` field and all image references demonstrated by the diff below (remove the red lines and add the green line).
+As part of the upgrade, modify the existing CSM object in the `authorization` namespace to include the `spec.version` field. Also, remove the old `spec.configVersion` field and all image references demonstrated by the example below (<b>remove the <span style="color:#d73a49;">red</span> lines and add the <span style="color:#28a745;">green</span> line</b>).
 
 {{< collapse id="1" title="Example CSM Object Edits" card="false" >}}
 ```diff
@@ -276,9 +276,8 @@ spec:
   ```
 {{% /tab %}}
 {{< /tabpane >}}
-<br>
 
-### Upgrading the Authorization Proxy Server
+## Upgrading the Authorization Proxy Server
 
   1.  Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
 
