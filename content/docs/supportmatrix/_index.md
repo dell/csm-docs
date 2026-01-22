@@ -66,9 +66,9 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 |-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
-| 1.35  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup) </div>| Yes | No   | Yes   | Yes  | No   |
-| 1.34  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup) </div>| Yes | No   | Yes  | Yes  | No   |
-| 1.33  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup) </div>| Yes | No   | Yes  | Yes  | No   |
+| 1.35  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup/tree/feature/multi-platform-support) </div>| Yes | No   | Yes   | Yes  | No   |
+| 1.34  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup/tree/feature/multi-platform-support) </div>| Yes | No   | Yes  | Yes  | No   |
+| 1.33  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup/tree/feature/multi-platform-support) </div>| Yes | No   | Yes  | Yes  | No   |
 {{</table>}}
 
 **Notes:**
