@@ -60,8 +60,6 @@ weight: 1
 | 1.5.2  | <div style="text-align: left"> Storage </div>| Yes | No   | Yes   | Yes   | No   |
 {{</table>}}
 
-The Storage Checkup is an automated diagnostic workflow designed to validate that storage operations required by virtual machines are functioning correctly in your environment.
-
 **Notes:**
 - PowerFlex 4.8 requires [SDC 3.6.6](https://quay.io/dell/storage/powerflex/sdc:3.6.6) version for compatibility.
 - PowerFlex 5.0 does not support SDC for SUSE Virtualization.
@@ -78,8 +76,6 @@ The Storage Checkup is an automated diagnostic workflow designed to validate tha
 
 
 ## Tested Host Operating Systems
-
-Container Storage Modules doesn't officially support specific operating systems, but the following are known to work:
 
 - RedHat CoreOS (RHCOS) as supported by OpenShift Container Platform
 - RHEL 8+

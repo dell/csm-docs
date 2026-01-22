@@ -54,7 +54,7 @@ Description: >
 - CSI node pod crashes while unmounting PowerStore LUNs
 - CSI PowerStore NVMe doesn't work with multiple VLANs
 - Pod Recovery by CSM Resiliency fails with panic in CSI PowerMax controller during node failure
-- Volume metrics API returns no data when optional filtering is applied - Powermax
+- Volume metrics API returns no data when optional filtering is applied - PowerMax
 - CSI PowerMax fails to switch to embedded Unisphere during Primary Unisphere failure
 - NodeUnstageVolume reports success even though flushing the volume fails - Unity
 - NodeUnstageVolume reports success even though flushing the volume fails - PowerStore
