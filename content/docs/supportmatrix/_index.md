@@ -62,6 +62,19 @@ weight: 1
 - PowerFlex 5.0 supports NVMe/TCP on SUSE Virtualization, SDC is not supported.
 - Harvester 1.7.x is not supported currently
 
+## Kubernetes Virtualization
+{{<table "table table-striped table-bordered table-sm">}}
+| Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
+|-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
+| 1.35  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup) </div>| Yes | No   | Yes   | Yes  | No   |
+| 1.34  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup) </div>| Yes | No   | Yes  | Yes  | No   |
+| 1.33  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup) </div>| Yes | No   | Yes  | Yes  | No   |
+{{</table>}}
+
+**Notes:**
+- PowerStore and PowerMax support iSCSI .
+- PowerFlex supports [SDC 5.0](https://quay.io/dell/storage/powerflex/sdc:5.0).
+
 ## Tested Host Operating Systems
 
 Container Storage Modules doesn't officially support specific operating systems, but the following are known to work:
