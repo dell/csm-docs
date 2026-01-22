@@ -35,7 +35,7 @@ Description: >
 - Added support for upgrading CSM through the CSM Operator using CSM Version.
 - Support PowerStore Metro Non-Uniform Host Connectivity.
 - Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure.
-- Metro Replication is now supported for environments using the Optimize Both Host Registration setting with witness enabled.
+- Metro Replication is supported for environments using the Optimize Both Host Registration setting with witness enabled.
 - Enabled scalable Kubernetes system metrics collection for observability and visualization across PowerFlex, PowerMax, PowerStore and PowerScale.
 - Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax and PowerFlex.
 - Support Offline Installation with OLM.
