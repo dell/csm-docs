@@ -27,24 +27,29 @@ Description: >
 
 ### New Features/Changes
 
-- Enable NVMe/TCP Connectivity for PowerFlex without SDC Requirement
-- Enable OIDC Support for PowerFlex
-- Enable Multi-SG support for PowerMax
-- Support added for SUSE storage Virtualization for CSI PowerMax, CSI PowerStore and CSI PowerFlex 
-- Support CSM upgrade via CSM operator using CSM Version
-- Support PowerStore Metro Non-Uniform Host Connectivity
-- Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure
-- Enhance PowerStore Resiliency deferred operations during Site Failure for Metro Configurations
-- Enabled scalable Kubernetes system metrics collection for observability and visualization across PowerFlex, PowerMax, PowerStore, and PowerScale
-- Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax, and PowerFlex
-- Synchronized CSM Operator with oc-mirror
-- Unified Logging Framework for CSI drivers (and future CSM modules)
-- PowerStore Async File Replication
-- Optimize volume provisioning and publishing in CSI driver for PowerMax Unisphere 10.3
-- Added Support for PowerFlex 5.0
-- Added Support for PowerScale 9.13
-- Streamlined installation of CSI PowerStore via dellctl for CSM Operator
-- Container Object Storage Interface driver compliance for ObjectScale 4.x
+- Added support for NVMe‑over‑TCP protocol enablement in the CSI PowerFlex versions 4.x and 5.x.
+- Added support for OIDC‑based Single Sign‑On (OpenID Connect SSO) integration with the CSI PowerFlex.
+- Added support for using multiple storage groups with a single storage class in PowerMax.
+- Support added for SUSE storage Virtualization for CSI PowerMax, CSI PowerStore and CSI PowerFlex.
+- Support added for Kubernetes storage Virtualization (KubeVirt) for CSI PowerMax, CSI PowerStore and CSI PowerFlex.
+- Added support for upgrading CSM through the CSM Operator using CSM Version.
+- Support PowerStore Metro Non-Uniform Host Connectivity.
+- Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure.
+- Metro Replication is now supported for environments using the Optimize Both Host Registration setting with witness enabled.
+- Enabled scalable Kubernetes system metrics collection for observability and visualization across PowerFlex, PowerMax, PowerStore and PowerScale.
+- Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax and PowerFlex.
+- Support Offline Installation with OLM.
+- PowerStore Async File Replication.
+- PowerStore sync File Replication.
+- Condense secret files while deploying Auth v2 for PowerStore PowerFlex, PowerScale and PowerMax.
+- Optimize volume provisioning and publishing in CSI PowerMax Unisphere 10.3.
+- Added Support for PowerFlex 5.0.
+- Added Support for PowerScale 9.13.
+- Streamlined installation of CSI PowerStore via dellctl for CSM Operator.
+- Container Object Storage Interface (COSI) driver compliance for ObjectScale 4.x.
+- Added support for full compliance with CSI Spec 1.7 for PowerStore.
+- Added support for full compliance with CSI Spec 1.7 for PowerFlex.
+- Added support for condensing secret files during Auth v2 deployment for PowerStore, PowerFlex, PowerScale and PowerMax.
 
 ### Fixed Issues
 

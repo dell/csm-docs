@@ -39,12 +39,12 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version      | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 |--------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
-| 4.19 - 4.20  | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes        | No        | Yes        | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left">  Observability        </div>                                           | Yes        | No        | Yes        | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left"> Authorization - v2.x  </div>                                           | Yes        | No        | Yes        | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left"> Resiliency            </div>                                           | Yes        | No        | Yes        | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left"> Replication (Metro, Sync)	</div>                                     | Yes        | No        | No         | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left"> Replication (Async)	</div>                                             | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left">  Observability        </div>                                           | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Authorization - v2.x  </div>                                           | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Resiliency            </div>                                           | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Replication (Metro, Sync)	</div>                                     | Yes        | No        | No         | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Replication (Async)	</div>                                             | Yes        | No        | Yes        | Yes      | No       |
 {{</table>}}
 > Note: PowerStore does not support VM cloning or VM snapshot operations while Metro replication is enabled.
 
@@ -57,10 +57,8 @@ weight: 1
 {{</table>}}
 
 **Notes:**
-- PowerStore and PowerMax support iSCSI and NVMe/TCP.
 - PowerFlex 4.8 supports [SDC 3.6.6](https://quay.io/dell/storage/powerflex/sdc:3.6.6) and NVMe/TCP on SUSE Virtualization.
 - PowerFlex 5.0 supports NVMe/TCP on SUSE Virtualization, SDC is not supported.
-- Harvester 1.7.x is not supported currently
 
 ## Tested Host Operating Systems
 
