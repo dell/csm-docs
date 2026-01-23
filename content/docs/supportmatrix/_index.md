@@ -71,10 +71,6 @@ weight: 1
 | 1.33  | <div style="text-align: left"> [Storage](https://github.com/coulof/kubevirt-storage-checkup/tree/feature/multi-platform-support) </div>| Yes | No   | Yes  | Yes  | No   |
 {{</table>}}
 
-**Notes:**
-- PowerStore and PowerMax support iSCSI .
-- PowerFlex supports [SDC 5.0](https://quay.io/dell/storage/powerflex/sdc:5.0).
-
 ## Tested Host Operating Systems
 
 Container Storage Modules doesn't officially support specific operating systems, but the following are known to work:
