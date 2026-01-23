@@ -11,7 +11,7 @@ weight: 2
 - **ConfigMap Approach:**  
 Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.  
 
-   **NOTE:** If a ConfigMap is applied, it takes the highest precedence, and any other image source configuration (such as `customRegistry`) will not be used.  
+>NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.
 
    **Sample ConfigMap Configuration:**
    ```yaml
@@ -43,10 +43,10 @@ Create a ConfigMap specifying the required images and apply it to the operator�
            sdc-monitor: quay.io/dell/storage/powerflex/sdc:5.0
            provisioner: registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
            attacher: registry.k8s.io/sig-storage/csi-attacher:v4.10.0
-           registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.14.0
+           registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
            resizer: registry.k8s.io/sig-storage/csi-resizer:v2.0.0
            snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v8.4.0
-           csi-metadata-retriever: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.11.0
+           csi-metadata-retriever: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.13.0
            external-health-monitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.16.0
            cert-manager-cainjector: quay.io/jetstack/cert-manager-cainjector:v1.11.0
            cert-manager-controller: quay.io/jetstack/cert-manager-controller:v1.11.0
@@ -77,14 +77,17 @@ Create a ConfigMap specifying the required images and apply it to the operator�
 - **Custom Registry Approach:**  
 Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in the configuration. The custom registry approach allows you to redirect all container image pulls to a registry of your choice while optionally preserving the original image path structure. This is useful in environments where images must be sourced from a private or enterprise-approved registry. If users want to use custom registry they must mirror all required images into the custom registry prior to upgrade.
 
-   - **customRegistry** –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration.
+   - **customRegistry** –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration. 
 
    - **retainImageRegistryPath** – The retainImageRegistryPath field is a boolean flag that determines whether the original image path structure should be preserved when using a custom registry. This parameter is only evaluated when customRegistry is set.
 
       - retainImageRegistryPath: **false**  
           When set to false, only the registry hostname is replaced. For example, with customRegistry=my.artifactory-registry.example, an image such as csi-vxflexos:v2.16.0 will be pulled from `my.artifactory-registry.example/csi-vxflexos:v2.16.0`.
       - retainImageRegistryPath: **true**  
-          When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`. <br><br>
+          When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`.
+
+>NOTE: The custom registry value must be Fully Qualified Domain Name (FQDN) and must not include any nested path or folder structure.
+>For example: my.artifactory-registry.example  
 
    **Sample CustomRegistry Configuration:**   
    ```yaml
@@ -103,4 +106,4 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
    ```
 **If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.**
 
-   **NOTE: If the upgrade using the version flag fails, refer to the [Operator Troubleshooting Guide](../troubleshooting/csmoperator/). If the issue still persists, uninstall the existing resources and perform a re-installation.**
+>NOTE: If the upgrade using the version field fails, consult the [Operator Troubleshooting Guide](../troubleshooting/csmoperator/). If the issue persists, uninstall the existing resources and proceed with a fresh installation.
