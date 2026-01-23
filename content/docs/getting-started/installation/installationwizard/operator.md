@@ -121,7 +121,7 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
       - retainImageRegistryPath: **true**  
           When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`. 
 
->NOTE: The custom registry value must be FQDN (Fully Qualified Domain Name) and must not include any nested path or folder structure.
+>NOTE: The custom registry value must be Fully Qualified Domain Name (FQDN) and must not include any nested path or folder structure.
 >For example: my.artifactory-registry.example  
 
    **Sample CustomRegistry Configuration:**   
