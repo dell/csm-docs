@@ -45,7 +45,7 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 - **ConfigMap Approach:**  
 Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.  
 
-   **NOTE:** If a ConfigMap is applied, it takes the highest precedence, and any other image source configuration (such as `customRegistry`) will not be used.  
+   >NOTE: If a ConfigMap is applied, it takes the highest precedence, and any other image source configuration (such as `customRegistry`) will not be used.  
 
    **Sample ConfigMap Configuration:**
    ```yaml
@@ -111,7 +111,8 @@ Create a ConfigMap specifying the required images and apply it to the operator�
 - **Custom Registry Approach:**  
 Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in the configuration. The custom registry approach allows you to redirect all container image pulls to a registry of your choice while optionally preserving the original image path structure. This is useful in environments where images must be sourced from a private or enterprise-approved registry. If users want to use custom registry they must mirror all required images into the custom registry prior to upgrade.
 
-   - **customRegistry** –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration. **NOTE:** The value of customRegistry should be a single domain without any nested folder structure. Example: `my.artifactory-registry.example`.
+   - **customRegistry** –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration.
+    >NOTE: The value of customRegistry should be a single domain without any nested folder structure. Example: `my.artifactory-registry.example`.
 
    - **retainImageRegistryPath** – The retainImageRegistryPath field is a boolean flag that determines whether the original image path structure should be preserved when using a custom registry. This parameter is only evaluated when customRegistry is set.
 
@@ -137,7 +138,7 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
    ```
 **If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.**
 
-   **NOTE: If the upgrade using the version flag fails, refer to the [Operator Troubleshooting Guide](../../../../troubleshooting/csmoperator/). If the issue still persists, uninstall the existing resources and perform a re-installation.**
+>NOTE: If the upgrade using the version flag fails, refer to the [Operator Troubleshooting Guide](../../../../troubleshooting/csmoperator/). If the issue still persists, uninstall the existing resources and perform a re-installation.
 
 >NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [CSI Driver](../../csmoperator#install-driver), [Resiliency](../../csmoperator/csm-modules/resiliency).
 
