@@ -35,32 +35,45 @@ weight: 1
 **Notes:**
 - CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
-## OpenShift Virtualization
+## Virtualization
+
+ Storage operations in the virtualization environment are validated using the [Storage Checkup](https://github.com/kiagnose/kubevirt-storage-checkup), an automated diagnostic workflow that verifies storage functions required by virtual machines are operating correctly
+
+### OpenShift Virtualization
 {{<table "table table-striped table-bordered table-sm">}}
 | Version      | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 |--------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
-| 4.19 - 4.20  | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes        | No        | Yes        | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left">  Observability        </div>                                           | Yes        | No        | Yes        | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left"> Authorization - v2.x  </div>                                           | Yes        | No        | Yes        | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left"> Resiliency            </div>                                           | Yes        | No        | Yes        | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left"> Replication (Metro, Sync)	</div>                                     | Yes        | No        | No         | Yes      | No       |
-| 4.19 - 4.20  | <div style="text-align: left"> Replication (Async)	</div>                                             | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Storage             </div>                                             | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Observability        </div>                                           | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Authorization - v2.x  </div>                                           | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Resiliency            </div>                                           | Yes        | No        | Yes        | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Replication (Metro, Sync)	</div>                                     | Yes        | No        | No         | Yes      | No       |
+| 4.17 - 4.20  | <div style="text-align: left"> Replication (Async)	</div>                                             | Yes        | No        | Yes        | Yes      | No       |
 {{</table>}}
 > Note: PowerStore does not support VM cloning or VM snapshot operations while Metro replication is enabled.
 
-## SUSE Virtualization (Harvester)
+### SUSE Virtualization (Harvester)
 {{<table "table table-striped table-bordered table-sm">}}
 | Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 |-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
-| 1.6.1  | <div style="text-align: left"> [Storage](https://github.com/ibrokethecloud/kubevirt-storage-checkup/tree/harvester-v1.5.x) </div>| Yes | No   | Yes   | Yes  | No   |
-| 1.5.2  | <div style="text-align: left"> [Storage](https://github.com/ibrokethecloud/kubevirt-storage-checkup/tree/harvester-v1.5.x) </div>| Yes | No   | Yes  | Yes  | No   |
+| 1.6.1  | <div style="text-align: left"> Storage </div>| Yes | No   | Yes   | Yes  | No   |
+| 1.5.2  | <div style="text-align: left"> Storage </div>| Yes | No   | Yes   | Yes   | No   |
 {{</table>}}
 
 **Notes:**
-- PowerStore and PowerMax support iSCSI and NVMe/TCP.
-- PowerFlex 4.8 supports [SDC 3.6.6](https://quay.io/dell/storage/powerflex/sdc:3.6.6) and NVMe/TCP on SUSE Virtualization.
-- PowerFlex 5.0 supports NVMe/TCP on SUSE Virtualization, SDC is not supported.
-- Harvester 1.7.x is not supported currently
+- PowerFlex 4.8 requires [SDC 3.6.6](https://quay.io/dell/storage/powerflex/sdc:3.6.6) version for compatibility.
+- PowerFlex 5.0 does not support SDC for SUSE Virtualization.
+
+
+### KubeVirt
+{{<table "table table-striped table-bordered table-sm">}}
+| Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
+|-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
+| 1.7  | <div style="text-align: left"> Storage </div>                                                                | Yes | No   | Yes  | Yes | No    |
+| 1.6  | <div style="text-align: left"> Storage </div>                                                                | Yes | No   | Yes  | Yes  | No   |
+| 1.5  | <div style="text-align: left"> Storage </div>                                                                | Yes | No   | Yes  | Yes  | No   |
+{{</table>}}
+
 
 ## Kubernetes Virtualization
 {{<table "table table-striped table-bordered table-sm">}}
@@ -72,8 +85,6 @@ weight: 1
 {{</table>}}
 
 ## Tested Host Operating Systems
-
-Container Storage Modules doesn't officially support specific operating systems, but the following are known to work:
 
 - RedHat CoreOS (RHCOS) as supported by OpenShift Container Platform
 - RHEL 8+
