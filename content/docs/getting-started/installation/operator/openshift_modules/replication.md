@@ -76,7 +76,7 @@ description: >
 1. Install the repctl utility
 
    ```bash
-   wget -O repctl https://github.com/dell/csm-replication/releases/download/<version>/repctl-linux-amd64
+   wget -O repctl https://github.com/dell/csm/releases/latest/download/repctl
 
    chmod +x repctl
    

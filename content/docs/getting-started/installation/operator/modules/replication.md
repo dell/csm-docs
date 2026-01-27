@@ -53,11 +53,10 @@ Operator, you need:
 ### Set up repctl tool
 
 Before you begin, make sure you have the repctl tool available.You can download a pre-built repctl binary from our
-[Releases](https://github.com/dell/csm-replication/releases) page.
+[Releases](https://github.com/dell/csm/releases) page.
 
 ```shell
-wget https://github.com/dell/csm-replication/releases/download/{{< version-docs key="Replication" >}}/repctl-linux-amd64
-mv repctl-linux-amd64 repctl
+wget https://github.com/dell/csm/releases/latest/download/repctl
 chmod +x repctl
 ```
 
