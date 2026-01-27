@@ -32,7 +32,7 @@ There are three methods of installing `cert-csi`.
 
 > ℹ️ **NOTE:**: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
 
-1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/latest/download/cert-csi)
+1. Download `cert-csi` from [here](https://github.com/dell/csm/releases/latest/download/cert-csi)
 
 2. Set the execute permission before running it.
 
