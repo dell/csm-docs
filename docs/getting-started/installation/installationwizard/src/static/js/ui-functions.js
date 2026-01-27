@@ -586,17 +586,17 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 	installationType = document.getElementById("installation-type").value
 	var helmChartVersion;
 	switch (csmVersion) {
-		case "1.13.0":
-			helmChartVersion = CONSTANTS.CSM_HELM_V1130;
-			break;
 		case "1.14.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V1140;
 			break;
 		case "1.15.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V1150;
 			break;
+		case "1.16.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V1160;
+			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V1150;
+			helmChartVersion = CONSTANTS.CSM_HELM_V1160;
 			break;
 	}
 	$("#command-text-area").show();

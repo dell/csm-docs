@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Replication">
   <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Replication">
-  <meta itemprop="dateModified" content="2025-06-05T13:26:25-04:00">
-  <meta itemprop="wordCount" content="637">
+  <meta itemprop="dateModified" content="2025-09-18T14:50:08-04:00">
+  <meta itemprop="wordCount" content="650">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Replication">
   <meta name="twitter:description" content="Dell Container Storage Modules (CSM) for Replication">
@@ -72,13 +72,13 @@
       
     
     
-    1.12.0
+    1.13.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
     </ul> 
 
 </div>
@@ -202,7 +202,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.b7ddf1b568be130421d83c6e2891f47f.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1936,24 +1936,24 @@
 </li>  
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
-  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
-    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
-      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
-        
-        <span class="">Troubleshooting</span>
-      </a>
-    </label>
-    
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xrelease-li">
   <input type="checkbox" id="m-csm-docsv3authorizationv2xrelease-check"/>
     <label for="m-csm-docsv3authorizationv2xrelease-check">
       <a href="/csm-docs/v3/authorization/v2.x/release/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationv2xrelease">
         
         <span class="">Release notes</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
+  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
+    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
+      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
+        
+        <span class="">Troubleshooting</span>
       </a>
     </label>
     
@@ -2704,6 +2704,9 @@ CSM for Replication Capabilities <a class="header-link"  href="#csm-for-replicat
 
 
 
+
+
+
 <table class="table table-striped table-bordered table-sm">
   <thead>
       <tr>
@@ -2820,6 +2823,8 @@ CSM for Replication Capabilities <a class="header-link"  href="#csm-for-replicat
 <p><em><strong>NOTE</strong></em>: To add or delete PV s on an existing SYNC Replication Group in PowerStore, the user needs to pause, perform the operation and then resume the replication group. For more details, please refer to the troubleshooting section.</p></blockquote>
 <blockquote>
 <p><em><strong>NOTE</strong></em>: To delete the last PV from a SYNC Replication Group in PowerStore, the user needs to first unassign the protection policy from the corresponding volume group on the PowerStore Manager UI. For more details, please refer to the troubleshooting section.</p></blockquote>
+<blockquote>
+<p><em><strong>NOTE</strong></em>: Snapshot for SyncIQ replicated volumes is not supported by the CSI-PowerScale driver.</p></blockquote>
 <h2 id="details">
 Details <a class="header-link"  href="#details" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -2991,7 +2996,7 @@ can exercise the general Disaster Recovery workflows -</p>
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2025
+    2026
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

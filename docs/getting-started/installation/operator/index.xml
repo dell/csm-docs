@@ -8,6 +8,13 @@
     <language>en</language>
     <atom:link href="https://dell.github.io/csm-docs/docs/getting-started/installation/operator/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>ConfigMap And CustomRegistry Configuration</title>
+      <link>https://dell.github.io/csm-docs/docs/getting-started/installation/operator/image-configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/getting-started/installation/operator/image-configuration/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Starting from &lt;strong&gt;CSM version 1.16&lt;/strong&gt;, users can utilize the &lt;strong&gt;&lt;code&gt;spec.version&lt;/code&gt;&lt;/strong&gt; parameter (as defined in the &lt;code&gt;sample.yaml&lt;/code&gt; file) for both installation and upgrade. When using this parameter, there are two approaches:&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;ConfigMap Approach:&lt;/strong&gt;&lt;br&gt;&#xA;Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Operator</title>
       <link>https://dell.github.io/csm-docs/docs/getting-started/installation/operator/operatorinstallation_kubernetes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v3">
-    <meta property="article:modified_time" content="2025-06-05T13:26:25-04:00">
+    <meta property="article:modified_time" content="2025-09-18T14:50:08-04:00">
 
   <meta itemprop="name" content="Unity XT">
   <meta itemprop="description" content="Installing the CSI Driver for Dell Unity XT via Helm">
-  <meta itemprop="dateModified" content="2025-06-05T13:26:25-04:00">
-  <meta itemprop="wordCount" content="3060">
+  <meta itemprop="dateModified" content="2025-09-18T14:50:08-04:00">
+  <meta itemprop="wordCount" content="3072">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Unity XT">
   <meta name="twitter:description" content="Installing the CSI Driver for Dell Unity XT via Helm">
@@ -73,13 +73,13 @@
       
     
     
-    1.12.0
+    1.13.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
     </ul> 
 
 </div>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.b7ddf1b568be130421d83c6e2891f47f.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1937,24 +1937,24 @@
 </li>  
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
-  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
-    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
-      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
-        
-        <span class="">Troubleshooting</span>
-      </a>
-    </label>
-    
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xrelease-li">
   <input type="checkbox" id="m-csm-docsv3authorizationv2xrelease-check"/>
     <label for="m-csm-docsv3authorizationv2xrelease-check">
       <a href="/csm-docs/v3/authorization/v2.x/release/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationv2xrelease">
         
         <span class="">Release notes</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
+  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
+    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
+      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
+        
+        <span class="">Troubleshooting</span>
       </a>
     </label>
     
@@ -2751,11 +2751,9 @@ Set up the iSCSI Initiator <a class="header-link"  href="#set-up-the-iscsi-initi
         </a></h3><p>The CSI Driver for Dell Unity XT supports iSCSI connectivity.</p>
 <p>If you use the iSCSI protocol, set up the iSCSI initiators as follows:</p>
 <ul>
-<li>Ensure that the iSCSI initiators are available on both Controller and Worker nodes.</li>
-<li>Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell Unity XT array that
-has IP interfaces. Manually create IP routes for each node that connects to the Dell Unity XT.</li>
-<li>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package for CentOS/RHEL or <em>open-iscsi</em> package for Ubuntu installed, and the <em>iscsid</em> service must be enabled and running.
-To do this, run the <code>systemctl enable --now iscsid</code> command.</li>
+<li>Ensure that each Kubernetes worker node has network connectivity to an iSCSI port on the Dell Unity XT array, allowing access via IP interfaces. Manually create the necessary IP routes.</li>
+<li>Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the <em>iscsi-initiator-utils</em> package for RHEL or <em>open-iscsi</em> package for Ubuntu.</li>
+<li>Enable and start the <em>iscsid</em> service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
 <li>Ensure that the unique initiator name is set in <em>/etc/iscsi/initiatorname.iscsi</em>.</li>
 </ul>
 <p>For more information about configuring iSCSI, see <a href="https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf">Dell Host Connectivity guide</a>.</p>
@@ -2775,7 +2773,7 @@ Unity XT.</p>
 <li>Ensure that all nodes have the <em>Device Mapper Multipathing</em> package installed.</li>
 </ul>
 <blockquote>
-<p>You can install it by running <code>yum install device-mapper-multipath</code> on CentOS or <code>apt install multipath-tools</code> on Ubuntu. This package should create a multipath configuration file located in <code>/etc/multipath.conf</code>.</p></blockquote>
+<p>You can install it by running <code>yum install device-mapper-multipath</code> on RHEL or <code>apt install multipath-tools</code> on Ubuntu. This package should create a multipath configuration file located in <code>/etc/multipath.conf</code>.</p></blockquote>
 <ul>
 <li>Enable multipathing using the <code>mpathconf --enable --with_multipathd y</code> command.</li>
 <li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
@@ -2797,7 +2795,7 @@ Install CSI Driver <a class="header-link"  href="#install-csi-driver" style=" di
 <p><em>Before you begin</em></p>
 <ul>
 <li>As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source <a href="https://github.com/dell/csi-unity">git repository</a> with the command
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v2.12.0 https://github.com/dell/csi-unity.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v2.13.0 https://github.com/dell/csi-unity.git
 </span></span></code></pre></div></li>
 <li>In the top-level dell-csi-helm-installer directory, there should be two scripts, <code>csi-install.sh</code> and <code>csi-uninstall.sh</code>.</li>
 <li>Ensure <em>unity</em> namespace exists in Kubernetes cluster. Use the <code>kubectl create namespace unity</code> command to create the namespace if the namespace is not present.</li>
@@ -2818,11 +2816,11 @@ kubeVersion: &ldquo;&gt;= 1.24.0-0 &lt; 1.29.0-0&rdquo;</li>
 <p>Get the required values.yaml using the command below:</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.12.0/charts/csi-unity/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.13.0/charts/csi-unity/values.yaml
 </span></span></code></pre></div><ol start="3">
 <li>
 <p>Edit <code>values.yaml</code> to set the following parameters for your installation:</p>
-<p>The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the <a href="https://github.com/dell/helm-charts/blob/csi-unity-2.12.0/charts/csi-unity/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
+<p>The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the <a href="https://github.com/dell/helm-charts/blob/csi-unity-2.13.0/charts/csi-unity/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
 <table>
   <thead>
       <tr>
@@ -3220,8 +3218,7 @@ To install nightly or latest csi driver build using bash script use this command
 <li>
 <p>You can also install the driver using standalone helm chart by cloning the centralised helm charts and running the helm install command as shown.</p>
 <p><strong>Syntax</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>git clone -b csi-unity-2.12.0 https://github.com/dell/helm-charts
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b csi-unity-2.13.0 https://github.com/dell/helm-charts
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>helm install &lt;release-name&gt; dell/container-storage-modules -n &lt;namespace&gt; --version &lt;container-storage-module chart-version&gt; -f &lt;values.yaml location&gt;
 </span></span><span style="display:flex;"><span>
@@ -3313,8 +3310,8 @@ There are samples storage class yaml files available under <code>csi-unity/sampl
 <li>At least one storage class is required for one array.</li>
 <li>If you uninstall the driver and reinstall it, you can still face errors if any update in the <code>values.yaml</code> file leads to an update of the storage class(es):</li>
 </ul>
-<pre tabindex="0"><code>    Error: cannot patch &#34;&lt;sc-name&gt;&#34; with kind StorageClass: StorageClass.storage.k8s.io &#34;&lt;sc-name&gt;&#34; is invalid: parameters: Forbidden: updates to parameters are forbidden
-</code></pre><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    Error: cannot patch <span style="color:#4e9a06">&#34;&lt;sc-name&gt;&#34;</span> with kind StorageClass: StorageClass.storage.k8s.io <span style="color:#4e9a06">&#34;&lt;sc-name&gt;&#34;</span> is invalid: parameters: Forbidden: updates to parameters are forbidden
+</span></span></code></pre></div><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.
 Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.</p>
 <h2 id="dynamically-update-the-unity-creds-secrets">
 Dynamically update the unity-creds secrets <a class="header-link"  href="#dynamically-update-the-unity-creds-secrets" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -3376,7 +3373,7 @@ Helm based installation <a class="header-link"  href="#helm-based-installation" 
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2025
+    2026
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>
