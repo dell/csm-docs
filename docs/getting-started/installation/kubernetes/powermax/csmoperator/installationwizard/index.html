@@ -21,14 +21,14 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-04-30T23:27:03+05:30">
+    <meta property="article:modified_time" content="2026-01-21T23:58:42+05:30">
 
   <meta itemprop="name" content="Installation Wizard">
   <meta itemprop="description" content="CSM Installation Wizard Support Matrix Click Here
 The Container Storage Modules Installation Wizard is a webpage that helps you create a manifest file to install Dell CSI Drivers and CSM Modules. Users can enable or disable modules through the UI, and it generates a single manifest file, eliminating the need to download individual Helm charts for drivers and modules.
 Generate Manifest File Open the Installation Wizard. Select the Installation Type as Helm/Operator. Select the Array. Enter the Image Repository. The default value is dellemc. Select the CSM Version. Select the modules for installation. If there are module specific inputs, enter their values. If needed, modify the Controller Pods Count. If needed, select Install Controller Pods on Control Plane and/or Install Node Pods on Control Plane. Enter the Namespace. The default value is csi-&lt;array&gt;. Click on Generate YAML. A manifest file, values.yaml will be generated and downloaded. A section Run the following commands to install will be displayed. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file. Installation Using Operator Steps">
-  <meta itemprop="dateModified" content="2025-04-30T23:27:03+05:30">
-  <meta itemprop="wordCount" content="322">
+  <meta itemprop="dateModified" content="2026-01-21T23:58:42+05:30">
+  <meta itemprop="wordCount" content="845">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Wizard">
   <meta name="twitter:description" content="CSM Installation Wizard Support Matrix Click Here
@@ -82,13 +82,13 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
       
     
     
-    1.15.1
+    1.16.0
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
     </ul> 
 
 </div>
@@ -212,7 +212,7 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.b7ddf1b568be130421d83c6e2891f47f.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -463,6 +463,18 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
         
 
 
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationkubernetespowerflexprerequisite-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationkubernetespowerflexprerequisite-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationkubernetespowerflexprerequisite-check">
+      <a href="/csm-docs/docs/getting-started/installation/kubernetes/powerflex/prerequisite/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationkubernetespowerflexprerequisite">
+        
+        <span class="">Prerequisites</span>
+      </a>
+    </label>
+    
+</li>  
+
+
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationkubernetespowerflexcsmoperator-li">
   <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationkubernetespowerflexcsmoperator-check"/>
     <label for="m-csm-docsdocsgetting-startedinstallationkubernetespowerflexcsmoperator-check">
@@ -641,6 +653,81 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
   <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationkubernetesunityxttroubleshooting-check"/>
     <label for="m-csm-docsdocsgetting-startedinstallationkubernetesunityxttroubleshooting-check">
       <a href="/csm-docs/docs/getting-started/installation/kubernetes/unityxt/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationkubernetesunityxttroubleshooting">
+        
+        <span class="">Troubleshooting</span>
+      </a>
+    </label>
+    
+</li>
+    </ul>
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscale-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscale-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscale-check">
+      <a href="/csm-docs/docs/getting-started/installation/kubernetes/objectscale/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscale">
+        
+        <span class="">ObjectScale</span>
+      </a>
+    </label>
+    
+    <ul class="ul-5 foldable">
+        
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaleprerequisite-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaleprerequisite-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaleprerequisite-check">
+      <a href="/csm-docs/docs/getting-started/installation/kubernetes/objectscale/prerequisite/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaleprerequisite">
+        
+        <span class="">Prerequisites</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscalehelm-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscalehelm-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscalehelm-check">
+      <a href="/csm-docs/docs/getting-started/installation/kubernetes/objectscale/helm/" title="COSI Driver installation using Helm" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscalehelm">
+        
+        <span class="">Helm</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscalecsmoperator-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscalecsmoperator-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscalecsmoperator-check">
+      <a href="/csm-docs/docs/getting-started/installation/kubernetes/objectscale/csmoperator/" title="COSI Driver installation using Operator" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscalecsmoperator">
+        
+        <span class="">Operator</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaleoffline-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaleoffline-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaleoffline-check">
+      <a href="/csm-docs/docs/getting-started/installation/kubernetes/objectscale/offline/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaleoffline">
+        
+        <span class="">Offline</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaletroubleshooting-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaletroubleshooting-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaletroubleshooting-check">
+      <a href="/csm-docs/docs/getting-started/installation/kubernetes/objectscale/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationkubernetesobjectscaletroubleshooting">
         
         <span class="">Troubleshooting</span>
       </a>
@@ -911,6 +998,57 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
   <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationopenshiftunityxttroubleshooting-check"/>
     <label for="m-csm-docsdocsgetting-startedinstallationopenshiftunityxttroubleshooting-check">
       <a href="/csm-docs/docs/getting-started/installation/openshift/unityxt/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationopenshiftunityxttroubleshooting">
+        
+        <span class="">Troubleshooting</span>
+      </a>
+    </label>
+    
+</li>
+    </ul>
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscale-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscale-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscale-check">
+      <a href="/csm-docs/docs/getting-started/installation/openshift/objectscale/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscale">
+        
+        <span class="">ObjectScale</span>
+      </a>
+    </label>
+    
+    <ul class="ul-5 foldable">
+        
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscalecsmoperator-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscalecsmoperator-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscalecsmoperator-check">
+      <a href="/csm-docs/docs/getting-started/installation/openshift/objectscale/csmoperator/" title="COSI Driver installation using Operator" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscalecsmoperator">
+        
+        <span class="">Operator</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscaleoffline-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscaleoffline-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscaleoffline-check">
+      <a href="/csm-docs/docs/getting-started/installation/openshift/objectscale/offline/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscaleoffline">
+        
+        <span class="">Offline</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscaletroubleshooting-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscaletroubleshooting-check"/>
+    <label for="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscaletroubleshooting-check">
+      <a href="/csm-docs/docs/getting-started/installation/openshift/objectscale/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedinstallationopenshiftobjectscaletroubleshooting">
         
         <span class="">Troubleshooting</span>
       </a>
@@ -2538,6 +2676,45 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
     </ul>
 </li>
     </ul>
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscale-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscale-check"/>
+    <label for="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscale-check">
+      <a href="/csm-docs/docs/getting-started/uninstallation/kubernetes/objectscale/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscale">
+        
+        <span class="">ObjectScale</span>
+      </a>
+    </label>
+    
+    <ul class="ul-5 foldable">
+        
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscalehelm-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscalehelm-check"/>
+    <label for="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscalehelm-check">
+      <a href="/csm-docs/docs/getting-started/uninstallation/kubernetes/objectscale/helm/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscalehelm">
+        
+        <span class="">Helm</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscaleoperator-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscaleoperator-check"/>
+    <label for="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscaleoperator-check">
+      <a href="/csm-docs/docs/getting-started/uninstallation/kubernetes/objectscale/operator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-starteduninstallationkubernetesobjectscaleoperator">
+        
+        <span class="">Operator</span>
+      </a>
+    </label>
+    
+</li>
+    </ul>
 </li>
     </ul>
 </li>  
@@ -2681,6 +2858,33 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
   <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationopenshiftunityxtoperator-check"/>
     <label for="m-csm-docsdocsgetting-starteduninstallationopenshiftunityxtoperator-check">
       <a href="/csm-docs/docs/getting-started/uninstallation/openshift/unityxt/operator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-starteduninstallationopenshiftunityxtoperator">
+        
+        <span class="">Operator</span>
+      </a>
+    </label>
+    
+</li>
+    </ul>
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsgetting-starteduninstallationopenshiftobjectscale-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationopenshiftobjectscale-check"/>
+    <label for="m-csm-docsdocsgetting-starteduninstallationopenshiftobjectscale-check">
+      <a href="/csm-docs/docs/getting-started/uninstallation/openshift/objectscale/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-starteduninstallationopenshiftobjectscale">
+        
+        <span class="">ObjectScale</span>
+      </a>
+    </label>
+    
+    <ul class="ul-5 foldable">
+        
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationopenshiftobjectscaleoperator-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationopenshiftobjectscaleoperator-check"/>
+    <label for="m-csm-docsdocsgetting-starteduninstallationopenshiftobjectscaleoperator-check">
+      <a href="/csm-docs/docs/getting-started/uninstallation/openshift/objectscale/operator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-starteduninstallationopenshiftobjectscaleoperator">
         
         <span class="">Operator</span>
       </a>
@@ -3473,69 +3677,6 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsconceptscosidriverinstallation-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptscosidriverinstallation-check"/>
-    <label for="m-csm-docsdocsconceptscosidriverinstallation-check">
-      <a href="/csm-docs/docs/concepts/cosidriver/installation/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptscosidriverinstallation">
-        
-        <span class="">Installation</span>
-      </a>
-    </label>
-    
-    <ul class="ul-4 foldable">
-        
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptscosidriverinstallationconfiguration_file-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptscosidriverinstallationconfiguration_file-check"/>
-    <label for="m-csm-docsdocsconceptscosidriverinstallationconfiguration_file-check">
-      <a href="/csm-docs/docs/concepts/cosidriver/installation/configuration_file/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsconceptscosidriverinstallationconfiguration_file">
-        
-        <span class="">Configuration File</span>
-      </a>
-    </label>
-    
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptscosidriverinstallationhelm-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptscosidriverinstallationhelm-check"/>
-    <label for="m-csm-docsdocsconceptscosidriverinstallationhelm-check">
-      <a href="/csm-docs/docs/concepts/cosidriver/installation/helm/" title="COSI Driver installation using Helm" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsconceptscosidriverinstallationhelm">
-        
-        <span class="">Using Helm</span>
-      </a>
-    </label>
-    
-</li>
-    </ul>
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptscosidriverupgrade-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptscosidriverupgrade-check"/>
-    <label for="m-csm-docsdocsconceptscosidriverupgrade-check">
-      <a href="/csm-docs/docs/concepts/cosidriver/upgrade/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptscosidriverupgrade">
-        
-        <span class="">Upgrade</span>
-      </a>
-    </label>
-    
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptscosidriveruninstallation-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptscosidriveruninstallation-check"/>
-    <label for="m-csm-docsdocsconceptscosidriveruninstallation-check">
-      <a href="/csm-docs/docs/concepts/cosidriver/uninstallation/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptscosidriveruninstallation">
-        
-        <span class="">Uninstallation</span>
-      </a>
-    </label>
-    
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsconceptscosidriverfeatures-li">
   <input type="checkbox" id="m-csm-docsdocsconceptscosidriverfeatures-check"/>
     <label for="m-csm-docsdocsconceptscosidriverfeatures-check">
@@ -3560,6 +3701,18 @@ Generate Manifest File Open the Installation Wizard. Select the Installation Ty
     
 </li>
     </ul>
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptscosidrivertroubleshooting-li">
+  <input type="checkbox" id="m-csm-docsdocsconceptscosidrivertroubleshooting-check"/>
+    <label for="m-csm-docsdocsconceptscosidrivertroubleshooting-check">
+      <a href="/csm-docs/docs/concepts/cosidriver/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptscosidrivertroubleshooting">
+        
+        <span class="">Troubleshooting</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
@@ -3886,144 +4039,250 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 </header>
 	
-  
-   
-   
-     
-    
-   
-   
+
+ 
+ 
    
   
-   
+ 
+ 
+ 
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  
-   
-  
-  
-  
-  
+
+
+
+
   
   
-  
-  
-  
-  
-  
-  
-    
-    
-  
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <br>
-  <p>CSM Installation Wizard Support Matrix <a href="../../../../../../supportmatrix/#installation-wizard-compatibility-matrix">Click Here</a></p>
-  <br>
-  <p>The Container Storage Modules Installation Wizard is a webpage that helps you create a manifest file to install Dell CSI Drivers and CSM Modules. Users can enable or disable modules through the UI, and it generates a single manifest file, eliminating the need to download individual Helm charts for drivers and modules.</p>
-  <h2 id="generate-manifest-file">
-  Generate Manifest File <a class="header-link"  href="#generate-manifest-file" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
-              <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
-              </svg>
-          </a></h2><ol>
-  <li>Open the <a href="/csm-docs/docs/getting-started/installation/installationwizard/src/index.html">Installation Wizard</a>.</li>
-  <li>Select the <code>Installation Type</code> as <code>Helm</code>/<code>Operator</code>.</li>
-  <li>Select the <code>Array</code>.</li>
-  <li>Enter the <code>Image Repository</code>. The default value is <code>dellemc</code>.</li>
-  <li>Select the <code>CSM Version</code>.</li>
-  <li>Select the modules for installation. If there are module specific inputs, enter their values.</li>
-  <li>If needed, modify the <code>Controller Pods Count</code>.</li>
-  <li>If needed, select <code>Install Controller Pods on Control Plane</code> and/or <code>Install Node Pods on Control Plane</code>.</li>
-  <li>Enter the <code>Namespace</code>. The default value is <code>csi-&lt;array&gt;</code>.</li>
-  <li>Click on <code>Generate YAML</code>.</li>
-  <li>A manifest file, <code>values.yaml</code> will be generated and downloaded.</li>
-  <li>A section <code>Run the following commands to install</code> will be displayed.</li>
-  <li>Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file.</li>
-  </ol>
-  <h2 id="installation-using-operator">
-  Installation Using Operator <a class="header-link"  href="#installation-using-operator" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
-              <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
-              </svg>
-          </a></h2><p><strong>Steps</strong></p>
-  <blockquote>
-  <p>NOTE: Ensure that the csm-operator is installed and that the namespace, secrets, and <code>config.yaml</code> are created as prerequisites.</p></blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<p>CSM Installation Wizard Support Matrix <a href="../../../../../../supportmatrix/#installation-wizard-compatibility-matrix">Click Here</a></p>
+<br>
+<p>The Container Storage Modules Installation Wizard is a webpage that helps you create a manifest file to install Dell CSI Drivers and CSM Modules. Users can enable or disable modules through the UI, and it generates a single manifest file, eliminating the need to download individual Helm charts for drivers and modules.</p>
+<h2 id="generate-manifest-file">
+Generate Manifest File <a class="header-link"  href="#generate-manifest-file" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><ol>
+<li>Open the <a href="/csm-docs/docs/getting-started/installation/installationwizard/src/index.html">Installation Wizard</a>.</li>
+<li>Select the <code>Installation Type</code> as <code>Helm</code>/<code>Operator</code>.</li>
+<li>Select the <code>Array</code>.</li>
+<li>Enter the <code>Image Repository</code>. The default value is <code>dellemc</code>.</li>
+<li>Select the <code>CSM Version</code>.</li>
+<li>Select the modules for installation. If there are module specific inputs, enter their values.</li>
+<li>If needed, modify the <code>Controller Pods Count</code>.</li>
+<li>If needed, select <code>Install Controller Pods on Control Plane</code> and/or <code>Install Node Pods on Control Plane</code>.</li>
+<li>Enter the <code>Namespace</code>. The default value is <code>csi-&lt;array&gt;</code>.</li>
+<li>Click on <code>Generate YAML</code>.</li>
+<li>A manifest file, <code>values.yaml</code> will be generated and downloaded.</li>
+<li>A section <code>Run the following commands to install</code> will be displayed.</li>
+<li>Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file.</li>
+</ol>
+<h2 id="installation-using-operator">
+Installation Using Operator <a class="header-link"  href="#installation-using-operator" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><p><strong>Steps</strong></p>
+<blockquote>
+<p>NOTE: Ensure that the csm-operator is installed and that the namespace, secrets, and <code>config.yaml</code> are created as prerequisites.</p></blockquote>
+<ul>
+<li>
+<p>Copy the downloaded <code>values.yaml</code> file.</p>
+</li>
+<li>
+<p>Look over all the fields in the generated <code>values.yaml</code> and fill in/adjust any as needed.</p>
+</li>
+</ul>
+<blockquote>
+<p>NOTE:
+Starting from <strong>CSM version 1.16</strong>, users can utilize the <strong><code>version</code></strong> parameter (as defined in the <code>values.yaml</code> file) for both installation and upgrade. When using this parameter, there are two approaches:</p></blockquote>
+<ul>
+<li><strong>ConfigMap Approach:</strong><br>
+Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.</li>
+</ul>
+<blockquote>
+<p>NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.</p></blockquote>
+<p><strong>Sample ConfigMap Configuration:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ConfigMap</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csm-images</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">dell-csm-operator</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">versions.yaml</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    - version: v1.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      images:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powermax: quay.io/dell/container-storage-modules/csi-powermax:v2.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        karavi-authorization-proxy: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        podmon: quay.io/dell/container-storage-modules/podmon:v1.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        otel-collector: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.143.1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        nginx-proxy : quay.io/nginx/nginx-unprivileged:1.27
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        metrics-powermax: quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.9.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        metrics-powerstore: quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        metrics-powerflex: quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        metrics-powerscale: quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.11.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        dell-csi-replicator: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        dell-replication-controller-manager: quay.io/dell/container-storage-modules/dell-replication-controller:v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        csipowermax-reverseproxy: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        sdc: quay.io/dell/storage/powerflex/sdc:5.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        sdc-monitor: quay.io/dell/storage/powerflex/sdc:5.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        provisioner: registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        attacher: registry.k8s.io/sig-storage/csi-attacher:v4.10.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        resizer: registry.k8s.io/sig-storage/csi-resizer:v2.0.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v8.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        csi-metadata-retriever: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.13.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        external-health-monitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        cert-manager-cainjector: quay.io/jetstack/cert-manager-cainjector:v1.11.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        cert-manager-controller: quay.io/jetstack/cert-manager-controller:v1.11.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        cert-manager-webhook: quay.io/jetstack/cert-manager-webhook:v1.11.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        proxy-service: quay.io/dell/container-storage-modules/csm-authorization-proxy:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        tenant-service: quay.io/dell/container-storage-modules/csm-authorization-tenant:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        role-service: quay.io/dell/container-storage-modules/csm-authorization-role:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        storage-service: quay.io/dell/container-storage-modules/csm-authorization-storage:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        opa: docker.io/openpolicyagent/opa:0.70.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.3.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        authorization-controller: quay.io/dell/container-storage-modules/csm-authorization-controller:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        redis: redis:8.2.0-alpine
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        commander: docker.io/rediscommander/redis-commander:latest
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    - version: v1.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      images:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        ....
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    - version: v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      images:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        ....</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><ul>
+<li>
+<p><strong>Custom Registry Approach:</strong><br>
+Alternatively, you can specify <code>customRegistry</code> and <code>retainImageRegistryPath</code> in the configuration. The custom registry approach allows you to redirect all container image pulls to a registry of your choice while optionally preserving the original image path structure. This is useful in environments where images must be sourced from a private or enterprise-approved registry. If users want to use custom registry they must mirror all required images into the custom registry prior to upgrade.</p>
+<ul>
+<li>
+<p><strong>customRegistry</strong> –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration.</p>
+</li>
+<li>
+<p><strong>retainImageRegistryPath</strong> – The retainImageRegistryPath field is a boolean flag that determines whether the original image path structure should be preserved when using a custom registry. This parameter is only evaluated when customRegistry is set.</p>
+<ul>
+<li>retainImageRegistryPath: <strong>false</strong><br>
+When set to false, only the registry hostname is replaced. For example, with customRegistry=my.artifactory-registry.example, an image such as csi-vxflexos:v2.16.0 will be pulled from <code>my.artifactory-registry.example/csi-vxflexos:v2.16.0</code>.</li>
+<li>retainImageRegistryPath: <strong>true</strong><br>
+When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from <code>my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>NOTE: The custom registry value must be Fully Qualified Domain Name (FQDN) and must not include any nested path or folder structure.
+For example: my.artifactory-registry.example</p></blockquote>
+<p><strong>Sample CustomRegistry Configuration:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">storage.dell.com/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ContainerStorageModule</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerflex</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1.16.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">customRegistry</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">my.artifactory-registry.example</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">retainImageRegistryPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Add fields here</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">....</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p><strong>If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.</strong></p>
+<blockquote>
+<p>NOTE: If the upgrade using the version field fails, consult the <a href="../../../../troubleshooting/csmoperator/">Operator Troubleshooting Guide</a>. If the issue persists, uninstall the existing resources and proceed with a fresh installation.</p></blockquote>
+<blockquote>
+<p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="../../csmoperator#install-driver">CSI Driver</a>, <a href="../../csmoperator/csm-modules/resiliency">Resiliency</a>.</p></blockquote>
+<style>
+.visible-content {
+  display: block;
+}
+.inline-content {
+  display: inline;
+}
+</style>
+<span id="" class="visible-content ">
   <ul>
-  <li>
-  <p>Copy the downloaded <code>values.yaml</code> file.</p>
-  </li>
-  <li>
-  <p>Look over all the fields in the generated <code>values.yaml</code> and fill in/adjust any as needed.</p>
-  </li>
-  </ul>
-  <blockquote>
-  <p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="../../csmoperator#install-driver">CSI Driver</a>, <a href="../../csmoperator/csm-modules/resiliency">Resiliency</a>.</p></blockquote>
-  <style>
-  .visible-content {
-    display: block;
-  }
-  .inline-content {
-    display: inline;
-  }
-  </style>
-  <span id="" class="visible-content ">
-    <ul>
-  <li>If Observability is checked in the wizard, refer to <a href="../../csmoperator/csm-modules/observability">Observability</a> to export metrics to Prometheus and load the Grafana dashboards.</li>
-  </ul>
-  
-  </span>
-  <style>
-  .visible-content {
-    display: block;
-  }
-  .inline-content {
-    display: inline;
-  }
-  </style>
-  <span id="" class="visible-content ">
-    <ul>
-  <li>If Authorization is checked in the wizard, only the sidecar is enabled. Refer to <a href="../../csmoperator/csm-modules/authorizationv2-0">Authorization</a> to install and configure the CSM Authorization Proxy Server.</li>
-  </ul>
-  
-  </span>
-  <style>
-  .visible-content {
-    display: block;
-  }
-  .inline-content {
-    display: inline;
-  }
-  </style>
-  <span id="" class="visible-content ">
-    <ul>
-  <li>If Replication is checked in the wizard, refer to <a href="../../csmoperator/csm-modules/replication">Replication</a> for the necessary prerequisites required for this module.</li>
-  </ul>
-  
-  </span>
+<li>If Observability is checked in the wizard, refer to <a href="../../csmoperator/csm-modules/observability">Observability</a> to export metrics to Prometheus and load the Grafana dashboards.</li>
+</ul>
+
+</span>
+<style>
+.visible-content {
+  display: block;
+}
+.inline-content {
+  display: inline;
+}
+</style>
+<span id="" class="visible-content ">
   <ul>
-  <li>Install the Operator.</li>
-  </ul>
-  <p>On your terminal, run this command:</p>
-  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    kubectl create -f values.yaml
-  </span></span></code></pre></div>
+<li>If Authorization is checked in the wizard, only the sidecar is enabled. Refer to <a href="../../csmoperator/csm-modules/authorizationv2-0">Authorization</a> to install and configure the CSM Authorization Proxy Server.</li>
+</ul>
+
+</span>
+<style>
+.visible-content {
+  display: block;
+}
+.inline-content {
+  display: inline;
+}
+</style>
+<span id="" class="visible-content ">
+  <ul>
+<li>If Replication is checked in the wizard, refer to <a href="../../csmoperator/csm-modules/replication">Replication</a> for the necessary prerequisites required for this module.</li>
+</ul>
+
+</span>
+<ul>
+<li>Install the Operator.</li>
+</ul>
+<p>On your terminal, run this command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    kubectl create -f values.yaml
+</span></span></code></pre></div>
 
  
 </div>
@@ -4485,6 +4744,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
             
         
         
@@ -4623,10 +4902,30 @@ document.addEventListener("DOMContentLoaded", function() {
         
             
         
+        
+
+        
+            
         
+    
 
+            
+        
+             
+                
+    
+    
+        
+            
         
+         
             
+        
+
+        
+        
+        
+
         
     
 
@@ -4647,11 +4946,33 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
+        
+    
+
+            
+        
+    
+
+            
         
+             
+                
     
+    
+        
+            
+        
+         
+            
+        
 
+        
+        
             
+        
         
+
+        
              
                 
     
@@ -4670,8 +4991,24 @@ document.addEventListener("DOMContentLoaded", function() {
         
     
 
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
             
         
+
+        
+        
+        
+
+        
     
 
             
@@ -4690,9 +5027,15 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
             
+        
+        
+
         
+            
         
+    
 
+            
         
              
                 
@@ -4727,11 +5070,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
+        
+    
+
+            
         
+    
 
+            
         
+             
+                
     
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
 
+        
             
         
              
@@ -4743,16 +5110,52 @@ document.addEventListener("DOMContentLoaded", function() {
         
          
             
+        
+
+        
+        
         
 
         
+    
+
+            
+        
+             
+                
+    
+    
         
             
         
+         
+            
+        
+
+        
+        
+        
+
         
+    
 
+            
+        
+             
+                
+    
+    
+        
+            
         
+         
             
+        
+
+        
+        
+        
+
         
     
 
@@ -5026,6 +5429,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
+            
+        
              
                 
     
@@ -5040,12 +5445,32 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
             
+        
+        
+
         
+            
         
+    
 
+            
         
+             
+                
+    
+    
+        
+            
+        
+         
             
         
+
+        
+        
+        
+
+        
     
 
             
@@ -5063,8 +5488,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -5082,12 +5511,34 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
+        
+            
         
         
 
         
+             
+                
     
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
 
+        
+            
+        
+            
+        
             
         
     
@@ -5107,10 +5558,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
             
+        
+         
+            
+        
+
+        
+        
+        
+
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -5131,11 +5608,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
             
+        
+             
+                
+    
+    
         
             
         
+         
             
         
+
+        
+        
+        
+
+        
     
 
             
@@ -7761,12 +8250,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -7815,10 +8300,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -7833,8 +8320,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -7873,18 +8364,12 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
-        
         
-
         
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -7898,19 +8383,127 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
-        
-            
         
         
 
         
-             
-                
     
-    
-        
+
             
         
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
          
             
         
@@ -9231,33 +9824,15 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
-             
-                
-    
     
-        
-            
-        
-         
-            
-        
 
-        
-        
             
         
-        
-
-        
              
                 
     
@@ -9267,32 +9842,14 @@ document.addEventListener("DOMContentLoaded", function() {
         
          
             
-        
-
-        
         
-        
 
-        
-             
-                
-    
-    
         
-            
         
-         
             
-        
-
         
         
-        
-
-        
-    
 
-            
         
              
                 
@@ -9305,18 +9862,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-        
-
         
-    
-
-            
         
-    
 
-            
         
              
                 
@@ -9336,43 +9885,11 @@ document.addEventListener("DOMContentLoaded", function() {
         
     
 
-            
-        
-             
-                
-    
-    
-        
             
-        
-         
-            
-        
-
-        
-        
-        
-
         
     
 
-            
-        
-             
-                
-    
-    
-        
             
-        
-         
-            
-        
-
-        
-        
-        
-
         
              
                 
@@ -9385,19 +9902,13 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
-            
-        
             
         
             
@@ -10872,6 +11383,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
     
 
+            
+        
             
         
             
@@ -10882,11 +11395,27 @@ document.addEventListener("DOMContentLoaded", function() {
         
             
         
+    
+
             
         
+             
+                
+    
     
+        
+            
+        
+         
+            
+        
 
+        
+        
             
+        
+        
+
         
              
                 
@@ -10932,14 +11461,30 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
          
+            
+        
+
+        
+        
             
         
+        
 
+        
+             
+                
+    
+    
         
+            
         
+         
             
+        
+
         
         
+        
 
         
              
@@ -10953,10 +11498,18 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+        
+
         
+    
+
+            
         
+    
 
+            
         
     
 
@@ -10970,14 +11523,30 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
          
+            
+        
+
+        
+        
             
         
+        
 
+        
+             
+                
+    
+    
         
+            
         
+         
             
+        
+
         
         
+        
 
         
              
@@ -10991,10 +11560,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -12003,8 +12576,50 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
         
+        
+        
+
+        
+    
+
+            
+        
+    
 
+            
         
     
 
@@ -12639,24 +13254,12 @@ document.addEventListener("DOMContentLoaded", function() {
         
          
             
-        
-
         
-        
-        
 
         
-    
-
-            
         
-    
-
-            
         
-    
 
-            
         
     
 
@@ -12671,14 +13274,28 @@ document.addEventListener("DOMContentLoaded", function() {
         
          
             
+        
+
         
+        
+        
 
         
+    
+
+            
         
+    
+
             
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -12693,12 +13310,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -12713,10 +13328,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -12731,6 +13348,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
+        
         
 
         
@@ -12747,12 +13366,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
         
-    
 
-            
         
              
                 
@@ -12892,28 +13507,12 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
          
-            
-        
-
-        
-        
             
-        
         
 
         
-             
-                
-    
-    
         
             
-        
-         
-            
-        
-
-        
         
         
 
@@ -12931,12 +13530,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
         
-    
 
-            
         
              
                 
@@ -13076,28 +13671,12 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
          
-            
-        
-
-        
-        
             
-        
         
 
-        
-             
-                
-    
-    
         
-            
         
-         
             
-        
-
-        
         
         
 
@@ -13115,12 +13694,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
         
-    
 
-            
         
              
                 
@@ -13997,12 +14572,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -14055,10 +14628,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -14104,23 +14679,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
-             
-                
     
-    
-        
-            
-        
-         
-            
-        
 
-        
-        
             
-        
-        
-
         
              
                 
@@ -14162,6 +14723,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
+    
+
+            
+        
              
                 
     
@@ -14175,12 +14740,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -14197,17 +14760,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
-        
-    
-
-            
-        
-    
-
-            
         
-            
-        
     
 
             
@@ -14224,8 +14777,6 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
-        
-            
         
         
 
@@ -14243,10 +14794,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -14312,10 +14865,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
-    
-
-            
-        
              
                 
     
@@ -14373,10 +14922,6 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
-        
-    
-
-            
         
              
                 
@@ -14394,6 +14939,14 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
+    
+
+            
+        
+    
+
+            
+        
              
                 
     
@@ -14470,10 +15023,22 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
+             
+                
     
-
+    
+        
+            
+        
+         
             
         
+
+        
+        
+        
+
+        
     
 
             
@@ -14515,10 +15080,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -14549,12 +15116,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -14573,8 +15136,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -14633,8 +15200,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
         
+    
 
+            
         
              
                 
@@ -14654,6 +15225,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
     
 
+            
+        
             
         
              
@@ -14696,10 +15269,6 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
-    
-
-            
-        
              
                 
     
@@ -14715,6 +15284,10 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
+        
+    
+
+            
         
              
                 
@@ -14793,12 +15366,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -14815,10 +15386,6 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
-        
-    
-
-            
         
              
                 
@@ -14840,8 +15407,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
-            
-        
              
                 
     
@@ -14879,8 +15444,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
         
+    
 
+            
         
              
                 
@@ -14915,12 +15484,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
         
-    
 
-            
         
              
                 
@@ -14945,22 +15510,14 @@ document.addEventListener("DOMContentLoaded", function() {
     
 
             
-        
-             
-                
-    
-    
         
             
         
-         
             
         
-
-        
-        
-        
+    
 
+            
         
     
 
@@ -14979,7 +15536,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
+        
 
         
              
@@ -15002,7 +15561,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
-    
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
 
             
         
@@ -15019,10 +15594,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
+        
+
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -15035,7 +15616,9 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
@@ -15078,8 +15661,24 @@ document.addEventListener("DOMContentLoaded", function() {
         
     
 
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
             
+        
+
+        
         
+        
+
+        
     
 
             
@@ -15135,10 +15734,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -15163,11 +15766,23 @@ document.addEventListener("DOMContentLoaded", function() {
     
 
             
+        
+             
+                
+    
+    
         
             
         
+         
             
+        
+
+        
         
+        
+
+        
     
 
             
@@ -15205,14 +15820,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -15225,10 +15836,16 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
+        
+            
         
     
 
@@ -15245,19 +15862,49 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
         
+             
+                
+    
     
+        
+            
+        
+         
+            
+        
 
+        
+        
             
+        
+        
+
         
+             
+                
+    
     
+        
+            
+        
+         
+            
+        
 
+        
+        
             
         
+        
+
+        
              
                 
     
@@ -15307,10 +15954,16 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
+        
+            
+        
+            
         
     
 
@@ -15327,10 +15980,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
+        
+            
         
     
 
@@ -15367,10 +16024,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -15387,14 +16048,28 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
         
+             
+                
     
-
+    
+        
             
+        
+         
+            
+        
+
+        
+        
+        
+
         
     
 
@@ -15413,11 +16088,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
+        
+            
+        
             
         
     
@@ -15438,9 +16115,15 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
             
+        
         
+
+        
+            
         
+    
 
+            
         
              
                 
@@ -15453,10 +16136,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -15478,11 +16165,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
+    
+
             
         
+             
+                
+    
     
+        
+            
+        
+         
+            
+        
 
+        
+        
             
+        
+        
+
         
              
                 
@@ -15498,9 +16201,15 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
             
+        
+        
+
         
+            
         
+    
 
+            
         
              
                 
@@ -15510,15 +16219,41 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
          
+            
+        
+
+        
+        
+            
+        
+        
+
+        
             
         
+    
 
+            
+        
+             
+                
+    
+    
         
+            
         
+         
             
+        
+
         
         
+        
+
+        
+    
 
+            
         
              
                 
@@ -15531,10 +16266,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -15551,13 +16290,33 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
         
+             
+                
+    
     
+        
+            
+        
+         
+            
+        
 
+        
+        
+            
+        
+        
+
+        
+            
+        
             
         
     
@@ -15578,9 +16337,15 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
             
+        
+        
+
         
+            
         
+    
 
+            
         
              
                 
@@ -15593,10 +16358,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -15609,14 +16378,36 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
+        
+    
+
+            
         
+    
 
+            
         
+             
+                
+    
     
+        
+            
+        
+         
+            
+        
 
+        
+        
             
+        
+        
+
         
              
                 
@@ -15669,10 +16460,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
+        
+            
         
     
 
@@ -15689,18 +16484,1606 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+            
+        
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
         
 
         
-    
-
+        
             
         
-    
+        
 
-            
         
              
                 
@@ -15714,6 +18097,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
+        
+            
         
         
 
@@ -15758,6 +18143,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
+    
+
+            
+        
              
                 
     
@@ -15771,12 +18160,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -15791,12 +18178,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -15811,16 +18196,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
-        
-    
-
-            
         
-    
 
-            
         
              
                 
@@ -15855,8 +18232,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
+        
+    
+
+            
         
+    
 
+            
         
     
 
@@ -15971,8 +18356,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
+        
+    
+
+            
         
+    
 
+            
         
     
 
@@ -15993,6 +18386,10 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
+        
+    
+
+            
         
     
 
@@ -16011,12 +18408,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -16031,16 +18426,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
-        
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -16057,10 +18446,6 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
-        
-    
-
-            
         
              
                 
@@ -16078,6 +18463,10 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
+    
+
+            
+        
              
                 
     
@@ -16091,8 +18480,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
+        
+    
+
+            
         
+    
 
+            
         
     
 
@@ -16113,6 +18510,10 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
+        
+    
+
+            
         
     
 
@@ -16131,12 +18532,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -16173,6 +18572,10 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
+        
+    
+
+            
         
     
 
@@ -16182,6 +18585,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
+            
+        
+            
+        
+            
+        
     
 
             
@@ -16234,6 +18643,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
+        
+            
         
         
 
@@ -16271,12 +18682,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -16293,10 +18702,6 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
-        
-    
-
-            
         
              
                 
@@ -16351,8 +18756,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
+        
+    
+
+            
+        
+    
+
+            
         
+    
 
+            
         
     
 
@@ -16371,12 +18788,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -16411,16 +18826,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
-        
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -16478,10 +18887,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
-    
-
-            
-        
              
                 
     
@@ -16535,8 +18940,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
+        
+    
+
+            
         
+    
 
+            
         
     
 
@@ -16559,6 +18972,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
+        
         
 
         
@@ -16595,12 +19010,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -16615,12 +19028,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
         
-    
 
-            
         
              
                 
@@ -16675,12 +19084,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -16699,8 +19104,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+        
+
         
+    
 
+            
         
              
                 
@@ -16711,12 +19120,24 @@ document.addEventListener("DOMContentLoaded", function() {
         
          
             
+        
+
         
+        
+        
 
         
+    
+
+            
         
+    
+
+            
         
+    
 
+            
         
     
 
@@ -16735,12 +19156,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -16774,25 +19193,27 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
+        
+            
         
         
 
         
+             
+                
     
-
+    
+        
             
         
-    
-
+         
             
         
-    
 
-            
         
-    
+        
+        
 
-            
         
              
                 
@@ -16807,10 +19228,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -16865,12 +19288,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -16885,14 +19304,28 @@ document.addEventListener("DOMContentLoaded", function() {
         
          
             
+        
+
         
+        
+        
 
         
+    
+
+            
         
+    
+
             
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -16927,6 +19360,10 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
+        
+    
+
+            
         
              
                 
@@ -16941,16 +19378,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-        
-
-        
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -16992,6 +19423,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
              
                 
     
@@ -17005,6 +19448,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
+        
         
 
         
@@ -17020,22 +19465,28 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         
+        
+            
         
         
 
         
+             
+                
     
-
+    
+        
             
         
-    
-
+         
             
         
-    
 
-            
+        
+        
         
+
+        
     
 
             
@@ -17076,7 +19527,11 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
         
+
+        
+    
 
+            
         
     
 
@@ -17093,7 +19548,9 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
@@ -17133,7 +19590,9 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
@@ -17149,10 +19608,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -17169,18 +19632,12 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-        
-
         
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -17202,21 +19659,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
             
         
-             
-                
-    
     
-        
-            
-        
-         
+
             
         
+    
 
+            
         
+            
         
+            
         
+    
 
+            
         
     
 
@@ -17233,18 +19690,12 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
-        
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -17611,10 +20062,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -17635,7 +20090,9 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+            
         
         
 
@@ -17673,12 +20130,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -17713,12 +20168,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -17731,18 +20184,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-        
-
         
-    
-
-            
         
-    
 
-            
         
     
 
@@ -17759,28 +20204,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-            
         
         
 
         
-             
-                
-    
     
-        
-            
-        
-         
-            
-        
 
-        
-        
-        
-
+            
         
     
 
@@ -17837,10 +20268,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -17873,13 +20306,19 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
+            
+        
             
         
     
@@ -17917,12 +20356,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -17975,10 +20412,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -17999,10 +20440,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -18021,12 +20466,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -18039,14 +20482,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -18063,9 +20502,7 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-            
         
         
 
@@ -18083,10 +20520,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -18163,10 +20602,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -18183,22 +20626,12 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-        
-
         
-    
-
             
         
-    
-
-            
         
-    
 
-            
         
              
                 
@@ -18211,9 +20644,7 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-            
         
         
 
@@ -18229,10 +20660,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -18249,10 +20684,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -18305,14 +20744,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -18325,14 +20760,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -18349,10 +20780,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -18369,14 +20804,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -18393,9 +20824,7 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-            
         
         
 
@@ -18411,10 +20840,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -18491,10 +20924,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -18514,6 +20951,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
     
 
+            
+        
             
         
              
@@ -18587,14 +21026,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -18618,24 +21053,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
     
 
-            
-        
-             
-                
-    
-    
-        
             
         
-         
-            
-        
-
-        
-        
-        
-
-        
     
 
             
@@ -18671,14 +21090,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -18691,10 +21106,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -18711,18 +21130,12 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-        
-
         
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -18735,9 +21148,7 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-            
         
         
 
@@ -18773,10 +21184,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -18813,14 +21228,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -18837,9 +21248,7 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
-            
         
         
 
@@ -18855,10 +21264,22 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
+        
+
         
+    
+
+            
         
+    
 
+            
+        
+            
+        
+            
         
     
 
@@ -18917,14 +21338,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -18943,10 +21360,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
-            
+        
+
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -18961,12 +21384,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -18999,10 +21420,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -19015,14 +21440,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -19079,10 +21500,14 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -19099,14 +21524,10 @@ document.addEventListener("DOMContentLoaded", function() {
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -22895,7 +25316,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2025
+    2026
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

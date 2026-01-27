@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v3">
-    <meta property="article:modified_time" content="2025-06-05T13:26:25-04:00">
+    <meta property="article:modified_time" content="2025-09-18T14:50:08-04:00">
 
   <meta itemprop="name" content="PowerStore">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerStore via Helm">
-  <meta itemprop="dateModified" content="2025-06-05T13:26:25-04:00">
-  <meta itemprop="wordCount" content="3373">
+  <meta itemprop="dateModified" content="2025-09-18T14:50:08-04:00">
+  <meta itemprop="wordCount" content="3491">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerStore">
   <meta name="twitter:description" content="Installing the CSI Driver for Dell PowerStore via Helm">
@@ -73,13 +73,13 @@
       
     
     
-    1.12.0
+    1.13.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
     </ul> 
 
 </div>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.b7ddf1b568be130421d83c6e2891f47f.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1937,24 +1937,24 @@
 </li>  
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
-  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
-    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
-      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
-        
-        <span class="">Troubleshooting</span>
-      </a>
-    </label>
-    
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xrelease-li">
   <input type="checkbox" id="m-csm-docsv3authorizationv2xrelease-check"/>
     <label for="m-csm-docsv3authorizationv2xrelease-check">
       <a href="/csm-docs/v3/authorization/v2.x/release/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationv2xrelease">
         
         <span class="">Release notes</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
+  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
+    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
+      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
+        
+        <span class="">Troubleshooting</span>
       </a>
     </label>
     
@@ -2748,8 +2748,9 @@ iSCSI Requirements <a class="header-link"  href="#iscsi-requirements" style=" di
             </svg>
         </a></h3><p>The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerStore driver:</p>
 <ul>
-<li>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package installed. On Debian based distributions the package name is  <em>open-iscsi</em>.</li>
-<li>The <em>iscsid</em> service must be enabled and running. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
+<li>Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the <em>iscsi-initiator-utils</em> package for RHEL or <em>open-iscsi</em> package for Ubuntu.</li>
+<li>Enable and start the <em>iscsid</em> service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
+<li>Ensure that the unique initiator name is set in <em>/etc/iscsi/initiatorname.iscsi</em>.</li>
 <li>To configure iSCSI in Red Hat OpenShift clusters, you can create a <code>MachineConfig</code> object using the console or <code>oc</code> to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a <code>MachineConfig</code> object:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -2783,7 +2784,36 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
             </svg>
         </a></h3><p>The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:</p>
 <ul>
-<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.</li>
+<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).</li>
+</ul>
+<blockquote>
+<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">worker-custom-nvme-hostnqn</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.4.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Unit]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Description=Custom CoreOS Generate NVMe Hostnqn
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Service]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Type=oneshot
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            ExecStart=/usr/bin/sh -c &#39;/usr/sbin/nvme gen-hostnqn &gt; /etc/nvme/hostnqn&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            RemainAfterExit=yes
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Install]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            WantedBy=multi-user.target</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><ul>
 <li>The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf -y install nvme-cli
@@ -2986,7 +3016,7 @@ Install the Driver <a class="header-link"  href="#install-the-driver" style=" di
         </a></h2><p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.12.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.13.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>Ensure that you have created namespace where you want to install the driver. You can run <code>kubectl create namespace csi-powerstore</code> to create a new one. &ldquo;csi-powerstore&rdquo; is just an example. You can choose any name for the namespace.
@@ -3027,7 +3057,7 @@ User Privileges <a class="header-link"  href="#user-privileges" style=" display:
 </li>
 <li>
 <p>Download the default values.yaml file</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.12.0/charts/csi-powerstore/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.13.0/charts/csi-powerstore/values.yaml
 </span></span></code></pre></div></li>
 <li>
 <p>Edit the newly created values file and provide values for the following parameters <code>vi my-powerstore-settings.yaml</code>:</p>
@@ -3359,7 +3389,7 @@ Helm based installation <a class="header-link"  href="#helm-based-installation" 
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2025
+    2026
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

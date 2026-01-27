@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v3">
-    <meta property="article:modified_time" content="2025-06-05T13:26:25-04:00">
+    <meta property="article:modified_time" content="2025-09-18T14:50:08-04:00">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerMax via Helm">
-  <meta itemprop="dateModified" content="2025-06-05T13:26:25-04:00">
-  <meta itemprop="wordCount" content="3993">
+  <meta itemprop="dateModified" content="2025-09-18T14:50:08-04:00">
+  <meta itemprop="wordCount" content="4306">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Installing the CSI Driver for Dell PowerMax via Helm">
@@ -73,13 +73,13 @@
       
     
     
-    1.12.0
+    1.13.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
     </ul> 
 
 </div>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.b7ddf1b568be130421d83c6e2891f47f.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1937,24 +1937,24 @@
 </li>  
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
-  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
-    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
-      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
-        
-        <span class="">Troubleshooting</span>
-      </a>
-    </label>
-    
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xrelease-li">
   <input type="checkbox" id="m-csm-docsv3authorizationv2xrelease-check"/>
     <label for="m-csm-docsv3authorizationv2xrelease-check">
       <a href="/csm-docs/v3/authorization/v2.x/release/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationv2xrelease">
         
         <span class="">Release notes</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
+  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
+    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
+      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
+        
+        <span class="">Troubleshooting</span>
       </a>
     </label>
     
@@ -2739,8 +2739,67 @@ CSI PowerMax Reverse Proxy <a class="header-link"  href="#csi-powermax-reverse-p
 <p>Starting from v2.7.0 these secrets will be automatically created using the tls.key and tls.cert contents provided in my-powermax-settings.yaml file. For this to be used, we need to install cert-manager which manages the certs and secrets. Install cer-manager using the following command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
 </span></span></code></pre></div><p>The following example shows how to generate a private key and how to use that key to sign an SSL certificate using the openssl tool:</p>
+<p>Create the Configuration file (openssl.cnf) which includes the subjectAltName:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">default_bits</span>       <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">distinguished_name</span> <span style="color:#ce5c00;font-weight:bold">=</span> req_distinguished_name
+</span></span><span style="display:flex;"><span><span style="color:#000">req_extensions</span>     <span style="color:#ce5c00;font-weight:bold">=</span> req_ext
+</span></span><span style="display:flex;"><span><span style="color:#000">prompt</span>             <span style="color:#ce5c00;font-weight:bold">=</span> no
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_distinguished_name <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">C</span>  <span style="color:#ce5c00;font-weight:bold">=</span> XX
+</span></span><span style="display:flex;"><span><span style="color:#000">L</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default City
+</span></span><span style="display:flex;"><span><span style="color:#000">O</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default Company Ltd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_ext <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">subjectAltName</span> <span style="color:#ce5c00;font-weight:bold">=</span> @alt_names
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> alt_names <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span>DNS.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;csipowermax-reverseproxy&#34;</span>
+</span></span><span style="display:flex;"><span>IP.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;0.0.0.0&#34;</span>
+</span></span></code></pre></div><p>Use a tool such as <code>openssl</code> to generate this secret using the example below:</p>
+<p>Create the Configuration file (openssl.cnf) which includes the subjectAltName:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">default_bits</span>       <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">distinguished_name</span> <span style="color:#ce5c00;font-weight:bold">=</span> req_distinguished_name
+</span></span><span style="display:flex;"><span><span style="color:#000">req_extensions</span>     <span style="color:#ce5c00;font-weight:bold">=</span> req_ext
+</span></span><span style="display:flex;"><span><span style="color:#000">prompt</span>             <span style="color:#ce5c00;font-weight:bold">=</span> no
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_distinguished_name <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">C</span>  <span style="color:#ce5c00;font-weight:bold">=</span> XX
+</span></span><span style="display:flex;"><span><span style="color:#000">L</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default City
+</span></span><span style="display:flex;"><span><span style="color:#000">O</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default Company Ltd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_ext <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">subjectAltName</span> <span style="color:#ce5c00;font-weight:bold">=</span> @alt_names
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> alt_names <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span>DNS.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;csipowermax-reverseproxy&#34;</span>
+</span></span><span style="display:flex;"><span>IP.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;0.0.0.0&#34;</span>
+</span></span></code></pre></div><p>Use a tool such as <code>openssl</code> to generate this secret using the example below:</p>
+<p>Create the Configuration file (openssl.cnf) which includes the subjectAltName:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">default_bits</span>       <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">distinguished_name</span> <span style="color:#ce5c00;font-weight:bold">=</span> req_distinguished_name
+</span></span><span style="display:flex;"><span><span style="color:#000">req_extensions</span>     <span style="color:#ce5c00;font-weight:bold">=</span> req_ext
+</span></span><span style="display:flex;"><span><span style="color:#000">prompt</span>             <span style="color:#ce5c00;font-weight:bold">=</span> no
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_distinguished_name <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">C</span>  <span style="color:#ce5c00;font-weight:bold">=</span> XX
+</span></span><span style="display:flex;"><span><span style="color:#000">L</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default City
+</span></span><span style="display:flex;"><span><span style="color:#000">O</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default Company Ltd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_ext <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">subjectAltName</span> <span style="color:#ce5c00;font-weight:bold">=</span> @alt_names
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> alt_names <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span>DNS.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;powermax-reverseproxy&#34;</span>
+</span></span><span style="display:flex;"><span>IP.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;0.0.0.0&#34;</span>
+</span></span></code></pre></div><p>Generate the CSR and Self-Signed Certificate:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl genrsa -out tls.key <span style="color:#0000cf;font-weight:bold">2048</span>
-</span></span><span style="display:flex;"><span>openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days <span style="color:#0000cf;font-weight:bold">3650</span>
+</span></span><span style="display:flex;"><span>openssl req -new -key tls.key -out tls.csr -config openssl.cnf
+</span></span><span style="display:flex;"><span>openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days <span style="color:#0000cf;font-weight:bold">3650</span> -extensions req_ext -extfile openssl.cnf
+</span></span><span style="display:flex;"><span>kubectl create secret -n &lt;namespace&gt; tls csirevproxy-tls-secret --cert<span style="color:#ce5c00;font-weight:bold">=</span>tls.crt --key<span style="color:#ce5c00;font-weight:bold">=</span>tls.key
 </span></span></code></pre></div><h3 id="install-helm-3">
 Install Helm 3 <a class="header-link"  href="#install-helm-3" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -2770,8 +2829,9 @@ iSCSI Requirements <a class="header-link"  href="#iscsi-requirements" style=" di
             </svg>
         </a></h3><p>The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerMax driver.</p>
 <ul>
-<li>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package installed. On Debian based distributions the package name is  <em>open-iscsi</em>.</li>
-<li>The <em>iscsid</em> service must be enabled and running. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
+<li>Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the <em>iscsi-initiator-utils</em> package for RHEL or <em>open-iscsi</em> package for Ubuntu.</li>
+<li>Enable and start the <em>iscsid</em> service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
+<li>Ensure that the unique initiator name is set in <em>/etc/iscsi/initiatorname.iscsi</em>.</li>
 <li>To configure iSCSI in Red Hat OpenShift clusters, you can create a <code>MachineConfig</code> object using the console or <code>oc</code> to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a <code>MachineConfig</code> object:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -2817,7 +2877,36 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
 <p>Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.</p></blockquote>
 <p><strong>Cluster requirements</strong></p>
 <ul>
-<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.</li>
+<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).</li>
+</ul>
+<blockquote>
+<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">worker-custom-nvme-hostnqn</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.2.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Unit]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Description=Custom CoreOS Generate NVMe Hostnqn
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Service]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Type=oneshot
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            ExecStart=/usr/bin/sh -c &#39;/usr/sbin/nvme gen-hostnqn &gt; /etc/nvme/hostnqn&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            RemainAfterExit=yes
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Install]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            WantedBy=multi-user.target</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><ul>
 <li>The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf -y install nvme-cli
@@ -2847,7 +2936,7 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.2.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.4.0</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">files</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -2996,7 +3085,7 @@ Installation <a class="header-link"  href="#installation" style=" display: inlin
             </svg>
         </a></h2><p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone -b v2.12.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.</li>
+<li>Run <code>git clone -b v2.13.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.</li>
 <li>Ensure that you have created a namespace where you want to install the driver. You can run <code>kubectl create namespace powermax</code> to create a new one</li>
 <li>Edit the <code>samples/secret/secret.yaml</code> file,to point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
@@ -3007,7 +3096,7 @@ These values can be obtained using base64 encoding as described in the following
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f samples/secret/secret.yaml
 </span></span></code></pre></div></li>
 <li>Download the default values.yaml file
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.12.0/charts/csi-powermax/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.13.0/charts/csi-powermax/values.yaml
 </span></span></code></pre></div></li>
 <li>Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -&gt; Help (?) -&gt; About in Unisphere for PowerMax GUI.</li>
 <li>Edit the newly created file and provide values for the following parameters
@@ -3032,13 +3121,13 @@ These values can be obtained using base64 encoding as described in the following
       </tr>
       <tr>
           <td>defaultCredentialsSecret</td>
-          <td>This secret name refers to:<br> 1 The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>2. The default Unisphere credentials if credentialsSecret is not specified for a management server.</td>
+          <td>This secret name refers to:<br> 1 The proxy credentials if the driver is installed with proxy.<br>2. The default Unisphere credentials if credentialsSecret is not specified for a management server.</td>
           <td>Yes</td>
           <td>powermax-creds</td>
       </tr>
       <tr>
           <td>storageArrays</td>
-          <td>This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.</td>
+          <td>This section refers to the list of arrays managed by the driver and Reverse Proxy.</td>
           <td>-</td>
           <td>-</td>
       </tr>
@@ -3051,12 +3140,12 @@ These values can be obtained using base64 encoding as described in the following
       <tr>
           <td>endpoint</td>
           <td>This refers to the URL of the Unisphere server managing <em>storageArrayId</em>. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on</td>
-          <td>Yes if Reverse Proxy mode is <em>StandAlone</em></td>
+          <td>Yes</td>
           <td>https://primary-1.unisphe.re:8443</td>
       </tr>
       <tr>
           <td>backupEndpoint</td>
-          <td>This refers to the URL of the backup Unisphere server managing <em>storageArrayId</em>, if Reverse Proxy is installed in <em>StandAlone</em> mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on</td>
+          <td>This refers to the URL of the backup Unisphere server managing <em>storageArrayId</em>, if Reverse Proxy is installed. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on</td>
           <td>Yes</td>
           <td>https://backup-1.unisphe.re:8443</td>
       </tr>
@@ -3076,7 +3165,7 @@ These values can be obtained using base64 encoding as described in the following
           <td>credentialsSecret</td>
           <td>This refers to the user credentials for <em>endpoint</em></td>
           <td>Yes</td>
-          <td>primary-1-secret</td>
+          <td>primary-unisphere-secret-1</td>
       </tr>
       <tr>
           <td>skipCertificateValidation</td>
@@ -3541,9 +3630,9 @@ Sample values file <a class="header-link"  href="#sample-values-file" style=" di
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h2><p>The following sections have useful snippets from <code>values.yaml</code> file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in StandAlone mode.</p>
-<h3 id="csi-powermax-driver-with-proxy-in-standalone-mode">
-CSI PowerMax driver with Proxy in StandAlone mode <a class="header-link"  href="#csi-powermax-driver-with-proxy-in-standalone-mode" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+        </a></h2><p>The following sections have useful snippets from <code>values.yaml</code> file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy.</p>
+<h3 id="csi-powermax-driver-with-proxy">
+CSI PowerMax driver with Proxy <a class="header-link"  href="#csi-powermax-driver-with-proxy" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
@@ -3561,7 +3650,7 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">backupEndpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://backup-2.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">managementServers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://primary-1.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-1-secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-unisphere-secret-1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">certSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-cert</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">limits</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -3570,13 +3659,13 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxOutStandingRead</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">50</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxOutStandingWrite</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">50</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://backup-1.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">backup-1-secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">backup-unisphere-secret-1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://primary-2.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-2-secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-unisphere-secret-2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://backup-2.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">backup-2-secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">backup-unisphere-secret-2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#8f5902;font-style:italic"># &#34;csireverseproxy&#34; refers to the subchart csireverseproxy</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -3584,7 +3673,6 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">tlsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csirevproxy-tls-secret</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">deployAsSidecar</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2222</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">StandAlone</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
 <p>Note: If the credential secret is missing from any management server details, the installer will try to use the defaultCredentialsSecret</p></blockquote>
 
@@ -3619,7 +3707,7 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2025
+    2026
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

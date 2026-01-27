@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v3">
-    <meta property="article:modified_time" content="2025-07-31T13:11:04-04:00">
+    <meta property="article:modified_time" content="2025-09-18T14:50:08-04:00">
 
   <meta itemprop="name" content="Observability">
   <meta itemprop="description" content="Installing Observability via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2025-07-31T13:11:04-04:00">
+  <meta itemprop="dateModified" content="2025-09-18T14:50:08-04:00">
   <meta itemprop="wordCount" content="590">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Observability">
@@ -73,13 +73,13 @@
       
     
     
-    1.12.0
+    1.13.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
     </ul> 
 
 </div>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.b7ddf1b568be130421d83c6e2891f47f.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1937,24 +1937,24 @@
 </li>  
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
-  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
-    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
-      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
-        
-        <span class="">Troubleshooting</span>
-      </a>
-    </label>
-    
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xrelease-li">
   <input type="checkbox" id="m-csm-docsv3authorizationv2xrelease-check"/>
     <label for="m-csm-docsv3authorizationv2xrelease-check">
       <a href="/csm-docs/v3/authorization/v2.x/release/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationv2xrelease">
         
         <span class="">Release notes</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
+  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
+    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
+      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
+        
+        <span class="">Troubleshooting</span>
       </a>
     </label>
     
@@ -2710,8 +2710,8 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace karavi
 </span></span></code></pre></div></li>
 <li>
-<p>Enable Observability module and components in <a href="https://github.com/dell/csm-operator/tree/
-release-v1.7.0
+<p>Enable Observability module and components in <a href="https://github.com/dell/csm-operator/tree/release/
+v1.8.1
 
 /samples">sample manifests</a>. If cert-manager has already been installed, don&rsquo;t enable it.</p>
 </li>
@@ -2773,8 +2773,8 @@ How to enable this module using minimal CR <a class="header-link"  href="#how-to
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h2><p>Alternatively, you can use the minimal sample files provided
-<a href="https://github.com/dell/csm-operator/tree/
-release-v1.7.0
+<a href="https://github.com/dell/csm-operator/tree/release/
+v1.8.1
 
 /samples/minimal-samples">here</a>.</p>
 <h2 id="upgrade-observability">
@@ -2843,7 +2843,7 @@ Upgrade Observability <a class="header-link"  href="#upgrade-observability" styl
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2025
+    2026
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v3">
-    <meta property="article:modified_time" content="2025-07-31T13:11:04-04:00">
+    <meta property="article:modified_time" content="2025-09-18T14:50:08-04:00">
 
   <meta itemprop="name" content="PowerScale">
   <meta itemprop="description" content="Code features for PowerScale Driver">
-  <meta itemprop="dateModified" content="2025-07-31T13:11:04-04:00">
+  <meta itemprop="dateModified" content="2025-09-18T14:50:08-04:00">
   <meta itemprop="wordCount" content="3986">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerScale">
@@ -73,13 +73,13 @@
       
     
     
-    1.12.0
+    1.13.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
     </ul> 
 
 </div>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.b7ddf1b568be130421d83c6e2891f47f.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1937,24 +1937,24 @@
 </li>  
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
-  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
-    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
-      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
-        
-        <span class="">Troubleshooting</span>
-      </a>
-    </label>
-    
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xrelease-li">
   <input type="checkbox" id="m-csm-docsv3authorizationv2xrelease-check"/>
     <label for="m-csm-docsv3authorizationv2xrelease-check">
       <a href="/csm-docs/v3/authorization/v2.x/release/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationv2xrelease">
         
         <span class="">Release notes</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3authorizationv2xtroubleshooting-li">
+  <input type="checkbox" id="m-csm-docsv3authorizationv2xtroubleshooting-check"/>
+    <label for="m-csm-docsv3authorizationv2xtroubleshooting-check">
+      <a href="/csm-docs/v3/authorization/v2.x/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationv2xtroubleshooting">
+        
+        <span class="">Troubleshooting</span>
       </a>
     </label>
     
@@ -3111,8 +3111,8 @@ Storage Capacity Tracking <a class="header-link"  href="#storage-capacity-tracki
 <p>This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka &ldquo;wait for first consumer&rdquo;). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
 If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.</p>
 <p>Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.</p>
-<p>The attribute <code>storageCapacity.enabled</code> in <code>values.yaml</code> can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set <code>storageCapacity.pollInterval</code> attribute. In case of driver installed via operator, this interval can be configured in the sample file provided <a href="https://github.com/dell/csm-operator/tree/
-release-v1.7.0
+<p>The attribute <code>storageCapacity.enabled</code> in <code>values.yaml</code> can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set <code>storageCapacity.pollInterval</code> attribute. In case of driver installed via operator, this interval can be configured in the sample file provided <a href="https://github.com/dell/csm-operator/tree/release/
+v1.8.1
 
 /samples/">here.</a> by editing the <code>--capacity-poll-interval</code> argument present in the provisioner sidecar.</p>
 <h2 id="node-selector-in-helm-template">
@@ -3391,7 +3391,7 @@ Creating a PersistentVolumeClaim <a class="header-link"  href="#creating-a-persi
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2025
+    2026
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

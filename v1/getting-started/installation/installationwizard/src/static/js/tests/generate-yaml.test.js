@@ -42,9 +42,9 @@ const CONSTANTS = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
-	CSM_HELM_V1120: "1.5.0",
-	CSM_HELM_V1130: "1.6.1",
-	CSM_HELM_V1141: "1.7.1",
+	CSM_HELM_V1130: "1.6.0",
+	CSM_HELM_V1140: "1.7.0",
+	CSM_HELM_V1150: "1.8.0",
 	HELM_TAINTS: `
     - key: "$KEY"
       operator: "Exists"
@@ -64,7 +64,7 @@ const CONSTANTS = {
 
 const testCSMMap = new Map([
 	["csmVersion", "1.12.0"],
-	["imageRepository", "dellemc"],
+	["imageRepository", "quay.io/dell/container-storage-modules"],
 	["maxVolumesPerNode", "0"],
 	["controllerCount", "1"],
 	["volNamePrefix", "csivol"],
@@ -85,7 +85,7 @@ describe("GIVEN setValues function", () => {
             <select id="fsGroup-Policy">
                 <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
             </select>
-            <input type="text" id="image-repository" value="dellemc">
+            <input type="text" id="image-repository" value="quay.io/dell/container-storage-modules">
             <input type="number" id="cert-secret-count" value="1">
             <input type="number" id="max-volumes-per-node" value="0">
             <input type="number" id="controller-count" value="1">
@@ -136,7 +136,7 @@ describe("GIVEN setValues function", () => {
 		const expected = {
 			csmVersion: '1.12.0',
 			driverVersion: 'v2.12.0',
-			imageRepository: 'dellemc',
+			imageRepository: 'quay.io/dell/container-storage-modules',
 			monitor: false,
 			certSecretCount: '1',
 			maxVolumesPerNode: '0',
@@ -230,7 +230,7 @@ describe("GIVEN setValues function", () => {
             <select id="fsGroup-Policy">
                 <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
             </select>
-            <input type="text" id="image-repository" value="dellemc">
+            <input type="text" id="image-repository" value="quay.io/dell/container-storage-modules">
             <input type="number" id="cert-secret-count" value="1">
             <input type="number" id="max-volumes-per-node" value="0">
             <input type="number" id="controller-count" value="1">
@@ -281,7 +281,7 @@ describe("GIVEN setValues function", () => {
 		const expected = {
 			csmVersion: '1.12.0',
 			driverVersion: 'v2.12.0',
-			imageRepository: 'dellemc',
+			imageRepository: 'quay.io/dell/container-storage-modules',
 			monitor: false,
 			certSecretCount: '1',
 			maxVolumesPerNode: '0',
@@ -375,7 +375,7 @@ describe("GIVEN setValues function", () => {
             <select id="fsGroup-Policy">
                 <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
             </select>
-            <input type="text" id="image-repository" value="dellemc">
+            <input type="text" id="image-repository" value="quay.io/dell/container-storage-modules">
             <input type="number" id="cert-secret-count" value="0">
             <input type="number" id="max-volumes-per-node" value="0">
             <input type="number" id="controller-count" value="2">
@@ -407,7 +407,7 @@ describe("GIVEN setValues function", () => {
 		const expected = {
 			csmVersion: "1.6.0",
 			driverVersion: "v2.6.0",
-			imageRepository: "dellemc",
+			imageRepository: "quay.io/dell/container-storage-modules",
 			certSecretCount: "0",
 			maxVolumesPerNode: '0',
 			controllerCount: "1",
@@ -719,7 +719,7 @@ describe("GIVEN createYamlString function", () => {
 	const testObjectSdc = {
 		csmVersion: "1.12.0",
 		driverVersion: "v2.12.0",
-		imageRepository: "dellemc",
+		imageRepository: "quay.io/dell/container-storage-modules",
 		maxVolumesPerNode: "0",
 		controllerCount: "1",
 		fsGroupPolicy: "ReadWriteOnceWithFSType",
@@ -775,7 +775,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       ## Controller ATTRIBUTES
       controller:
         controllerCount: 1
@@ -846,7 +846,7 @@ describe("GIVEN createYamlString function", () => {
    #      - endpoint: ""
       version: v2.6.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       clusterPrefix: 
       portGroups: ""
       controller:
@@ -890,7 +890,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
         powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
@@ -961,7 +961,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       certSecretCount: 1
       fsGroupPolicy: ReadWriteOnceWithFSType
       controller:
@@ -1334,7 +1334,7 @@ describe("GIVEN createYamlString function", () => {
 	const testObject = {
 		csmVersion: "1.12.0",
 		driverVersion: "v2.12.0",
-		imageRepository: "dellemc",
+		imageRepository: "quay.io/dell/container-storage-modules",
 		maxVolumesPerNode: "0",
 		controllerCount: "1",
 		fsGroupPolicy: "ReadWriteOnceWithFSType",
@@ -1390,7 +1390,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       ## Controller ATTRIBUTES
       controller:
         controllerCount: 1
@@ -1461,7 +1461,7 @@ describe("GIVEN createYamlString function", () => {
    #      - endpoint: ""
       version: v2.6.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       clusterPrefix: 
       portGroups: ""
       controller:
@@ -1505,7 +1505,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
         powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
@@ -1576,7 +1576,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       certSecretCount: 1
       fsGroupPolicy: ReadWriteOnceWithFSType
       controller:
@@ -1672,7 +1672,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       ## Controller ATTRIBUTES
       controller:
         controllerCount: 1
@@ -1743,7 +1743,7 @@ describe("GIVEN createYamlString function", () => {
    #      - endpoint: ""
       version: v2.6.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       clusterPrefix: 
       portGroups: ""
       controller:
@@ -1787,7 +1787,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
         powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
@@ -1858,7 +1858,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       certSecretCount: 1
       fsGroupPolicy: ReadWriteOnceWithFSType
       controller:
@@ -1955,7 +1955,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       ## Controller ATTRIBUTES
       controller:
         controllerCount: 1
@@ -2026,7 +2026,7 @@ describe("GIVEN createYamlString function", () => {
    #      - endpoint: ""
       version: v2.6.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       clusterPrefix: 
       portGroups: ""
       controller:
@@ -2070,7 +2070,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
         powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
@@ -2141,7 +2141,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       certSecretCount: 1
       fsGroupPolicy: ReadWriteOnceWithFSType
       controller:
@@ -2240,7 +2240,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       ## Controller ATTRIBUTES
       controller:
         controllerCount: 1
@@ -2311,7 +2311,7 @@ describe("GIVEN createYamlString function", () => {
    #      - endpoint: ""
       version: v2.6.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       clusterPrefix: 
       portGroups: ""
       controller:
@@ -2355,7 +2355,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
         powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
@@ -2426,7 +2426,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       certSecretCount: 1
       fsGroupPolicy: ReadWriteOnceWithFSType
       controller:
@@ -2524,7 +2524,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       ## Controller ATTRIBUTES
       controller:
         controllerCount: 1
@@ -2595,7 +2595,7 @@ describe("GIVEN createYamlString function", () => {
    #      - endpoint: ""
       version: v2.6.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       clusterPrefix: 
       portGroups: ""
       controller:
@@ -2639,7 +2639,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
         powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
@@ -2710,7 +2710,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       version: v2.12.0
       images:
-        driverRepository: dellemc
+        driverRepository: quay.io/dell/container-storage-modules
       certSecretCount: 1
       fsGroupPolicy: ReadWriteOnceWithFSType
       controller:
