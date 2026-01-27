@@ -56,8 +56,7 @@ Before you begin, make sure you have the repctl tool available.You can download 
 [Releases](https://github.com/dell/csm-replication/releases) page.
 
 ```shell
-wget https://github.com/dell/csm-replication/releases/download/{{< version-docs key="Replication" >}}/repctl-linux-amd64
-mv repctl-linux-amd64 repctl
+wget https://github.com/dell/csm/releases/latest/download/repctl
 chmod +x repctl
 ```
 
