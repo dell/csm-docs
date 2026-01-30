@@ -23,37 +23,37 @@ description: >
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 </br>
 
 ### Operator Installation
 
 </br>
- 
-1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-2. Click **Dell Container Storage Modules** tile 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.**
+
+2. Click **Dell Container Storage Modules** tile
 
 3. Keep all default settings and click **Install**.
 
 </br>
 <ol>
 
-Verify that the operator is deployed 
-```terminal 
+Verify that the operator is deployed
+```terminal
 oc get operators
 
 NAME                                                          AGE
 dell-csm-operator-certified.openshift-operators               2d21h
-```  
+```
 
 ```terminal
 oc get pod -n openshift-operators
 
 NAME                                                       READY   STATUS       RESTARTS      AGE
 dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
-``` 
+```
 
 
 </ol>
@@ -90,6 +90,8 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     EOF
     ```
 
+    For each entry in `managementServers`, if `skipCertificateValidation` is set to `true`, then the `certSecret` field must not be present in that same entry.
+
     Edit the file, then run the command to create the `powermax-creds`.
 
     ```bash
@@ -115,7 +117,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
 
 3. **Create Powermax Array Configmap:**
-  
+
     **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
 
     Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
@@ -151,7 +153,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
     [OR]
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file. 
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
     .
 
     <span><span/>{{< message text="19" >}}.
@@ -202,7 +204,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
   oc get csm powermax -n powermax
 
   NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-  powermax    3h             powermax        {{< version-docs key="PMax_latestVersion" >}}         Succeeded      
+  powermax    3h             powermax        {{< version-docs key="PMax_latestVersion" >}}         Succeeded
   ```
 
   Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
@@ -318,13 +320,13 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 
 
-{{< /accordion >}}   
+{{< /accordion >}}
 
 <br>
 
 {{< accordion id="Three" title="Modules" >}}
 
-<br>   
+<br>
 
 {{< cardcontainer >}}
 
@@ -334,4 +336,4 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency" >}}
 
 {{< /cardcontainer >}}
-{{< /accordion >}}  
+{{< /accordion >}}
