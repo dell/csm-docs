@@ -60,6 +60,7 @@ weight: 1
 {{</table>}}
 
 **Notes:**
+- Resiliency, Replication, Observability, and Authorization modules are not supported.
 - PowerFlex 4.8 requires [SDC 3.6.6](https://quay.io/dell/storage/powerflex/sdc:3.6.6) version for compatibility.
 - PowerFlex 5.0 does not support SDC for SUSE Virtualization.
 
