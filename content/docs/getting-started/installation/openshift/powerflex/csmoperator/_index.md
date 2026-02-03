@@ -26,30 +26,30 @@ weight: 2
 ### Operator Installation
 
 </br>
- 
-1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-2. Click **Dell Container Storage Modules** tile 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.**
+
+2. Click **Dell Container Storage Modules** tile
 
 3. Keep all default settings and click **Install**.
 
 </br>
 <ol>
 
-Verify that the operator is deployed 
-```terminal 
+Verify that the operator is deployed
+```terminal
 oc get operators
 
 NAME                                                          AGE
 dell-csm-operator-certified.openshift-operators               2d21h
-```  
+```
 
 ```terminal
 oc get pod -n openshift-operators
 
 NAME                                                       READY   STATUS       RESTARTS      AGE
 dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
-``` 
+```
 
 
 </ol>
@@ -67,17 +67,17 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
     Use this command to create new project. You can use any project name instead of `vxflexos`.
 
-    ```bash 
+    ```bash
     oc new-project vxflexos
     ```
 
-2. ##### **Create config secret:** 
+2. ##### **Create config secret:**
       <br>
 
-    Create a file called `config.yaml` or use [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml): 
-    
-    
-    Example: 
+    Create a file called `config.yaml` or use [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml):
+
+
+    Example:
     <div style="margin-bottom:-1.8rem">
 
     ```yaml
@@ -92,9 +92,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     EOF
     ```
     </div>
-    
+
     Add blocks for each Powerflex array in `config.yaml`, and include both source and target arrays if replication is enabled.
- 
+
     <br>
 
     Edit the file, then run the command to create the `vxflexos-config`.
@@ -102,10 +102,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```bash
     oc create secret generic vxflexos-config --from-file=config=config.yaml -n vxflexos --dry-run=client -oyaml > secret-vxflexos-config.yaml
     ```
-    
+
     Use this command to **create** the config:
 
-    ```bash 
+    ```bash
     oc apply -f secret-vxflexos-config.yaml
     ```
 
@@ -114,20 +114,20 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```bash
     oc replace -f secret-vxflexos-config.yaml --force
     ```
-  
+
     Verify config secret is created.
 
     ```terminal
     oc get secret -n vxflexos
-     
+
     NAME                 TYPE        DATA   AGE
     vxflexos-config      Opaque      1      3h7m
-    ```  
+    ```
 
 </br>
 
 3. ##### **Create Custom Resource** ContainerStorageModule for powerflex.
-   
+
    <br>
 
     Use this command to create the **ContainerStorageModule Custom Resource**:
@@ -136,7 +136,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     oc create -f csm-vxflexos.yaml
     ```
 
-    <span><span/>{{< message text="19" >}}.   
+    <span><span/>{{< message text="19" >}}
 
     Example:
     <div style="margin-bottom:-1.8rem">
@@ -152,16 +152,16 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       version: {{< version-docs key="CSM_latestVersion" >}}
       driver:
         csiDriverType: "powerflex"
-    EOF 
-    ``` 
+    EOF
+    ```
     </div>
-    
+
     **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
 
-    **Note:** 
+    **Note:**
     - Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
     - Configure OIDC secret for Powerflex [Concepts](../../../../../concepts/csidriver/features/powerflex/#oidc-authentication-support)
-   
+
    </br>
     To set the parameters in CR. The table shows the main settings of the PowerFlex driver and their defaults.
   <ul>
@@ -209,10 +209,10 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
 </ul>
 
-<br> 
+<br>
 
 4. ##### **Create Storage class:**
-    
+
     <br>
 
     Use this command to create the **Storage Class**:
@@ -221,9 +221,9 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     oc apply -f sc-vxflexos.yaml
     ```
 
-    Example: 
+    Example:
     <div style="margin-bottom:-1.8rem">
-    
+
     ```yaml
     cat << EOF > sc-vxflexos.yaml
     apiVersion: storage.k8s.io/v1
@@ -252,17 +252,17 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
     ```terminal
     oc get storageclass vxflexos
-  
+
     NAME                    PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
     vxflexos (default)      csi-vxflexos.dellemc.com       Delete          Immediate           true                   3h8m
-    ``` 
+    ```
 
     </br>
 
 5. ##### **Create Volume Snapshot Class:**
 
     <br>
-    
+
     Use this command to create the **Volume Snapshot Class**:
 
 
@@ -279,7 +279,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
       name: vsclass-vxflexos
     driver: csi-vxflexos.dellemc.com
     deletionPolicy: Delete
-    EOF 
+    EOF
     ```
 
     Verify Volume Snapshot Class is created:
@@ -289,18 +289,18 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
     NAME                 DRIVER                     DELETIONPOLICY   AGE
     vsclass-vxflexos     csi-vxflexos.dellemc.com   Delete           3h9m
-    ``` 
+    ```
    </br>
 
 ### Configurations
 <br>
 
 
-{{< collapse id="2" title="Persistent Volume Claim " card="false" >}} 
-  
-  <br> 
-  <ol> 
-  <li> 
+{{< collapse id="2" title="Persistent Volume Claim " card="false" >}}
+
+  <br>
+  <ol>
+  <li>
 
   ##### **Create Persistent Volume Claim**
 
@@ -337,15 +337,15 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
   NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
   pvc-vxflexos                   Bound    ocp08-9f103c4fc6   8Gi        RWO            vxflexos       <unset>                 4s
-  ``` 
-  <br> 
+  ```
+  <br>
   </li>
   <li>
 
   ##### **Create Pod which uses Persistent Volume Claim with storage class**
 
   <br>
-  
+
   Use this command to create the **Pod**:
 
 
@@ -353,7 +353,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   oc apply -f pod-vxflexos.yaml
   ```
 
-  Example: 
+  Example:
   ```yaml
   cat << 'EOF' > pod-vxflexos.yaml
   apiVersion: v1
@@ -384,13 +384,13 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
   NAME                                        READY   STATUS    RESTARTS   AGE
   pod-vxflexos                                1/1     Running   0          109s
-  ``` 
-  <br> 
+  ```
+  <br>
   </li>
   <li>
 
   ##### **Delete Persistence Volume Claim**
-  
+
   </br>
 
   Use this command to  **Delete Persistence Volume Claim**:
@@ -407,20 +407,20 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
 
   ```
-  </br> 
-</li> 
+  </br>
+</li>
 </ol>
 
 {{< /collapse >}}
 
 
-{{< collapse id="4" title="Volume Snapshot" card="false" >}} 
-<br> 
+{{< collapse id="4" title="Volume Snapshot" card="false" >}}
+<br>
 
-<ol> 
+<ol>
 <li>
 
-##### **Create Volume Snapshot**  
+##### **Create Volume Snapshot**
 
 <br>
 
@@ -453,7 +453,7 @@ oc get volumesnapshot -n default
 
 NAME           READYTOUSE   SOURCEPVC       SOURCESNAPSHOTCONTENT   RESTORESIZE   SNAPSHOTCLASS      SNAPSHOTCONTENT                                    CREATIONTIME   AGE
 vs-vxflexos    true         pvc-vxflexos                            8Gi           vsclass-vxflexos   snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   2m57s          12s
-``` 
+```
 
 </br>
 
@@ -464,12 +464,12 @@ oc get volumesnapshotcontent
 
 NAME                                               READYTOUSE   RESTORESIZE   DELETIONPOLICY   DRIVER                     VOLUMESNAPSHOTCLASS   VOLUMESNAPSHOT   VOLUMESNAPSHOTNAMESPACE   AGE
 snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-vxflexos.dellemc.com   vsclass-vxflexos      vs-vxflexos      default                   23s
-```  
-<br> 
+```
+<br>
 </li>
 <li>
 
-##### **Restore Snapshot** 
+##### **Restore Snapshot**
 
 </br>
 
@@ -482,7 +482,7 @@ oc apply -f pvc-vxflexos-restore.yaml
 Example:
 
 ```yaml
-cat << 'EOF' > pvc-vxflexos-restore.yaml  
+cat << 'EOF' > pvc-vxflexos-restore.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -500,7 +500,7 @@ spec:
     requests:
       storage: 8Gi
   EOF
-``` 
+```
 
 Verify restore pvc is created:
 
@@ -511,7 +511,7 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 pvc-vxflexos            Bound    ocp08-095f7d3c52   8Gi        RWO            vxflexos      <unset>                 7m34s
 pvc-vxflexos-restore    Bound    ocp08-19874e9042   8Gi        RWO            vxflexos      <unset>                 4s
 ```
-</br> 
+</br>
 </li>
 <li>
 
@@ -536,11 +536,11 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
 
 
-{{< /collapse >}}  
+{{< /collapse >}}
 
 
 
-{{< /accordion >}}  
+{{< /accordion >}}
 
 <br>
 
@@ -552,11 +552,11 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
     {{< customcard  link1="./csm-modules/observability"   image="6" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="6" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="6" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="6" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
 
 
-{{< /accordion >}} 
+{{< /accordion >}}
