@@ -47,13 +47,15 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         certSecret: primary-cert
     ```
 
+     **Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field
+   
     After editing the file, **run this command to create a `secret.yaml`** called `powermax-creds`. If you are using a different namespace/secret name, just substitute those into the command.
 
     ```bash
       kubectl create secret generic powermax-creds --namespace powermax --from-file=config=secret.yaml
     ```
 
-3. **Create Powermax Array Configmap:**
+4. **Create Powermax Array Configmap:**
 
     **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
 
@@ -77,14 +79,14 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
     ```
 
-4. **Create the Reverse Proxy TLS Secret**
+5. **Create the Reverse Proxy TLS Secret**
 
     Referencing the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite#csi-powermax-reverse-proxy) prerequisite, create the `csirevproxy-tls-secret` secret.
     ```bash
     kubectl create secret -n powermax tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
     ```
 
-5. **Install Driver**
+6. **Install Driver**
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
     
