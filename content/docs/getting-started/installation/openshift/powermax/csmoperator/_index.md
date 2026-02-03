@@ -90,8 +90,6 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     EOF
     ```
 
-    For each entry in `managementServers`, if `skipCertificateValidation` is set to `true`, then the `certSecret` field must not be present in that same entry.
-
     Edit the file, then run the command to create the `powermax-creds`.
 
     ```bash
