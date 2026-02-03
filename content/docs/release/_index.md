@@ -22,6 +22,7 @@ Description: >
 > * <span><span/>{{< message text="14" >}}
 > * <span><span/>{{< message text="15" >}}
 > * <span><span/>{{< message text="16" >}}
+> * <span><span/>{{< message text="24" >}}
 
 ## Release Notes for v1.16.0
 
