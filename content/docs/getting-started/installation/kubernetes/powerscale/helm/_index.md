@@ -24,7 +24,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for PowerS
             {{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" Var="powerscale" hideIds="2">}}
 {{< /accordion >}}
 <br>
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 ## Prerequisites
 
@@ -108,10 +108,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
    **Note**: The 'clusterName' serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.
 
-4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.15.1/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
+4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-{{< version-docs key="driver_latestVersion" >}}/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.15.1/charts/csi-isilon/values.yaml) file in this repository.
+   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-{{< version-docs key="driver_latestVersion" >}}/charts/csi-isilon/values.yaml) file in this repository.
 
   <ul>
    {{< collapse id="2" title="Parameters">}}
@@ -165,7 +165,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    |<div style="text-align: left"> skipCertificateValidation |<div style="text-align: left"> A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
    |<div style="text-align: left"> **podmon**               |<div style="text-align: left"> [Podmon](../helm/csm-modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    |<div style="text-align: left"> enabled                  |<div style="text-align: left"> A boolean that enables/disables podmon feature. |  No      |   false   |
-    
+
    *NOTE:*
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
@@ -192,7 +192,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    |<div style="text-align: left"> endpointPort |<div style="text-align: left"> Specify the HTTPs port number of the PowerScale OneFS API server | No | default value from values.yaml |
    |<div style="text-align: left"> isiPath |<div style="text-align: left"> The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute. | No | default value from values.yaml |
    |<div style="text-align: left"> mountEndpoint |<div style="text-align: left"> Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if [CSM-Authorization](https://github.com/dell/karavi-authorization) is enabled. | No | - |
-{{< /collapse >}} 
+{{< /collapse >}}
 
 ### User privileges
 
