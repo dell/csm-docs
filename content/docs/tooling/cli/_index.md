@@ -100,7 +100,6 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 > **NOTES:**
 > - `--machineconfig` is applicable for both OpenShift and Kubernetes.
 > - Replication is not supported via CLI flags. [From-File](#from-file-parameters) must be used to install Replication.
-> - For Authorization, the installation process requires the storage array password for initial array discovery and validation. As a result, the Kubernetes Administrator cannot complete the installation without access to this credential. The tenant token will be used for all other requests to the array.
 
 {{< collapse id="dellctl-install-cli-params" title="From-File Parameters" card="false" >}}
 {{<table install-flags >}}
