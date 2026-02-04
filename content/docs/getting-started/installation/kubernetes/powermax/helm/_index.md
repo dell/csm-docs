@@ -71,6 +71,8 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
         certSecret: my-unishpere-cert-secret
     ```
 
+    **NOTE:** For each entry in `managementServers`, if `skipCertificateValidation` is set to `true`, then the `certSecret` field must not be present in that same entry.
+
 4. Create the `powermax-creds` Secret.
     ```bash
     kubectl create secret generic powermax-creds --namespace powermax --from-file=config=secret.yaml
