@@ -720,6 +720,8 @@ This method works with both `helm` and `operator` installations for PowerMax, au
 
 **Note:** ConfigMaps to specify credentials is deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. However, for backwards compatibility, you can still configure and use the PowerMax driver with the config map.
 
+**Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field
+
 ## Multiple Availability Zones
 
 Starting with CSM 1.14.0, the PowerMax CSI driver supports multiple availability zones (AZ) for block protocols. Availability Zones permit provisioning of volumes on storage arrays that are dedicated to a set of cluster nodes. Cluster nodes in an AZ will only access storage in the same AZ. Arrays in an AZ will not be used to provision storage to nodes which are not in the same AZ. This may be of benefit when stricter control of access to storage is needed or for disaster preparation use cases. Unlike the [topology support](#topology-support) mentioned earlier, multi AZ support restricts driver access to storage to only from arrays within the cluster node's AZ. No host registration nor storage connectivity setup is performed to arrays not in the node's AZ.
