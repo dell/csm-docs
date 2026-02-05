@@ -42,7 +42,7 @@ The CSI Drivers implement an interface between [CSI](https://kubernetes-csi.gith
 | <div style="text-align: left"> iSCSI         | Yes              | N/A              | N/A                | Yes              | Yes               |
 | <div style="text-align: left"> NVMeTCP       | Yes              | N/A              | Yes                 | Yes              | N/A               |
 | <div style="text-align: left"> NVMeFC        | Yes              | N/A              | N/A                | N/A              | N/A               |
-| <div style="text-align: left"> NFS           | Yes              | Yes              | N/A*               | Yes - SDNAS only (No eNAS) | Yes     |
+| <div style="text-align: left"> NFS           | Yes              | Yes              | N/A               | Yes - SDNAS only (No eNAS) | Yes     |
 | <div style="text-align: left"> Other         | N/A              | N/A              | ScaleIO protocol   | N/A              | N/A               |
 | <div style="text-align: left"> Supported FS  | ext3 / ext4 / xfs / NFS | NFS       | ext4 / xfs / NFS   | ext4 / xfs / NFS | ext4 / xfs / NFS  |
 | <div style="text-align: left"> Thin / Thick provisioning | Thin | N/A              | Thin               | Thin             | Thin/Thick        |
@@ -50,7 +50,6 @@ The CSI Drivers implement an interface between [CSI](https://kubernetes-csi.gith
 | <div style="text-align: left"> Auto RDM(vSphere)  | N/A         | N/A              | N/A                | Yes(over FC)     | N/A              |
 | <div style="text-align: left"> Internet Protocol| IPv4          | IPv4             | IPv4               | IPv4             | IPv4             |
 {{</table>}}
-> **Note:** * PowerFlex supports NFS until version 3.6
 
 > **Note:** Please note Dual-Stack or IPv6 is not supported.
 
