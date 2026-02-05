@@ -127,7 +127,6 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | storage.include-nas-servers                | NAS Servers to include. This is provided as an array. | "" | No |
 | storage.exclude-nas-servers               | NAS Servers to exclude. This is provided as an array. | "" | No |
 | storage.skip-certificate-validation        | Enable or disable validating the storage system certificate. | false | No |
-| storage.certificate-authority              | Path of the certificate authority file if not skipping storage certificate validation | "" | No |
 | storage.primary                            | Replicated storage classes will use this storage as the primary site. | false | No |
 | storage.secondary                          | Replicated storage classes will use this storage as the secondary site. | false | No |
 | **storage.storage-class**                  | This section configures the storage classes. It is provided as an array. | - | - |
@@ -466,7 +465,6 @@ storage:
     block-protocol: FC
     nfs-acls: 0777
     skip-certificate-validation: false
-    certificate-authority: /path/to/powerstore-ca.pem
     storage-class:
       - fsType: ext4
         reclaimPolicy: Delete
