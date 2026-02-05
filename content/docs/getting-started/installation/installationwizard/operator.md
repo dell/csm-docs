@@ -2,7 +2,7 @@
 title: "Installation Wizard Operator"
 linkTitle: "Installation Wizard Operator"
 description: Container Storage Modules Installation Wizard
-weight: 1 
+weight: 1
 toc_hide: true
 ---
 <br>
@@ -40,14 +40,14 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 - Look over all the fields in the generated `values.yaml` and fill in/adjust any as needed.
 
 > NOTE:
-> Starting from **CSM version 1.16**, users can utilize the **`version`** parameter (as defined in the `values.yaml` file) for both installation and upgrade. When using this parameter, there are two approaches:  
->  
-- **ConfigMap Approach:**  
-Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.  
+> Starting from **CSM version 1.16**, users can utilize the **`version`** parameter (as defined in the `values.yaml` file) for both installation and upgrade. When using this parameter, there are two approaches:
+>
+- **ConfigMap Approach:**
+Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.
 
->NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored. 
-   
-   
+>NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.
+
+
    **Sample ConfigMap Configuration:**
    ```yaml
    apiVersion: v1
@@ -91,9 +91,9 @@ Create a ConfigMap specifying the required images and apply it to the operator�
            role-service: quay.io/dell/container-storage-modules/csm-authorization-role:v2.4.0
            storage-service: quay.io/dell/container-storage-modules/csm-authorization-storage:v2.4.0
            opa: docker.io/openpolicyagent/opa:0.70.0
-           opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.3.0
+           opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.2.1
            authorization-controller: quay.io/dell/container-storage-modules/csm-authorization-controller:v2.4.0
-           redis: redis:8.2.0-alpine
+           redis: redis:8.4.0-alpine
            commander: docker.io/rediscommander/redis-commander:latest
        - version: v1.15.0
          images:
@@ -108,23 +108,23 @@ Create a ConfigMap specifying the required images and apply it to the operator�
            isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.14.0
            ....
    ```
- 
-- **Custom Registry Approach:**  
+
+- **Custom Registry Approach:**
 Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in the configuration. The custom registry approach allows you to redirect all container image pulls to a registry of your choice while optionally preserving the original image path structure. This is useful in environments where images must be sourced from a private or enterprise-approved registry. If users want to use custom registry they must mirror all required images into the custom registry prior to upgrade.
 
-   - **customRegistry** –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration.  
+   - **customRegistry** –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration.
 
    - **retainImageRegistryPath** – The retainImageRegistryPath field is a boolean flag that determines whether the original image path structure should be preserved when using a custom registry. This parameter is only evaluated when customRegistry is set.
 
-      - retainImageRegistryPath: **false**  
+      - retainImageRegistryPath: **false**
           When set to false, only the registry hostname is replaced. For example, with customRegistry=my.artifactory-registry.example, an image such as csi-vxflexos:v2.16.0 will be pulled from `my.artifactory-registry.example/csi-vxflexos:v2.16.0`.
-      - retainImageRegistryPath: **true**  
-          When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`. 
+      - retainImageRegistryPath: **true**
+          When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`.
 
 >NOTE: The custom registry value must be Fully Qualified Domain Name (FQDN) and must not include any nested path or folder structure.
->For example: my.artifactory-registry.example  
+>For example: my.artifactory-registry.example
 
-   **Sample CustomRegistry Configuration:**   
+   **Sample CustomRegistry Configuration:**
    ```yaml
    apiVersion: storage.dell.com/v1
    kind: ContainerStorageModule
@@ -146,11 +146,11 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
 >NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [CSI Driver](../../csmoperator#install-driver), [Resiliency](../../csmoperator/csm-modules/resiliency).
 
 {{< hide id="1" >}}
-- If Observability is checked in the wizard, refer to [Observability](../../csmoperator/csm-modules/observability) to export metrics to Prometheus and load the Grafana dashboards. 
+- If Observability is checked in the wizard, refer to [Observability](../../csmoperator/csm-modules/observability) to export metrics to Prometheus and load the Grafana dashboards.
 {{< /hide >}}
 
 {{< hide id="2" >}}
-- If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../csmoperator/csm-modules/authorizationv2-0) to install and configure the CSM Authorization Proxy Server. 
+- If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../csmoperator/csm-modules/authorizationv2-0) to install and configure the CSM Authorization Proxy Server.
 {{< /hide >}}
 
 {{< hide id="3">}}
