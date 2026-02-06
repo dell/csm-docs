@@ -11,45 +11,55 @@ CSM Installation Wizard Support Matrix [Click Here](../../../../../../supportmat
 
 <br>
 
+## Installation Wizard Overview
+
 The Container Storage Modules Installation Wizard is a webpage that helps you create a manifest file to install Dell CSI Drivers and CSM Modules. Users can enable or disable modules through the UI, and it generates a single manifest file, eliminating the need to download individual Helm charts for drivers and modules.
 
-## Generate Manifest File
+## Complete Installation Flow
 
-1. Open the [Installation Wizard](/csm-docs/docs/getting-started/installation/installationwizard/src/index.html).
-2. Select the `Installation Type` as `Helm`/`Operator`.
-3. Select the `Array`.
-4. Enter the `Image Repository`. The default value is `dellemc`.
-5. Select the `CSM Version`.
-6. Select the modules for installation. If there are module specific inputs, enter their values.
-7. If needed, modify the `Controller Pods Count`.
-8. If needed, select `Install Controller Pods on Control Plane` and/or `Install Node Pods on Control Plane`.
-9. Enter the `Namespace`. The default value is `csi-<array>`.
-10. Click on `Generate YAML`.
-11. A manifest file, `values.yaml` will be generated and downloaded.
-12. A section `Run the following commands to install` will be displayed.
-13. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file.
+### Step 1: Generate Manifest File
 
-## Installation Using Operator
+1. **Open the [Installation Wizard](/csm-docs/docs/getting-started/installation/installationwizard/src/index.html)**
+2. **Select Installation Type**: Choose `Helm` or `Operator`
+3. **Select Your Array**: PowerStore, PowerMax, PowerFlex, PowerScale, or Unity
+4. **Enter Image Repository**: Default is `dellemc` (or custom registry)
+5. **Select CSM Version**: Choose your desired version
+6. **Configure Modules**: Enable/disable modules and enter module-specific values
+7. **Set Pod Configuration**: Adjust controller pod count and placement if needed
+8. **Enter Namespace**: Default is `csi-<array>` (customize if desired)
+9. **Generate YAML**: Click to create your manifest file
+10. **Download values.yaml**: The wizard will download the generated file
+11. **Copy Installation Commands**: The wizard displays commands to run
 
-**Steps**
+### Step 2: Prerequisites Setup
 
->NOTE: Ensure that the csm-operator is installed and that the namespace, secrets, and `config.yaml` are created as prerequisites.
+> **IMPORTANT**: Before proceeding, ensure you have:
+- CSM Operator installed.
+- Make sure all required namespaces, secrets, and the `config.yaml` file (if needed) are set up prior to driver installation.
 
-- Copy the downloaded `values.yaml` file.
+### Step 3: Configure Your Manifest
 
-- Look over all the fields in the generated `values.yaml` and fill in/adjust any as needed.
+1. **Review the downloaded `values.yaml` file**
+2. **Fill in array-specific details** (endpoints, credentials, etc.)
+3. **Adjust configuration parameters** as needed for your environment
 
-> NOTE:
-> Starting from **CSM version 1.16**, users can utilize the **`version`** parameter (as defined in the `values.yaml` file) for both installation and upgrade. When using this parameter, there are two approaches:  
->  
-- **ConfigMap Approach:**  
-Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.  
+> Note: Starting from **CSM version 1.16**, users can utilize the `spec.version` parameter for automatic image management. **No ConfigMap or custom registry configuration needed**. Images are automatically selected based on your version choice. For more details click on Advanced Image Configuration Options.
 
->NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored. 
-   
-   
-   **Sample ConfigMap Configuration:**
-   ```yaml
+{{< collapse id="1" title="Advanced Image Configuration Options">}}
+
+### Advanced Configuration.
+
+Use these options only if you need to override standard behavior:
+
+#### ConfigMap Approach
+Create a `ConfigMap` that defines **all container images** for the CSM version being deployed, and apply it **before** creating the CR.
+
+**Important**: ConfigMap takes precedence over all other settings.
+
+**Certified OCP Example**: [OCP Example](https://github.com/dell/csm-operator/tree/main/samples/ocp/v1.11.0/ocp_configmap.yaml)
+
+**Example for upstream k8s and OCP environments.**:
+ ```yaml
    apiVersion: v1
    kind: ConfigMap
    metadata:
@@ -57,7 +67,7 @@ Create a ConfigMap specifying the required images and apply it to the operator�
     namespace: dell-csm-operator
    data:
      versions.yaml: |
-       - version: v1.16.0
+       - version: v1.16.1
          images:
            powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.16.0
            powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
@@ -106,61 +116,93 @@ Create a ConfigMap specifying the required images and apply it to the operator�
            powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.14.0
            powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.14.0
            isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.14.0
-           ....
+           ....  
+  ```
+
+#### Custom Registry Approach
+Add `customRegistry` and `retainImageRegistryPath` to your CR:
+
+**Configuration Parameters**
+- **customRegistry** – Override the default image registry by specifying your custom registry FQDN. When set, all images are pulled from your registry using their default image names and paths.
+- **retainImageRegistryPath** – Control whether to preserve the original image path structure when using a custom registry. This parameter only applies when `customRegistry` is set.
+
+**retainImageRegistryPath Options:**
+- **false** (Default) - Only the registry hostname is replaced  
+  *Example*: `customRegistry=my.artifactory-registry.example`  
+  Image `csi-vxflexos:v2.16.0` → `my.artifactory-registry.example/csi-vxflexos:v2.16.0`
+
+- **true** - Preserve the full original image path  
+  *Example*: `customRegistry=my.artifactory-registry.example`  
+  Image `csi-vxflexos:v2.16.0` → `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`
+
+**Important Requirements:**
+- Custom registry must be a **Fully Qualified Domain Name (FQDN)**
+- **No nested paths or folder structures** allowed
+- **Mirror all required images** to your custom registry before installation
+
+```yaml
+apiVersion: storage.dell.com/v1
+kind: ContainerStorageModule
+metadata:
+  name: powerflex
+  namespace: vxflexos
+spec:
+  version: v1.16.0
+  customRegistry: my.artifactory-registry.example
+  retainImageRegistryPath: false
+  driver:
+    # ... driver configuration
+```
+
+**Priority Order**: ConfigMap (highest) → Custom Registry → Default Images (`spec.version`)
+
+If neither configuration method is provided, the operator automatically defaults to the image set associated with the relevant drivers and modules. For offline environments, users must supply either a `ConfigMap` or a `customRegistry`.
+
+If upgrading via the version field fails, refer to the [Troubleshooting Guide](../../../../troubleshooting/csmoperator/). Should the problem continue, remove the existing resources and perform a fresh installation.
+
+{{< /collapse >}}
+
+### Step 4: Install CSM
+
+1. **Apply the manifest**:
+   ```bash
+   kubectl create -f values.yaml
    ```
- 
-- **Custom Registry Approach:**  
-Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in the configuration. The custom registry approach allows you to redirect all container image pulls to a registry of your choice while optionally preserving the original image path structure. This is useful in environments where images must be sourced from a private or enterprise-approved registry. If users want to use custom registry they must mirror all required images into the custom registry prior to upgrade.
 
-   - **customRegistry** –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration.  
-
-   - **retainImageRegistryPath** – The retainImageRegistryPath field is a boolean flag that determines whether the original image path structure should be preserved when using a custom registry. This parameter is only evaluated when customRegistry is set.
-
-      - retainImageRegistryPath: **false**  
-          When set to false, only the registry hostname is replaced. For example, with customRegistry=my.artifactory-registry.example, an image such as csi-vxflexos:v2.16.0 will be pulled from `my.artifactory-registry.example/csi-vxflexos:v2.16.0`.
-      - retainImageRegistryPath: **true**  
-          When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`. 
-
->NOTE: The custom registry value must be Fully Qualified Domain Name (FQDN) and must not include any nested path or folder structure.
->For example: my.artifactory-registry.example  
-
-   **Sample CustomRegistry Configuration:**   
-   ```yaml
-   apiVersion: storage.dell.com/v1
-   kind: ContainerStorageModule
-   metadata:
-     name: powerflex
-     namespace: vxflexos
-   spec:
-     version: v1.16.0
-     customRegistry: my.artifactory-registry.example
-     retainImageRegistryPath: false
-     # Add fields here
-     driver:
-       ....
+2. **Verify installation**:
+   ```bash
+   kubectl get csm -n <namespace>
+   kubectl get pods -n <namespace>
    ```
-**If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.**
-
->NOTE: If the upgrade using the version field fails, consult the [Operator Troubleshooting Guide](../../../../troubleshooting/csmoperator/). If the issue persists, uninstall the existing resources and proceed with a fresh installation.
-
->NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [CSI Driver](../../csmoperator#install-driver), [Resiliency](../../csmoperator/csm-modules/resiliency).
 
 {{< hide id="1" >}}
-- If Observability is checked in the wizard, refer to [Observability](../../csmoperator/csm-modules/observability) to export metrics to Prometheus and load the Grafana dashboards. 
+#### If Observability Module Enabled
+- [Configure Prometheus metrics export](../../csmoperator/csm-modules/observability)
+- [Load Grafana dashboards](../../csmoperator/csm-modules/observability)
 {{< /hide >}}
 
 {{< hide id="2" >}}
-- If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../csmoperator/csm-modules/authorizationv2-0) to install and configure the CSM Authorization Proxy Server. 
+#### If Authorization Module Enabled
+- [Install CSM Authorization Proxy Server](../../csmoperator/csm-modules/authorizationv2-0)
+- [Configure authentication policies](../../csmoperator/csm-modules/authorizationv2-0)
 {{< /hide >}}
 
-{{< hide id="3">}}
-- If Replication is checked in the wizard, refer to [Replication](../../csmoperator/csm-modules/replication) for the necessary prerequisites required for this module.
+{{< hide id="3" >}}
+#### If Replication Module Enabled
+- [Configure replication prerequisites](../../csmoperator/csm-modules/replication)
+- [Set up disaster recovery](../../csmoperator/csm-modules/replication)
 {{< /hide >}}
 
-- Install the Operator.
+## Quick Reference
 
-On your terminal, run this command:
+| Action | Command | Description |
+|--------|---------|-------------|
+| **Check CSM Status** | `kubectl get csm -n <namespace>` | Verify installation status |
+| **Check Pods** | `kubectl get pods -n <namespace>` | Verify all pods are running |
+| **Check Storage Classes** | `kubectl get sc` | Verify storage classes created |
+| **View Logs** | `kubectl logs -n <namespace> <pod-name>` | Troubleshoot issues |
 
-```bash
-    kubectl create -f values.yaml
-```
+## Need Help?
+
+- **[Troubleshooting Guide](../../../../troubleshooting/csmoperator/)** - Common issues and solutions
+- **[Support Matrix](../../../../supportmatrix/)** - Version compatibility
