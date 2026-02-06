@@ -24,13 +24,6 @@ Description: >
 > * <span><span/>{{< message text="16" >}}
 > * <span><span/>{{< message text="24" >}}
 
-## Release Notes for v1.16.1
-
-### Fixed Issues
-
-- CSM Operator - CSI sidecar images in the driver deployment are not correctly updated when a custom registry is configured and instead continue to pull the default upstream images.
-- CSM Operator - Offline bundle creation fails to retrieve and save the third‑party image docker.io/openpolicyagent/kube-mgmt:9.3.0 when running on OpenShift.
-
 ## Release Notes for v1.16.0
 
 ### New Features/Changes
