@@ -57,7 +57,7 @@ Create a ConfigMap specifying the required images and apply it to the operatorâ€
     namespace: dell-csm-operator
    data:
      versions.yaml: |
-       - version: v1.16.0
+       - version: {{< version-docs key="CSM_latestVersion" >}}
          images:
            powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.16.0
            powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
@@ -132,7 +132,7 @@ Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in
      name: powerflex
      namespace: vxflexos
    spec:
-     version: v1.16.0
+     version: {{< version-docs key="CSM_latestVersion" >}}
      customRegistry: my.artifactory-registry.example
      retainImageRegistryPath: false
      # Add fields here
