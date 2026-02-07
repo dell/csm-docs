@@ -25,9 +25,9 @@ Replication provides the following capabilities:
 | Capability                                                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | ------------------------------------------------------------------------------------------------------------------------------------- |:----------:| :--------: | :-------: |:--------:| :---: |
 | <div style="text-align: left">Replicate data using native storage array based replication                                             |    Yes    |    Yes      |    Yes     |   Yes    |  No   |
-| <div style="text-align: left">Asynchronous file volume replication                                                                    |    No     |    Yes      |    N/A*     |    No    |  No   |
+| <div style="text-align: left">Asynchronous file volume replication                                                                    |    Yes     |    Yes      |    N/A     |    No    |  No   |
 | <div style="text-align: left">Asynchronous block volume replication                                                                   |    Yes    |    N/A      |    Yes     |   Yes    |  No   |
-| <div style="text-align: left">Synchronous file volume replication                                                                     |    No     |    No       |    N/A*     |    No    |  No   |
+| <div style="text-align: left">Synchronous file volume replication                                                                     |    Yes     |    No       |    N/A     |    No    |  No   |
 | <div style="text-align: left">Synchronous block volume replication                                                                    |    Yes    |    N/A      |    N/A     |   Yes    |  No   |
 | <div style="text-align: left">Active-Active (Metro) block volume replication                                                          |    Yes    |    N/A      |    N/A     |   Yes    |  No   |
 | <div style="text-align: left">Active-Active (Metro) file volume replication                                                           |    No     |    N/A      |    N/A     |    No    |  No   |
@@ -40,8 +40,6 @@ Replication provides the following capabilities:
 | <div style="text-align: left">Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
 
 {{</table>}}
-
-> **Note:** * PowerFlex supports file Asynchronous/Synchronous volume replication until version 3.6
 
 > _**NOTE**_: To add or delete PVs on an existing SYNC Replication Group in
 > PowerStore, the user needs to pause, perform the operation and then resume the

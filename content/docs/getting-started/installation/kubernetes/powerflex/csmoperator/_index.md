@@ -63,7 +63,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    i. **Create a CR (Custom Resource)** for PowerFlex using the sample files provided
 
     <span></span>{{< message text="19" >}}
-  
+
     a. **Minimal Configuration:**
     ```yaml
     apiVersion: storage.dell.com/v1
@@ -83,7 +83,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
 
-    **Note:** 
+    **Note:**
       - Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
       - Configure OIDC secret for Powerflex [Concepts](../../../../../concepts/csidriver/features/powerflex/#oidc-authentication-support)
 
@@ -194,15 +194,6 @@ ii . **Run this command to create** a PowerFlex custom resource:
 
 **Note** :
    - Snapshotter and resizer sidecars are installed by default.
-
-
-
-<div id="configmap"></div>
-
-{{< collapse id="2" title="ConfigMap & Customer Registry">}}
-
-
-{{< /collapse >}}
 
 {{< /accordion >}}
 
