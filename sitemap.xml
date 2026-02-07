@@ -1883,6 +1883,9 @@
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/kubernetes/unityxt/helm/</loc>
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/v2/getting-started/installation/helm/modules/observability/</loc>
+    <lastmod>2025-09-18T14:50:08-04:00</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/v2/getting-started/installation/helm/modules/observability/deployment/</loc>
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
   </url><url>
@@ -2055,9 +2058,6 @@
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/upgrade/kubernetes/powerstore/helm/csm-modules/observability/</loc>
-    <lastmod>2025-09-18T14:50:08-04:00</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/v2/getting-started/installation/helm/modules/observability/</loc>
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/getting-started/installation/kubernetes/powerflex/csmoperator/csm-modules/observability/</loc>
