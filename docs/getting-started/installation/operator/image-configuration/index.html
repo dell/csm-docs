@@ -9,31 +9,27 @@
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-32x32.png" sizes="32x32">
 <title>ConfigMap And CustomRegistry Configuration | </title>
-<meta name="description" content="Starting from CSM version 1.16, users can utilize the spec.version parameter (as defined in the sample.yaml file) for both installation and upgrade. When using this parameter, there are two approaches:
-ConfigMap Approach:
-Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap. NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.">
+<meta name="description" content="NOTE: Starting from CSM version 1.16, users can utilize the spec.version parameter for automatic image management. No ConfigMap or custom registry configuration needed.
+Advanced Configuration Use these options only if you need to override standard behavior:">
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/getting-started/installation/operator/image-configuration/">
   <meta property="og:site_name" content="Dell Technologies">
   <meta property="og:title" content="ConfigMap And CustomRegistry Configuration">
-  <meta property="og:description" content="Starting from CSM version 1.16, users can utilize the spec.version parameter (as defined in the sample.yaml file) for both installation and upgrade. When using this parameter, there are two approaches:
-ConfigMap Approach:
-Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap. NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.">
+  <meta property="og:description" content="NOTE: Starting from CSM version 1.16, users can utilize the spec.version parameter for automatic image management. No ConfigMap or custom registry configuration needed.
+Advanced Configuration Use these options only if you need to override standard behavior:">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2026-01-23T21:26:33+05:30">
+    <meta property="article:modified_time" content="2026-02-07T14:36:01-05:00">
 
   <meta itemprop="name" content="ConfigMap And CustomRegistry Configuration">
-  <meta itemprop="description" content="Starting from CSM version 1.16, users can utilize the spec.version parameter (as defined in the sample.yaml file) for both installation and upgrade. When using this parameter, there are two approaches:
-ConfigMap Approach:
-Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap. NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.">
-  <meta itemprop="dateModified" content="2026-01-23T21:26:33+05:30">
-  <meta itemprop="wordCount" content="522">
+  <meta itemprop="description" content="NOTE: Starting from CSM version 1.16, users can utilize the spec.version parameter for automatic image management. No ConfigMap or custom registry configuration needed.
+Advanced Configuration Use these options only if you need to override standard behavior:">
+  <meta itemprop="dateModified" content="2026-02-07T14:36:01-05:00">
+  <meta itemprop="wordCount" content="408">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="ConfigMap And CustomRegistry Configuration">
-  <meta name="twitter:description" content="Starting from CSM version 1.16, users can utilize the spec.version parameter (as defined in the sample.yaml file) for both installation and upgrade. When using this parameter, there are two approaches:
-ConfigMap Approach:
-Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap. NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.">
+  <meta name="twitter:description" content="NOTE: Starting from CSM version 1.16, users can utilize the spec.version parameter for automatic image management. No ConfigMap or custom registry configuration needed.
+Advanced Configuration Use these options only if you need to override standard behavior:">
 <link rel="preload" href="/csm-docs/scss/main.min.227c85af7ab92878f8483de5241e5ddc55b1b9bb4ebcb3ec9ca6409b9da7751e.css" as="style" integrity="sha256-InyFr3q5KHj4SD3lJB5d3FWxubtOvLPsnKZAm52ndR4=" crossorigin="anonymous">
 <link href="/csm-docs/scss/main.min.227c85af7ab92878f8483de5241e5ddc55b1b9bb4ebcb3ec9ca6409b9da7751e.css" rel="stylesheet" integrity="sha256-InyFr3q5KHj4SD3lJB5d3FWxubtOvLPsnKZAm52ndR4=" crossorigin="anonymous">
 <script
@@ -82,10 +78,10 @@ Create a ConfigMap specifying the required images and apply it to the operator�
       
     
     
-    1.16.0
+    1.16.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -212,7 +208,7 @@ Create a ConfigMap specifying the required images and apply it to the operator�
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.783dbcabc066a4833104012709979aaf.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1137,6 +1133,18 @@ Create a ConfigMap specifying the required images and apply it to the operator�
       </a>
     </label>
     
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
@@ -1854,6 +1862,18 @@ Create a ConfigMap specifying the required images and apply it to the operator�
       <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0">
         
         <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
       </a>
     </label>
     
@@ -4035,108 +4055,125 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 </header>
 	<blockquote>
-<p>Starting from <strong>CSM version 1.16</strong>, users can utilize the <strong><code>spec.version</code></strong> parameter (as defined in the <code>sample.yaml</code> file) for both installation and upgrade. When using this parameter, there are two approaches:</p></blockquote>
+<p><strong>NOTE</strong>: Starting from <strong>CSM version 1.16</strong>, users can utilize the <code>spec.version</code> parameter for automatic image management. <strong>No ConfigMap or custom registry configuration needed</strong>.</p></blockquote>
+<h3 id="advanced-configuration">
+Advanced Configuration <a class="header-link"  href="#advanced-configuration" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><p>Use these options only if you need to override standard behavior:</p>
+<h4 id="configmap-approach">
+ConfigMap Approach <a class="header-link"  href="#configmap-approach" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h4><p>Create a <code>ConfigMap</code> that defines <strong>all container images</strong> for the CSM version being deployed, and apply it <strong>before</strong> creating the CR.</p>
+<p><strong>Important</strong>: ConfigMap takes precedence over all other settings.</p>
+<p><strong>Certified OCP Example</strong>: <a href="https://github.com/dell/csm-operator/tree/main/samples/ocp/v1.11.0/ocp_configmap.yaml">OCP Example</a></p>
+<p><strong>Example for upstream k8s and OCP environments.</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ConfigMap</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csm-images</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">dell-csm-operator</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">versions.yaml</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      - version: v1.16.1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        images:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powermax: quay.io/dell/container-storage-modules/csi-powermax:v2.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          karavi-authorization-proxy: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          podmon: quay.io/dell/container-storage-modules/podmon:v1.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          otel-collector: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.143.1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          nginx-proxy : quay.io/nginx/nginx-unprivileged:1.27
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          metrics-powermax: quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.9.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          metrics-powerstore: quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          metrics-powerflex: quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          metrics-powerscale: quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.11.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          dell-csi-replicator: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          dell-replication-controller-manager: quay.io/dell/container-storage-modules/dell-replication-controller:v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          csipowermax-reverseproxy: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          sdc: quay.io/dell/storage/powerflex/sdc:5.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          sdc-monitor: quay.io/dell/storage/powerflex/sdc:5.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          provisioner: registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          attacher: registry.k8s.io/sig-storage/csi-attacher:v4.10.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          resizer: registry.k8s.io/sig-storage/csi-resizer:v2.0.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v8.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          csi-metadata-retriever: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.13.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          external-health-monitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          cert-manager-cainjector: quay.io/jetstack/cert-manager-cainjector:v1.11.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          cert-manager-controller: quay.io/jetstack/cert-manager-controller:v1.11.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          cert-manager-webhook: quay.io/jetstack/cert-manager-webhook:v1.11.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          proxy-service: quay.io/dell/container-storage-modules/csm-authorization-proxy:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          tenant-service: quay.io/dell/container-storage-modules/csm-authorization-tenant:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          role-service: quay.io/dell/container-storage-modules/csm-authorization-role:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          storage-service: quay.io/dell/container-storage-modules/csm-authorization-storage:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          opa: docker.io/openpolicyagent/opa:0.70.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.3.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          authorization-controller: quay.io/dell/container-storage-modules/csm-authorization-controller:v2.4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          redis: redis:8.2.0-alpine
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          commander: docker.io/rediscommander/redis-commander:latest
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      - version: v1.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        images:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          ....
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      - version: v1.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        images:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.14.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          ....  </span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><h4 id="custom-registry-approach">
+Custom Registry Approach <a class="header-link"  href="#custom-registry-approach" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h4><p>Add <code>customRegistry</code> and <code>retainImageRegistryPath</code> to your CR:</p>
+<p><strong>Configuration Parameters</strong></p>
 <ul>
-<li><strong>ConfigMap Approach:</strong><br>
-Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.</li>
+<li><strong>customRegistry</strong> – Override the default image registry by specifying your custom registry FQDN. When set, all images are pulled from your registry using their default image names and paths.</li>
+<li><strong>retainImageRegistryPath</strong> – Control whether to preserve the original image path structure when using a custom registry. This parameter only applies when <code>customRegistry</code> is set.</li>
 </ul>
-<blockquote>
-<p>NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.</p></blockquote>
-<p><strong>Sample ConfigMap Configuration:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ConfigMap</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csm-images</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">dell-csm-operator</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">versions.yaml</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    - version: v1.16.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      images:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.16.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.16.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powermax: quay.io/dell/container-storage-modules/csi-powermax:v2.16.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        karavi-authorization-proxy: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.4.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        podmon: quay.io/dell/container-storage-modules/podmon:v1.15.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        otel-collector: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.143.1
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        nginx-proxy : quay.io/nginx/nginx-unprivileged:1.27
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        metrics-powermax: quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.9.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        metrics-powerstore: quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.14.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        metrics-powerflex: quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.14.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        metrics-powerscale: quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.11.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        dell-csi-replicator: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.14.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        dell-replication-controller-manager: quay.io/dell/container-storage-modules/dell-replication-controller:v1.14.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        csipowermax-reverseproxy: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        sdc: quay.io/dell/storage/powerflex/sdc:5.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        sdc-monitor: quay.io/dell/storage/powerflex/sdc:5.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        provisioner: registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        attacher: registry.k8s.io/sig-storage/csi-attacher:v4.10.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        resizer: registry.k8s.io/sig-storage/csi-resizer:v2.0.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v8.4.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        csi-metadata-retriever: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.13.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        external-health-monitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.16.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        cert-manager-cainjector: quay.io/jetstack/cert-manager-cainjector:v1.11.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        cert-manager-controller: quay.io/jetstack/cert-manager-controller:v1.11.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        cert-manager-webhook: quay.io/jetstack/cert-manager-webhook:v1.11.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        proxy-service: quay.io/dell/container-storage-modules/csm-authorization-proxy:v2.4.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        tenant-service: quay.io/dell/container-storage-modules/csm-authorization-tenant:v2.4.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        role-service: quay.io/dell/container-storage-modules/csm-authorization-role:v2.4.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        storage-service: quay.io/dell/container-storage-modules/csm-authorization-storage:v2.4.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        opa: docker.io/openpolicyagent/opa:0.70.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.3.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        authorization-controller: quay.io/dell/container-storage-modules/csm-authorization-controller:v2.4.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        redis: redis:8.2.0-alpine
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        commander: docker.io/rediscommander/redis-commander:latest
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    - version: v1.15.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      images:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.15.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.15.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.15.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        ....
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    - version: v1.14.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      images:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.14.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.14.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.14.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        ....</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><ul>
-<li>
-<p><strong>Custom Registry Approach:</strong><br>
-Alternatively, you can specify <code>customRegistry</code> and <code>retainImageRegistryPath</code> in the configuration. The custom registry approach allows you to redirect all container image pulls to a registry of your choice while optionally preserving the original image path structure. This is useful in environments where images must be sourced from a private or enterprise-approved registry. If users want to use custom registry they must mirror all required images into the custom registry prior to upgrade.</p>
+<p><strong>retainImageRegistryPath Options:</strong></p>
 <ul>
 <li>
-<p><strong>customRegistry</strong> –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration.</p>
+<p><strong>false</strong> (Default) - Only the registry hostname is replaced<br>
+<em>Example</em>: <code>customRegistry=my.artifactory-registry.example</code><br>
+Image <code>csi-vxflexos:v2.16.0</code> → <code>my.artifactory-registry.example/csi-vxflexos:v2.16.0</code></p>
 </li>
 <li>
-<p><strong>retainImageRegistryPath</strong> – The retainImageRegistryPath field is a boolean flag that determines whether the original image path structure should be preserved when using a custom registry. This parameter is only evaluated when customRegistry is set.</p>
+<p><strong>true</strong> - Preserve the full original image path<br>
+<em>Example</em>: <code>customRegistry=my.artifactory-registry.example</code><br>
+Image <code>csi-vxflexos:v2.16.0</code> → <code>my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0</code></p>
+</li>
+</ul>
+<p><strong>Important Requirements:</strong></p>
 <ul>
-<li>retainImageRegistryPath: <strong>false</strong><br>
-When set to false, only the registry hostname is replaced. For example, with customRegistry=my.artifactory-registry.example, an image such as csi-vxflexos:v2.16.0 will be pulled from <code>my.artifactory-registry.example/csi-vxflexos:v2.16.0</code>.</li>
-<li>retainImageRegistryPath: <strong>true</strong><br>
-When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from <code>my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0</code>.</li>
+<li>Custom registry must be a <strong>Fully Qualified Domain Name (FQDN)</strong></li>
+<li><strong>No nested paths or folder structures</strong> allowed</li>
+<li><strong>Mirror all required images</strong> to your custom registry before installation</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>NOTE: The custom registry value must be Fully Qualified Domain Name (FQDN) and must not include any nested path or folder structure.
-For example: my.artifactory-registry.example</p></blockquote>
-<p><strong>Sample CustomRegistry Configuration:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">storage.dell.com/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ContainerStorageModule</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerflex</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1.16.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1.16.1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">customRegistry</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">my.artifactory-registry.example</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">retainImageRegistryPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Add fields here</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">....</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><p><strong>If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.</strong></p>
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># ... driver configuration</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p><strong>Priority Order</strong>: ConfigMap (highest) → Custom Registry → Default Images (<code>spec.version</code>)</p>
+<p>If neither configuration method is provided, the operator automatically defaults to the image set associated with the relevant drivers and modules. For offline environments, users must supply either a <code>ConfigMap</code> or a <code>customRegistry</code>.</p>
 <blockquote>
 <p>NOTE: If the upgrade using the version field fails, consult the <a href="/csm-docs/docs/getting-started/installation/troubleshooting/csmoperator/">Operator Troubleshooting Guide</a>. If the issue persists, uninstall the existing resources and proceed with a fresh installation.</p></blockquote>
  
@@ -5725,232 +5762,6 @@ For example: my.artifactory-registry.example</p></blockquote>
 
             
         
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
              
                 
     
@@ -6648,6 +6459,252 @@ For example: my.artifactory-registry.example</p></blockquote>
 
         
         
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
         
 
         
@@ -6814,6 +6871,26 @@ For example: my.artifactory-registry.example</p></blockquote>
         
         
 
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
         
              
                 
