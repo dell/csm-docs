@@ -5,11 +5,6 @@ description: Container Storage Modules Installation Wizard
 weight: 1 
 toc_hide: true
 ---
-<br>
-
-CSM Installation Wizard Support Matrix [Click Here](../../../../../../supportmatrix/#installation-wizard-compatibility-matrix)
-
-<br>
 
 ## Installation Wizard Overview
 
@@ -205,4 +200,4 @@ If upgrading via the version field fails, refer to the [Troubleshooting Guide](.
 ## Need Help?
 
 - **[Troubleshooting Guide](../../../../troubleshooting/csmoperator/)** - Common issues and solutions
-- **[Support Matrix](../../../../supportmatrix/)** - Version compatibility
+- **[Support Matrix](../../../../docs/supportmatrix/#installation-wizard-compatibility)** - Version compatibility
