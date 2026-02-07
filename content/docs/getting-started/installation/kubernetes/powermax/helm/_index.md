@@ -70,6 +70,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
         skipCertificateValidation: false
         certSecret: my-unishpere-cert-secret
     ```
+     **Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field
 
     **NOTE:** For each entry in `managementServers`, if `skipCertificateValidation` is set to `true`, then the `certSecret` field must not be present in that same entry.
 
