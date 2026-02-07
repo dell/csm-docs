@@ -67,7 +67,7 @@ Create a `ConfigMap` that defines **all container images** for the CSM version b
     namespace: dell-csm-operator
    data:
      versions.yaml: |
-       - version: v1.16.1
+       - version: {{< version-docs key="CSM_latestVersion" >}}
          images:
            powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.16.0
            powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
@@ -129,11 +129,11 @@ Add `customRegistry` and `retainImageRegistryPath` to your CR:
 **retainImageRegistryPath Options:**
 - **false** (Default) - Only the registry hostname is replaced  
   *Example*: `customRegistry=my.artifactory-registry.example`  
-  Image `csi-vxflexos:v2.16.0` → `my.artifactory-registry.example/csi-vxflexos:v2.16.0`
+  Image `csi-vxflexos:v2.16.1` → `my.artifactory-registry.example/csi-vxflexos:v2.16.1`
 
 - **true** - Preserve the full original image path  
   *Example*: `customRegistry=my.artifactory-registry.example`  
-  Image `csi-vxflexos:v2.16.0` → `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`
+  Image `csi-vxflexos:v2.16.1` → `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.1`
 
 **Important Requirements:**
 - Custom registry must be a **Fully Qualified Domain Name (FQDN)**
@@ -147,7 +147,7 @@ metadata:
   name: powerflex
   namespace: vxflexos
 spec:
-  version: v1.16.0
+  version: {{< version-docs key="CSM_latestVersion" >}}
   customRegistry: my.artifactory-registry.example
   retainImageRegistryPath: false
   driver:
