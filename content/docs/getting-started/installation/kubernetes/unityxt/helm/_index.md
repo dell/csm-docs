@@ -25,7 +25,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 ## Install Driver
 
@@ -53,7 +53,7 @@ Procedure
 2. Get the required values.yaml using the command below:
 
 ```bash
-cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.16.0/charts/csi-unity/values.yaml
+cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-{{< version-docs key="driver_latestVersion" >}}/charts/csi-unity/values.yaml
 ```
 
 3. Edit `values.yaml` to set the following parameters for your installation:

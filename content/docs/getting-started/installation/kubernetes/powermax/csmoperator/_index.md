@@ -1,6 +1,6 @@
 ---
 title: Installation Guide
-linkTitle: Operator 
+linkTitle: Operator
 weight: 2
 no_list: true
 description: >
@@ -18,11 +18,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 
 <br>
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 ### Install Driver
 
-1. **Create Namespace:** 
+1. **Create Namespace:**
     ```bash
     kubectl create namespace powermax
     ```
@@ -46,6 +46,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         skipCertificateValidation: false
         certSecret: primary-cert
     ```
+
+    **NOTE:** For each entry in `managementServers`, if `skipCertificateValidation` is set to `true`, then the `certSecret` field must not be present in that same entry.
 
     After editing the file, **run this command to create a `secret.yaml`** called `powermax-creds`. If you are using a different namespace/secret name, just substitute those into the command.
 
@@ -87,7 +89,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 5. **Install Driver**
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
-    
+
     <span></span>{{< message text="19" >}}
 
     a. **Default Configuration:** Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
@@ -98,7 +100,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
-<ul>   
+<ul>
 {{< collapse id="1" title="Parameters">}}
    | Parameter                                       | Description                                                                                                                                                                                                                                                              | Required | Default                        |
    |-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------|
@@ -142,7 +144,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     ```bash
     kubectl get all -n powermax
     ```
-</ul> 
+</ul>
 
 6. **Verify the installation** as mentioned below
 
@@ -152,8 +154,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
-7. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
-   
+7. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files.
+
 ## Other features to enable
 ### Dynamic Logging Configuration
 
@@ -239,7 +241,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
            rules:
              - "*:*"
    ```
-<ul>  
+<ul>
    {{< collapse id="2" title="Parameters">}}
    | Parameter | Description  |
    |-----------|--------------|
@@ -248,7 +250,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
    | allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
    | deniedConnections | List of node, array and protocol info for user denied configuration |
    | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
-   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair | 
+   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
    {{< /collapse >}}
 </ul>
 <br>
@@ -266,15 +268,15 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 <br>
 
-{{< accordion id="Three" title="Modules"  >}}  
+{{< accordion id="Three" title="Modules"  >}}
 
- <br>  
+ <br>
 
 {{< markdownify >}}
 The driver and modules versions installable with the Container Storage Modules Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 
-<br>        
+<br>
 
 {{< cardcontainer >}}
 
@@ -282,7 +284,7 @@ The driver and modules versions installable with the Container Storage Modules O
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 

@@ -23,37 +23,37 @@ description: >
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 </br>
 
 ### Operator Installation
 
 </br>
- 
-1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-2. Click **Dell Container Storage Modules** tile 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.**
+
+2. Click **Dell Container Storage Modules** tile
 
 3. Keep all default settings and click **Install**.
 
 </br>
 <ol>
 
-Verify that the operator is deployed 
-```terminal 
+Verify that the operator is deployed
+```terminal
 oc get operators
 
 NAME                                                          AGE
 dell-csm-operator-certified.openshift-operators               2d21h
-```  
+```
 
 ```terminal
 oc get pod -n openshift-operators
 
 NAME                                                       READY   STATUS       RESTARTS      AGE
 dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
-``` 
+```
 
 
 </ol>
@@ -89,6 +89,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
         certSecret: primary-cert
     EOF
     ```
+    **NOTE:** For each entry in `managementServers`, if `skipCertificateValidation` is set to `true`, then the `certSecret` field must not be present in that same entry.
 
     Edit the file, then run the command to create the `powermax-creds`.
 
@@ -115,7 +116,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
 
 3. **Create Powermax Array Configmap:**
-  
+
     **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
 
     Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
@@ -151,40 +152,40 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
     [OR]
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file. 
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
     .
 
-    <span><span/>{{< message text="19" >}}.
+    <span><span/>{{< message text="19" >}}
 
     c. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
 <ul>
 {{< collapse id="1" title="Parameters">}}
-   | Parameter                                       | Description                                                                                                                                                                                                                                                              | Required | Default                        |
-   |-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------|
-   | dnsPolicy                                       | Determines the DNS Policy of the Node service                                                                                                                                                                                                                            | Yes      | ClusterFirstWithHostNet        |
-   | replicas                                        | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.                                          | Yes      | 2                              |
-   | fsGroupPolicy                                   | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field.                                                                                                                                                                  | No       | "ReadWriteOnceWithFSType"      |
-   | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                          |          |                                |
-   | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | No      | CSM                            |
-   | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                               | Yes      | csipowermax-reverseproxy       |
-   | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When node name template is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
-   | X_CSI_IG_NODENAME_TEMPLATE                      | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.                                              | No       | -                              |
-   | X_CSI_POWERMAX_DRIVER_NAME                      | Set custom CSI driver name. For more details on this feature see the related [documentation](../../../../../concepts/csidriver/features/powermax/#custom-driver-name)                                                                                                                             | No       | -                              |
-   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No       | false                          |
-   | X_CSI_VSPHERE_ENABLED                           | Enable VMware virtualized environment support via RDM                                                                                                                                                                                                                    | No       | false                          |
-   | X_CSI_VSPHERE_PORTGROUP                         | Existing portGroup that driver will use for vSphere                                                                                                                                                                                                                      | Yes      | ""                             |
-   | X_CSI_VSPHERE_HOSTNAME                          | Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere                                                                                                                                                                     | Yes      | ""                             |
-   | X_CSI_VCenter_HOST                              | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                | Yes      | ""                             |
-   | X_CSI_REVPROXY_USE_SECRET | Define whether or not to use the new secret format for the PowerMax and the Reverse Proxy. The secret format will be determined by the contents of the secret specified in the `authSecret`. **Note:** If this parameter remains `false`, PowerMax and the reverse proxy will use the configMap approach. | Yes      | "false" |
-   | X_CSI_DYNAMIC_SG_ENABLED | Enable/Disable creation of multiple storage groups with a single storage class. When enabled, driver dynamically creates multiple storage groups when the existing storage groups reach the maximum volume limit. | Yes      | "false" |
-   | ***Node parameters***                           |                                                                                                                                                                                                                                                                          |          |                                |
-   | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP                | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../../../concepts/csidriver/features/powermax/#iscsi-chap)                                                                                                                               | No       | false                          |
-   | X_CSI_TOPOLOGY_CONTROL_ENABLED                  | Enable/Disable topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.                                                                                                      | No       | false                          |
-   | ***CSI Reverseproxy Module***                   |                                                                                                                                                                                                                                                                          |          |                                |
-   | X_CSI_REVPROXY_TLS_SECRET                       | Name of TLS secret defined in config map                                                                                                                                                                                                                                 | Yes      | "csirevproxy-tls-secret"       |
-   | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
-   | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
+   | Parameter                                       | Description                                                                                                                                                                                                                                                                                               | Required | Default                        |
+   | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
+   | dnsPolicy                                       | Determines the DNS Policy of the Node service                                                                                                                                                                                                                                                             | Yes      | ClusterFirstWithHostNet        |
+   | replicas                                        | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.                                                                           | Yes      | 2                              |
+   | fsGroupPolicy                                   | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field.                                                                                                                             | No       | "ReadWriteOnceWithFSType"      |
+   | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                                                           |          |                                |
+   | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                                                          | No       | CSM                            |
+   | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                                                                | Yes      | csipowermax-reverseproxy       |
+   | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When node name template is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                                                 | No       | false                          |
+   | X_CSI_IG_NODENAME_TEMPLATE                      | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.                                                                               | No       | -                              |
+   | X_CSI_POWERMAX_DRIVER_NAME                      | Set custom CSI driver name. For more details on this feature see the related [documentation](../../../../../concepts/csidriver/features/powermax/#custom-driver-name)                                                                                                                                     | No       | -                              |
+   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar                                  | No       | false                          |
+   | X_CSI_VSPHERE_ENABLED                           | Enable VMware virtualized environment support via RDM                                                                                                                                                                                                                                                     | No       | false                          |
+   | X_CSI_VSPHERE_PORTGROUP                         | Existing portGroup that driver will use for vSphere                                                                                                                                                                                                                                                       | Yes      | ""                             |
+   | X_CSI_VSPHERE_HOSTNAME                          | Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere                                                                                                                                                                                                      | Yes      | ""                             |
+   | X_CSI_VCenter_HOST                              | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                                                 | Yes      | ""                             |
+   | X_CSI_REVPROXY_USE_SECRET                       | Define whether or not to use the new secret format for the PowerMax and the Reverse Proxy. The secret format will be determined by the contents of the secret specified in the `authSecret`. **Note:** If this parameter remains `false`, PowerMax and the reverse proxy will use the configMap approach. | Yes      | "false"                        |
+   | X_CSI_DYNAMIC_SG_ENABLED                        | Enable/Disable creation of multiple storage groups with a single storage class. When enabled, driver dynamically creates multiple storage groups when the existing storage groups reach the maximum volume limit.                                                                                         | Yes      | "false"                        |
+   | ***Node parameters***                           |                                                                                                                                                                                                                                                                                                           |          |                                |
+   | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP                | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../../../concepts/csidriver/features/powermax/#iscsi-chap)                                                                                                                                       | No       | false                          |
+   | X_CSI_TOPOLOGY_CONTROL_ENABLED                  | Enable/Disable topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.                                                                                                                                      | No       | false                          |
+   | ***CSI Reverseproxy Module***                   |                                                                                                                                                                                                                                                                                                           |          |                                |
+   | X_CSI_REVPROXY_TLS_SECRET                       | Name of TLS secret defined in config map                                                                                                                                                                                                                                                                  | Yes      | "csirevproxy-tls-secret"       |
+   | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                                                       | Yes      | "2222"                         |
+   | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                                                            | Yes      | "powermax-reverseproxy-config" |
   {{< /collapse >}}
 
   i. Confirm that value of `X_CSI_REVPROXY_USE_SECRET` is set to `true`.
@@ -202,7 +203,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
   oc get csm powermax -n powermax
 
   NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-  powermax    3h             powermax        {{< version-docs key="PMax_latestVersion" >}}         Succeeded      
+  powermax    3h             powermax        {{< version-docs key="PMax_latestVersion" >}}         Succeeded
   ```
 
   Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
@@ -298,14 +299,14 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
      ```
   <ul>
    {{< collapse id="2" title="Parameters">}}
-   | Parameter | Description  |
-   |-----------|--------------|
-   | allowedConnections | List of node, array and protocol info for user allowed configuration |
-   | allowedConnections.nodeName | Name of the node on which user wants to apply given rules |
-   | allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
-   | deniedConnections | List of node, array and protocol info for user denied configuration |
-   | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
-   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+   | Parameter                   | Description                                                          |
+   | --------------------------- | -------------------------------------------------------------------- |
+   | allowedConnections          | List of node, array and protocol info for user allowed configuration |
+   | allowedConnections.nodeName | Name of the node on which user wants to apply given rules            |
+   | allowedConnections.rules    | List of StorageArrayID:TransportProtocol pair                        |
+   | deniedConnections           | List of node, array and protocol info for user denied configuration  |
+   | deniedConnections.nodeName  | Name of the node on which user wants to apply given rules            |
+   | deniedConnections.rules     | List of StorageArrayID:TransportProtocol pair                        |
    {{< /collapse >}}
   </ul>
 <br>
@@ -318,13 +319,13 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 
 
-{{< /accordion >}}   
+{{< /accordion >}}
 
 <br>
 
 {{< accordion id="Three" title="Modules" >}}
 
-<br>   
+<br>
 
 {{< cardcontainer >}}
 
@@ -334,4 +335,4 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency" >}}
 
 {{< /cardcontainer >}}
-{{< /accordion >}}  
+{{< /accordion >}}
