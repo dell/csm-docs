@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2026-01-20T14:03:47-05:00">
+    <meta property="article:modified_time" content="2026-02-07T14:36:01-05:00">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Code features for PowerMax Driver">
-  <meta itemprop="dateModified" content="2026-01-20T14:03:47-05:00">
-  <meta itemprop="wordCount" content="5924">
+  <meta itemprop="dateModified" content="2026-02-07T14:36:01-05:00">
+  <meta itemprop="wordCount" content="5948">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Code features for PowerMax Driver">
@@ -74,10 +74,10 @@
       
     
     
-    1.16.0
+    1.16.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -204,7 +204,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.783dbcabc066a4833104012709979aaf.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1129,6 +1129,18 @@
       </a>
     </label>
     
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
@@ -1846,6 +1858,18 @@
       <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0">
         
         <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
       </a>
     </label>
     
@@ -4750,6 +4774,7 @@ Mount Credentials Support <a class="header-link"  href="#mount-credentials-suppo
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">certSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-cert</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>This method works with both <code>helm</code> and <code>operator</code> installations for PowerMax, automatically mounting the secret for use by the PowerMax driver/node and the Reverse Proxy.</p>
 <p><strong>Note:</strong> ConfigMaps to specify credentials is deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. However, for backwards compatibility, you can still configure and use the PowerMax driver with the config map.</p>
+<p><strong>NOTE:</strong> For each entry in <code>managementServers</code>, if <code>skipCertificateValidation</code> is set to <code>true</code>, then the <code>certSecret</code> field must not be present in that same entry.</p>
 <h2 id="multiple-availability-zones">
 Multiple Availability Zones <a class="header-link"  href="#multiple-availability-zones" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -6551,232 +6576,6 @@ Soft Limit <a class="header-link"  href="#soft-limit" style=" display: inline-bl
 
             
         
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
              
                 
     
@@ -7474,6 +7273,252 @@ Soft Limit <a class="header-link"  href="#soft-limit" style=" display: inline-bl
 
         
         
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
         
 
         
@@ -7640,6 +7685,26 @@ Soft Limit <a class="header-link"  href="#soft-limit" style=" display: inline-bl
         
         
 
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
         
              
                 

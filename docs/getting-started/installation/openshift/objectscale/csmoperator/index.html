@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="COSI Driver installation using Operator">
   <meta itemprop="description" content="Installation of COSI Driver using Operator">
-  <meta itemprop="dateModified" content="2026-01-21T23:58:42+05:30">
+  <meta itemprop="dateModified" content="2026-02-07T14:36:01-05:00">
   <meta itemprop="wordCount" content="475">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="COSI Driver installation using Operator">
@@ -73,10 +73,10 @@
       
     
     
-    1.16.0
+    1.16.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.783dbcabc066a4833104012709979aaf.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1128,6 +1128,18 @@
       </a>
     </label>
     
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
@@ -1845,6 +1857,18 @@
       <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0">
         
         <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
       </a>
     </label>
     
@@ -4221,7 +4245,7 @@ Install COSI Driver <a class="header-link"  href="#install-cosi-driver" style=" 
 </ol>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc new-project dell-cosi
 </span></span></code></pre></div><ol start="2">
-<li>Create a new file called <code>secret.yaml</code> with the contents of the <a href="../../../kubernetes/cosi/configuration#configuration-file-example">configuration file</a>. Edit the file with parameters specific to the ObjectScale instance.</li>
+<li>Create a new file called <code>secret.yaml</code> with the contents of the <a href="../../../kubernetes/objectscale/configuration#configuration-file-example">configuration file</a>. Edit the file with parameters specific to the ObjectScale instance.</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF &gt; secret.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">connections</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -6106,232 +6130,6 @@ cosi-59fbff5ff-w2sxm   2/2     Running   0          32s
 
             
         
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
              
                 
     
@@ -7029,6 +6827,252 @@ cosi-59fbff5ff-w2sxm   2/2     Running   0          32s
 
         
         
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
         
 
         
@@ -7195,6 +7239,26 @@ cosi-59fbff5ff-w2sxm   2/2     Running   0          32s
         
         
 
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
         
              
                 

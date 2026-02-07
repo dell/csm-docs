@@ -21,7 +21,7 @@
   <meta itemprop="name" content="Offline">
   <meta itemprop="description" content="Offline Installation">
   <meta itemprop="dateModified" content="2025-02-18T23:05:05+05:30">
-  <meta itemprop="wordCount" content="1718">
+  <meta itemprop="wordCount" content="1652">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Offline">
   <meta name="twitter:description" content="Offline Installation">
@@ -73,10 +73,10 @@
       
     
     
-    1.16.0
+    1.16.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.783dbcabc066a4833104012709979aaf.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1128,6 +1128,18 @@
       </a>
     </label>
     
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
@@ -1845,6 +1857,18 @@
       <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0">
         
         <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
       </a>
     </label>
     
@@ -4539,7 +4563,7 @@ Workflow <a class="header-link"  href="#workflow-1" style=" display: inline-bloc
 <li>The Operator installs to the <code>dell-csm-operator</code> namespace by default</li>
 <li>Offline bundle installation is only supported with manual installs (without using Operator Lifecycle Manager).</li>
 <li><span></span>
-Starting with CSM version 1.16, the sample Custom Resource (CR) files introduce a new field, <code>spec.version</code>, which specifies the target CSM release for deployment. When this field is set, users can provide container images through either the ConfigMap-based image definitions or a custom registry setup. These methods remove the need to embed image references directly within the CR itself. Detailed instructions for both image management options are provided in the <a href="./../../../../installation/operator/image-configuration">ConfigMap & Custom Registry</a> section. <b>If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules. This spec.version is currently supported on Powerstore, Powermax, Powerscale and Powerflex platforms.</b>
+Starting from CSM version 1.16, users can utilize the <code>spec.version</code> parameter for automatic image management. <b>No ConfigMap or custom registry configuration needed.</b> For more details click on <a href="./../../../../installation/operator/image-configuration">Advanced Image Configuration Options</a> section. This <code>spec.version</code> is currently supported on Powerstore, Powermax, Powerscale and Powerflex platforms.
 </li>
 <li>Offline bundle installs the operator in the default namespace via the install.sh script. Ensure the current context in the kubeconfig file is set to default.</li>
 </ul>
@@ -6640,232 +6664,6 @@ transform: rotate(90deg);
 
             
         
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
              
                 
     
@@ -7563,6 +7361,252 @@ transform: rotate(90deg);
 
         
         
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
         
 
         
@@ -7729,6 +7773,26 @@ transform: rotate(90deg);
         
         
 
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
         
              
                 

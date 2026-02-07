@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="CSM Operator Installation">
-  <meta itemprop="dateModified" content="2026-01-21T23:58:42+05:30">
-  <meta itemprop="wordCount" content="2582">
+  <meta itemprop="dateModified" content="2026-02-07T14:36:01-05:00">
+  <meta itemprop="wordCount" content="2508">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="CSM Operator Installation">
@@ -73,10 +73,10 @@
       
     
     
-    1.16.0
+    1.16.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.783dbcabc066a4833104012709979aaf.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1128,6 +1128,18 @@
       </a>
     </label>
     
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
@@ -1845,6 +1857,18 @@
       <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0">
         
         <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
       </a>
     </label>
     
@@ -4594,36 +4618,31 @@ vxflexos-config      Opaque      1      3h7m
 <p>Use this command to create the <strong>ContainerStorageModule Custom Resource</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc create -f csm-vxflexos.yaml
 </span></span></code></pre></div><p><span><span/>
-Starting with CSM version 1.16, the sample Custom Resource (CR) files introduce a new field, <code>spec.version</code>, which specifies the target CSM release for deployment. When this field is set, users can provide container images through either the ConfigMap-based image definitions or a custom registry setup. These methods remove the need to embed image references directly within the CR itself.</br> </br> Detailed instructions for both image management options are provided in the <a href="./../../../../installation/operator/image-configuration">ConfigMap &amp; Custom Registry</a> section. </br> </br> <b>If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules.</b></p>
+Starting from CSM version 1.16, users can utilize the <code>spec.version</code> parameter for automatic image management. <b>No ConfigMap or custom registry configuration needed</b>.</br> </br>  For more details click on <a href="./../../../../installation/operator/image-configuration">Advanced Image Configuration Options</a> section. </br></p>
+<p>Example:</p>
+ <div style="margin-bottom:-1.8rem">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt; EOF &gt; csm-vxflexos.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">storage.dell.com/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ContainerStorageModule</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1.16.1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">csiDriverType</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;powerflex&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div> </div>
+<p><strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/release/v1.11.0/samples/v2.16.0/storage_csm_powerflex_v2160.yaml">sample file</a> for detailed settings.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Configure SFTP settings based on PowerFlex <a href="../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module">Concepts</a></li>
+<li>Configure OIDC secret for Powerflex <a href="../../../../../concepts/csidriver/features/powerflex/#oidc-authentication-support">Concepts</a></li>
+</ul>
+</br>
+ To set the parameters in CR. The table shows the main settings of the PowerFlex driver and their defaults.
 </li>
 </ol>
-<p>.</p>
-<pre><code>Example:
-&lt;div style=&quot;margin-bottom:-1.8rem&quot;&gt;
-
-```yaml
-cat &lt;&lt; EOF &gt; csm-vxflexos.yaml
-apiVersion: storage.dell.com/v1
-kind: ContainerStorageModule
-metadata:
-  name: vxflexos
-  namespace: vxflexos
-spec:
-  version: v1.16.0
-  driver:
-    csiDriverType: &quot;powerflex&quot;
-EOF 
-``` 
-&lt;/div&gt;
-
-**Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/v1.11.0/samples/v2.16.0/storage_csm_powerflex_v2160.yaml) for detailed settings.
-
-**Note:** 
-- Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
-- Configure OIDC secret for Powerflex [Concepts](../../../../../concepts/csidriver/features/powerflex/#oidc-authentication-support)
-</code></pre>
-   </br>
-    To set the parameters in CR. The table shows the main settings of the PowerFlex driver and their defaults.
   <ul>
 <style>
   .collapse-toggle {
@@ -4850,7 +4869,7 @@ NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                        
 vxflexos    3h             powerflex       v2.16.0         Succeeded
 </code></pre><p>Check the status of the CR to verify if the driver installation is in the <code>Succeeded</code> state. If the status is not <code>Succeeded</code>, see the <a href="../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it">Troubleshooting guide</a> for more information.</p>
 </ul>
-<br> 
+<br>
 <ol start="4">
 <li>
 <h5 id="create-storage-class">
@@ -4898,7 +4917,7 @@ vxflexos (default)      csi-vxflexos.dellemc.com       Delete          Immediate
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vsclass-vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-vxflexos.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">deletionPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Delete</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF </span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>Verify Volume Snapshot Class is created:</p>
 <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get volumesnapshotclass
 
@@ -4957,9 +4976,9 @@ Configurations <a class="header-link"  href="#configurations" style=" display: i
       <strong class="collapse-text">Persistent Volume Claim </strong>
   </div>
 <div class="collapse-content " style="display: none;">
-    <br> 
-  <ol> 
-  <li> 
+    <br>
+  <ol>
+  <li>
 <h5 id="create-persistent-volume-claim">
 <strong>Create Persistent Volume Claim</strong></h5>  <br>
   Use this command to create the **Persistent Volume Claim**:
@@ -5026,7 +5045,7 @@ pod-vxflexos                                1/1     Running   0          109s
 <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get pvc -n default
 <p>NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
 </code></pre>  </br></p>
-</li> 
+</li>
 </ol>
   </div>
 </div>
@@ -5088,8 +5107,8 @@ pod-vxflexos                                1/1     Running   0          109s
       <strong class="collapse-text">Volume Snapshot</strong>
   </div>
 <div class="collapse-content " style="display: none;">
-  <br> 
-<ol> 
+  <br>
+<ol>
 <li>
 <h5 id="create-volume-snapshot">
 <strong>Create Volume Snapshot</strong></h5><br>
@@ -5124,7 +5143,7 @@ snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    De
 <p>Use this command to  <strong>Restore Snapshot</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f pvc-vxflexos-restore.yaml
 </span></span></code></pre></div><p>Example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt; &#39;EOF&#39; &gt; pvc-vxflexos-restore.yaml  </span><span style="color:#f8f8f8;text-decoration:underline">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt; &#39;EOF&#39; &gt; pvc-vxflexos-restore.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PersistentVolumeClaim</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -5513,7 +5532,7 @@ pvc-vxflexos-restore    Bound    ocp08-19874e9042   8Gi        RWO            vx
       </a>
       </div>
     
- 
+
 
     
     
@@ -7270,232 +7289,6 @@ pvc-vxflexos-restore    Bound    ocp08-19874e9042   8Gi        RWO            vx
 
             
         
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
              
                 
     
@@ -8193,6 +7986,252 @@ pvc-vxflexos-restore    Bound    ocp08-19874e9042   8Gi        RWO            vx
 
         
         
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
         
 
         
@@ -8359,6 +8398,26 @@ pvc-vxflexos-restore    Bound    ocp08-19874e9042   8Gi        RWO            vx
         
         
 
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
         
              
                 

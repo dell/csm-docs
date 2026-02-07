@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Helm Installation">
-  <meta itemprop="dateModified" content="2025-11-06T13:25:34+05:30">
+  <meta itemprop="dateModified" content="2026-02-07T14:36:01-05:00">
   <meta itemprop="wordCount" content="3613">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
@@ -73,10 +73,10 @@
       
     
     
-    1.16.0
+    1.16.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.783dbcabc066a4833104012709979aaf.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1128,6 +1128,18 @@
       </a>
     </label>
     
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
@@ -1845,6 +1857,18 @@
       <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0">
         
         <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
       </a>
     </label>
     
@@ -4392,12 +4416,12 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 <p><strong>Note</strong>: The &lsquo;clusterName&rsquo; serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.</p>
 </li>
 <li>
-<p>Download <code>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.15.1/charts/csi-isilon/values.yaml</code> into <code>cd ../dell-csi-helm-installer</code> to customize settings for installation.</p>
+<p>Download <code>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.16.0/charts/csi-isilon/values.yaml</code> into <code>cd ../dell-csi-helm-installer</code> to customize settings for installation.</p>
 </li>
 <li>
 <p>Edit <em>my-isilon-settings.yaml</em> to set the following parameters for your installation:
 The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-found in the  <a href="https://github.com/dell/helm-charts/blob/csi-isilon-2.15.1/charts/csi-isilon/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
+found in the  <a href="https://github.com/dell/helm-charts/blob/csi-isilon-2.16.0/charts/csi-isilon/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
 </li>
 </ol>
   <ul>
@@ -7221,232 +7245,6 @@ Silent Mount Re-tries (v2.6.0) <a class="header-link"  href="#silent-mount-re-tr
 
             
         
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
              
                 
     
@@ -8144,6 +7942,252 @@ Silent Mount Re-tries (v2.6.0) <a class="header-link"  href="#silent-mount-re-tr
 
         
         
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
         
 
         
@@ -8310,6 +8354,26 @@ Silent Mount Re-tries (v2.6.0) <a class="header-link"  href="#silent-mount-re-tr
         
         
 
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
         
              
                 

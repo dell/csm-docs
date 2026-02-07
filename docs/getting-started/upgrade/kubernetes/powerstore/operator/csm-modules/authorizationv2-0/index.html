@@ -25,7 +25,7 @@ Upgrade CSM Authorization This section outlines the upgrade steps for Container 
   <meta itemprop="description" content="Starting with CSM 1.12, all deployments will need to use images from quay.io. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from Docker Hub.
 Upgrade CSM Authorization This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:">
   <meta itemprop="dateModified" content="2025-07-25T03:44:32+05:30">
-  <meta itemprop="wordCount" content="1473">
+  <meta itemprop="wordCount" content="1423">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Authorization v2.0">
   <meta name="twitter:description" content="Starting with CSM 1.12, all deployments will need to use images from quay.io. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from Docker Hub.
@@ -78,10 +78,10 @@ Upgrade CSM Authorization This section outlines the upgrade steps for Container 
       
     
     
-    1.16.0
+    1.16.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -208,7 +208,7 @@ Upgrade CSM Authorization This section outlines the upgrade steps for Container 
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.783dbcabc066a4833104012709979aaf.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1133,6 +1133,18 @@ Upgrade CSM Authorization This section outlines the upgrade steps for Container 
       </a>
     </label>
     
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
@@ -1850,6 +1862,18 @@ Upgrade CSM Authorization This section outlines the upgrade steps for Container 
       <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0">
         
         <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
       </a>
     </label>
     
@@ -4121,7 +4145,7 @@ CSM v1.15 → CSM v1.16 (Authorization v2.3.0 → v2.4.0) <a class="header-link"
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><p><span></span>
-Starting with CSM v1.16 and CSM Authorization v2.4.0, the sample Custom Resource (CR) file introduces a new field, <code>spec.version</code>, which specifies the target CSM release for deployment. When this field is set, users can provide container images through either the ConfigMap-based image definitions or a custom registry setup. These methods remove the need to embed image references directly within the CR itself.</br> </br> Detailed instructions for both image management options are provided in the <a href='/csm-docs/docs/getting-started/installation/operator/image-configuration/'>ConfigMap & Custom Registry</a> section. </br> </br> <b>If neither method is configured, the operator automatically falls back to using the default image set associated with the Authorization Proxy Server. This fallback only works for CSM 1.16 (Authorization v2.4.0).</b>
+Starting with CSM v1.16 and CSM Authorization v2.4.0, users can utilize the <code>spec.version</code> parameter for automatic image management.</br> For more details click on <a href='/csm-docs/docs/getting-started/installation/operator/image-configuration/'>Advanced Image Configuration Options</a> section. </br> </br> </br> <b>If neither method is configured, the operator automatically falls back to using the default image set associated with the Authorization Proxy Server. This fallback only works for CSM 1.16 (Authorization v2.4.0).</b>
 
 </p>
 <p>As part of the upgrade, modify the existing CSM object in the <code>authorization</code> namespace to include the <code>spec.version</code> field. Also, remove the old <code>spec.configVersion</code> field and all image references demonstrated by the example below (<b>remove the <span style="color:#d73a49;">red</span> lines and add the <span style="color:#28a745;">green</span> line</b>).</p>
@@ -4178,7 +4202,7 @@ Starting with CSM v1.16 and CSM Authorization v2.4.0, the sample Custom Resource
   </div>
 <div class="collapse-content " style="display: none;">
   <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>spec:
-</span></span><span style="display:flex;"><span><span style="color:#00a000">+ version: v1.16.0
+</span></span><span style="display:flex;"><span><span style="color:#00a000">+ version: v1.16.1
 </span></span></span><span style="display:flex;"><span><span style="color:#00a000"></span>  modules:
 </span></span><span style="display:flex;"><span>    - name: authorization-proxy-server
 </span></span><span style="display:flex;"><span>      enabled: true
@@ -6425,14 +6449,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
-    
-
-            
-        
-    
-
-            
-        
              
                 
     
@@ -6451,6 +6467,34 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
             
         
         
@@ -7519,6 +7563,26 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
 
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
         
              
                 
@@ -25832,9 +25896,9 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         </a>
         
         
-        <a class="pagination-nav__link pagination-nav__link--next" href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/helm/">
+        <a class="pagination-nav__link pagination-nav__link--next" href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/observability/">
             <div class="pagination-nav__sublabel"></div>
-            <div class="pagination-nav__label">Helm<i class="fa fa-chevron-right"></i></div>
+            <div class="pagination-nav__label">Observability<i class="fa fa-chevron-right"></i></div>
         </a>
         
     

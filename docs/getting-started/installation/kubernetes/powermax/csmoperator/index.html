@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Installing the CSI Driver for PowerMax via Container Storage Modules Operator">
-  <meta itemprop="dateModified" content="2026-01-21T23:58:42+05:30">
-  <meta itemprop="wordCount" content="1640">
+  <meta itemprop="dateModified" content="2026-02-07T14:36:01-05:00">
+  <meta itemprop="wordCount" content="1598">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="Installing the CSI Driver for PowerMax via Container Storage Modules Operator">
@@ -73,10 +73,10 @@
       
     
     
-    1.16.0
+    1.16.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f910366a113bb284561b992088fa26db.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.783dbcabc066a4833104012709979aaf.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1128,6 +1128,18 @@
       </a>
     </label>
     
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
@@ -1845,6 +1857,18 @@
       <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0">
         
         <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/observability/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesobservability">
+        
+        <span class="">Observability</span>
       </a>
     </label>
     
@@ -4079,7 +4103,8 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">password2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">certSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-cert</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><p>After editing the file, <strong>run this command to create a <code>secret.yaml</code></strong> called <code>powermax-creds</code>. If you are using a different namespace/secret name, just substitute those into the command.</p>
+</span></span></span></code></pre></div><p><strong>NOTE:</strong> For each entry in <code>managementServers</code>, if <code>skipCertificateValidation</code> is set to <code>true</code>, then the <code>certSecret</code> field must not be present in that same entry.</p>
+<p>After editing the file, <strong>run this command to create a <code>secret.yaml</code></strong> called <code>powermax-creds</code>. If you are using a different namespace/secret name, just substitute those into the command.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  kubectl create secret generic powermax-creds --namespace powermax --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml
 </span></span></code></pre></div></li>
 <li>
@@ -4112,14 +4137,14 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 <p><strong>Install Driver</strong></p>
 <p>i. <strong>Create a CR (Custom Resource)</strong> for PowerMax using the sample files provided</p>
 <p><span></span>
-Starting with CSM version 1.16, the sample Custom Resource (CR) files introduce a new field, <code>spec.version</code>, which specifies the target CSM release for deployment. When this field is set, users can provide container images through either the ConfigMap-based image definitions or a custom registry setup. These methods remove the need to embed image references directly within the CR itself.</br> </br> Detailed instructions for both image management options are provided in the <a href="./../../../../installation/operator/image-configuration">ConfigMap &amp; Custom Registry</a> section. </br> </br> <b>If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules.</b></p>
+Starting from CSM version 1.16, users can utilize the <code>spec.version</code> parameter for automatic image management. <b>No ConfigMap or custom registry configuration needed</b>.</br> </br>  For more details click on <a href="./../../../../installation/operator/image-configuration">Advanced Image Configuration Options</a> section. </br></p>
 <p>a. <strong>Default Configuration:</strong> Refer the minimal sample files provided in respective CSM versions folder under samples <a href="https://github.com/dell/csm-operator/tree/main/samples">here</a>. Modify if needed.</p>
 <p>[OR]</p>
 <p>b. <strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/release/v1.11.0/samples/v2.16.0/storage_csm_powermax_v2160.yaml">sample file</a> for detailed settings or use <a href="./installationwizard#generate-manifest-file">Wizard</a> to generate the sample file.</p>
 <p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:</p>
 </li>
 </ol>
-<ul>   
+<ul>
 <style>
   .collapse-toggle {
       margin-bottom: 30px;
@@ -4345,7 +4370,7 @@ Starting with CSM version 1.16, the sample Custom Resource (CR) files introduce 
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get all -n powermax
 </span></span></code></pre></div></li>
 </ul>
-</ul> 
+</ul>
 <ol start="6">
 <li>
 <p><strong>Verify the installation</strong> as mentioned below</p>
@@ -4453,7 +4478,7 @@ Example:</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          - &#34;*:*&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 </ol>
-<ul>  
+<ul>
 <style>
   .collapse-toggle {
       margin-bottom: 30px;
@@ -4631,14 +4656,14 @@ Example:</p>
       <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionThree">
         <div class="accordion-body">
           
-              
+            
 
- <br>  
+ <br>
 
 The driver and modules versions installable with the Container Storage Modules Operator <a href="../../../../../supportmatrix/#operator-compatibility-matrix">Click Here</a>
 
 
-<br>        
+<br>
 
 <style>
 .custom-container{
@@ -4900,7 +4925,7 @@ The driver and modules versions installable with the Container Storage Modules O
       </a>
       </div>
     
- 
+
 
     
     
@@ -6656,232 +6681,6 @@ The driver and modules versions installable with the Container Storage Modules O
 
             
         
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
-    
-
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
-
-        
-    
-
-            
-        
              
                 
     
@@ -7579,6 +7378,252 @@ The driver and modules versions installable with the Container Storage Modules O
 
         
         
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
         
 
         
@@ -7745,6 +7790,26 @@ The driver and modules versions installable with the Container Storage Modules O
         
         
 
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
         
              
                 
