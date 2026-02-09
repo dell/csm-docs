@@ -441,7 +441,7 @@
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/installationwizard/operator/</loc>
-    <lastmod>2026-02-07T14:36:01-05:00</lastmod>
+    <lastmod>2026-02-09T16:00:05-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/installationwizard/operator/</loc>
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
@@ -1170,7 +1170,7 @@
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/operator/image-configuration/</loc>
-    <lastmod>2026-02-07T14:36:01-05:00</lastmod>
+    <lastmod>2026-02-09T16:00:05-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/concepts/authorization/v2.x/configuration/</loc>
     <lastmod>2025-09-10T00:18:32+05:30</lastmod>
@@ -1847,6 +1847,9 @@
     <loc>https://dell.github.io/csm-docs/v3/csidriver/</loc>
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/helm/modules/observability/</loc>
+    <lastmod>2025-09-02T17:13:09+05:30</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/helm/modules/observability/deployment/</loc>
     <lastmod>2025-09-02T17:13:09+05:30</lastmod>
   </url><url>
@@ -1881,9 +1884,6 @@
     <lastmod>2025-11-06T13:25:34+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/kubernetes/unityxt/helm/</loc>
-    <lastmod>2025-09-18T14:50:08-04:00</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/v2/getting-started/installation/helm/modules/observability/</loc>
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/getting-started/installation/helm/modules/observability/deployment/</loc>
@@ -1921,9 +1921,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/deployment/helm/modules/installation/observability/installer/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/helm/modules/observability/</loc>
-    <lastmod>2026-01-13T18:02:54+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerflex/csmoperator/csm-modules/observability/</loc>
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
@@ -2058,6 +2055,9 @@
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/upgrade/kubernetes/powerstore/helm/csm-modules/observability/</loc>
+    <lastmod>2025-09-18T14:50:08-04:00</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/v2/getting-started/installation/helm/modules/observability/</loc>
     <lastmod>2025-09-18T14:50:08-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/getting-started/installation/kubernetes/powerflex/csmoperator/csm-modules/observability/</loc>
