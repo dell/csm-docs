@@ -23,7 +23,6 @@ weight: 1
 
 ### Container Storage Modules Certified Operator 1.11.1 Images
 
-
 <ul>
 {{< collapse id="1" title="PowerStore" show="true">}}
 <div style="overflow-x: auto;">
@@ -31,7 +30,7 @@ weight: 1
 | Version/Digest | Image |
 | - | - |
 | 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
-| 2.16.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerstore@sha256:0b4e3f64ec340bb16bda3719fb447c17ee09529cbcf1bb08354470aac10e93cc |
+| 2.16.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerstore@sha256:4be94a81d2bfdabacb686d3061ef9b71861f21efd6678b23c418c484dd10d2f9 |
 | 1.14.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powerstore@sha256:e02dbcb245797cbf6c6ad22803ff3c38f5be5690b18502d00af134a9c15531c9 |
 | 6.1.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:6b5a502366ecd4ed81bcdc768699fe431ab70437324f5a7883e9f49a5d640863 |
 | 4.10.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-attacher@sha256:8a46d7ecbb798f19d7ccd7e510a2efec00ae7ba50fd82cc2f5ac45cedbab0bc1 |
@@ -63,7 +62,7 @@ weight: 1
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-storage@sha256:de12e0a30d0cad6d01bfff60634dd50f767368b0727a0afd7faae37a84f02330 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-controller@sha256:c72297f70609bc1ff151acb1216dfca903d73fe9a79c623311ba933cc2f240ec |
 | 0.70.0 |<div style="text-align:left"> docker.io/openpolicyagent/opa@sha256:2b1c4b231f6dfa6a2baea4af4109203b10cd4b65e836d72f03bfe5d8dfce7095 |
-| 9.3.0  |<div style="text-align:left"> docker.io/openpolicyagent/kube-mgmt@sha256:027e399c6bc472f15c8aaa6a41dfa416707f30a7a80708705f132511f9c7a906 |
+| 9.2.1  |<div style="text-align:left"> docker.io/openpolicyagent/kube-mgmt@sha256:2c233c59becd9ec59a3f507220a8e837d06226172876adc41ebe1252a57f9fb4 |
 | 8.4.0-alpine |<div style="text-align:left"> docker.io/library/redis@sha256:0804c395e634e624243387d3c3a9c45fcaca876d313c2c8b52c3fdf9a912dded |
 | 19cd0c49f418 |<div style="text-align:left"> docker.io/rediscommander/redis-commander@sha256:19cd0c49f418779fa2822a0496c5e6516d0c792effc39ed20089e6268477e40a |
 {{</table>}}
@@ -76,7 +75,7 @@ weight: 1
 | Version/Digest | Image |
 | - | - |
 | 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
-| 2.16.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerscale@sha256:83827890fccaa3aa0006fdb7af5f41522890adcc499d4d7f40d439a97a95ecfb |
+| 2.16.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerscale@sha256:ecee95824ca006e5824f092ad410af360814b88dc242237c1f2ed792feb83c54 |
 | 1.11.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powerscale@sha256:a1b24f964308efc7d21e0496dbbe602819ac9ef1115899646a058665f3fb83a0 |
 | 6.1.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:6b5a502366ecd4ed81bcdc768699fe431ab70437324f5a7883e9f49a5d640863 |
 | 4.10.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-attacher@sha256:8a46d7ecbb798f19d7ccd7e510a2efec00ae7ba50fd82cc2f5ac45cedbab0bc1 |
@@ -108,7 +107,7 @@ weight: 1
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-storage@sha256:de12e0a30d0cad6d01bfff60634dd50f767368b0727a0afd7faae37a84f02330 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-controller@sha256:c72297f70609bc1ff151acb1216dfca903d73fe9a79c623311ba933cc2f240ec |
 | 0.70.0 |<div style="text-align:left"> docker.io/openpolicyagent/opa@sha256:2b1c4b231f6dfa6a2baea4af4109203b10cd4b65e836d72f03bfe5d8dfce7095 |
-| 9.3.0  |<div style="text-align:left"> docker.io/openpolicyagent/kube-mgmt@sha256:027e399c6bc472f15c8aaa6a41dfa416707f30a7a80708705f132511f9c7a906 |
+| 9.2.1  |<div style="text-align:left"> docker.io/openpolicyagent/kube-mgmt@sha256:2c233c59becd9ec59a3f507220a8e837d06226172876adc41ebe1252a57f9fb4 |
 | 8.4.0-alpine |<div style="text-align:left"> docker.io/library/redis@sha256:0804c395e634e624243387d3c3a9c45fcaca876d313c2c8b52c3fdf9a912dded |
 | 19cd0c49f418 |<div style="text-align:left"> docker.io/rediscommander/redis-commander@sha256:19cd0c49f418779fa2822a0496c5e6516d0c792effc39ed20089e6268477e40a |
 {{</table>}}
@@ -154,7 +153,7 @@ weight: 1
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-storage@sha256:de12e0a30d0cad6d01bfff60634dd50f767368b0727a0afd7faae37a84f02330 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-controller@sha256:c72297f70609bc1ff151acb1216dfca903d73fe9a79c623311ba933cc2f240ec |
 | 0.70.0 |<div style="text-align:left"> docker.io/openpolicyagent/opa@sha256:2b1c4b231f6dfa6a2baea4af4109203b10cd4b65e836d72f03bfe5d8dfce7095 |
-| 9.3.0  |<div style="text-align:left"> docker.io/openpolicyagent/kube-mgmt@sha256:027e399c6bc472f15c8aaa6a41dfa416707f30a7a80708705f132511f9c7a906 |
+| 9.2.1  |<div style="text-align:left"> docker.io/openpolicyagent/kube-mgmt@sha256:2c233c59becd9ec59a3f507220a8e837d06226172876adc41ebe1252a57f9fb4 |
 | 8.4.0-alpine |<div style="text-align:left"> docker.io/library/redis@sha256:0804c395e634e624243387d3c3a9c45fcaca876d313c2c8b52c3fdf9a912dded |
 | 19cd0c49f418 |<div style="text-align:left"> docker.io/rediscommander/redis-commander@sha256:19cd0c49f418779fa2822a0496c5e6516d0c792effc39ed20089e6268477e40a |
 {{</table>}}
@@ -200,7 +199,7 @@ weight: 1
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-storage@sha256:de12e0a30d0cad6d01bfff60634dd50f767368b0727a0afd7faae37a84f02330 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-controller@sha256:c72297f70609bc1ff151acb1216dfca903d73fe9a79c623311ba933cc2f240ec |
 | 0.70.0 |<div style="text-align:left"> docker.io/openpolicyagent/opa@sha256:2b1c4b231f6dfa6a2baea4af4109203b10cd4b65e836d72f03bfe5d8dfce7095 |
-| 9.3.0  |<div style="text-align:left"> docker.io/openpolicyagent/kube-mgmt@sha256:027e399c6bc472f15c8aaa6a41dfa416707f30a7a80708705f132511f9c7a906 |
+| 9.2.1  |<div style="text-align:left"> docker.io/openpolicyagent/kube-mgmt@sha256:2c233c59becd9ec59a3f507220a8e837d06226172876adc41ebe1252a57f9fb4 |
 | 8.4.0-alpine |<div style="text-align:left"> docker.io/library/redis@sha256:0804c395e634e624243387d3c3a9c45fcaca876d313c2c8b52c3fdf9a912dded |
 | 19cd0c49f418 |<div style="text-align:left"> docker.io/rediscommander/redis-commander@sha256:19cd0c49f418779fa2822a0496c5e6516d0c792effc39ed20089e6268477e40a |
 
@@ -214,7 +213,7 @@ weight: 1
 | Version/Digest | Image |
 | - | - |
 | 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
-| 2.15.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-cosi@sha256:e3d33cb6d804431a713e0ddf0f8881460c421c97f27d4842bb966237b41d0a9f |
+| 1.0.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-cosi@sha256:e3d33cb6d804431a713e0ddf0f8881460c421c97f27d4842bb966237b41d0a9f |
 | 6.1.0 |<div style="text-align:left"> gcr.io/k8s-staging-sig-storage/objectstorage-sidecar@sha256:1a357bc1c0ad47e1b223ed605a281b75188ca605ae35cb1e6fb8010ab5bae189 |
 {{</table>}}
 </div>
