@@ -27,7 +27,7 @@ chmod +x repctl
 Alternately, if you want to build the binary yourself, you can follow these steps:
 
 ```shell
-git clone -b v1.11.0 https://github.com/dell/csm-replication.git
+git clone -b v1.11.1 https://github.com/dell/csm-replication.git
 cd csm-replication/repctl
 make build
 ```

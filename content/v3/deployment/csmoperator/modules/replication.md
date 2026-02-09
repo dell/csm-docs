@@ -34,7 +34,7 @@ This change will need to be made to the /etc/hosts file on:
 The [csm-replication](https://github.com/dell/csm-replication.git) GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:
 
 ```bash
-git clone -b v1.11.0 https://github.com/dell/csm-replication.git
+git clone -b v1.11.1 https://github.com/dell/csm-replication.git
 cd csm-replication/repctl
 make build
 ```
