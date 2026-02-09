@@ -720,7 +720,7 @@ This method works with both `helm` and `operator` installations for PowerMax, au
 
 **Note:** ConfigMaps to specify credentials is deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. However, for backwards compatibility, you can still configure and use the PowerMax driver with the config map.
 
-**NOTE:** For each entry in `managementServers`, if `skipCertificateValidation` is set to `true`, then the `certSecret` field must not be present in that same entry.
+**Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field.
 
 ## Multiple Availability Zones
 
