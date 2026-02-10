@@ -1,6 +1,6 @@
 ---
 title: PowerFlex
-linktitle: PowerFlex 
+linktitle: PowerFlex
 weight: 1
 Description: Code features for PowerFlex Driver
 ---
@@ -283,18 +283,6 @@ allowedTopologies:
     - csi-vxflexos.dellemc.com
 ```
 
-**Note** : 
-- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system.
-- It is assumed that the required NFS dependencies are already present on the node, as these are typically included in standard Linux OS packages by default.
-
-You can check what labels your nodes contain by running
-```bash
-kubectl get nodes --show-labels
-```
-
-Here's an example of how the labels look after describing the nodes:
-csi-vxflexos.dellemc.com/<system-id>-nfs=true
-
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
 > *NOTE*: In the manifest file of the Container Storage Modules operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
@@ -314,7 +302,7 @@ in your values file to the desired number of controller pods. By default, the dr
 If you are using the Container Storage Modules Operator, the value to adjust is:
 
 ```yaml
-replicas: 1  
+replicas: 1
 ```
 
 in your driver yaml in `config/samples/`
@@ -335,7 +323,7 @@ controller:
   #   node-role.kubernetes.io/master: ""
   nodeSelector:
   #   node-role.kubernetes.io/master: ""
-  
+
   # "controller.tolerations" defines tolerations that would be applied to controller deployment
   # Leave as blank to install controller on worker nodes
   # Default value: None
@@ -360,7 +348,7 @@ controller:
   #   node-role.kubernetes.io/master: ""
   nodeSelector:
   #   node-role.kubernetes.io/master: ""
-  
+
   # "controller.tolerations" defines tolerations that would be applied to controller deployment
   # Leave as blank to install controller on worker nodes
   # Default value: None
@@ -384,7 +372,7 @@ controller:
   #   node-role.kubernetes.io/master: ""
   nodeSelector:
      node-role.kubernetes.io/master: ""
-  
+
   # "controller.tolerations" defines tolerations that would be applied to controller deployment
   # Leave as blank to install controller on worker nodes
   # Default value: None
@@ -396,16 +384,16 @@ controller:
 
 > *NOTE:* Tolerations/selectors work the same way for node pods.
 
-For configuring Controller HA on the Container Storage Modules Operator, please refer to the [Container Storage Modules Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).  
+For configuring Controller HA on the Container Storage Modules Operator, please refer to the [Container Storage Modules Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).
 
 ## SDC Deployment
 
-The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run the node portion of the CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platforms which support automatic SDC deployment: currently Red Hat CoreOS (RHCOS), RHEL8.x,RHEL 7.9 are the only supported OS platforms. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions. 
+The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run the node portion of the CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platforms which support automatic SDC deployment: currently Red Hat CoreOS (RHCOS), RHEL8.x,RHEL 7.9 are the only supported OS platforms. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
 
 - On Kubernetes nodes which run the node portion of the CSI driver, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the nodes with OS version which supports automatic SDC deployment. If there is an SDC kernel module installed then the version is checked and updated.
 - Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.
 - On nodes that do not support automatic SDC deployment by SDC init container, manual installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
-Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions. 
+Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
 - There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node.
 
 From Container Storage Modules **1.12.0**, you can disable automatic SDC deployment.
@@ -436,24 +424,24 @@ There is a sample yaml file in the samples folder called `secret.yaml` with the 
   # Password for accessing PowerFlex system.
   # If authorization is enabled, password will be ignored.
   password: "password"
-  # PowerFlex system name or ID.	
+  # PowerFlex system name or ID.
   # Required: true
   systemID: "1a99aa999999aa9a"
   # Required: false
-  # Previous names used in secret of PowerFlex system. Only needed if PowerFlex System Name has been changed by user 
-  # and old resources are still based on the old name. 
+  # Previous names used in secret of PowerFlex system. Only needed if PowerFlex System Name has been changed by user
+  # and old resources are still based on the old name.
   allSystemNames: "pflex-1,pflex-2"
   # REST API gateway HTTPS endpoint for PowerFlex system.
-  # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
+  # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that
   # the authorization sidecar will listen on
   endpoint: "https://127.0.0.1"
     # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
     # Allowed values: true or false
     # Default value: true
-  skipCertificateValidation: true 
+  skipCertificateValidation: true
   # indicates if this array is the default array
   # needed for backwards compatibility
-  # only one array is allowed to have this set to true 
+  # only one array is allowed to have this set to true
   # Default value: false
   isDefault: true
   # defines the MDM(s) that SDC should register with on start.
@@ -468,7 +456,7 @@ There is a sample yaml file in the samples folder called `secret.yaml` with the 
   password: "Password123"
   systemID: "2b11bb111111bb1b"
   endpoint: "https://127.0.0.2"
-  skipCertificateValidation: true 
+  skipCertificateValidation: true
   mdm: "10.0.0.3,10.0.0.4"
   AllSystemNames: "name1,name2"
  ```
@@ -507,11 +495,11 @@ cd <DRIVER-HOME>/dell-csi-helm-installer
  kubectl delete  pods --all -n vxflexos
 ```
 
-### Creating storage classes 
+### Creating storage classes
 
 To be able to provision Kubernetes volumes using a specific array, we need to create corresponding storage classes.
 
-Find the sample yaml files under `samples/storageclass`. Edit `storageclass.yaml` if you want `ext4` filesystem, and use `storageclass-xfs.yaml` if you want `xfs` filesystem. Replace `<STORAGE_POOL>` with the storage pool you have, and replace `<SYSTEM_ID>` with the system ID or system name for the array you'd like to use. 
+Find the sample yaml files under `samples/storageclass`. Edit `storageclass.yaml` if you want `ext4` filesystem, and use `storageclass-xfs.yaml` if you want `xfs` filesystem. Replace `<STORAGE_POOL>` with the storage pool you have, and replace `<SYSTEM_ID>` with the system ID or system name for the array you'd like to use.
 
 Then we need to apply storage classes to Kubernetes using `kubectl`:
 
@@ -523,7 +511,7 @@ After that, you can use the storage class for the corresponding array.
 
 ## Ephemeral Inline Volume
 
-Starting from version 1.4, CSI PowerFlex driver supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
+Starting from version 1.4, CSI PowerFlex driver supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification.
 
 At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.
 
@@ -566,21 +554,21 @@ spec:
 
 ```
 
-This manifest creates a pod and attach two newly created ephemeral inline csi volumes to it, one ext4 and the other xfs.  
-To run the corresponding helm test, go to csi-vxflexos/test/helm/ephemeral and fill in the values for storagepool and systemID in sample.yaml.  
+This manifest creates a pod and attach two newly created ephemeral inline csi volumes to it, one ext4 and the other xfs.
+To run the corresponding helm test, go to csi-vxflexos/test/helm/ephemeral and fill in the values for storagepool and systemID in sample.yaml.
 Then run:
 ```bash
 ./testEphemeral.sh
 ```
-this test deploys the pod with two ephemeral volumes, and write some data to them before deleting the pod.   
-When creating ephemeral volumes, it is important to specify the following within the volumeAttributes section: volumeName, size, storagepool, and if you want to use a non-default array, systemID.  
+this test deploys the pod with two ephemeral volumes, and write some data to them before deleting the pod.
+When creating ephemeral volumes, it is important to specify the following within the volumeAttributes section: volumeName, size, storagepool, and if you want to use a non-default array, systemID.
 
 ## Consuming Existing Volumes with Static Provisioning
 
 To use existing volumes from PowerFlex array as Persistent volumes in your Kubernetes environment, perform these steps:
 1. Log into one of the MDMs of the PowerFlex cluster.
 2. Execute these commands to retrieve the `systemID` and `volumeID`.
-    1. ```bash    
+    1. ```bash
         scli --mdm_ip <IPs, comma separated> --login --username <username> --password <password>
        ```
     - **Output:** `Logged in. User role is SuperUser. System ID is <systemID>`
@@ -645,7 +633,7 @@ spec:
 
 ## Dynamic Logging Configuration
 
-The dynamic logging configuration that was introduced in v1.5 of the driver was revamped for v2.0; v1.5 logging configuration is not compatible with v2.0.   
+The dynamic logging configuration that was introduced in v1.5 of the driver was revamped for v2.0; v1.5 logging configuration is not compatible with v2.0.
 Two fields in values.yaml (located at helm/csi-vxflexos/values.yaml) are used to configure the dynamic logging: logLevel and logFormat.
 
 ```yaml
@@ -657,23 +645,23 @@ logLevel: "debug"
 # CSI driver log format
 # Allowed values: "TEXT" or "JSON"
 # Default value: "TEXT"
-logFormat: "TEXT"    
+logFormat: "TEXT"
 ```
 
-To change the logging fields after the driver is deployed, you can use this command to edit the configmap:  
+To change the logging fields after the driver is deployed, you can use this command to edit the configmap:
 ```bash
- kubectl edit configmap -n vxflexos vxflexos-config-params 
-```  
-and then make the necessary adjustments for CSI_LOG_LEVEL and CSI_LOG_FORMAT.   
+ kubectl edit configmap -n vxflexos vxflexos-config-params
+```
+and then make the necessary adjustments for CSI_LOG_LEVEL and CSI_LOG_FORMAT.
 
-If either option is set to a value outside of what is supported, the driver will use the default values of "debug" and "text" . 
+If either option is set to a value outside of what is supported, the driver will use the default values of "debug" and "text" .
 
-## Volume Health Monitoring 
+## Volume Health Monitoring
 
 > *NOTE*: Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). If the feature gate is on, and you want to use this feature,
-> ensure the proper values are enabled in your values file. See the values table in the installation doc for more details. 
+> ensure the proper values are enabled in your values file. See the values table in the installation doc for more details.
 
-Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.  
+Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.
 
 To accomplish this, the driver utilizes the external-health-monitor sidecar. When driver detects a volume condition is abnormal, the sidecar will report an event to the corresponding PVC. For example, in this event from `kubectl describe pvc -n <ns>` we can see that the underlying volume was deleted from the PowerFlex array:
 
@@ -759,7 +747,7 @@ Based on these two keys, there are certain scenarios on which the driver is goin
 * If enabled and prefix given then set the prefix+worker_node_name for SDC name.
 * If enabled and prefix not given then set worker_node_name for SDC name.
 
-> ℹ️ **NOTE:** : name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
+> ℹ️ **NOTE:** : name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit.
 
 ## Pre-approving SDC
 
@@ -798,210 +786,14 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 
 >**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n vxflexos --no-headers=true | awk '/vxflexos-/{print $1}'| xargs kubectl delete -n vxflexos pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxVxflexosVolumesPerNode` is 0. <br><br>If `maxVxflexosVolumesPerNode` is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxVxflexosVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-vxflexos-volumes-per-node` is not set.
 
-## NFS volume support
-
-> ℹ️ **NOTE:** :
-> * From PowerFlex CSI driver version 2.8, NFS volumes are supported on PowerFlex 4.0.x systems. This feature is not available on PowerFlex version 5.0
-> * Starting from Container Storage Modules 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
-
-CSI driver will support following operations for NFS volumes:
-
-* Creation and deletion of a NFS volume with RWO/RWX/ROX access modes.
-* Support of tree quotas while volume creation.
-* Expand the size of a NFS volume.
-* Creation and deletion of snapshot of a NFS volume while retaining file permissions.
-* Create NFS volume from the snapshot.
-
-To enable the support of NFS volumes operations from CSI driver, there are a few new keys introduced which needs to be set before performing the operations for NFS volumes.
-* `nasName`: defines the NAS server name that should be used for NFS volumes.
-* `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
-
-> ℹ️ **NOTE:** :
-> * `nasName`
->   * nasName is a mandatory parameter and has to be provided in secret yaml, else it will be an error state and will be captured in driver logs.
->   * nasName can be given at storage class level as well.
->   * If specified in both, secret and storage class, then precedence is given to storage class value.
->   * If nasName not given in secret, irrespective of it specified in SC, then it's an error state and will be captured in driver logs.
->   * If the PowerFlex storage system v4.0.x is configured with only block capabilities, then the user is required to give the default value for nasName as "none".
-
-The user has to update the `secret.yaml`, `values.yaml` and `storageclass-nfs.yaml` with the above keys as like below:
-
-[`samples/secret.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml)
-```yaml
-- username: "admin"
-  password: "Password123"
-  systemID: "2b11bb111111bb1b"
-  endpoint: "https://127.0.0.2"
-  skipCertificateValidation: true
-  isDefault: true
-  mdm: "10.0.0.3,10.0.0.4"
-  nasName: "nas-server"
-```
-
-[`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: vxflexos-nfs
-provisioner: csi-vxflexos.dellemc.com
-reclaimPolicy: Delete
-allowVolumeExpansion: true
-parameters:
-  storagepool: "pool2" # Insert Storage pool
-  systemID: <SYSTEM_ID> # Insert System ID
-  csi.storage.k8s.io/fstype: nfs
-  nasName: "nas-server"
-#  path: /csi
-#  softLimit: "80"
-#  gracePeriod: "86400"
-volumeBindingMode: WaitForFirstConsumer
-allowedTopologies:
-- matchLabelExpressions:
-  - key: csi-vxflexos.dellemc.com/<SYSTEM_ID>-nfs # Insert System ID
-    values:
-    - "true"
-```
-
-[`helm/csi-vxflexos/values.yaml`](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml)
-```yaml
-...
-enableQuota: false
-...
-```
-
 ## Volume Size and Rounding Rules
-For NFS File Shares, the minimum supported volume size is 3 Gi. If request size is smaller than 3 Gi, the volume will be automatically provisioned as 3 Gi.
 
 For Block Volumes, the minimum supported size is 8 Gi. Any size request below 8 Gi will result in a volume of 8 Gi being created. Additionally, if the requested size is not a multiple of 8, the system will round it up to the next multiple of 8 when provisioning the volume.
 
-For example:  
+For example:
 A requested size of 9 Gi or 8.1 Gi will result in a 16 Gi volume being created on the backend array.
 Similarly, a size of 20 Gi will be rounded up to 24 Gi.
 This behavior ensures that the allocated volume sizes comply with the backend array's alignment requirements.
-
-## Usage of Quotas to Limit Storage Consumption for NFS volumes
-Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
-
-To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
-```yaml
-...
-...
-# enableQuota: a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.
-# Allowed values:
-#   true: set quota for volume
-#   false: do not set quota for volume
-# Optional: true
-# Default value: none
-enableQuota: true
-...
-...
-```
-
-For example, if the user creates a PVC with 3 Gi of storage and quotas have already been enabled in PowerFlex system for the specified volume.
-
-When `enableQuota` is set to `true`
-
-* The driver sets the hard limit of the PVC to 3Gi.
-* The user adds data of 2Gi to the PVC (by logging into POD). It works as expected.
-* The user tries to add 2Gi more data.
-* Driver doesn't allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.
-* The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.
-* User retries adding 2Gi more data (which has been errored out previously).
-* The driver accepts the data.
-
-When `enableQuota` is set to `false`
-
-* Driver doesn't set any hard limit against the PVC created.
-* The user adds 2Gi data to the PVC, which has a limit of 3Gi. It works as expected.
-* The user tries to add 2Gi more data. Now the total size of data is 4Gi.
-* Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)
-* The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.
-
-If enableQuota feature is set, user can also set other tree quota parameters such as soft limit, soft grace period and path using storage class yaml file.
-
-* `path`: relative path to the root of the associated NFS volume.
-* `softLimit`: soft limit set to quota. Specified as a percentage w.r.t. PVC size.
-* `gracePeriod`: grace period of quota, must be mentioned along with softLimit, in seconds. Soft Limit can be exceeded until the grace period.
-
-> ℹ️ **NOTE:** :
-> * `hardLimit` is set to same size as that of PVC size.
-> *  When a volume with quota enabled is expanded then the hardLimit and softLimit are also recalculated by driver w.r.t. to the new PVC size.
-> * `sofLimit` cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).
-> * `softLimit` should be lesser than 100%, since hardLimit will be set to 100% (PVC size) internally by the driver.
-
-### Storage Class Example with Quota Limit Parameters
-[`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
-
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: vxflexos-nfs
-provisioner: csi-vxflexos.dellemc.com
-reclaimPolicy: Delete
-allowVolumeExpansion: true
-parameters:
-  storagepool: "pool2" # Insert Storage pool
-  systemID: <SYSTEM_ID> # Insert System ID
-  csi.storage.k8s.io/fstype: nfs
-  nasName: "nas-server"
-  path: /csi
-  softLimit: "80"
-  gracePeriod: "86400"
-volumeBindingMode: WaitForFirstConsumer
-allowedTopologies:
-  - matchLabelExpressions:
-    - key: csi-vxflexos.dellemc.com/<SYSTEM_ID>-nfs # Insert System ID
-      values:
-        - "true"
-```
-## Configuring custom access to NFS exports
-
-CSI PowerFlex driver Version 2.9.0 and later supports the ability to configure NFS access to nodes that use dedicated storage networks.
-
-To enable this feature you need to specify `externalAccess` parameter in your helm `values.yaml` file or `X_CSI_POWERFLEX_EXTERNAL_ACCESS` variable when creating CustomResource using an operator.
-
-The value of that parameter is added as an additional entry to NFS Export host access.
-
-For example the following notation:
-```yaml
-externalAccess: "10.0.0.0/24"
-```
-
-This means that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
-
-## Configuring NFS independent of SDC
-
-Starting from Container Storage Modules 1.12.0, the CSI PowerFlex driver supports configuring NFS independent of SDC. This separation is helpful in scenarios where an SDC is not available in the cluster or additional network interfaces do not need to be deployed.
-
-To disable SDC deployment, update the values file and provide the interface names mapping for each of the nodes that are being used.
-
-**Helm**
-```yaml
-node:
-  ...
-  sdc:
-    # enabled: Enable/Disable SDC
-    enabled: false
-  ...
-
-interfaceNames:
-  # worker-1-jxsjoueeewabc.domain: "ens192"
-  # worker-2-jxsjoueeewabc.domain: "ens192"
-```
-
-**Operator**
-```yaml
-common:
-...
-  - name: INTERFACE_NAMES: 'worker-1-jxsjoueeewabc.domain: "ens192", worker-2-jxsjoueeewabc.domain: "ens192"'
-...
-node:
-...
-  - name: X_CSI_SDC_ENABLED
-    value: "false"
-```
 
 ## Storage Capacity Tracking
 CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.
@@ -1105,7 +897,7 @@ The driver will try to find the kernel modules in the following order:
 
 - Pre-compiled Modules:
 
-Driver will fetch pre-compiled kernel modules for various Linux kernels that are typically included in PowerFlex SDC installation packages. These modules are stored in a driver cache. 
+Driver will fetch pre-compiled kernel modules for various Linux kernels that are typically included in PowerFlex SDC installation packages. These modules are stored in a driver cache.
 
 - Automatic Fetching from SFTP repository:
 
@@ -1127,17 +919,17 @@ Enable the SFTP repository settings by enabling the SDC SFTP Repo and configurin
 
  *NOTE:*
 - Exposing SFTP settings to automatically pull scini.ko modules is only available for SDC 3.6.5, 4.5.4 and 5.x.
-- Ensure that sdcrepo-private-secret and sdcrepo-public-secret are created from the secrets file. 
+- Ensure that sdcrepo-private-secret and sdcrepo-public-secret are created from the secrets file.
   ```bash
   kubectl create secret generic sdcsftprepo-private-secret -n vxflexos --from-file=user_private_rsa_key=sftp-secret-private.crt
   kubectl create secret generic sdcsftprepo-public-secret -n vxflexos --from-file=repo_public_rsa_key=sftp-secret-public.crt
   ```
-- Private key of SFTP server should be obtained and public key should be pulled from known hosts after logging in to server via private key. 
+- Private key of SFTP server should be obtained and public key should be pulled from known hosts after logging in to server via private key.
 - The secrets should have permissions set to 600 to ensure security and proper access control. Setting permissions to 600 ensures that only the owner has read and write access, preventing unauthorized users from accessing or modifying the secrets.
 - After creating the private SFTP server,
   scini.tar should be located in the folder structure with the format of RHEL version as the username followed by sdc kernel version. For example the format should be `RHEL9/4.5.4000.111/5.14.0-503.40.1.el9_5.x86_64/scini.tar`.
   SSH Configuration on the Server should be enabled for public key authentication and public key should be added to authorized keys. For example, in /etc/ssh/sshd_config the following config should exist
-    ```ssh 
+    ```ssh
         PubkeyAuthentication yes
         AuthorizedKeysFile .ssh/authorized_keys
         Match Group sftpusers
@@ -1158,14 +950,14 @@ To enable NVMe/TCP, the following configurations must be applied:
     ```yaml
     blockProtocol: "NVMeTCP"
     ```
-     **Note:** 
+     **Note:**
      * If `blockProtocol` is not specified or set to `auto` in the vxflexos-config secret, the driver automatically detects the available initiators on the host and selects the appropriate protocol. The selection priority is SDC first, followed by NVMe/TCP.
      * When configuring the driver with multiple PowerFlex arrays, the blockProtocol value must be the same for all arrays.
 
 2.  **Disable SDC**: SDC deployment must be disabled to ensure the driver relies on NVMe/TCP.
     *   **Helm**: Set `sdc.enabled` to `false` in [values.yaml](https://github.com/dell/helm-charts/blob/csi-vxflexos-{{< version-docs key="driver_latestVersion" >}}/charts/csi-vxflexos/values.yaml).
     *   **Operator**: Set `X_CSI_SDC_ENABLED` to `false` in the Custom Resource (CR) [here](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml).
-    
+
       > **IMPORTANT**: The driver prioritizes SDC over NVMe/TCP. If SDC is enabled (default) or detected on the node, the driver will default to SDC communication, if `blockProtocol` is set to `auto`.
 
 ### Migration to NVMe/TCP
@@ -1197,7 +989,7 @@ OIDC (OpenID Connect) allows Kubernetes deployments to authenticate to PowerFlex
 - Okta
 
 This means that instead of storing long‑lived PowerFlex credentials inside the Kubernetes Secret, the driver uses short‑lived, automatically refreshed access tokens obtained via the OIDC provider.
- 
+
 ### Secret Configuration for OIDC
 Below is the required secret structure for OIDC-enabled authentication.
   ```yaml
@@ -1245,8 +1037,8 @@ In PowerFlex, Management Virtual Machine (MVM) IP addresses are the IPs assigned
 
 Execute the below steps by logging into the MVM IP:
 
-Env variables needed for the steps: 
-SSO_IP -  This is the Cluster IP address of the SSO service in Kubernetes Cluster. 
+Env variables needed for the steps:
+SSO_IP -  This is the Cluster IP address of the SSO service in Kubernetes Cluster.
 PM_TOKEN - This is an access token (JWT) retrieved by logging into PowerFlex via its SSO REST API and can be used for subsequent API calls to PowerFlex services.
 IN_IP - This is the External IP address of the rke2-ingress-nginx-controller service, which is typically the load balancer or ingress controller IP used for external traffic.
 
@@ -1257,7 +1049,7 @@ export IN_IP=`kubectl get svc -A | grep -m1 rke2-ingress-nginx-controller | sort
 ```
 
 ##### **1. Initialize the SSO CIAM config for PowerFlex**
-      
+
 This API initializes the SSO CIAM configuration for PowerFlex.
 
 ```bash
@@ -1265,7 +1057,7 @@ curl -k -X POST https://$IN_IP/rest/v1/sso-ciam/init --header 'Accept: applicati
 ```
 >Note: The API returns a unique identifier. Record this value, as it will be required in the following steps under the name CIAM_ID.
 
-##### **2. Configure PowerFlex with Embedded Keycloak as the OIDC Service provider** 
+##### **2. Configure PowerFlex with Embedded Keycloak as the OIDC Service provider**
 
 This API call registers and configures PowerFlex as an OIDC Service Provider with Embedded Keycloak, enabling secure SSO authentication using OpenID Connect.
 
@@ -1296,16 +1088,16 @@ curl -vvL -k --request POST \
   \"days_to_store_state_code_verifier\": 1
 }"
 ```
-##### **3. Add certificates to PowerFlex for CIAM services** 
+##### **3. Add certificates to PowerFlex for CIAM services**
 
   PowerFlex CIAM must trust the Azure/Keycloak/Okta signing certificate in order to validate RS256‑signed JWT tokens issued by ID provider. This certificate must be added to CIAM as a trusted CA.
 
-  - For Microsoft Azure, 
+  - For Microsoft Azure,
 
-    We have to add the following certificates for CIAM services 
+    We have to add the following certificates for CIAM services
 
     * DigiCert is a trusted Certificate Authority (CA). Azure services use SSL/TLS certificates issued by DigiCert to secure communication.
-    * GA2 (GlobalSign or similar root/intermediate) certificates are part of the certificate chain that validates Azure’s identity endpoints. 
+    * GA2 (GlobalSign or similar root/intermediate) certificates are part of the certificate chain that validates Azure’s identity endpoints.
 
       They ensure:
       - The OIDC metadata URL `(https://login.microsoftonline.com/...)` and token endpoints are trusted.
@@ -1328,7 +1120,7 @@ curl -vvL -k --request POST \
         -----END CERTIFICATE-----
         ```
 
-    - Option 2 — Retrieve the Certificate from the Keycloak UI 
+    - Option 2 — Retrieve the Certificate from the Keycloak UI
       This option retrieves the actual RS256 signing certificate directly from Keycloak’s admin interface.
       * Log in to Keycloak Admin Console - `https://<PFMP_IP>/auth/admin/`
       Log in using the admin credentials obtained via:
@@ -1344,7 +1136,7 @@ curl -vvL -k --request POST \
         <copied-certificate-content>
         -----END CERTIFICATE-----
         ```
-  - For Okta, 
+  - For Okta,
     - Option 1 — Download the Certificate from Browser
       * Open the Okta URL in  browser: `https://<okta-domain-name>.okta.com`
       * Click the lock icon in the address bar.
@@ -1376,18 +1168,18 @@ curl -vvL -k --request POST \
   It registers an external identity provider (Azure/Keycloak/Okta) with PowerFlex using OpenID Connect (OIDC). This allows PowerFlex users to authenticate through Azure/Keycloak/Okta instead of local credentials.
 
 
-> **Note:**  
-> - `CLIENT_ID` – Client ID of Microsoft Azure / Keycloak / Okta  
-> - `CLIENT_SECRET` – Client secret of Microsoft Azure / Keycloak / Okta  
-> - `IDP` – AzureEntraID / Keycloak / Okta  
-> - For **Azure**,  
->   `IDP_METADATA_URL` – `https://login.microsoftonline.com/<Tenant_id>/v2.0`  
->   where `<Tenant_id>` is the Azure Active Directory tenant the identity provider belongs to.  
-> - For **Keycloak**,  
->   `IDP_METADATA_URL` – `https://<keycloak_ip>/realms/CSM`  
->   where the realm name is the name of the realm where the application is created.  
-> - For **Okta**,  
->   `IDP_METADATA_URL` – `https://<okta-domain-name>.okta.com/oauth2/default`  
+> **Note:**
+> - `CLIENT_ID` – Client ID of Microsoft Azure / Keycloak / Okta
+> - `CLIENT_SECRET` – Client secret of Microsoft Azure / Keycloak / Okta
+> - `IDP` – AzureEntraID / Keycloak / Okta
+> - For **Azure**,
+>   `IDP_METADATA_URL` – `https://login.microsoftonline.com/<Tenant_id>/v2.0`
+>   where `<Tenant_id>` is the Azure Active Directory tenant the identity provider belongs to.
+> - For **Keycloak**,
+>   `IDP_METADATA_URL` – `https://<keycloak_ip>/realms/CSM`
+>   where the realm name is the name of the realm where the application is created.
+> - For **Okta**,
+>   `IDP_METADATA_URL` – `https://<okta-domain-name>.okta.com/oauth2/default`
 >   where `<okta-domain-name>` is the name of the Okta domain where the application is created.
 
 
@@ -1470,7 +1262,7 @@ Since PowerFlex relies on embedded Keycloak for OIDC, a valid redirect URI must 
 - In Keycloak,
   - Add the below to Client Scopes → Default Client Scopes:
     ```
-      openid  
+      openid
       profile
       email
       roles
@@ -1496,7 +1288,7 @@ Since PowerFlex relies on embedded Keycloak for OIDC, a valid redirect URI must 
 
 ##### **6. Create OAuth2 client in CIAM**
 
-This will create a new OAuth2 client in CIAM 
+This will create a new OAuth2 client in CIAM
 
 ```bash
 curl -kL --request POST \
@@ -1519,7 +1311,7 @@ curl -kL --request POST \
 
 ##### **7. Add the application to CIAM**
 
-This command will add the application to CIAM 
+This command will add the application to CIAM
 
 - ROLE refers to the role assigned to all tokens exchanged for a specific Identity Provider (IdP) and Application ID, enabling access to the PowerFlex APIs.
 - CIAM_CLIENT_ID is the client ID issued by the CIAM system.
@@ -1527,7 +1319,7 @@ This command will add the application to CIAM
 - METADATA denotes the metadata URL of the corresponding Azure, Keycloak, or Okta application.
 - SERVICE_ID_IDP identifies the service ID associated with the configured identity provider.
 
-  ```bash 
+  ```bash
   curl -kLvv --request POST \
     --url https://$IN_IP/rest/v1/oauth2-token-exchanges \
     --header 'Content-Type: application/json' \

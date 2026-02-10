@@ -15,7 +15,7 @@ weight: 2
 <br>
 
 
-{{< accordion id="Zero" title="Prerequisite" markdown="true">}} 
+{{< accordion id="Zero" title="Prerequisite" markdown="true">}}
 
 <br>
 
@@ -30,19 +30,19 @@ weight: 2
                 v4.1 Enabled: Yes
                 v4.2 Enabled: Yes
     NFS RDMA Enabled: No
-        Rquota Enabled: No   
+        Rquota Enabled: No
 
-    ``` 
+    ```
     <br>
 
-2. **Create Group and User for CSM**  
+2. **Create Group and User for CSM**
 
     ```bash
     isi auth group create csmadmins --zone system
     isi auth user create csmadmin --password "P@ssw0rd123" --password-expires false --primary-group csmadmins --zone system
-    ``` 
+    ```
 
-3. **Create role and assign the required permission** 
+3. **Create role and assign the required permission**
 
     ```bash
     isi auth roles create CSMAdminRole --description "Dell CSM Admin Role"  --zone System
@@ -52,63 +52,63 @@ weight: 2
 
     ```
 
-4. **Get PowerScale Array Details** 
+4. **Get PowerScale Array Details**
 
-   a. Cluster Name: 
-   
-      ``` 
+   a. Cluster Name:
+
+      ```
       ps01-1# isi cluster identity view
-      Description: 
-          MOTD: 
-      MOTD Header: 
-          Name: ps01 
-      ``` 
+      Description:
+          MOTD:
+      MOTD Header:
+          Name: ps01
+      ```
 
    b. Access Zone Name:
 
       ```
       ps01-1# isi zone zones list
-      Name      Path               
+      Name      Path
       -----------------------------
-      System    /ifs               
+      System    /ifs
       ps01-az01 /ifs/data/ps01/az01
       -----------------------------
-      Total: 2 
+      Total: 2
       ```
 
-   c. Smart Connect Zone name  
+   c. Smart Connect Zone name
 
       ```
       ps01-1# isi network pools list
-      ID                                SC Zone               IP Ranges                   Allocation Method 
+      ID                                SC Zone               IP Ranges                   Allocation Method
       ------------------------------------------------------------------------------------------------------
-      groupnet0.subnet0.ps01-az01-pool0 ps01-az01.example.com 10.181.98.225-10.181.98.227 static            
-      groupnet0.subnet0.system-pool0    ps01.example.com      10.181.98.222-10.181.98.224 static            
+      groupnet0.subnet0.ps01-az01-pool0 ps01-az01.example.com 10.181.98.225-10.181.98.227 static
+      groupnet0.subnet0.system-pool0    ps01.example.com      10.181.98.222-10.181.98.224 static
       ------------------------------------------------------------------------------------------------------
-      Total: 2  
+      Total: 2
       ```
 
-<br> 
+<br>
 
-5. **Create the base directory for the storage class** 
-    
-   ```bash 
+5. **Create the base directory for the storage class**
+
+   ```bash
    mkdir /ifs/data/ps01/az01/csi
    chown csmadmin:csmadmins /ifs/data/ps01/az01/csi
    chmod 755 /ifs/data/ps01/az01/csi
 
    ```
-<br> 
+<br>
 
-6. Make sure all the parent directory of the base path has permission 755 
+6. Make sure all the parent directory of the base path has permission 755
 
 <br>
 
-7. **(optional) Create quota on the base directory** 
+7. **(optional) Create quota on the base directory**
 
-   ```bash 
+   ```bash
    isi quota quotas create /ifs/data/ps01/az01/csi directory --percent-advisory-threshold 80 --percent-soft-threshold 90 --soft-grace 1D --hard-threshold 100G --include-snapshots true
-   ``` 
+   ```
 
 {{< /accordion >}}
 
@@ -117,37 +117,37 @@ weight: 2
 
 <br>
 
-{{< accordion id="Two" title="Base Install" markdown="true" >}}   
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 </br>
 
 #### Operator Installation
 
 </br>
- 
-1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-2. Click **Dell Container Storage Modules** tile 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.**
+
+2. Click **Dell Container Storage Modules** tile
 
 3. Keep all default settings and click **Install**.
 
 </br>
 <ol>
 
-Verify that the operator is deployed 
-```terminal 
+Verify that the operator is deployed
+```terminal
 oc get operators
 
 NAME                                                          AGE
 dell-csm-operator-certified.openshift-operators               2d21h
-```  
+```
 
 ```terminal
 oc get pod -n openshift-operators
 
 NAME                                                       READY   STATUS       RESTARTS      AGE
 dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
-``` 
+```
 
 
 </ol>
@@ -157,23 +157,23 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 </br>
 
 1. ##### **Create project:**
-   
+
    <br>
 
     Use this command to create new project. You can use any project name instead of `isilon`.
 
-    ```bash 
+    ```bash
     oc new-project isilon
     ```
 <br>
 
-2. ##### **Create config secret:** 
+2. ##### **Create config secret:**
 
-    <br>   
-    
-    Create a file called `config.yaml` or use [sample](https://github.com/dell/csi-powerscale/blob/main/samples/secret/secret.yaml): 
-   
-    Example: 
+    <br>
+
+    Create a file called `config.yaml` or use [sample](https://github.com/dell/csi-powerscale/blob/main/samples/secret/secret.yaml):
+
+    Example:
     <div style="margin-bottom: -1.8rem">
 
 
@@ -191,7 +191,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
    </div>
 
     Add blocks for each Powerscale array in `config.yaml`, and include both source and target arrays if replication is enabled.
- 
+
     <br>
 
     Edit the file, then run the command to create the `isilon-creds`.
@@ -199,10 +199,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```bash
     oc create secret generic isilon-creds --from-file=config=config.yaml -n isilon --dry-run=client -oyaml > secret-isilon-config.yaml
     ```
-    
+
     Use this command to **create** the config:
 
-    ```bash 
+    ```bash
     oc apply -f secret-isilon-config.yaml
     ```
 
@@ -211,23 +211,23 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```bash
     oc replace -f secret-isilon-config.yaml --force
     ```
-  
+
     Verify config secret is created.
 
     ```terminal
     oc get secret -n isilon
-     
+
     NAME                 TYPE        DATA   AGE
     isilon-config        Opaque      1      3h7m
-    ```  
+    ```
   </br>
 
 3. ##### **Create isilon-certs-n secret.**
       <br>
 
       If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: secret-isilon-certs.yaml
-     
-      ```yaml 
+
+      ```yaml
       cat << EOF > secret-isilon-certs.yaml
       apiVersion: v1
       kind: Secret
@@ -236,7 +236,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
         namespace: isilon
       type: Opaque
       data:
-        cert-0: "" 
+        cert-0: ""
       EOF
       ```
 
@@ -246,7 +246,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 <br>
 
 4. ##### **Create Custom Resource** ContainerStorageModule for PowerScale.
-   
+
    <br>
 
     Use this command to create the **ContainerStorageModule Custom Resource**:
@@ -255,7 +255,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     oc create -f csm-isilon.yaml
     ```
 
-   <span><span/>{{< message text="19" >}}.
+   <span><span/>{{< message text="19" >}}
 
     Example:
     <div style="margin-bottom: -1.8rem">
@@ -277,9 +277,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
           envs:
             - name: X_CSI_ISI_AUTH_TYPE
               value: "1"
-     EOF 
-     ``` 
-    </div> 
+     EOF
+     ```
+    </div>
 
     **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
 
@@ -325,24 +325,24 @@ Check if ContainerStorageModule CR is created successfully:
 oc get csm isilon -n isilon
 
 NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION    STATE
-isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}          Succeeded      
+isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}          Succeeded
 ```
 
 </ul>
 
 <br>
 
-4. ##### **Create Storage class:** 
-    
+4. ##### **Create Storage class:**
+
     <br>
 
-    Use this command to create the **Storage Class**: 
+    Use this command to create the **Storage Class**:
 
     ```bash
     oc apply -f sc-isilon.yaml
     ```
 
-    Example: 
+    Example:
     ```yaml
     cat << EOF > sc-isilon.yaml
     apiVersion: storage.k8s.io/v1
@@ -354,36 +354,36 @@ isilon      3h             isilon          {{< version-docs key="PScale_latestVe
     allowVolumeExpansion: true
     IsiVolumePathPermissions: "0775"
     mountOptions: ["vers=4"]
-    parameters:  
+    parameters:
        ClusterName: ps01
-       AccessZone: ps01-az01  
-       AzServiceIP: ps01-az01.example.com 
-       IsiPath: /ifs/data/ps01/az01/csi 
-       RootClientEnabled: "false" 
-       csi.storage.k8s.io/fstype: "nfs" 
+       AccessZone: ps01-az01
+       AzServiceIP: ps01-az01.example.com
+       IsiPath: /ifs/data/ps01/az01/csi
+       RootClientEnabled: "false"
+       csi.storage.k8s.io/fstype: "nfs"
     volumeBindingMode: Immediate
     EOF
     ```
-     Replace placeholders with actual values for your powerscale array and various storage class sample refer [here](https://github.com/dell/csi-powerscale/tree/main/samples/storageclass) 
+     Replace placeholders with actual values for your powerscale array and various storage class sample refer [here](https://github.com/dell/csi-powerscale/tree/main/samples/storageclass)
 
     <br>
 
-    Verify Storage Class is created: 
+    Verify Storage Class is created:
 
     ```terminal
     oc get storageclass isilon
-  
+
     NAME                    PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION    AGE
     isilon (default)        csi-isilon.dellemc.com         Delete          Immediate           true                    3h8m
-    ``` 
+    ```
 
     </br>
 
-6. ##### **Create Volume Snapshot Class:** 
+6. ##### **Create Volume Snapshot Class:**
 
     <br>
-    
-    Use this command to create the **Volume Snapshot**: 
+
+    Use this command to create the **Volume Snapshot**:
 
 
     ```bash
@@ -401,28 +401,28 @@ isilon      3h             isilon          {{< version-docs key="PScale_latestVe
     deletionPolicy: Delete
     parameters:
        IsiPath: /ifs/data/ps01/az01/csi
-    EOF 
+    EOF
     ```
 
-    Verify Volume Snapshot Class is created: 
+    Verify Volume Snapshot Class is created:
 
     ```terminal
     oc get volumesnapshotclass
-    
+
     NAME                      DRIVER                              DELETIONPOLICY   AGE
     vsclass-isilon            csi-isilon.dellemc.com              Delete           3h9m
-    ``` 
+    ```
    </br>
 
 ### Configurations
 <br>
 
 
-{{< collapse id="2" title="Persistent Volume Claim" card="false" >}} 
-<ol>  
+{{< collapse id="2" title="Persistent Volume Claim" card="false" >}}
+<ol>
 
-  <br> 
-<li>  
+  <br>
+<li>
 
 ##### **Create Persistent Volume Claim**
 
@@ -461,9 +461,9 @@ isilon      3h             isilon          {{< version-docs key="PScale_latestVe
 
   NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
   pvc-isilon                     Bound    ocp08-9f103c4fc6   8Gi        RWO            isilon         <unset>                 4s
-  ``` 
+  ```
 
-  <br> 
+  <br>
 </li>
 
 <li>
@@ -479,7 +479,7 @@ isilon      3h             isilon          {{< version-docs key="PScale_latestVe
   oc apply -f pod-isilon.yaml
   ```
 
-  Example: 
+  Example:
   ```yaml
   cat << 'EOF' > pod-isilon.yaml
   apiVersion: v1
@@ -510,14 +510,14 @@ isilon      3h             isilon          {{< version-docs key="PScale_latestVe
 
   NAME                                        READY   STATUS    RESTARTS   AGE
   pod-isilon                                  1/1     Running   0          109s
-  ``` 
+  ```
 
-  <br> 
+  <br>
 </li>
 <li>
 
   ##### **Delete Persistence Volume Claim**
-  
+
   </br>
 
   Use this command to  **Delete Persistence Volume Claim**:
@@ -535,18 +535,18 @@ isilon      3h             isilon          {{< version-docs key="PScale_latestVe
 
   ```
   </br>
-  </li> 
+  </li>
 </ol>
 
 {{< /collapse >}}
 
 
-{{< collapse id="4" title="Volume Snapshot" card="false" >}} 
-<br> 
+{{< collapse id="4" title="Volume Snapshot" card="false" >}}
+<br>
 <ol>
 <li>
 
-##### **Create Volume Snapshot**  
+##### **Create Volume Snapshot**
 
 <br>
 
@@ -579,7 +579,7 @@ oc get volumesnapshot -n default
 
 NAME           READYTOUSE   SOURCEPVC       SOURCESNAPSHOTCONTENT   RESTORESIZE   SNAPSHOTCLASS      SNAPSHOTCONTENT                                    CREATIONTIME   AGE
 vs-isilon      true         pvc-isilon                              8Gi           vsclass-isilon     snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   2m57s          12s
-``` 
+```
 
 </br>
 
@@ -590,13 +590,13 @@ oc get volumesnapshotcontent
 
 NAME                                               READYTOUSE   RESTORESIZE   DELETIONPOLICY   DRIVER                     VOLUMESNAPSHOTCLASS   VOLUMESNAPSHOT   VOLUMESNAPSHOTNAMESPACE   AGE
 snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-isilon.dellemc.com     vsclass-isilon        vs-isilon        default                   23s
-```  
+```
 </li>
-<br> 
+<br>
 
 <li>
 
-##### **Restore Snapshot** 
+##### **Restore Snapshot**
 
 </br>
 
@@ -609,7 +609,7 @@ oc apply -f pvc-isilon-restore.yaml
 Example:
 
 ```yaml
-cat << 'EOF' > pvc-isilon-restore.yaml  
+cat << 'EOF' > pvc-isilon-restore.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -627,7 +627,7 @@ spec:
     requests:
       storage: 8Gi
   EOF
-``` 
+```
 
 Verify restore pvc is created:
 
@@ -637,8 +637,8 @@ oc get pvc -n default
 NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
 pvc-isilon              Bound    ocp08-095f7d3c52   8Gi        RWO            isilon         <unset>                 7m34s
 pvc-isilon-restore      Bound    ocp08-19874e9042   8Gi        RWO            isilon         <unset>                 4s
-``` 
-</br> 
+```
+</br>
 </li>
 <li>
 
@@ -662,15 +662,15 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 </li>
 
 </ol>
-{{< /collapse >}} 
+{{< /collapse >}}
 
 
 
-{{< /accordion >}}  
+{{< /accordion >}}
 <br>
 {{< accordion id="Three" title="Modules" >}}
 
-<br>   
+<br>
 
 {{< cardcontainer >}}
 
@@ -678,9 +678,9 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
-{{< /accordion >}}  
+{{< /accordion >}}

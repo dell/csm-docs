@@ -462,8 +462,8 @@ on any worker node with access to the PowerMax array `000000000001` irrespective
 
 > A set of sample storage class definitions to enable topology-aware volume provisioning has been provided in the `csi-powermax/samples/storageclass` folder
 
-**Note** : 
-- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system. 
+**Note** :
+- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system.
 - It is assumed that NFS dependencies are configured by default on the node, as these dependencies are included in the default Linux OS package. For other protocols (iSCSI, FC, NVMe/TCP), all necessary connectivity checks between the initiator and target are performed before labels are added.
 
 You can check what labels your nodes contain by running
@@ -720,7 +720,7 @@ This method works with both `helm` and `operator` installations for PowerMax, au
 
 **Note:** ConfigMaps to specify credentials is deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. However, for backwards compatibility, you can still configure and use the PowerMax driver with the config map.
 
-**Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field
+**Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field.
 
 ## Multiple Availability Zones
 

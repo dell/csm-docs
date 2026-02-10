@@ -149,7 +149,7 @@ The `dellctl` tool can automatically install the CSI PowerStore driver and modul
     oc create -f csm-powerstore.yaml
     ```
 
-    <span><span/>{{< message text="19" >}}.
+    <span><span/>{{< message text="19" >}}
 
     Example:
     <div style="margin-bottom: -1.8rem">

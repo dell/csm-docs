@@ -1,6 +1,6 @@
 ---
 title: PowerMax
-linktitle: PowerMax 
+linktitle: PowerMax
 description: Troubleshooting PowerMax Driver
 ---
 <div class="tdleft">
@@ -21,7 +21,7 @@ description: Troubleshooting PowerMax Driver
 | `kubectl logs powermax-controller-<xyz> –n <namespace>` driver logs says connection refused and the reverseproxy logs says "Failed to setup server.(secrets \"secret-name\" not found)" | Make sure the given secret <secret-name> exist on the cluster |
 | nodestage is failing with error `Error invalid IQN Target iqn.EMC.0648.SE1F` | 1. Update initiator name to full default name , ex: iqn.1993-08.org.debian:01:e9afae962192 <br> 2.Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed and it should be full default name. |
 | Volume mount is failing on few OS(ex:VMware Virtual Platform) during node publish with error `wrong fs type, bad option, bad superblock` | 1. Check the multipath configuration(if enabled) 2. Edit Vm Advanced settings->hardware and add the param `disk.enableUUID=true` and reboot the node |
-| Standby controller pod is in crashloopbackoff state | Scale down the replica count of the controller pod's deployment to 1 using ```kubectl scale deployment <deployment_name> --replicas=1 -n <driver_namespace>``` |  
+| Standby controller pod is in crashloopbackoff state | Scale down the replica count of the controller pod's deployment to 1 using ```kubectl scale deployment <deployment_name> --replicas=1 -n <driver_namespace>``` |
 | When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](/docs/getting-started/installation/kubernetes/powermax/csmoperator/csm-modules/replication/#configuration-steps) to create it.|
 | PVC creation is failing with error `A problem occurred modifying the storage group resource: Failed to create batch task(s): The maximum allowed devices for a storage group has been exceeded`. This is because of a hardware limit of 4k devices in a storage group.| Create a separate Storage Class with a new unique `ApplicationPrefix` parameter (such as `ApplicationPrefix: OCPX`) or add a new unique `StorageGroup` parameter (such as `StorageGroup: "custom_SG_1"`) to place the provisioned volumes in a new Storage Group.|
 | Despite having `skipCertificateValidation` set to true, the driver fails to start with the following error appearing in the reverseproxy container logs: `[ERROR]  Failed to run server: secrets "xxx" not found`| Upgrade PowerMax ReverseProxy image to v2.16.0 or remove the `certSecret` field from your secret/configmap |

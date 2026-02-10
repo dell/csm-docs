@@ -22,6 +22,14 @@ Description: >
 > * <span><span/>{{< message text="14" >}}
 > * <span><span/>{{< message text="15" >}}
 > * <span><span/>{{< message text="16" >}}
+> * <span><span/>{{< message text="24" >}}
+
+## Release Notes for v1.16.1
+
+### Fixed Issues
+
+- CSM Operator – Fixed CSI sidecar images not updating when using a custom registry.
+- CSM Operator – Fixed offline bundle creation failing to fetch `docker.io/openpolicyagent/kube-mgmt:9.3.0` on OpenShift.
 
 ## Release Notes for v1.16.0
 
