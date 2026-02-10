@@ -70,7 +70,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
         skipCertificateValidation: false
         certSecret: my-unishpere-cert-secret
     ```
-     **Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field
+     **Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field    
 
 4. Create the `powermax-creds` Secret.
     ```bash
@@ -80,7 +80,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 5. Download the default values.yaml file.
     ```bash
     cd dell-csi-helm-installer
-    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.15.1/charts/csi-powermax/values.yaml
+    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-{{< version-docs key="driver_latestVersion" >}}/charts/csi-powermax/values.yaml
     ```
 
 6. Edit the newly created file and provide values for the following parameters.
@@ -126,7 +126,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 |<div style="text-align: left"> version |<div style="text-align: left"> Current version of the driver. Don't modify this value as this value will be used by the install script.                                                                                                                                                                                                                                                                        | Yes | {{< version-docs key="PMax_latestVersion" >}} |
 |<div style="text-align: left"> images |<div style="text-align: left"> List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.                                                                                                                                                                                                                                                         | Yes | "" || driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
 |<div style="text-align: left"> maxPowerMaxVolumesPerNode |<div style="text-align: left"> Specifies the maximum number of volume that can be created on a node.                                                                                                                                                                                                                                                                                                           | Yes| 0 |
-|<div style="text-align: left"> dynamicSGEnabled |<div style="text-align: left"> Enable/Disable creation of multiple storage groups with a single storage class. When enabled, driver dynamically creates multiple storage groups when the existing storage groups reach the maximum volume limit. | Yes| false |      
+|<div style="text-align: left"> dynamicSGEnabled |<div style="text-align: left"> Enable/Disable creation of multiple storage groups with a single storage class. When enabled, driver dynamically creates multiple storage groups when the existing storage groups reach the maximum volume limit. | Yes| false |
 |<div style="text-align: left"> **controller** |<div style="text-align: left"> Allows configuration of the controller-specific parameters.                                                                                                                                                                                                                                                                                                                     | - | - |
 | <div style="text-align: left"> controllerCount |<div style="text-align: left"> Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release                                                                                                                                                                                                                                                                                        | Yes | 2 |
 | <div style="text-align: left"> volumeNamePrefix |<div style="text-align: left"> Defines a string prefix for the names of PersistentVolumes created                                                                                                                                                                                                                                                                                                              | Yes | "k8s" |
@@ -251,4 +251,3 @@ Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any
 {{< /cardcontainer >}}
 
 {{< /accordion >}}
-

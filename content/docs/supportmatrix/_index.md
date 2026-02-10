@@ -11,7 +11,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm tdleft">}}
 | Prerequisites    | PowerStore         | PowerScale | PowerFlex | PowerMax | Unity XT | ObjectScale |
 | :--------------: | :----------------: | :--------: | :-------: | :------: | :------: | :--:
-| Version          | 3.6, 4.0, 4.1, 4.2 | OneFS 9.4, 9.5.0.x (x >= 5),<br>9.7, 9.8, 9.9, 9.10, 9.11, 9.12, 9.13 | 3.6.x, 4.5.x, 4.6.x, 4.8.x, 5.0  | Unisphere 10.0, 10.1, 10.2, 10.3 | 5.3.x, 5.4.x, 5.5 | 4.0 |
+| Version          | 3.6, 4.0, 4.1, 4.2 | OneFS 9.4, 9.5.0.x (x >= 5),<br>9.7, 9.8, 9.9, 9.10, 9.11, 9.12, 9.13 | 4.5.x, 4.6.x, 4.8.x, 5.0  | Unisphere 10.0, 10.1, 10.2, 10.3 | 5.3.x, 5.4.x, 5.5 | 4.0 |
 | OS Dependencies  | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils | nfs-utils | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)<br>nvme-cli | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | iscsi-initiator-utils<br>multipathd<br>nfs-utils | - |
 {{</table>}}
 
@@ -29,7 +29,6 @@ weight: 1
 |----------------------------|:----------------:      |
 | Kubernetes                 | 1.33, 1.34, 1.35       |
 | Red Hat OpenShift          | 4.17, 4.18, 4.19, 4.20 |
-| Mirantis Kubernetes Engine | 3.7.x                  |
 {{</table>}}
 
 **Notes:**
@@ -56,11 +55,12 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 |-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
-| 1.6.1  | <div style="text-align: left"> Storage </div>| Yes | No   | Yes   | Yes  | No   |
-| 1.5.2  | <div style="text-align: left"> Storage </div>| Yes | No   | Yes   | Yes   | No   |
+| 1.6  | <div style="text-align: left"> Storage </div>| Yes | No   | Yes   | Yes  | No   |
+| 1.5  | <div style="text-align: left"> Storage </div>| Yes | No   | Yes   | Yes   | No   |
 {{</table>}}
 
 **Notes:**
+- Resiliency, Replication, Observability, and Authorization modules are not supported.
 - PowerFlex 4.8 requires [SDC 3.6.6](https://quay.io/dell/storage/powerflex/sdc:3.6.6) version for compatibility.
 - PowerFlex 5.0 does not support SDC for SUSE Virtualization.
 
@@ -120,10 +120,10 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | OpenShift Version | Operator / CSM Combination |
 |------------------|-------------------|
-| 4.17 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
-| 4.18 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
-| 4.19 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
-| 4.20 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.15.1 </br>  1.11.0 / 1.16.0 |
+| 4.17 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 </br>  1.11.1 / 1.16.1 |
+| 4.18 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.1 / 1.15.1 </br>  1.11.1 / 1.16.1 |
+| 4.19 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.15.1 </br>  1.11.1 / 1.16.1 |
+| 4.20 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.1 / 1.15.1 </br>  1.11.1 / 1.16.1 |
 {{</ table >}}
 
 **Note:**

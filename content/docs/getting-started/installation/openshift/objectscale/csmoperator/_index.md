@@ -61,7 +61,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 ```bash
 oc new-project dell-cosi
 ```
-2. Create a new file called `secret.yaml` with the contents of the [configuration file](../../../kubernetes/cosi/configuration#configuration-file-example). Edit the file with parameters specific to the ObjectScale instance.
+2. Create a new file called `secret.yaml` with the contents of the [configuration file](../../../kubernetes/objectscale/configuration#configuration-file-example). Edit the file with parameters specific to the ObjectScale instance.
 ```yaml
 cat <<EOF > secret.yaml
 connections:

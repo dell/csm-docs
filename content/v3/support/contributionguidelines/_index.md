@@ -6,11 +6,6 @@ Description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) docs Contribution Guidelines
 ---
 
-
-{{% pageinfo color="primary" %}}
-<span><span/>{{< message text="17" >}}
-{{% /pageinfo %}}
-
 ### Contributing to CSM Docs
 
 Become one of the contributors to this project! 

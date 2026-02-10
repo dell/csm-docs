@@ -81,7 +81,7 @@ volume stats value under node should be set to true.
 
     **Note** :
     skipCertificateValidation flag is currently unsupported. Please refrain from changing its value.
-    
+
     Add more blocks similar to above for each PowerStore array if necessary. If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
     ### User Privileges
     The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
@@ -95,7 +95,7 @@ volume stats value under node should be set to true.
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.15.1/charts/csi-powerstore/values.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-{{< version-docs key="driver_latestVersion" >}}/charts/csi-powerstore/values.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 <ul>
@@ -134,7 +134,7 @@ volume stats value under node should be set to true.
 |<div style="text-align: left"> podmon.enabled |<div style="text-align: left"> Allows to enable/disable [Resiliency](./csm-modules/resiliency#powerstore-specific-recommendations) feature | No | false |
 |<div style="text-align: left"> multiNas.threshold |<div style="text-align: left"> Number of consecutive FS creation failures after which a NAS is put into cooldown. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore#multi-nas-support) for more details. | No | 5 |
 |<div style="text-align: left"> multiNas.cooldownPeriod |<div style="text-align: left"> Duration for which a NAS remains in cooldown once the threshold is reached. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore#multi-nas-support) for more details. | No | 5m |
-{{< /collapse >}} 
+{{< /collapse >}}
 </ul>
 
 1. Install the driver using `csi-install.sh` bash script by running

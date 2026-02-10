@@ -28,7 +28,7 @@ As part of the upgrade, modify the existing CSM object in the `authorization` na
 {{< collapse id="1" title="Example CSM Object Edits" card="false" >}}
 ```diff
 spec:
-+ version: v1.16.0
++ version: v1.16.1
   modules:
     - name: authorization-proxy-server
       enabled: true

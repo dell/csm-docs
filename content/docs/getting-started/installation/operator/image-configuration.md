@@ -6,15 +6,22 @@ description:
 toc_hide: true
 weight: 2
 ---
-> Starting from **CSM version 1.16**, users can utilize the **`spec.version`** parameter (as defined in the `sample.yaml` file) for both installation and upgrade. When using this parameter, there are two approaches:  
->  
-- **ConfigMap Approach:**  
-Create a ConfigMap specifying the required images and apply it to the operator’s namespace prior applying the CR. The operator will pull and apply the images defined in the ConfigMap.  
 
->NOTE: When a ConfigMap is applied, it takes precedence over all other settings. Any alternative image source configuration, such as custom registry, will be ignored.
+> **NOTE**: Starting from **CSM version 1.16**, users can utilize the `spec.version` parameter for automatic image management. **No ConfigMap or custom registry configuration needed**.
 
-   **Sample ConfigMap Configuration:**
-   ```yaml
+### Advanced Configuration
+
+Use these options only if you need to override standard behavior:
+
+#### ConfigMap Approach
+Create a `ConfigMap` that defines **all container images** for the CSM version being deployed, and apply it **before** creating the CR.
+
+**Important**: ConfigMap takes precedence over all other settings.
+
+**Certified OCP Example**: [OCP Example](https://github.com/dell/csm-operator/blob/main/samples/ocp/1.11.1/ocp_configmap.yaml)
+
+**Example for upstream k8s and OCP environments.**:
+ ```yaml
    apiVersion: v1
    kind: ConfigMap
    metadata:
@@ -22,7 +29,7 @@ Create a ConfigMap specifying the required images and apply it to the operator�
     namespace: dell-csm-operator
    data:
      versions.yaml: |
-       - version: v1.16.0
+       - version: {{< version-docs key="CSM_latestVersion" >}}
          images:
            powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.16.0
            powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
@@ -71,39 +78,46 @@ Create a ConfigMap specifying the required images and apply it to the operator�
            powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.14.0
            powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.14.0
            isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.14.0
-           ....
-   ```
- 
-- **Custom Registry Approach:**  
-Alternatively, you can specify `customRegistry` and `retainImageRegistryPath` in the configuration. The custom registry approach allows you to redirect all container image pulls to a registry of your choice while optionally preserving the original image path structure. This is useful in environments where images must be sourced from a private or enterprise-approved registry. If users want to use custom registry they must mirror all required images into the custom registry prior to upgrade.
+           ....  
+  ```
 
-   - **customRegistry** –  The customRegistry field in the CSM Custom Resource (CR) enables administrators to override the default image registry. When specified, all images are pulled from the custom registry using their default image names and paths, unless otherwise modified by additional configuration. 
+#### Custom Registry Approach
+Add `customRegistry` and `retainImageRegistryPath` to your CR:
 
-   - **retainImageRegistryPath** – The retainImageRegistryPath field is a boolean flag that determines whether the original image path structure should be preserved when using a custom registry. This parameter is only evaluated when customRegistry is set.
+**Configuration Parameters**
+- **customRegistry** – Override the default image registry by specifying your custom registry FQDN. When set, all images are pulled from your registry using their default image names and paths.
+- **retainImageRegistryPath** – Control whether to preserve the original image path structure when using a custom registry. This parameter only applies when `customRegistry` is set.
 
-      - retainImageRegistryPath: **false**  
-          When set to false, only the registry hostname is replaced. For example, with customRegistry=my.artifactory-registry.example, an image such as csi-vxflexos:v2.16.0 will be pulled from `my.artifactory-registry.example/csi-vxflexos:v2.16.0`.
-      - retainImageRegistryPath: **true**  
-          When set to true, the full original image path under the registry is retained. For example, with customRegistry=my.artifactory-registry.example, the same image will be pulled from `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`.
+**retainImageRegistryPath Options:**
+- **false** (Default) - Only the registry hostname is replaced  
+  *Example*: `customRegistry=my.artifactory-registry.example`  
+  Image `csi-vxflexos:v2.16.0` → `my.artifactory-registry.example/csi-vxflexos:v2.16.0`
 
->NOTE: The custom registry value must be Fully Qualified Domain Name (FQDN) and must not include any nested path or folder structure.
->For example: my.artifactory-registry.example  
+- **true** - Preserve the full original image path  
+  *Example*: `customRegistry=my.artifactory-registry.example`  
+  Image `csi-vxflexos:v2.16.0` → `my.artifactory-registry.example/dell/container-storage-modules/csi-vxflexos:v2.16.0`
 
-   **Sample CustomRegistry Configuration:**   
-   ```yaml
-   apiVersion: storage.dell.com/v1
-   kind: ContainerStorageModule
-   metadata:
-     name: powerflex
-     namespace: vxflexos
-   spec:
-     version: v1.16.0
-     customRegistry: my.artifactory-registry.example
-     retainImageRegistryPath: false
-     # Add fields here
-     driver:
-       ....
-   ```
-**If neither method is configured, the operator automatically falls back to using the default image set associated with the corresponding drivers and modules. In case the environment is offline, the user should use either a ConfigMap or customRegistry.**
+**Important Requirements:**
+- Custom registry must be a **Fully Qualified Domain Name (FQDN)**
+- **No nested paths or folder structures** allowed
+- **Mirror all required images** to your custom registry before installation
+
+```yaml
+apiVersion: storage.dell.com/v1
+kind: ContainerStorageModule
+metadata:
+  name: powerflex
+  namespace: vxflexos
+spec:
+  version: {{< version-docs key="CSM_latestVersion" >}}
+  customRegistry: my.artifactory-registry.example
+  retainImageRegistryPath: false
+  driver:
+    # ... driver configuration
+```
+
+**Priority Order**: ConfigMap (highest) → Custom Registry → Default Images (`spec.version`)
+
+If neither configuration method is provided, the operator automatically defaults to the image set associated with the relevant drivers and modules. For offline environments, users must supply either a `ConfigMap` or a `customRegistry`.
 
 >NOTE: If the upgrade using the version field fails, consult the [Operator Troubleshooting Guide](../troubleshooting/csmoperator/). If the issue persists, uninstall the existing resources and proceed with a fresh installation.
