@@ -21,7 +21,7 @@
   <meta itemprop="name" content="Troubleshooting">
   <meta itemprop="description" content="Operator Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI? How can I view detailed logs for the Container Storage Modules Operator? My Dell CSI Driver install failed. How do I fix it? My Container Storage Module Replication install fails to validate replication prechecks with ’no such host’. How to update resource limits for Container Storage Modules Operator when it is deployed using Operator hub Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? The Container Storage Modules Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage Module Operator">
   <meta itemprop="dateModified" content="2025-05-13T20:06:59+05:30">
-  <meta itemprop="wordCount" content="1418">
+  <meta itemprop="wordCount" content="1499">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Troubleshooting">
   <meta name="twitter:description" content="Operator Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI? How can I view detailed logs for the Container Storage Modules Operator? My Dell CSI Driver install failed. How do I fix it? My Container Storage Module Replication install fails to validate replication prechecks with ’no such host’. How to update resource limits for Container Storage Modules Operator when it is deployed using Operator hub Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? The Container Storage Modules Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage Module Operator">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.228464250afc6f835074d207d96c8598.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.d26748d177d41805057cf0d4100b9e00.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4299,6 +4299,14 @@ How to update resource limits for CSM Operator when it is deployed using Operato
       <tr>
           <td>fsGroupPolicy may not work as expected without root privileges for NFS only <a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
           <td>To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter</td>
+      </tr>
+      <tr>
+          <td>Port conflicts with the <code>external-health-monitor</code> sidecar using port 8080</td>
+          <td>After deploying PowerStore with <code>external-health-monitor</code> enabled, edit the deployment and modify the <code>--http-endpoint</code> for the <code>external-health-monitor</code> sidecar to something different than 8080.</td>
+      </tr>
+      <tr>
+          <td>Port 8080 conflicts when <code>CSM Disaster Recovery (DR)</code> is enabled</td>
+          <td>With the introduction of CSM Disaster Recovery (DR), this controller is enabled by default and uses port 8080. If the user has no need for this feature, they can disable it through the values file and setting it to false.</td>
       </tr>
   </tbody>
 </table>
