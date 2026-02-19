@@ -842,6 +842,8 @@ spec:
 
 The CSI PowerMax driver introduces support for dynamic creation and management of multiple Storage Groups under a single StorageClass. This feature enables scaling beyond the volume limit per SG, ensuring optimal utilization of the PowerMax array’s capacity while maintaining consistent performance characteristics.
 
+**Note:** This capability requires PowerMax 10.1.0 or later version
+
 #### Multiple Storage Groups per StorageClass
 - A single StorageClass can have multiple SGs associated with it under the same SLO.
 
