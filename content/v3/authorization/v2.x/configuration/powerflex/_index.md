@@ -21,15 +21,35 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
 2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
+   > **Purpose of this secret**: The `karavi-authorization-config` secret tells the Authorization sidecar proxy which localhost endpoint to listen on and where the actual storage array is located. The CSI driver sends requests to the localhost endpoint; the sidecar intercepts them, attaches the tenant token, and forwards them to the CSM Authorization Proxy Server, which then proxies to the actual storage array.
+
    | Parameter                 | Description                                                                                                      | Required | Default                        |
    | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
-   | username                  | Username for connecting to the backend storage array. This parameter is ignored.                                 | No       | -                              |
-   | password                  | Password for connecting to to the backend storage array. This parameter is ignored.                              | No       | -                              |
-   | intendedEndpoint          | HTTPS REST API endpoint of the backend storage array.                                                            | Yes      | -                              |
-   | endpoint                  | HTTPS localhost endpoint that the authorization sidecar will listen on.                                          | Yes      | https://localhost:9400         |
+   | username                  | Username for connecting to the backend storage array. This parameter is ignored when Authorization is enabled (credentials are managed via Vault). | No       | -                              |
+   | password                  | Password for connecting to the backend storage array. This parameter is ignored when Authorization is enabled (credentials are managed via Vault). | No       | -                              |
+   | intendedEndpoint          | HTTPS REST API endpoint of the backend storage array. This is the actual endpoint the Proxy Server will forward requests to. | Yes      | -                              |
+   | endpoint                  | HTTPS localhost endpoint that the authorization sidecar will listen on. The CSI driver is configured to send requests here instead of directly to the storage array. | Yes      | https://localhost:9400         |
    | systemID                  | System ID of the backend storage array.                                                                          | Yes      | " "                            |
-   | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No       | true                           |
-   | isDefault                 | A boolean that indicates if the array is the default array. This parameter is not used.                          | No       | default value from values.yaml |
+   | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used by the sidecar (certificate validation to the array is handled by the Proxy Server). | No       | true                           |
+   | isDefault                 | A boolean that indicates if the array is the default array. This parameter is not used by the sidecar.           | No       | default value from values.yaml |
+
+    Sample `karavi-authorization-config.json`:
+
+    ```json
+    {
+      "storageArrays": [
+        {
+          "username": "ignored",
+          "password": "ignored",
+          "intendedEndpoint": "https://10.0.0.1",
+          "endpoint": "https://localhost:9400",
+          "systemID": "1000000000000000",
+          "skipCertificateValidation": true,
+          "isDefault": true
+        }
+      ]
+    }
+    ```
 
     Create the karavi-authorization-config secret using this command:
 
@@ -39,6 +59,17 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     ```
 
 3. Create the proxy-server-root-certificate secret.
+
+    > **Purpose**: This secret contains the Root CA certificate used to establish **secure TLS communication between the Authorization sidecar** (running alongside the CSI driver) **and the CSM Authorization Proxy Server** (exposed via Ingress). It is **not** related to the TLS certificate of the backend storage array.
+
+    **Where to get `rootCertificate.pem`:**
+    - If CSM Authorization was installed with a **self-signed certificate** (via cert-manager), extract the CA certificate from the cert-manager CA secret in the `authorization` namespace.
+    - If CSM Authorization was installed with **your own certificate**, provide the **Root CA certificate that signed it** (the root of the certificate chain that the Proxy Server's TLS certificate was issued from).
+    - If running in **insecure mode** (not recommended for production), create the secret with empty data and set `skipCertificateValidation` to `true` in the driver configuration.
+
+    **Relationship with `skipCertificateValidation`:**
+    - When `SKIP_CERTIFICATE_VALIDATION` is set to `true` in the Authorization sidecar configuration (Step 5), the sidecar skips TLS verification of the Proxy Server, and this secret can be empty.
+    - When `SKIP_CERTIFICATE_VALIDATION` is set to `false`, this secret must contain a valid Root CA certificate.
 
     If running in *insecure* mode, create the secret with empty data:
 
