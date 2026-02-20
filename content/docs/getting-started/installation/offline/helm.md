@@ -6,7 +6,7 @@ description: Offline Helm Installation
 weight: 4
 ---
 
-## Workflow
+## Workflow:
 
 To perform an offline installation :
 
