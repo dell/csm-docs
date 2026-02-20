@@ -63,7 +63,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
     > **Purpose**: This secret contains the Root CA certificate used to establish **secure TLS communication between the Authorization sidecar** (running alongside the CSI driver) **and the CSM Authorization Proxy Server** (exposed via Ingress). It is **not** related to the TLS certificate of the backend storage array.
 
     **Where to get `rootCertificate.pem`:**
-    - If CSM Authorization was installed with a **self-signed certificate** (via cert-manager), extract the CA certificate from the cert-manager CA secret in the `authorization` namespace.
+    - If CSM Authorization was installed with a **self-signed certificate** (via cert-manager), extract the CA certificate from the cert-manager CA secret (e.g., `karavi-selfsigned-tls`) in the `authorization` namespace.
     - If CSM Authorization was installed with **your own certificate**, provide the **Root CA certificate that signed it** (the root of the certificate chain that the Proxy Server's TLS certificate was issued from).
     - If running in **insecure mode** (not recommended for production), create the secret with empty data and set `skipCertificateValidation` to `true` in the driver configuration.
 

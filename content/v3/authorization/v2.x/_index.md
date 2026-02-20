@@ -17,12 +17,12 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 The diagram above illustrates the end-to-end communication flow:
 
 1. **Tenant Application** sends a storage request (e.g., create volume) via a PersistentVolumeClaim.
-2. **CSI Driver** intercepts the request. An **Authorization sidecar proxy** is injected alongside the CSI driver, which attaches the tenant's access token to every outgoing storage request.
-3. The request is forwarded to the **CSM Authorization Proxy Server** (exposed via an Ingress controller, typically NGINX).
-4. The **Proxy Server** validates the access token, evaluates RBAC policies via Open Policy Agent (OPA), checks quota limits against Redis, and — if approved — proxies the request to the **backend Dell storage array** (e.g., PowerFlex, PowerMax, or PowerScale) using credentials stored in **HashiCorp Vault**.
+2. **CSI Driver** handles the request. An **Authorization sidecar proxy** is injected alongside the CSI driver, which attaches the tenant's access token to every outgoing storage request. The driver is configured to send requests to a localhost endpoint where the sidecar listens.
+3. The request is forwarded to the **CSM Authorization Proxy Server** (exposed via an Ingress controller).
+4. The **Proxy Server** validates the access token, evaluates RBAC policies via Open Policy Agent (OPA), checks quota limits against Redis, and — if approved — proxies the request to the **backend Dell storage array** (e.g., PowerFlex, PowerMax, PowerScale, or PowerStore) using credentials stored in **HashiCorp Vault**.
 5. The storage array processes the request and returns the response back through the proxy to the CSI driver.
 
-> **Key point**: The CSI driver and the storage array are unaware that authorization is taking place. The proxy transparently intercepts and validates all requests.
+> **Key point**: The storage array is unaware that authorization is taking place. The proxy transparently handles and validates all requests.
 
 This is the introduction to a Stateless Architecture for Authorization. The creation of storage, roles, and tenants is done through Custom Resources (CRs) which are tracked and contained within CSM Authorization. The underlying communication is consistent with the previous architecture which makes the creation of volumes and snapshots seamless.
 
@@ -40,52 +40,25 @@ CSM Authorization uses three types of JSON Web Tokens (JWTs):
 ### Access Token (Tenant)
 
 - **Purpose**: A short-lived token attached to every storage request by the Authorization sidecar proxy. The Proxy Server validates this token to authorize the request.
-- **Default expiration**: 30 minutes (configurable via `--access-token-expiration` during token generation).
+- **Default expiration**: 1 minute (configurable via `--access-token-expiration` during token generation).
 - **Behavior on expiry**: When the access token expires, the sidecar proxy automatically requests a new access token using the refresh token. **No manual intervention is required.**
 
 ### Refresh Token (Tenant)
 
 - **Purpose**: A longer-lived token used to obtain new access tokens without requiring the tenant to re-authenticate.
-- **Default expiration**: 1480 hours (~61 days) (configurable via `--refresh-token-expiration` during token generation).
-- **Behavior on expiry**: If the refresh token expires (e.g., the CSI driver is stopped for a period longer than the refresh token lifetime), **the Storage Administrator must generate a new token pair** using `dellctl generate token` and the Kubernetes Tenant Administrator must re-apply the new `proxy-authz-tokens` secret in the driver namespace.
+- **Default expiration**: 720 hours (30 days) (configurable via `--refresh-token-expiration` during token generation).
+- **Behavior on expiry**: The refresh token will expire after its configured lifetime regardless of whether the CSI driver pods are active or not. The refresh token is **not** automatically refreshed. When it expires, **the Storage Administrator must generate a new token pair** using `dellctl generate token` and the Kubernetes Tenant Administrator must re-apply the new `proxy-authz-tokens` secret in the driver namespace.
 
 ### Automatic Token Refresh
 
-The Authorization sidecar proxy handles token refresh **automatically**:
+The Authorization sidecar proxy handles access token refresh **automatically**:
 
 1. The sidecar attaches the access token to each storage request sent to the Proxy Server.
-2. If the Proxy Server returns HTTP 401 (token expired), the sidecar sends the refresh token along with the expired access token to request a new access token.
+2. If the Proxy Server returns HTTP 401 (indicating the access token has expired), the sidecar sends the refresh token to request a new access token.
 3. The Proxy Server validates the refresh token, checks that the tenant has not been revoked, and issues a new access token.
-4. The sidecar retries the original request with the new access token.
+4. Kubernetes retries the original CSI operation, and the sidecar attaches the new access token to the retried request.
 
-> **Important**: As long as the refresh token is valid, the token refresh is fully automatic. If the CSI driver pods are stopped for longer than the refresh token expiration period, new tokens must be manually generated and applied.
-
-## Tenant Token Generation — Access and Flow
-
-### Who Can Generate Tokens?
-
-Token generation is a **two-step process** with distinct access requirements:
-
-| Step | Command | Who | Requirements |
-| ---- | ------- | --- | ------------ |
-| 1. Generate admin token | `dellctl admin token` | Storage Administrator | Must know the JWT signing secret (`web.jwtsigningsecret`) configured during CSM Authorization installation. No Kubernetes cluster access or storage array access is required for this step alone. |
-| 2. Generate tenant token | `dellctl generate token` | Storage Administrator | Requires the admin token from Step 1 and network access to the CSM Authorization Proxy Server endpoint (via `--addr`). Does **not** require direct access to the storage array or Unisphere. |
-
-### Communication Path During Token Generation
-
-When generating tenant tokens via `dellctl generate token`:
-
-1. `dellctl` communicates **only with the CSM Authorization Proxy Server** (specified via `--addr`).
-2. The Proxy Server validates the admin token and generates the tenant access/refresh token pair.
-3. `dellctl` does **not** communicate directly with Unisphere or the storage array during token generation.
-
-> **Note**: Storage array credentials are stored in HashiCorp Vault and are accessed only by the CSM Authorization Proxy Server at runtime when proxying storage requests. Token generation does not involve the storage array.
-
-### Access Requirements Summary
-
-- **Kubernetes cluster access (kubeconfig)** is **not required** for token generation itself. However, the generated token secret must be applied to the tenant's Kubernetes cluster, which requires `kubectl` access to that cluster.
-- **Storage array / Unisphere access** is **not required** for token generation. The Proxy Server handles all storage array communication.
-- **Any user with the admin token and network access to the Proxy Server** can generate tenant tokens. Token generation is not restricted by Kubernetes RBAC or storage-level permissions — it is controlled by possession of the admin token and the JWT signing secret.
+> **Important**: Only the **access token** is refreshed automatically. The **refresh token** itself is never refreshed — it will expire after its configured lifetime regardless of driver activity. When the refresh token expires, new tokens must be manually generated and applied.
 
 ## Kubernetes Secrets Reference
 
@@ -93,7 +66,7 @@ When configuring a CSI driver with CSM Authorization, several Kubernetes secrets
 
 | Secret Name | Purpose | Contents | How It Is Created |
 | ----------- | ------- | -------- | ----------------- |
-| `proxy-authz-tokens` | Stores the tenant's access and refresh tokens used by the Authorization sidecar to authenticate with the Proxy Server. | Base64-encoded `access` and `refresh` JWT tokens. | Generated by `dellctl generate token` and applied via `kubectl apply -f token.yaml`. |
+| `proxy-authz-tokens` | Stores the tenant's access and refresh tokens used by the Authorization sidecar to authenticate with the Proxy Server. | Base64-encoded `access` and `refresh` JWT tokens. | Generated by `dellctl generate token` and applied via `kubectl apply -f token.yaml -n [CSI_DRIVER_NAMESPACE]`. Alternatively, the output of `dellctl generate token` can be piped directly to `kubectl`. |
 | `karavi-authorization-config` | Configures the Authorization sidecar with backend storage array connection information. Tells the sidecar which localhost endpoint to listen on and which storage array the requests are intended for. | JSON configuration with `endpoint` (localhost address the sidecar listens on), `intendedEndpoint` (actual storage array URL), `systemID`, etc. | Created manually from the sample `karavi-authorization-config.json` file in the CSI driver repository. |
 | `proxy-server-root-certificate` | Contains the Root CA certificate used to validate TLS connections between the CSI driver's Authorization sidecar and the CSM Authorization Proxy Server. | A PEM-encoded root CA certificate under the key `rootCertificate.pem`. | Created manually. See [proxy-server-root-certificate details](#proxy-server-root-certificate-details) below. |
 
@@ -105,34 +78,37 @@ The `proxy-server-root-certificate` secret enables **secure TLS communication** 
 
 **Where to get `rootCertificate.pem`:**
 
-- If CSM Authorization was installed with a **self-signed certificate** (via cert-manager), you can extract the CA certificate from the cert-manager CA secret in the `authorization` namespace.
+- If CSM Authorization was installed with a **self-signed certificate** (via cert-manager), you can extract the CA certificate from the cert-manager CA secret (e.g., `karavi-selfsigned-tls`) in the `authorization` namespace.
 - If CSM Authorization was installed with **your own certificate**, provide the **Root CA certificate that signed it**. This is the root of the certificate chain that the Proxy Server's TLS certificate was issued from.
 - If running in **insecure mode** (not recommended for production), create the secret with empty data and set `skipCertificateValidation` to `true` in the driver configuration.
 
 **Relationship with `skipCertificateValidation`:**
 
-- `skipCertificateValidation: true` in the driver/sidecar configuration (e.g., `SKIP_CERTIFICATE_VALIDATION` environment variable) causes the sidecar to **skip TLS verification** of the Proxy Server's certificate. In this case, the `proxy-server-root-certificate` secret can be empty.
-- `skipCertificateValidation: false` requires the `proxy-server-root-certificate` secret to contain a valid Root CA so the sidecar can verify the Proxy Server's TLS certificate.
+In the **driver secret** (e.g., `vxflexos-config`, `isilon-creds`, `powermax-creds`, `powerstore-config`), `skipCertificateValidation` **must always be set to `true`** when CSM Authorization is enabled. This is because the Authorization sidecar generates a self-signed certificate on the fly for the localhost endpoint, and the driver does not have this certificate.
 
-> **Note**: The `skipCertificateValidation` parameter in the **Storage CR** (under `spec.skipCertificateValidation`) is a separate setting that controls certificate validation between the **Proxy Server and the backend storage array**, not between the sidecar and the Proxy Server.
+The `SKIP_CERTIFICATE_VALIDATION` setting in the CSI driver Helm values or CSM Operator CR is a **separate** setting that controls whether the Authorization sidecar validates the Proxy Server's TLS certificate:
+
+- `SKIP_CERTIFICATE_VALIDATION: true` causes the sidecar to **skip TLS verification** of the Proxy Server's certificate. In this case, the `proxy-server-root-certificate` secret can be empty.
+- `SKIP_CERTIFICATE_VALIDATION: false` requires the `proxy-server-root-certificate` secret to contain a valid Root CA so the sidecar can verify the Proxy Server's TLS certificate.
+
+> **Note**: The `skipCertificateValidation` parameter in the **Storage CR** (under `spec.skipCertificateValidation`) is yet another separate setting that controls certificate validation between the **Proxy Server and the backend storage array**.
 
 ## Why CSI Driver Configuration Is Still Required (Step 6)
 
-Even when using the CSM Authorization proxy, the CSI driver still requires configuration (Helm values and/or Kubernetes secrets) because:
+Even when using the CSM Authorization proxy, the CSI driver still requires configuration (Helm values or CSM Operator CR, and Kubernetes secrets) because:
 
-1. **Endpoint redirection**: The driver must be configured to send requests to `https://localhost:<port>` (e.g., `https://localhost:9400`) instead of the actual storage array endpoint. This localhost address is where the Authorization sidecar listens and intercepts requests.
-2. **Sidecar enablement**: The driver's Helm values must enable the Authorization module and specify the sidecar image, proxy host, and certificate validation settings.
+1. **Endpoint redirection**: The driver must be configured to send requests to `https://localhost:<port>` (e.g., `https://localhost:9400`) instead of the actual storage array endpoint. This localhost address is where the Authorization sidecar listens and handles requests.
+2. **Sidecar enablement**: The driver's Helm values or CSM Operator CR must enable the Authorization module and specify the sidecar image, proxy host, and certificate validation settings.
 3. **Reverse proxy configuration** (PowerMax only): PowerMax requires the CSI Reverse Proxy to be configured as a sidecar and pointed to the localhost endpoint.
 
-The driver credentials (`username`/`password`) are ignored when Authorization is enabled — the Proxy Server uses credentials from Vault instead. However, the fields must still be present in the configuration (they can be left as placeholder values).
+The driver credentials (`username`/`password`) in the driver secret are ignored when Authorization is enabled — the Proxy Server uses credentials from HashiCorp Vault instead. However, the fields must still be present in the configuration (they can be left as placeholder values).
 
 ## Exposing the CSM Authorization Proxy Server
 
-By default, CSM Authorization deploys an **NGINX Ingress Controller** to expose the Proxy Server outside the Kubernetes cluster. However, NGINX is **not mandatory**.
+The CSM Authorization Proxy Server is exposed outside the Kubernetes cluster via an Ingress controller.
 
-### Using NGINX (Default)
-
-The Helm chart includes an optional NGINX Ingress Controller deployment (`nginx.enabled: true`). This creates an Ingress resource for the `proxy-server` service. Set `nginx.enabled: false` if you already have an Ingress Controller installed in your cluster.
+- **Kubernetes**: Both the Helm chart and CSM Operator support deploying an optional NGINX Ingress Controller. In Helm, set `nginx.enabled: true` (or `false` if you already have an Ingress Controller). In the CSM Operator, configure the corresponding NGINX component in the Custom Resource.
+- **OpenShift**: OpenShift provides a default Ingress controller (OpenShift Router). Set the `openshift` parameter accordingly in the Helm chart or CSM Operator Custom Resource.
 
 ## CSM for Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
