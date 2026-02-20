@@ -63,9 +63,9 @@ Create a `ConfigMap` that defines **all container images** for the CSM version b
            role-service: quay.io/dell/container-storage-modules/csm-authorization-role:v2.4.0
            storage-service: quay.io/dell/container-storage-modules/csm-authorization-storage:v2.4.0
            opa: docker.io/openpolicyagent/opa:0.70.0
-           opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.3.0
+           opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.2.1
            authorization-controller: quay.io/dell/container-storage-modules/csm-authorization-controller:v2.4.0
-           redis: redis:8.2.0-alpine
+           redis: redis:8.4.0-alpine
            commander: docker.io/rediscommander/redis-commander:latest
        - version: v1.15.0
          images:
