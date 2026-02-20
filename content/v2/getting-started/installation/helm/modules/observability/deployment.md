@@ -150,9 +150,7 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
        kubectl get configmap [POWERMAX-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, and `proxy-authz-tokens` secrets from the CSI PowerMax namespace into the CSM for Observability namespace:
-
-       > **Note**: These secrets were created during the [CSM Authorization configuration for PowerMax](../../authorizationv2-0/#configuring-a-dell-csi-driver-with-container-storage-modules-for-authorization). The `sed` commands below rename the secrets with a `powermax-` prefix so they do not conflict with secrets from other drivers in the shared Observability namespace. Replace `[CSI_DRIVER_NAMESPACE]` with the actual CSI PowerMax driver namespace (e.g., `powermax`) and `[CSM_NAMESPACE]` with the Observability namespace (e.g., `karavi`).
+    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, and `proxy-authz-tokens` Secrets from the CSI PowerMax namespace into the CSM for Observability namespace:
 
        ```bash
 

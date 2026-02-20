@@ -11,7 +11,7 @@ tags:
 
 The following diagram shows a high-level overview of Container Storage Modules for Authorization with a `tenant-app` that is using a CSI driver to perform storage operations through the CSM for Authorization `proxy-server` to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.
 
-![Alt text](../../../../images/authorization/v2.x/image.png)
+![Alt text](../../../../images/authorization/v2.x/image_new.png)
 
 ### Diagram Explanation
 
