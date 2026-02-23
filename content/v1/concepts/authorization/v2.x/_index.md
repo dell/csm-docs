@@ -15,17 +15,40 @@ The following diagram shows a high-level overview of Container Storage Modules f
 
 ### Diagram Explanation
 
-The diagram above illustrates the end-to-end communication flow:
+The diagram above illustrates the CSM Authorization architecture:
 
-1. **Tenant Application** sends a storage request (e.g., create volume) via a PersistentVolumeClaim.
-2. **CSI Driver** handles the request. An **Authorization sidecar proxy** is injected alongside the CSI driver, which attaches the tenant's access token to every outgoing storage request. The driver is configured to send requests to a localhost endpoint where the sidecar listens.
-3. The request is forwarded to the **CSM Authorization Proxy Server** (exposed via an Ingress controller).
-4. The **Proxy Server** validates the access token, evaluates RBAC policies via Open Policy Agent (OPA), checks quota limits against Redis, and — if approved — proxies the request to the **backend Dell storage array** (e.g., PowerFlex, PowerMax, PowerScale, or PowerStore) using credentials provided via a Kubernetes Secret or a SecretProviderClass (for dynamic secrets from external providers).
-5. The storage array processes the request and returns the response back through the proxy to the CSI driver.
+> **Note**: The Driver Namespace and Authorization Namespace can reside on different Kubernetes clusters or on the same cluster.
 
-> **Key point**: The storage array is unaware that authorization is taking place. The proxy transparently handles and validates all requests.
+#### Driver Namespace (Tenant)
 
-This is the introduction to a Stateless Architecture for Authorization. The creation of storage, roles, and tenants is done through Custom Resources (CRs) which are tracked and contained within CSM Authorization. The underlying communication is consistent with the previous architecture which makes the creation of volumes and snapshots seamless.
+1. An **Application pod** issues a storage request (e.g., create volume) via a PersistentVolumeClaim.
+2. The **CSI Driver Pod** contains the **CSI Driver Container** (with Controller and Node components) and an **Authorization sidecar**. The sidecar:
+   - Injects a Bearer JWT token into every outgoing storage request.
+   - Adds forward headers for request routing.
+   - Auto-refreshes access tokens using the refresh token before they expire. If the refresh token expires, new tokens must be manually generated and applied.
+   - Presents a self-signed TLS certificate on the localhost endpoint where the driver sends requests.
+3. The sidecar forwards the request over **HTTPS + JWT** to the Authorization Proxy Server.
+
+#### Authorization Namespace (Proxy)
+
+4. The **Authorization Proxy Server** receives the request and performs **JWT Validation** to authenticate the tenant.
+5. The **Dispatch Handler** routes the request to the appropriate storage backend handler (PowerMax, PowerFlex, PowerStore, or PowerScale).
+6. The following services support the proxy server:
+   - **Tenant Service** — manages tenant configurations and generates JSON Web Tokens.
+   - **Role Service** — manages roles that tenants are bound to.
+   - **Storage Service** — manages backend storage array configurations and makes **Storage API calls** to the arrays.
+7. **Redis (Sentinel)** stores tenant data, enforces quota limits, and handles SDC approval.
+8. **Open Policy Agent (OPA)** evaluates RBAC policies and issues Allow/Deny decisions for each request.
+9. The **CR Controller** manages Custom Resources for Storage, CSM Tenant, and CSM Role definitions.
+10. The **Credentials Manager** retrieves array credentials via the **Kubernetes Secrets Store CSI driver** (supporting Secrets, Vault, or Conjur).
+
+#### Backend Storage
+
+11. Once authorized, the proxy server makes **Driver API calls** to the backend Dell storage arrays (PowerMax, PowerFlex, PowerStore, or PowerScale). The storage array processes the request and returns the response back through the proxy to the CSI driver.
+
+> **Key point**: The storage array is unaware that authorization is taking place. The authorization proxy transparently handles and validates all requests.
+
+This is a Stateless Architecture for Authorization. The creation of storage, roles, and tenants is done through Custom Resources (CRs) which are tracked and contained within CSM Authorization. The underlying communication is consistent with the previous architecture which makes the creation of volumes and snapshots seamless.
 
 ## Token Types and Lifecycle
 
