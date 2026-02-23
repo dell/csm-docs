@@ -134,10 +134,10 @@ The driver credentials in the driver secret (e.g., `username`/`password`) are re
 For PowerMax, the request path includes an additional CSI Reverse Proxy component:
 
 ```
-CSI Driver → CSI Reverse Proxy (sidecar) → Authorization Sidecar (localhost:9400) → Authorization Proxy Server (via Ingress) → PowerMax Unisphere
+CSI Driver → CSI Reverse Proxy (sidecar) → Authorization Sidecar (localhost) → Authorization Proxy Server (via Ingress) → PowerMax Unisphere
 ```
 
-- The **CSI Reverse Proxy** is deployed as a sidecar in the driver pod and forwards requests to `localhost:9400`.
+- The **CSI Reverse Proxy** is deployed as a sidecar in the driver pod and forwards requests to a localhost endpoint where the Authorization Sidecar listens. The port is configurable and may differ per array in multi-array configurations.
 - The **Authorization Sidecar** (also in the driver pod) injects the JWT token and forwards the request to the Authorization Proxy Server.
 - The **Authorization Proxy Server** validates the token, applies RBAC/quota policies, and proxies the request to Unisphere using its own credentials.
 
@@ -153,7 +153,7 @@ The CSM Authorization Proxy Server is exposed outside the Kubernetes cluster via
 **Additional notes:**
 
 - **cert-manager**: The Helm chart can optionally deploy cert-manager to generate a self-signed TLS certificate for the Authorization Ingress. If cert-manager is already installed and managed separately in your cluster, set `cert-manager.enabled: false` in the Helm values.
-- **Hostname resolution**: The default hostname for the Authorization Proxy Server (e.g., `csm-authorization.com`) must be resolvable from the CSI driver namespace. You can add an entry to `/etc/hosts` on the relevant nodes, or configure your organization's **DNS** to resolve the hostname to the Ingress controller's external IP address.
+- **Hostname resolution**: The default hostname `csm-authorization.com` is a **placeholder** and must be replaced with a real hostname that is resolvable via **DNS** from the CSI driver pods. Configure your organization's DNS to resolve the chosen hostname to the Ingress controller's external IP address.
 - **`proxyHost`**: The `proxyHost` value configured in the CSI driver Helm values or CSM Operator CR is the hostname of the Authorization Proxy Server. The Authorization sidecar reads this value to know where to forward requests. This is **not** the same as the `endpoint` field in the driver secret, which is always `https://localhost:<port>` (the sidecar's local listener).
 
 ## Container Storage Modules for Authorization Capabilities
