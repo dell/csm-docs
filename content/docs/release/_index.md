@@ -28,7 +28,7 @@ Description: >
 
 ### Fixed Issues
 
-- CSM PowerMax - Fix Clone API Failure on V3 Microcode Arrays by Enforcing Version-Based Fallback to Legacy Snapshot Workflow
+- CSM PowerMax - Fix Clone API Failure on V3 Microcode Arrays by Enforcing Version-Based Fallback to Legacy Snapshot Workflow 
 
 ## Release Notes for v1.16.1
 
