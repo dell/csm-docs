@@ -24,6 +24,12 @@ Description: >
 > * <span><span/>{{< message text="16" >}}
 > * <span><span/>{{< message text="24" >}}
 
+## Release Notes for v1.16.2
+
+### Fixed Issues
+
+- CSM PowerMax - Fix Clone API Failure on V3 Microcode Arrays by Enforcing Version-Based Fallback to Legacy Snapshot Workflow 
+
 ## Release Notes for v1.16.1
 
 ### Fixed Issues
