@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2026-02-09T16:00:05-05:00">
+    <meta property="article:modified_time" content="2026-02-24T18:54:45+05:30">
 
   <meta itemprop="name" content="Installation Wizard Operator">
   <meta itemprop="description" content="Container Storage Modules Installation Wizard">
-  <meta itemprop="dateModified" content="2026-02-09T16:00:05-05:00">
+  <meta itemprop="dateModified" content="2026-02-24T18:54:45+05:30">
   <meta itemprop="wordCount" content="754">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Wizard Operator">
@@ -74,10 +74,10 @@
       
     
     
-    1.16.1
+    1.16.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -204,7 +204,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d26748d177d41805057cf0d4100b9e00.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc89207edf38938d02b3775acab90ebb.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4174,7 +4174,7 @@ ConfigMap Approach <a class="header-link"  href="#configmap-approach" style=" di
             </svg>
         </a></h4><p>Create a <code>ConfigMap</code> that defines <strong>all container images</strong> for the CSM version being deployed, and apply it <strong>before</strong> creating the CR.</p>
 <p><strong>Important</strong>: ConfigMap takes precedence over all other settings.</p>
-<p><strong>Certified OCP Example</strong>: <a href="https://github.com/dell/csm-operator/blob/main/samples/ocp/1.11.1/ocp_configmap.yaml">OCP Example</a></p>
+<p><strong>Certified OCP Example</strong>: <a href="https://github.com/dell/csm-operator/blob/main/samples/ocp/1.11.2/ocp_configmap.yaml">OCP Example</a></p>
 <p><strong>Example for upstream k8s and OCP environments.</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ConfigMap</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4183,12 +4183,12 @@ ConfigMap Approach <a class="header-link"  href="#configmap-approach" style=" di
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">dell-csm-operator</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">versions.yaml</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      - version: v1.16.1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      - version: v1.16.2
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        images:
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.16.0
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.16.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powermax: quay.io/dell/container-storage-modules/csi-powermax:v2.16.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          powermax: quay.io/dell/container-storage-modules/csi-powermax:v2.16.1
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          karavi-authorization-proxy: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.4.0
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          podmon: quay.io/dell/container-storage-modules/podmon:v1.15.0
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          otel-collector: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.143.1
@@ -4199,7 +4199,7 @@ ConfigMap Approach <a class="header-link"  href="#configmap-approach" style=" di
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          metrics-powerscale: quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.11.0
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          dell-csi-replicator: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.14.0
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          dell-replication-controller-manager: quay.io/dell/container-storage-modules/dell-replication-controller:v1.14.0
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          csipowermax-reverseproxy: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.0
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          csipowermax-reverseproxy: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.1
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          sdc: quay.io/dell/storage/powerflex/sdc:5.0
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          sdc-monitor: quay.io/dell/storage/powerflex/sdc:5.0
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          provisioner: registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
@@ -4270,7 +4270,7 @@ Image <code>csi-vxflexos:v2.16.1</code> → <code>my.artifactory-registry.exampl
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerflex</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1.16.1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1.16.2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">customRegistry</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">my.artifactory-registry.example</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">retainImageRegistryPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
