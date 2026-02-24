@@ -82,7 +82,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 5. Download the default values.yaml file.
     ```bash
     cd dell-csi-helm-installer
-    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-{{< version-docs key="driver_latestVersion" >}}/charts/csi-powermax/values.yaml
+    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-{{< version-docs key="PMax_latestVersion" >}}/charts/csi-powermax/values.yaml
     ```
 
 6. Edit the newly created file and provide values for the following parameters.
