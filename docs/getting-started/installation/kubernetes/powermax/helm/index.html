@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Helm Installation">
-  <meta itemprop="dateModified" content="2026-02-07T14:36:01-05:00">
+  <meta itemprop="dateModified" content="2026-02-24T18:54:45+05:30">
   <meta itemprop="wordCount" content="2695">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
@@ -73,10 +73,10 @@
       
     
     
-    1.16.1
+    1.16.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d26748d177d41805057cf0d4100b9e00.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc89207edf38938d02b3775acab90ebb.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4283,7 +4283,7 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 <ol>
 <li>
 <p>Clone the csi-powermax repository, using the latest release branch. This will include the Helm charts and dell-csi-helm-installer scripts.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v2.16.0 https://github.com/dell/csi-powermax.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v2.16.1 https://github.com/dell/csi-powermax.git
 </span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> ./csi-powermax
 </span></span></code></pre></div></li>
 <li>
@@ -4321,7 +4321,7 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 <li>
 <p>Download the default values.yaml file.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer
-</span></span><span style="display:flex;"><span>wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.16.0/charts/csi-powermax/values.yaml
+</span></span><span style="display:flex;"><span>wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-v2.16.1/charts/csi-powermax/values.yaml
 </span></span></code></pre></div></li>
 <li>
 <p>Edit the newly created file and provide values for the following parameters.</p>
@@ -4572,7 +4572,7 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
           <td><div style="text-align: left"> version</td>
           <td><div style="text-align: left"> Current version of the driver. Don&rsquo;t modify this value as this value will be used by the install script.</td>
           <td>Yes</td>
-          <td>v2.16.0</td>
+          <td>v2.16.1</td>
       </tr>
       <tr>
           <td><div style="text-align: left"> images</td>
