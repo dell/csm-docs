@@ -21,7 +21,7 @@ weight: 1
 |<div style="text-align:left"> COSI | {{< version-docs key="cosi" >}} |
 {{</table>}}
 
-### Container Storage Modules Certified Operator 1.11.1 Images
+### Container Storage Modules Certified Operator 1.11.2 Images
 
 <ul>
 {{< collapse id="1" title="PowerStore" show="true">}}
@@ -29,7 +29,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
 | 2.16.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerstore@sha256:4be94a81d2bfdabacb686d3061ef9b71861f21efd6678b23c418c484dd10d2f9 |
 | 1.14.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powerstore@sha256:e02dbcb245797cbf6c6ad22803ff3c38f5be5690b18502d00af134a9c15531c9 |
 | 6.1.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:6b5a502366ecd4ed81bcdc768699fe431ab70437324f5a7883e9f49a5d640863 |
@@ -55,7 +55,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-proxy@sha256:38d2ad1b4bc75f1d6bb638d0cf22a71dfb9cbfed6e7f93fbc0d026bc2c95d2d7 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-tenant@sha256:16f2540cf1dc278fc285ffe9d063c84e7998f76b99dd8276f1304ecaf2dd99b0 |
 | 2.4.0  |<div style="text-align:left">  registry.connect.redhat.com/dell-emc/dell-csm-authorization-role@sha256:c869424c422aa2f1cba1c7ea87cf1304503c00b9b263afb5a018afbbbad629e2 |
@@ -74,7 +74,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
 | 2.16.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerscale@sha256:ecee95824ca006e5824f092ad410af360814b88dc242237c1f2ed792feb83c54 |
 | 1.11.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powerscale@sha256:a1b24f964308efc7d21e0496dbbe602819ac9ef1115899646a058665f3fb83a0 |
 | 6.1.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:6b5a502366ecd4ed81bcdc768699fe431ab70437324f5a7883e9f49a5d640863 |
@@ -100,7 +100,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-proxy@sha256:38d2ad1b4bc75f1d6bb638d0cf22a71dfb9cbfed6e7f93fbc0d026bc2c95d2d7 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-tenant@sha256:16f2540cf1dc278fc285ffe9d063c84e7998f76b99dd8276f1304ecaf2dd99b0 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-role@sha256:c869424c422aa2f1cba1c7ea87cf1304503c00b9b263afb5a018afbbbad629e2 |
@@ -119,7 +119,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
 | 2.16.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerflex@sha256:96e270ec08263da917e4ad4c9aab897e5d519c1b5003fdf245e25ecfef7d1cb5 |
 | 1.14.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powerflex@sha256:439656d2a594ee43fe95b1dee29daa6efcebc6a71b7f779c4bd88dd37315aac1 |
 | 5.0 |<div style="text-align:left"> quay.io/dell/storage/powerflex/sdc@sha256:1436844390ea95507bf0a24c68a300a355f010a90ed654a42a1f091482b6a0fc |
@@ -146,7 +146,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-proxy@sha256:38d2ad1b4bc75f1d6bb638d0cf22a71dfb9cbfed6e7f93fbc0d026bc2c95d2d7 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-tenant@sha256:16f2540cf1dc278fc285ffe9d063c84e7998f76b99dd8276f1304ecaf2dd99b0 |
 | 2.4.0  |<div style="text-align:left">  registry.connect.redhat.com/dell-emc/dell-csm-authorization-role@sha256:c869424c422aa2f1cba1c7ea87cf1304503c00b9b263afb5a018afbbbad629e2 |
@@ -165,9 +165,9 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
-| 2.16.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax@sha256:75737812107b0f7c7e4351851b70c1d778c5b0e63aa790d0ab64d4e7ebcffd86 |
-| 2.15.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax-reverseproxy@sha256:f29eb52bf3dcee52d79c3f99ee9e391fd544d7d38e4f7b371296f248a509074e |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
+| 2.16.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax@sha256:ae69cdc9b0afca8ff91bc8b763ac3a864afc221e5044a123674a79fbbb24d087 |
+| 2.15.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax-reverseproxy@sha256:fab25a4fcad61509ba774bda2675c7a94547f544a90f6462ac2c5e8e6ebd02b8 |
 | 1.9.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powermax@sha256:4db12d3d888b537012394dc69b440568ee96a5495e508fc25bef92acb2393edd |
 | 6.1.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:6b5a502366ecd4ed81bcdc768699fe431ab70437324f5a7883e9f49a5d640863 |
 | 4.10.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-attacher@sha256:8a46d7ecbb798f19d7ccd7e510a2efec00ae7ba50fd82cc2f5ac45cedbab0bc1 |
@@ -192,7 +192,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-proxy@sha256:38d2ad1b4bc75f1d6bb638d0cf22a71dfb9cbfed6e7f93fbc0d026bc2c95d2d7 |
 | 2.4.0  |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-tenant@sha256:16f2540cf1dc278fc285ffe9d063c84e7998f76b99dd8276f1304ecaf2dd99b0 |
 | 2.4.0  |<div style="text-align:left">  registry.connect.redhat.com/dell-emc/dell-csm-authorization-role@sha256:c869424c422aa2f1cba1c7ea87cf1304503c00b9b263afb5a018afbbbad629e2 |
@@ -212,7 +212,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
 | 1.0.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-cosi@sha256:e3d33cb6d804431a713e0ddf0f8881460c421c97f27d4842bb966237b41d0a9f |
 | 6.1.0 |<div style="text-align:left"> gcr.io/k8s-staging-sig-storage/objectstorage-sidecar@sha256:1a357bc1c0ad47e1b223ed605a281b75188ca605ae35cb1e6fb8010ab5bae189 |
 {{</table>}}
@@ -224,7 +224,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |
 | - | - |
-| 1.11.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:f80c4fe9f439040a417e008a83e033892bedae3ef10246df7e0787915f7ed003 |
+| 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
 | 2.15.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-unity@sha256:92e0286ce4cc6d16e98683629ded9c36e3725ad268018915e4ab36057d0f0f4a |
 | 6.1.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:6b5a502366ecd4ed81bcdc768699fe431ab70437324f5a7883e9f49a5d640863 |
 | 4.10.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-attacher@sha256:8a46d7ecbb798f19d7ccd7e510a2efec00ae7ba50fd82cc2f5ac45cedbab0bc1 |
