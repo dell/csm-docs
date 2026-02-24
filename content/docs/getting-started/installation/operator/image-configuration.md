@@ -18,7 +18,7 @@ Create a `ConfigMap` that defines **all container images** for the CSM version b
 
 **Important**: ConfigMap takes precedence over all other settings.
 
-**Certified OCP Example**: [OCP Example](https://github.com/dell/csm-operator/blob/main/samples/ocp/1.11.1/ocp_configmap.yaml)
+**Certified OCP Example**: [OCP Example](https://github.com/dell/csm-operator/blob/main/samples/ocp/1.11.2/ocp_configmap.yaml)
 
 **Example for upstream k8s and OCP environments.**:
  ```yaml
@@ -34,7 +34,7 @@ Create a `ConfigMap` that defines **all container images** for the CSM version b
            powerstore: quay.io/dell/container-storage-modules/csi-powerstore:v2.16.0
            powerflex: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
            isilon: quay.io/dell/container-storage-modules/csi-isilon:v2.16.0
-           powermax: quay.io/dell/container-storage-modules/csi-powermax:v2.16.0
+           powermax: quay.io/dell/container-storage-modules/csi-powermax:v2.16.1
            karavi-authorization-proxy: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.4.0
            podmon: quay.io/dell/container-storage-modules/podmon:v1.15.0
            otel-collector: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.143.1
@@ -45,7 +45,7 @@ Create a `ConfigMap` that defines **all container images** for the CSM version b
            metrics-powerscale: quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.11.0
            dell-csi-replicator: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.14.0
            dell-replication-controller-manager: quay.io/dell/container-storage-modules/dell-replication-controller:v1.14.0
-           csipowermax-reverseproxy: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.0
+           csipowermax-reverseproxy: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.1
            sdc: quay.io/dell/storage/powerflex/sdc:5.0
            sdc-monitor: quay.io/dell/storage/powerflex/sdc:5.0
            provisioner: registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
@@ -63,9 +63,9 @@ Create a `ConfigMap` that defines **all container images** for the CSM version b
            role-service: quay.io/dell/container-storage-modules/csm-authorization-role:v2.4.0
            storage-service: quay.io/dell/container-storage-modules/csm-authorization-storage:v2.4.0
            opa: docker.io/openpolicyagent/opa:0.70.0
-           opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.3.0
+           opa-kube-mgmt: docker.io/openpolicyagent/kube-mgmt:9.2.1
            authorization-controller: quay.io/dell/container-storage-modules/csm-authorization-controller:v2.4.0
-           redis: redis:8.2.0-alpine
+           redis: redis:8.4.0-alpine
            commander: docker.io/rediscommander/redis-commander:latest
        - version: v1.15.0
          images:
