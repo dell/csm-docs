@@ -22,6 +22,4 @@ description: Troubleshooting PowerStore Driver
 | Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version | Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the `verify.sh` to continue.| 
 | Volumes are not getting deleted on the array when PV's are deleted | Ensure `persistentVolumeReclaimPolicy` is set to Delete. |
 | fsGroupPolicy may not work as expected without root privileges for NFS only [https://github.com/kubernetes/examples/issues/260](https://github.com/kubernetes/examples/issues/260) | To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter |
-| Port conflicts with the `external-health-monitor` sidecar using port 8080 | After deploying PowerStore with `external-health-monitor` enabled, edit the deployment and modify the `--http-endpoint` for the `external-health-monitor` sidecar to something different than 8080. |
-| Port 8080 conflicts when `CSM Disaster Recovery (DR)` is enabled | With the introduction of CSM Disaster Recovery (DR), this controller is enabled by default and uses port 8080. If the user has no need for this feature, they can disable it through the values file and setting it to false. |
 </div>
