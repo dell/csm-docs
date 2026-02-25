@@ -19,11 +19,7 @@ metadata:
   name: powerstore
   namespace: $NAMESPACE
 spec:
-<<<<<<<< HEAD:content/docs/getting-started/installation/installationwizard/src/templates/operator/csm-powerstore-1.16.1.template
-  version: v1.16.1
-========
   version: v1.16.2
->>>>>>>> 856f14a75ce038146c7844a4f9601a36c5176498:content/docs/getting-started/installation/installationwizard/src/templates/operator/csm-powerstore-1.16.2.template
   driver:
     csiDriverType: "powerstore"
     csiDriverSpec:
