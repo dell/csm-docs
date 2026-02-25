@@ -787,16 +787,16 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
 
 ##### CSI Driver for PowerFlex
 
-1. Delete the current `karavi-authorization-config` Secret from the CSM namespace.
+1. Delete the current `proxy-server-root-certificate` and `proxy-authz-tokens` secrets from the CSM namespace.
 
     ```console
-    kubectl delete secret karavi-authorization-config -n [CSM_NAMESPACE]
+    kubectl delete secret proxy-server-root-certificate proxy-authz-tokens -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `karavi-authorization-config` Secret from the CSI Driver for PowerFlex namespace to Container Storage Modules Observability namespace.
+2. Copy the `proxy-server-root-certificate` and `proxy-authz-tokens` secrets from the CSI Driver for PowerFlex namespace to Container Storage Modules Observability namespace.
 
     ```console
-    kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+    kubectl get secret proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
 {{< /hide >}}
@@ -805,16 +805,16 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
 
 ##### CSI Driver for PowerScale
 
-1. Delete the current `isilon-karavi-authorization-config` Secret from the CSM namespace.
+1. Delete the current `isilon-proxy-server-root-certificate` and `isilon-proxy-authz-tokens` secrets from the CSM namespace.
 
     ```console
-    kubectl delete secret isilon-karavi-authorization-config -n [CSM_NAMESPACE]
+    kubectl delete secret isilon-proxy-server-root-certificate isilon-proxy-authz-tokens -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `isilon-karavi-authorization-config` Secret from the CSI Driver for PowerScale namespace to Container Storage Modules Observability namespace.
+2. Copy the `proxy-server-root-certificate` and `proxy-authz-tokens` secrets from the CSI Driver for PowerScale namespace to Container Storage Modules Observability namespace (renamed with `isilon-` prefix).
 
     ```console
-    kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | kubectl create -f
+    kubectl get secret proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f -
     ```
 
 {{< /hide >}}
@@ -823,16 +823,16 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
 
 ##### CSI Driver for PowerMax
 
-1. Delete the current `powermax-karavi-authorization-config` Secret from the CSM namespace.
+1. Delete the current `powermax-proxy-server-root-certificate` and `powermax-proxy-authz-tokens` secrets from the CSM namespace.
 
    ```console
-   kubectl delete secret powermax-karavi-authorization-config -n [CSM_NAMESPACE]
+   kubectl delete secret powermax-proxy-server-root-certificate powermax-proxy-authz-tokens -n [CSM_NAMESPACE]
    ```
 
-2. Copy `powermax-karavi-authorization-config` Secret from the CSI Driver for PowerMax to the CSM namespace.
+2. Copy `proxy-server-root-certificate` and `proxy-authz-tokens` secrets from the CSI Driver for PowerMax to the CSM namespace (renamed with `powermax-` prefix).
 
    ```console
-   kubectl get secret karavi-authorization-config proxy-server-root-certificate -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | kubectl create -f - 
+   kubectl get secret proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f - 
    ```
 
 {{< /hide >}}
