@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2026-02-07T14:36:01-05:00">
+    <meta property="article:modified_time" content="2026-02-25T11:25:10+05:30">
 
   <meta itemprop="name" content="Authorization v2.0">
   <meta itemprop="description" content="Installing Authorization v2.0 via Container Storage Modules Operator">
-  <meta itemprop="dateModified" content="2026-02-07T14:36:01-05:00">
-  <meta itemprop="wordCount" content="2992">
+  <meta itemprop="dateModified" content="2026-02-25T11:25:10+05:30">
+  <meta itemprop="wordCount" content="3066">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Authorization v2.0">
   <meta name="twitter:description" content="Installing Authorization v2.0 via Container Storage Modules Operator">
@@ -204,7 +204,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc89207edf38938d02b3775acab90ebb.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.58161eae0198fe0fe3bdb543543016dc.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4558,7 +4558,7 @@ window.addEventListener(&quot;hashchange&quot;, function () {
 <p><strong>Note</strong>: Only one of SecretProviderClass or Secret can be used at a time.</p></blockquote>
 <br>
 <ol start="4">
-<li>Prepare <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml">samples/authorization/config.yaml</a> which contains the JWT signing secret. The following table lists the configuration parameters.</li>
+<li>Prepare <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml">samples/authorization/config.yaml</a> which contains the JWT signing secret and other configuration parameters. The following table lists the configuration parameters.</li>
 </ol>
 <table>
   <thead>
@@ -4576,11 +4576,48 @@ window.addEventListener(&quot;hashchange&quot;, function () {
           <td>true</td>
           <td>secret</td>
       </tr>
+      <tr>
+          <td>web.showdebughttp</td>
+          <td>Enable debug logging for HTTP requests</td>
+          <td>No</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>proxy.readtimeout</td>
+          <td>Proxy server read timeout. Increase if storage operations take longer.</td>
+          <td>No</td>
+          <td>120s</td>
+      </tr>
+      <tr>
+          <td>proxy.writetimeout</td>
+          <td>Proxy server write timeout. Increase if storage operations take longer.</td>
+          <td>No</td>
+          <td>120s</td>
+      </tr>
+      <tr>
+          <td>zipkin.collectoruri</td>
+          <td>Zipkin collector URI for trace data (e.g., <code>http://&lt;ZIPKIN_ADDRESS&gt;:9411/api/v2/spans</code>)</td>
+          <td>No</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>zipkin.probability</td>
+          <td>Probability of a trace being sampled (0.0 to 1.0)</td>
+          <td>No</td>
+          <td>-</td>
+      </tr>
   </tbody>
 </table>
 <p>Example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">web</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">jwtsigningsecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">randomString123</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">showdebughttp</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">proxy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">readtimeout</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">120s</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">writetimeout</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">120s</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">zipkin</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">collectoruri</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;http://ZIPKIN_ADDRESS:9411/api/v2/spans&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">probability</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;1.0&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div>
 
 

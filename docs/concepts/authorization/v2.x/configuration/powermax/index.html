@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Enabling Container Storage Modules Authorization for PowerMax CSI Driver">
-  <meta itemprop="dateModified" content="2025-10-07T14:02:33-05:00">
-  <meta itemprop="wordCount" content="1035">
+  <meta itemprop="dateModified" content="2026-02-25T11:25:10+05:30">
+  <meta itemprop="wordCount" content="1210">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Enabling Container Storage Modules Authorization for PowerMax CSI Driver">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc89207edf38938d02b3775acab90ebb.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.58161eae0198fe0fe3bdb543543016dc.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4072,6 +4072,19 @@ Configuring PowerMax CSI Driver with Container Storage Modules for Authorization
 </li>
 <li>
 <p>Create the proxy-server-root-certificate secret.</p>
+<blockquote>
+<p><strong>Purpose</strong>: This secret contains the Root CA certificate used to establish <strong>secure TLS communication between the Authorization sidecar</strong> (running alongside the CSI driver) <strong>and the CSM Authorization Proxy Server</strong> (exposed via Ingress). It is <strong>not</strong> related to the TLS certificate of the backend storage array.</p></blockquote>
+<p><strong>Where to get <code>rootCertificate.pem</code>:</strong></p>
+<ul>
+<li>If CSM Authorization was installed with a <strong>self-signed certificate</strong> (via cert-manager), extract the CA certificate from the cert-manager CA secret (e.g., <code>karavi-selfsigned-tls</code>) in the <code>authorization</code> namespace.</li>
+<li>If CSM Authorization was installed with <strong>your own certificate</strong>, provide the <strong>Root CA certificate that signed it</strong> (the root of the certificate chain that the Proxy Server&rsquo;s TLS certificate was issued from).</li>
+<li>If running in <strong>insecure mode</strong> (not recommended for production), create the secret with empty data and set <code>skipCertificateValidation</code> to <code>true</code> in the driver configuration.</li>
+</ul>
+<p><strong>Relationship with <code>skipCertificateValidation</code>:</strong></p>
+<ul>
+<li>When <code>SKIP_CERTIFICATE_VALIDATION</code> is set to <code>true</code> in the Authorization sidecar configuration, the sidecar skips TLS verification of the Proxy Server, and this secret can be empty.</li>
+<li>When <code>SKIP_CERTIFICATE_VALIDATION</code> is set to <code>false</code>, this secret must contain a valid Root CA certificate.</li>
+</ul>
 <p>If running in <em>insecure</em> mode, create the secret with empty data:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n powermax create secret generic proxy-server-root-certificate --from-literal<span style="color:#ce5c00;font-weight:bold">=</span>rootCertificate.pem<span style="color:#ce5c00;font-weight:bold">=</span> -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
 </span></span></code></pre></div><p>Otherwise, create the proxy-server-root-certificate secret with the appropriate file:</p>

@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="PowerScale">
   <meta itemprop="description" content="Enabling Container Storage Modules Authorization for PowerScale CSI Driver">
-  <meta itemprop="dateModified" content="2025-09-18T14:50:08-04:00">
-  <meta itemprop="wordCount" content="890">
+  <meta itemprop="dateModified" content="2026-02-25T11:25:10+05:30">
+  <meta itemprop="wordCount" content="1212">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerScale">
   <meta name="twitter:description" content="Enabling Container Storage Modules Authorization for PowerScale CSI Driver">
@@ -202,7 +202,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc89207edf38938d02b3775acab90ebb.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.58161eae0198fe0fe3bdb543543016dc.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3897,6 +3897,8 @@ Configuring PowerScale CSI Driver with Container Storage Modules for Authorizati
 <p>Edit these parameters in <code>samples/secret/karavi-authorization-config.json</code> file in <a href="https://github.com/dell/csi-powerscale/tree/main/samples/secret/karavi-authorization-config.json">CSI PowerScale</a> driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the <em>endpoint</em> parameter must be different for each driver.</p>
 </li>
 </ol>
+<blockquote>
+<p><strong>Purpose of this secret</strong>: The <code>karavi-authorization-config</code> secret tells the Authorization sidecar proxy which localhost endpoint to listen on and where the actual storage array is located. The CSI driver sends requests to the localhost endpoint; the sidecar intercepts them, attaches the tenant token, and forwards them to the CSM Authorization Proxy Server, which then proxies to the actual storage array.</p></blockquote>
 <table>
   <thead>
       <tr>
@@ -3909,25 +3911,25 @@ Configuring PowerScale CSI Driver with Container Storage Modules for Authorizati
   <tbody>
       <tr>
           <td>username</td>
-          <td>Username for connecting to the backend storage array. This parameter is ignored.</td>
+          <td>Username for connecting to the backend storage array. This parameter is ignored when Authorization is enabled (credentials are managed via Vault).</td>
           <td>No</td>
           <td>-</td>
       </tr>
       <tr>
           <td>password</td>
-          <td>Password for connecting to to the backend storage array. This parameter is ignored.</td>
+          <td>Password for connecting to the backend storage array. This parameter is ignored when Authorization is enabled (credentials are managed via Vault).</td>
           <td>No</td>
           <td>-</td>
       </tr>
       <tr>
           <td>intendedEndpoint</td>
-          <td>HTTPS REST API endpoint of the backend storage array.</td>
+          <td>HTTPS REST API endpoint of the backend storage array. This is the actual endpoint the Proxy Server will forward requests to.</td>
           <td>Yes</td>
           <td>-</td>
       </tr>
       <tr>
           <td>endpoint</td>
-          <td>HTTPS localhost endpoint that the authorization sidecar will listen on.</td>
+          <td>HTTPS localhost endpoint that the authorization sidecar will listen on. The CSI driver is configured to send requests here instead of directly to the storage array.</td>
           <td>Yes</td>
           <td>https://localhost:9400</td>
       </tr>
@@ -3939,23 +3941,50 @@ Configuring PowerScale CSI Driver with Container Storage Modules for Authorizati
       </tr>
       <tr>
           <td>skipCertificateValidation</td>
-          <td>A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used.</td>
+          <td>A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used by the sidecar (certificate validation to the array is handled by the Proxy Server).</td>
           <td>No</td>
           <td>true</td>
       </tr>
       <tr>
           <td>isDefault</td>
-          <td>A boolean that indicates if the array is the default array. This parameter is not used.</td>
+          <td>A boolean that indicates if the array is the default array. This parameter is not used by the sidecar.</td>
           <td>No</td>
           <td>default value from values.yaml</td>
       </tr>
   </tbody>
 </table>
-<p>Create the karavi-authorization-config secret using this command:</p>
+<p>Sample <code>karavi-authorization-config.json</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;storageArrays&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ignored&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ignored&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;intendedEndpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://10.0.0.1:8080&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://localhost:9400&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;cluster1&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;skipCertificateValidation&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;isDefault&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><p>Create the karavi-authorization-config secret using this command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n isilon create secret generic karavi-authorization-config --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>samples/secret/karavi-authorization-config.json -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
 </span></span></code></pre></div><ol start="3">
 <li>
 <p>Create the proxy-server-root-certificate secret.</p>
+<blockquote>
+<p><strong>Purpose</strong>: This secret contains the Root CA certificate used to establish <strong>secure TLS communication between the Authorization sidecar</strong> (running alongside the CSI driver) <strong>and the CSM Authorization Proxy Server</strong> (exposed via Ingress). It is <strong>not</strong> related to the TLS certificate of the backend storage array.</p></blockquote>
+<p><strong>Where to get <code>rootCertificate.pem</code>:</strong></p>
+<ul>
+<li>If CSM Authorization was installed with a <strong>self-signed certificate</strong> (via cert-manager), extract the CA certificate from the cert-manager CA secret (e.g., <code>karavi-selfsigned-tls</code>) in the <code>authorization</code> namespace.</li>
+<li>If CSM Authorization was installed with <strong>your own certificate</strong>, provide the <strong>Root CA certificate that signed it</strong> (the root of the certificate chain that the Proxy Server&rsquo;s TLS certificate was issued from).</li>
+<li>If running in <strong>insecure mode</strong> (not recommended for production), create the secret with empty data and set <code>skipCertificateValidation</code> to <code>true</code> in the driver configuration.</li>
+</ul>
+<p><strong>Relationship with <code>skipCertificateValidation</code>:</strong></p>
+<ul>
+<li>When <code>SKIP_CERTIFICATE_VALIDATION</code> is set to <code>true</code> in the Authorization sidecar configuration (Step 5), the sidecar skips TLS verification of the Proxy Server, and this secret can be empty.</li>
+<li>When <code>SKIP_CERTIFICATE_VALIDATION</code> is set to <code>false</code>, this secret must contain a valid Root CA certificate.</li>
+</ul>
 <p>If running in <em>insecure</em> mode, create the secret with empty data:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n isilon create secret generic proxy-server-root-certificate --from-literal<span style="color:#ce5c00;font-weight:bold">=</span>rootCertificate.pem<span style="color:#ce5c00;font-weight:bold">=</span> -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
 </span></span></code></pre></div><p>Otherwise, create the proxy-server-root-certificate secret with the appropriate file:</p>
