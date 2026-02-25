@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Observability">
   <meta itemprop="description" content="Container Storage Modules (CSM) for Observability Helm deployment">
-  <meta itemprop="dateModified" content="2026-01-13T18:02:54+05:30">
-  <meta itemprop="wordCount" content="4302">
+  <meta itemprop="dateModified" content="2026-02-25T11:25:10+05:30">
+  <meta itemprop="wordCount" content="4338">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Observability">
   <meta name="twitter:description" content="Container Storage Modules (CSM) for Observability Helm deployment">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc89207edf38938d02b3775acab90ebb.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.58161eae0198fe0fe3bdb543543016dc.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -5197,12 +5197,12 @@ Update Storage Systems <a class="header-link"  href="#update-storage-systems" st
   <h5 id="csi-driver-for-powerflex">
 CSI Driver for PowerFlex</h5><ol>
 <li>
-<p>Delete the current <code>karavi-authorization-config</code> Secret from the CSM namespace.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl delete secret karavi-authorization-config -n [CSM_NAMESPACE]
+<p>Delete the current <code>proxy-server-root-certificate</code> and <code>proxy-authz-tokens</code> secrets from the CSM namespace.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl delete secret proxy-server-root-certificate proxy-authz-tokens -n [CSM_NAMESPACE]
 </span></span></span></code></pre></div></li>
 <li>
-<p>Copy the <code>karavi-authorization-config</code> Secret from the CSI Driver for PowerFlex namespace to Container Storage Modules Observability namespace.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
+<p>Copy the <code>proxy-server-root-certificate</code> and <code>proxy-authz-tokens</code> secrets from the CSI Driver for PowerFlex namespace to Container Storage Modules Observability namespace.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl get secret proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
 </span></span></span></code></pre></div></li>
 </ol>
 
@@ -5219,12 +5219,12 @@ CSI Driver for PowerFlex</h5><ol>
   <h5 id="csi-driver-for-powerscale">
 CSI Driver for PowerScale</h5><ol>
 <li>
-<p>Delete the current <code>isilon-karavi-authorization-config</code> Secret from the CSM namespace.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl delete secret isilon-karavi-authorization-config -n [CSM_NAMESPACE]
+<p>Delete the current <code>isilon-proxy-server-root-certificate</code> and <code>isilon-proxy-authz-tokens</code> secrets from the CSM namespace.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl delete secret isilon-proxy-server-root-certificate isilon-proxy-authz-tokens -n [CSM_NAMESPACE]
 </span></span></span></code></pre></div></li>
 <li>
-<p>Copy the <code>isilon-karavi-authorization-config</code> Secret from the CSI Driver for PowerScale namespace to Container Storage Modules Observability namespace.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | sed &#39;s/name: karavi-authorization-config/name: isilon-karavi-authorization-config/&#39; | kubectl create -f
+<p>Copy the <code>proxy-server-root-certificate</code> and <code>proxy-authz-tokens</code> secrets from the CSI Driver for PowerScale namespace to Container Storage Modules Observability namespace (renamed with <code>isilon-</code> prefix).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl get secret proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | sed &#39;s/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/&#39; | sed &#39;s/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/&#39; | kubectl create -f -
 </span></span></span></code></pre></div></li>
 </ol>
 
@@ -5241,12 +5241,12 @@ CSI Driver for PowerScale</h5><ol>
   <h5 id="csi-driver-for-powermax">
 CSI Driver for PowerMax</h5><ol>
 <li>
-<p>Delete the current <code>powermax-karavi-authorization-config</code> Secret from the CSM namespace.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl delete secret powermax-karavi-authorization-config -n [CSM_NAMESPACE]
+<p>Delete the current <code>powermax-proxy-server-root-certificate</code> and <code>powermax-proxy-authz-tokens</code> secrets from the CSM namespace.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl delete secret powermax-proxy-server-root-certificate powermax-proxy-authz-tokens -n [CSM_NAMESPACE]
 </span></span></span></code></pre></div></li>
 <li>
-<p>Copy <code>powermax-karavi-authorization-config</code> Secret from the CSI Driver for PowerMax to the CSM namespace.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl get secret karavi-authorization-config proxy-server-root-certificate -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | sed &#39;s/name: karavi-authorization-config/name: powermax-karavi-authorization-config/&#39; | kubectl create -f - 
+<p>Copy <code>proxy-server-root-certificate</code> and <code>proxy-authz-tokens</code> secrets from the CSI Driver for PowerMax to the CSM namespace (renamed with <code>powermax-</code> prefix).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl get secret proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | sed &#39;s/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/&#39; | sed &#39;s/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/&#39; | kubectl create -f - 
 </span></span></span></code></pre></div></li>
 </ol>
 

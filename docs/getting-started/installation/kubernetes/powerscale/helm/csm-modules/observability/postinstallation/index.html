@@ -25,7 +25,7 @@ Prometheus Grafana Other Deployment Methods There are various ways to deploy the
   <meta itemprop="description" content="Post Installation Dependencies The following third-party components are required in the same Kubernetes cluster where Container Storage Modules Observability has been deployed:
 Prometheus Grafana Other Deployment Methods There are various ways to deploy these components. We recommend following the Helm deployments according to the specifications defined below.">
   <meta itemprop="dateModified" content="2025-02-18T23:05:05+05:30">
-  <meta itemprop="wordCount" content="1688">
+  <meta itemprop="wordCount" content="1704">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Post Installation Dependencies">
   <meta name="twitter:description" content="Post Installation Dependencies The following third-party components are required in the same Kubernetes cluster where Container Storage Modules Observability has been deployed:
@@ -208,7 +208,7 @@ Prometheus Grafana Other Deployment Methods There are various ways to deploy the
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc89207edf38938d02b3775acab90ebb.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.58161eae0198fe0fe3bdb543543016dc.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4671,12 +4671,12 @@ Update Storage Systems <a class="header-link"  href="#update-storage-systems" st
   <h5 id="csi-driver-for-powerscale">
 CSI Driver for PowerScale</h5><ol>
 <li>
-<p>Delete the current <code>isilon-karavi-authorization-config</code> Secret from the CSM namespace.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl delete secret isilon-karavi-authorization-config -n [CSM_NAMESPACE]
+<p>Delete the current <code>isilon-proxy-server-root-certificate</code> and <code>isilon-proxy-authz-tokens</code> secrets from the CSM namespace.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl delete secret isilon-proxy-server-root-certificate isilon-proxy-authz-tokens -n [CSM_NAMESPACE]
 </span></span></span></code></pre></div></li>
 <li>
-<p>Copy the <code>isilon-karavi-authorization-config</code> Secret from the CSI Driver for PowerScale namespace to Container Storage Modules Observability namespace.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | sed &#39;s/name: karavi-authorization-config/name: isilon-karavi-authorization-config/&#39; | kubectl create -f
+<p>Copy the <code>proxy-server-root-certificate</code> and <code>proxy-authz-tokens</code> secrets from the CSI Driver for PowerScale namespace to Container Storage Modules Observability namespace (renamed with <code>isilon-</code> prefix).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl get secret proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | sed &#39;s/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/&#39; | sed &#39;s/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/&#39; | kubectl create -f -
 </span></span></span></code></pre></div></li>
 </ol>
 

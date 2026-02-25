@@ -21,14 +21,14 @@ kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-04-26T00:25:26+05:30">
+    <meta property="article:modified_time" content="2026-02-25T11:25:10+05:30">
 
   <meta itemprop="name" content="Powerflex">
   <meta itemprop="description" content="Copy only the deployed CSI driver entities to the Observability namespace
 PowerFlex Copy the config Secret from the CSI PowerFlex namespace into the Container Storage Modules Observability namespace:
 kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f - If the CSI driver secret name is not the default vxflexos-config, please use the following command to copy secret:">
-  <meta itemprop="dateModified" content="2025-04-26T00:25:26+05:30">
-  <meta itemprop="wordCount" content="219">
+  <meta itemprop="dateModified" content="2026-02-25T11:25:10+05:30">
+  <meta itemprop="wordCount" content="218">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Powerflex">
   <meta name="twitter:description" content="Copy only the deployed CSI driver entities to the Observability namespace
@@ -212,7 +212,7 @@ kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc89207edf38938d02b3775acab90ebb.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.58161eae0198fe0fe3bdb543543016dc.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4088,9 +4088,9 @@ PowerFlex <a class="header-link"  href="#powerflex" style=" display: inline-bloc
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get configmap <span style="color:#ce5c00;font-weight:bold">[</span>VXFLEXOS-CONFIG-PARAMS<span style="color:#ce5c00;font-weight:bold">]</span> -n <span style="color:#ce5c00;font-weight:bold">[</span>CSI_DRIVER_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> -o yaml <span style="color:#000;font-weight:bold">|</span> sed <span style="color:#4e9a06">&#39;s/name: [VXFLEXOS-CONFIG-PARAMS]/name: vxflexos-config-params/&#39;</span> <span style="color:#000;font-weight:bold">|</span> sed <span style="color:#4e9a06">&#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39;</span> <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
 </span></span></code></pre></div></li>
 <li>
-<p>Copy the <code>karavi-authorization-config</code>, <code>proxy-server-root-certificate</code>, <code>proxy-authz-tokens</code> Secret from the CSI PowerFlex namespace into the Container Storage Modules Observability namespace:</p>
+<p>Copy the <code>proxy-server-root-certificate</code> and <code>proxy-authz-tokens</code> secrets from the CSI PowerFlex namespace into the Container Storage Modules Observability namespace:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n <span style="color:#ce5c00;font-weight:bold">[</span>CSI_DRIVER_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> -o yaml <span style="color:#000;font-weight:bold">|</span> sed <span style="color:#4e9a06">&#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39;</span> <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
+</span></span><span style="display:flex;"><span>kubectl get secret proxy-server-root-certificate proxy-authz-tokens -n <span style="color:#ce5c00;font-weight:bold">[</span>CSI_DRIVER_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> -o yaml <span style="color:#000;font-weight:bold">|</span> sed <span style="color:#4e9a06">&#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39;</span> <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
 </span></span></code></pre></div></li>
 </ol>
 </li>

@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Authorization - v2.x">
   <meta itemprop="description" content="Container Storage Modules (CSM) for Authorization v2.x.">
-  <meta itemprop="dateModified" content="2025-09-18T14:50:08-04:00">
-  <meta itemprop="wordCount" content="560">
+  <meta itemprop="dateModified" content="2026-02-25T11:25:10+05:30">
+  <meta itemprop="wordCount" content="2456">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Authorization - v2.x">
   <meta name="twitter:description" content="Container Storage Modules (CSM) for Authorization v2.x.">
@@ -202,7 +202,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc89207edf38938d02b3775acab90ebb.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.58161eae0198fe0fe3bdb543543016dc.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3870,8 +3870,239 @@ document.addEventListener("DOMContentLoaded", function() {
 	
     
         <p>The following diagram shows a high-level overview of Container Storage Modules for Authorization with a <code>tenant-app</code> that is using a CSI driver to perform storage operations through the CSM for Authorization <code>proxy-server</code> to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.</p>
-<p><img src="../../../../images/authorization/v2.x/image.png" alt="Alt text"></p>
-<p>This is the introduction to a Stateless Architecture for Authorization. The creation of storage, roles, and tenants is done through Custom Resources (CRs) which are tracked and contained within CSM Authorization. The underlying communication is consistent with the previous architecture which makes the creation of volumes and snapshots seamless.</p>
+<blockquote>
+<p><strong>Important</strong>: CSM Authorization <strong>must</strong> be deployed and configured <strong>before</strong> installing the CSI driver. The driver must be configured from the outset to route all storage operations through the Authorization service. For high availability and security containment, the CSM Authorization Proxy Server should run within a Kubernetes cluster managed by the Storage Administrator.</p></blockquote>
+<p><img src="../../../../images/authorization/v2.x/image_new.png" alt="Alt text"></p>
+<h3 id="diagram-explanation">
+Diagram Explanation <a class="header-link"  href="#diagram-explanation" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><p>The diagram above illustrates the CSM Authorization architecture:</p>
+<blockquote>
+<p><strong>Note</strong>: The Driver Namespace and Authorization Namespace can reside on different Kubernetes clusters or on the same cluster.</p></blockquote>
+<h4 id="driver-namespace-tenant">
+Driver Namespace (Tenant) <a class="header-link"  href="#driver-namespace-tenant" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h4><ol>
+<li>An <strong>Application pod</strong> issues a storage request (e.g., create volume) via a PersistentVolumeClaim.</li>
+<li>The <strong>CSI Driver Pod</strong> contains the <strong>CSI Driver Container</strong> (with Controller and Node components) and an <strong>Authorization sidecar</strong>. The sidecar:
+<ul>
+<li>Injects a Bearer JWT token into every outgoing storage request.</li>
+<li>Adds forward headers for request routing.</li>
+<li>Auto-refreshes access tokens using the refresh token before they expire. If the refresh token expires, new tokens must be manually generated and applied.</li>
+<li>Presents a self-signed TLS certificate on the localhost endpoint where the driver sends requests.</li>
+</ul>
+</li>
+<li>The sidecar forwards the request over <strong>HTTPS + JWT</strong> to the Authorization Proxy Server.</li>
+</ol>
+<h4 id="authorization-namespace-proxy">
+Authorization Namespace (Proxy) <a class="header-link"  href="#authorization-namespace-proxy" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h4><ol start="4">
+<li>The <strong>Authorization Proxy Server</strong> receives the request and performs <strong>JWT Validation</strong> to authenticate the tenant.</li>
+<li>The <strong>Dispatch Handler</strong> routes the request to the appropriate storage backend handler (PowerMax, PowerFlex, PowerStore, or PowerScale).</li>
+<li>The following services support the proxy server:
+<ul>
+<li><strong>Tenant Service</strong> — manages tenant configurations and generates JSON Web Tokens.</li>
+<li><strong>Role Service</strong> — manages roles that tenants are bound to.</li>
+<li><strong>Storage Service</strong> — manages backend storage array configurations and makes <strong>Storage API calls</strong> to the arrays.</li>
+</ul>
+</li>
+<li><strong>Redis (Sentinel)</strong> stores tenant data, enforces quota limits, and handles SDC approval.</li>
+<li><strong>Open Policy Agent (OPA)</strong> evaluates RBAC policies and issues Allow/Deny decisions for each request.</li>
+<li>The <strong>CR Controller</strong> manages Custom Resources for Storage, CSM Tenant, and CSM Role definitions.</li>
+<li>The <strong>Credentials Manager</strong> retrieves array credentials via the <strong>Kubernetes Secrets Store CSI driver</strong> (supporting Secrets, Vault, or Conjur).</li>
+</ol>
+<h4 id="backend-storage">
+Backend Storage <a class="header-link"  href="#backend-storage" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h4><ol start="11">
+<li>Once authorized, the proxy server makes <strong>Driver API calls</strong> to the backend Dell storage arrays (PowerMax, PowerFlex, PowerStore, or PowerScale). The storage array processes the request and returns the response back through the proxy to the CSI driver.</li>
+</ol>
+<blockquote>
+<p><strong>Key point</strong>: The storage array is unaware that authorization is taking place. The authorization proxy transparently handles and validates all requests.</p></blockquote>
+<p>This is a Stateless Architecture for Authorization. The creation of storage, roles, and tenants is done through Custom Resources (CRs) which are tracked and contained within CSM Authorization. The underlying communication is consistent with the previous architecture which makes the creation of volumes and snapshots seamless.</p>
+<h2 id="token-types-and-lifecycle">
+Token Types and Lifecycle <a class="header-link"  href="#token-types-and-lifecycle" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><p>CSM Authorization uses three types of JSON Web Tokens (JWTs):</p>
+<h3 id="admin-token">
+Admin Token <a class="header-link"  href="#admin-token" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><ul>
+<li><strong>Purpose</strong>: Used by the Storage Administrator to authenticate with the CSM Authorization Proxy Server for administrative operations (e.g., generating tenant tokens).</li>
+<li><strong>Generated by</strong>: <code>dellctl admin token</code> command, using the JWT signing secret configured during CSM Authorization installation (the <code>web.jwtsigningsecret</code> in <code>karavi-config-secret</code>).</li>
+<li><strong>Default expiration</strong>: Access token = 1 minute, Refresh token = 720 hours (30 days).</li>
+<li><strong>Who can generate it</strong>: Only a user who knows the JWT signing secret (i.e., the Storage Administrator who installed CSM Authorization).</li>
+<li><strong>Access requirements</strong>: The <code>dellctl</code> CLI communicates with the <strong>CSM Authorization Server</strong>, not directly with the storage array. It can be run from any machine that has network access to the Authorization Server and a valid kubeconfig for the cluster. Direct storage array or Unisphere access is <strong>not</strong> required for token generation.</li>
+</ul>
+<h3 id="access-token-tenant">
+Access Token (Tenant) <a class="header-link"  href="#access-token-tenant" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><ul>
+<li><strong>Purpose</strong>: A short-lived token attached to every storage request by the Authorization sidecar proxy. The Proxy Server validates this token to authorize the request.</li>
+<li><strong>Default expiration</strong>: 1 minute (configurable via <code>--access-token-expiration</code> during token generation).</li>
+<li><strong>Behavior on expiry</strong>: When the access token expires, the sidecar proxy automatically requests a new access token using the refresh token. <strong>No manual intervention is required.</strong></li>
+</ul>
+<h3 id="refresh-token-tenant">
+Refresh Token (Tenant) <a class="header-link"  href="#refresh-token-tenant" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><ul>
+<li><strong>Purpose</strong>: A longer-lived token used to obtain new access tokens without requiring the tenant to re-authenticate.</li>
+<li><strong>Default expiration</strong>: 720 hours (30 days) (configurable via <code>--refresh-token-expiration</code> during token generation).</li>
+<li><strong>Behavior on expiry</strong>: The refresh token will expire after its configured lifetime regardless of whether the CSI driver pods are active or not. The refresh token is <strong>not</strong> automatically refreshed. When it expires, <strong>the Storage Administrator must generate a new token pair</strong> using <code>dellctl generate token</code> and the Kubernetes Tenant Administrator must re-apply the new <code>proxy-authz-tokens</code> secret in the driver namespace.</li>
+</ul>
+<h3 id="automatic-token-refresh">
+Automatic Token Refresh <a class="header-link"  href="#automatic-token-refresh" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><p>The Authorization sidecar proxy handles access token refresh <strong>automatically</strong>:</p>
+<ol>
+<li>The sidecar attaches the access token to each storage request sent to the Proxy Server.</li>
+<li>If the Proxy Server returns HTTP 401 (indicating the access token has expired), the sidecar sends the refresh token to request a new access token.</li>
+<li>The Proxy Server validates the refresh token, checks that the tenant has not been revoked, and issues a new access token.</li>
+<li>Kubernetes retries the original CSI operation, and the sidecar attaches the new access token to the retried request.</li>
+</ol>
+<blockquote>
+<p><strong>Important</strong>: Only the <strong>access token</strong> is refreshed automatically. The <strong>refresh token</strong> itself is never refreshed — it will expire after its configured lifetime regardless of driver activity. When the refresh token expires, new tokens must be manually generated and applied.</p></blockquote>
+<h2 id="kubernetes-secrets-reference">
+Kubernetes Secrets Reference <a class="header-link"  href="#kubernetes-secrets-reference" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><p>When configuring a CSI driver with CSM Authorization, several Kubernetes secrets are involved. Note that there are two distinct secrets with similar names that serve <strong>different components</strong>:</p>
+<ul>
+<li><strong><code>karavi-config-secret</code></strong> — Created in the <strong>Authorization namespace</strong> during CSM Authorization Proxy Server installation. Contains the JWT signing secret (<code>web.jwtsigningsecret</code>) and proxy configuration (timeouts, debug settings). This secret is used by the <strong>Proxy Server</strong> itself.</li>
+<li><strong><code>karavi-authorization-config</code></strong> — Created in the <strong>CSI driver namespace</strong> during driver configuration. Contains the sidecar configuration (localhost endpoint, intended storage array endpoint, system ID). This secret is used by the <strong>Authorization sidecar</strong> running alongside the CSI driver.</li>
+</ul>
+<p>The following table explains the secrets created in the <strong>driver namespace</strong>:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Secret Name</th>
+          <th>Purpose</th>
+          <th>Contents</th>
+          <th>How It Is Created</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>proxy-authz-tokens</code></td>
+          <td>Stores the tenant&rsquo;s access and refresh tokens used by the Authorization sidecar to authenticate with the Proxy Server.</td>
+          <td>Base64-encoded <code>access</code> and <code>refresh</code> JWT tokens.</td>
+          <td>Generated by <code>dellctl generate token</code> and applied via <code>kubectl apply -f token.yaml -n [CSI_DRIVER_NAMESPACE]</code>. Alternatively, the output of <code>dellctl generate token</code> can be piped directly to <code>kubectl</code>.</td>
+      </tr>
+      <tr>
+          <td><code>karavi-authorization-config</code></td>
+          <td>Configures the Authorization sidecar with backend storage array connection information. Tells the sidecar which localhost endpoint to listen on and which storage array the requests are intended for.</td>
+          <td>JSON configuration with <code>endpoint</code> (localhost address the sidecar listens on), <code>intendedEndpoint</code> (actual storage array URL), <code>systemID</code>, etc.</td>
+          <td>Created manually from the sample <code>karavi-authorization-config.json</code> file in the CSI driver repository.</td>
+      </tr>
+      <tr>
+          <td><code>proxy-server-root-certificate</code></td>
+          <td>Contains the Root CA certificate used to validate TLS connections between the CSI driver&rsquo;s Authorization sidecar and the CSM Authorization Proxy Server.</td>
+          <td>A PEM-encoded root CA certificate under the key <code>rootCertificate.pem</code>.</td>
+          <td>Created manually. See <a href="/csm-docs/v1/concepts/authorization/v2.x/#proxy-server-root-certificate-details">proxy-server-root-certificate details</a> below.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="proxy-server-root-certificate-details">
+proxy-server-root-certificate Details <a class="header-link"  href="#proxy-server-root-certificate-details" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><p>The <code>proxy-server-root-certificate</code> secret enables <strong>secure TLS communication</strong> between:</p>
+<ul>
+<li>The <strong>CSM Authorization sidecar</strong> (running alongside the CSI driver)</li>
+<li>The <strong>CSM Authorization Proxy Server</strong> (exposed via Ingress)</li>
+</ul>
+<p><strong>Where to get <code>rootCertificate.pem</code>:</strong></p>
+<ul>
+<li>If CSM Authorization was installed with a <strong>self-signed certificate</strong> (via cert-manager), you can extract the CA certificate from the cert-manager CA secret (e.g., <code>karavi-selfsigned-tls</code>) in the <code>authorization</code> namespace.</li>
+<li>If CSM Authorization was installed with <strong>your own certificate</strong>, provide the <strong>Root CA certificate that signed it</strong>. This is the root of the certificate chain that the Proxy Server&rsquo;s TLS certificate was issued from.</li>
+<li>If running in <strong>insecure mode</strong> (not recommended for production), create the secret with empty data and set <code>skipCertificateValidation</code> to <code>true</code> in the driver configuration.</li>
+</ul>
+<p><strong>Relationship with <code>skipCertificateValidation</code>:</strong></p>
+<p>In the <strong>driver secret</strong> (e.g., <code>vxflexos-config</code>, <code>isilon-creds</code>, <code>powermax-creds</code>, <code>powerstore-config</code>), <code>skipCertificateValidation</code> <strong>must always be set to <code>true</code></strong> when CSM Authorization is enabled. This is because the Authorization sidecar generates a self-signed certificate on the fly for the localhost endpoint, and the driver does not have this certificate.</p>
+<p>The <code>SKIP_CERTIFICATE_VALIDATION</code> setting in the CSI driver Helm values or CSM Operator CR is a <strong>separate</strong> setting that controls whether the Authorization sidecar validates the Proxy Server&rsquo;s TLS certificate:</p>
+<ul>
+<li><code>SKIP_CERTIFICATE_VALIDATION: true</code> causes the sidecar to <strong>skip TLS verification</strong> of the Proxy Server&rsquo;s certificate. In this case, the <code>proxy-server-root-certificate</code> secret can be empty.</li>
+<li><code>SKIP_CERTIFICATE_VALIDATION: false</code> requires the <code>proxy-server-root-certificate</code> secret to contain a valid Root CA so the sidecar can verify the Proxy Server&rsquo;s TLS certificate.</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: The <code>skipCertificateValidation</code> parameter in the <strong>Storage CR</strong> (under <code>spec.skipCertificateValidation</code>) is yet another separate setting that controls certificate validation between the <strong>Proxy Server and the backend storage array</strong>.</p></blockquote>
+<h2 id="why-csi-driver-configuration-is-still-required-step-6">
+Why CSI Driver Configuration Is Still Required (Step 6) <a class="header-link"  href="#why-csi-driver-configuration-is-still-required-step-6" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><p>Even when using the CSM Authorization proxy, the CSI driver still requires configuration (Helm values or CSM Operator CR, and Kubernetes secrets) because:</p>
+<ol>
+<li><strong>Endpoint redirection</strong>: The driver must be configured to send requests to <code>https://localhost:&lt;port&gt;</code> (e.g., <code>https://localhost:9400</code>) instead of the actual storage array endpoint. This localhost address is where the Authorization sidecar listens and handles requests.</li>
+<li><strong>Sidecar enablement</strong>: The driver&rsquo;s Helm values or CSM Operator CR must enable the Authorization module and specify the sidecar image, proxy host, and certificate validation settings.</li>
+<li><strong>Reverse proxy configuration</strong> (PowerMax only): PowerMax requires the CSI Reverse Proxy to be configured as a sidecar and pointed to the localhost endpoint.</li>
+</ol>
+<p>The driver credentials in the driver secret (e.g., <code>username</code>/<code>password</code>) are read from a Kubernetes secret or secret provider class resource. When Authorization is enabled, the Proxy Server uses its own credentials to communicate with the storage array. However, the driver credential fields must still be present in the configuration (they can be left as placeholder values).</p>
+<h3 id="powermax-traffic-flow">
+PowerMax Traffic Flow <a class="header-link"  href="#powermax-traffic-flow" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><p>For PowerMax, the request path includes an additional CSI Reverse Proxy component:</p>
+<pre tabindex="0"><code>CSI Driver → CSI Reverse Proxy (sidecar) → Authorization Sidecar (localhost) → Authorization Proxy Server (via Ingress) → PowerMax Unisphere
+</code></pre><ul>
+<li>The <strong>CSI Reverse Proxy</strong> is deployed as a sidecar in the driver pod and forwards requests to a localhost endpoint where the Authorization Sidecar listens. The port is configurable and may differ per array in multi-array configurations.</li>
+<li>The <strong>Authorization Sidecar</strong> (also in the driver pod) injects the JWT token and forwards the request to the Authorization Proxy Server.</li>
+<li>The <strong>Authorization Proxy Server</strong> validates the token, applies RBAC/quota policies, and proxies the request to Unisphere using its own credentials.</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: When Authorization is enabled, the <code>certSecret</code> field in the driver secret (used for direct Unisphere TLS validation without Authorization) is no longer relevant, since the driver communicates with the local sidecar, not directly with Unisphere. The <code>certSecret</code> value can be left empty or set to a placeholder.</p></blockquote>
+<h2 id="exposing-the-csm-authorization-proxy-server">
+Exposing the CSM Authorization Proxy Server <a class="header-link"  href="#exposing-the-csm-authorization-proxy-server" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><p>The CSM Authorization Proxy Server is exposed outside the Kubernetes cluster via an Ingress controller.</p>
+<ul>
+<li><strong>Kubernetes</strong>: Both the Helm chart and CSM Operator support deploying an optional NGINX Ingress Controller. In Helm, set <code>nginx.enabled: true</code> (or <code>false</code> if you already have an Ingress Controller). In the CSM Operator, configure the corresponding NGINX component in the Custom Resource.</li>
+<li><strong>OpenShift</strong>: OpenShift provides a default Ingress controller (OpenShift Router). Set the <code>openshift</code> parameter accordingly in the Helm chart or CSM Operator Custom Resource.</li>
+</ul>
+<p><strong>Additional notes:</strong></p>
+<ul>
+<li><strong>cert-manager</strong>: The Helm chart can optionally deploy cert-manager to generate a self-signed TLS certificate for the Authorization Ingress. If cert-manager is already installed and managed separately in your cluster, set <code>cert-manager.enabled: false</code> in the Helm values.</li>
+<li><strong>Hostname resolution</strong>: The default hostname <code>csm-authorization.com</code> is a <strong>placeholder</strong> and must be replaced with a real hostname that is resolvable via <strong>DNS</strong> from the CSI driver pods. Configure your organization&rsquo;s DNS to resolve the chosen hostname to the Ingress controller&rsquo;s external IP address.</li>
+<li><strong><code>proxyHost</code></strong>: The <code>proxyHost</code> value configured in the CSI driver Helm values or CSM Operator CR is the hostname of the Authorization Proxy Server. The Authorization sidecar reads this value to know where to forward requests. This is <strong>not</strong> the same as the <code>endpoint</code> field in the driver secret, which is always <code>https://localhost:&lt;port&gt;</code> (the sidecar&rsquo;s local listener).</li>
+</ul>
 <h2 id="container-storage-modules-for-authorization-capabilities">
 Container Storage Modules for Authorization Capabilities <a class="header-link"  href="#container-storage-modules-for-authorization-capabilities" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
