@@ -47,7 +47,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         certSecret: primary-cert
     ```
 
-    **NOTE:** For each entry in `managementServers`, if `skipCertificateValidation` is set to `true`, then the `certSecret` field must not be present in that same entry.
+   **Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field.
 
     After editing the file, **run this command to create a `secret.yaml`** called `powermax-creds`. If you are using a different namespace/secret name, just substitute those into the command.
 

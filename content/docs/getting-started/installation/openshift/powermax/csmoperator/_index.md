@@ -89,7 +89,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
         certSecret: primary-cert
     EOF
     ```
-    **NOTE:** For each entry in `managementServers`, if `skipCertificateValidation` is set to `true`, then the `certSecret` field must not be present in that same entry.
+    **Note:** If setting skipCertificateValidation to true, the ReverseProxy will ignore the `certSecret` field.
 
     Edit the file, then run the command to create the `powermax-creds`.
 
