@@ -207,17 +207,29 @@ spec:
 
 <br>
 
-4. Prepare [samples/authorization/config.yaml](https://github.com/dell/helm-charts/blob/main/samples/csm-authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare [samples/authorization/config.yaml](https://github.com/dell/helm-charts/blob/main/samples/csm-authorization/config.yaml) which contains the JWT signing secret and other configuration parameters. The following table lists the configuration parameters.
 
-    | Parameter            | Description                         | Required | Default |
-    | -------------------- | ----------------------------------- | -------- | ------- |
-    | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
+    | Parameter            | Description                                                                 | Required | Default |
+    | -------------------- | --------------------------------------------------------------------------- | -------- | ------- |
+    | web.jwtsigningsecret | String used to sign JSON Web Tokens                                         | true     | secret  |
+    | web.showdebughttp    | Enable debug logging for HTTP requests                                      | No       | false   |
+    | proxy.readtimeout    | Proxy server read timeout. Increase if storage operations take longer.      | No       | 120s    |
+    | proxy.writetimeout   | Proxy server write timeout. Increase if storage operations take longer.     | No       | 120s    |
+    | zipkin.collectoruri  | Zipkin collector URI for trace data (e.g., `http://<ZIPKIN_ADDRESS>:9411/api/v2/spans`) | No | - |
+    | zipkin.probability   | Probability of a trace being sampled (0.0 to 1.0)                          | No       | -       |
 
     Example:
 
     ```yaml
     web:
       jwtsigningsecret: randomString123
+      showdebughttp: true
+    proxy:
+      readtimeout: 120s
+      writetimeout: 120s
+    zipkin:
+      collectoruri: "http://ZIPKIN_ADDRESS:9411/api/v2/spans"
+      probability: "1.0"
     ```
 
 {{< tabpane Ordinal="4" text=true lang="en" >}}

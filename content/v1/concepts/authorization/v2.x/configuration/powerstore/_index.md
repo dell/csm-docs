@@ -43,6 +43,17 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
 3. Create the proxy-server-root-certificate secret.
 
+    > **Purpose**: This secret contains the Root CA certificate used to establish **secure TLS communication between the Authorization sidecar** (running alongside the CSI driver) **and the CSM Authorization Proxy Server** (exposed via Ingress). It is **not** related to the TLS certificate of the backend storage array.
+
+    **Where to get `rootCertificate.pem`:**
+    - If CSM Authorization was installed with a **self-signed certificate** (via cert-manager), extract the CA certificate from the cert-manager CA secret (e.g., `karavi-selfsigned-tls`) in the `authorization` namespace.
+    - If CSM Authorization was installed with **your own certificate**, provide the **Root CA certificate that signed it** (the root of the certificate chain that the Proxy Server's TLS certificate was issued from).
+    - If running in **insecure mode** (not recommended for production), create the secret with empty data and set `skipCertificateValidation` to `true` in the driver configuration.
+
+    **Relationship with `skipCertificateValidation`:**
+    - When `SKIP_CERTIFICATE_VALIDATION` is set to `true` in the Authorization sidecar configuration (Step 5), the sidecar skips TLS verification of the Proxy Server, and this secret can be empty.
+    - When `SKIP_CERTIFICATE_VALIDATION` is set to `false`, this secret must contain a valid Root CA certificate.
+
     If running in *insecure* mode, create the secret with empty data:
 
       ```bash
