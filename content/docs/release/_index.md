@@ -24,6 +24,13 @@ Description: >
 > * <span><span/>{{< message text="16" >}}
 > * <span><span/>{{< message text="24" >}}
 
+## Release Notes for v1.16.3
+
+### Fixed Issues
+
+- CSM PowerMax - Fix Driver deleted volume before driver is able to attach with no DeleteVolume when driver is installed with multiple controllers.
+- CSM PowerFlex - Fix Support for ROX - MULTI_NODE_READER_ONLY access mode with CSI PowerFlex.
+
 ## Release Notes for v1.16.2
 
 ### Fixed Issues

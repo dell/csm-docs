@@ -21,7 +21,7 @@ weight: 1
 |<div style="text-align:left"> COSI | {{< version-docs key="cosi" >}} |
 {{</table>}}
 
-### Container Storage Modules Certified Operator 1.11.2 Images
+### Container Storage Modules Certified Operator 1.11.3 Images
 
 <ul>
 {{< collapse id="1" title="PowerStore" show="true">}}
