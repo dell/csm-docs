@@ -61,6 +61,7 @@ A `storage` entity in Container Storage Modules Authorization consists of the st
 
 >__Note__:
 > - You must specify exactly one option for the storageSystemCredentials field, e.g. secretProviderClass.
+> - For PowerStore, the endpoint must be appeneded with `/api/rest`. For example, `https://10.0.0.1/api/rest`.
 
 Edit these parameters in the manifest:
 
