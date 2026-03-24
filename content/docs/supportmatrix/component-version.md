@@ -120,7 +120,7 @@ weight: 1
 | Version/Digest | Image |
 | - | - |
 | 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
-| 2.16.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerflex@sha256:96e270ec08263da917e4ad4c9aab897e5d519c1b5003fdf245e25ecfef7d1cb5 |
+| 2.16.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerflex@sha256:96e270ec08263da917e4ad4c9aab897e5d519c1b5003fdf245e25ecfef7d1cb5 |
 | 1.14.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powerflex@sha256:439656d2a594ee43fe95b1dee29daa6efcebc6a71b7f779c4bd88dd37315aac1 |
 | 5.0 |<div style="text-align:left"> quay.io/dell/storage/powerflex/sdc@sha256:1436844390ea95507bf0a24c68a300a355f010a90ed654a42a1f091482b6a0fc |
 | 6.1.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:6b5a502366ecd4ed81bcdc768699fe431ab70437324f5a7883e9f49a5d640863 |
@@ -166,8 +166,8 @@ weight: 1
 | Version/Digest | Image |
 | - | - |
 | 1.11.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:0a9a1134690465ffe3963f243ebd912325aa2b34c502585dafce68aeb2543a46 |
-| 2.16.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax@sha256:ae69cdc9b0afca8ff91bc8b763ac3a864afc221e5044a123674a79fbbb24d087 |
-| 2.15.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax-reverseproxy@sha256:fab25a4fcad61509ba774bda2675c7a94547f544a90f6462ac2c5e8e6ebd02b8 |
+| 2.16.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax@sha256:ae69cdc9b0afca8ff91bc8b763ac3a864afc221e5044a123674a79fbbb24d087 |
+| 2.15.2 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax-reverseproxy@sha256:fab25a4fcad61509ba774bda2675c7a94547f544a90f6462ac2c5e8e6ebd02b8 |
 | 1.9.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powermax@sha256:4db12d3d888b537012394dc69b440568ee96a5495e508fc25bef92acb2393edd |
 | 6.1.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:6b5a502366ecd4ed81bcdc768699fe431ab70437324f5a7883e9f49a5d640863 |
 | 4.10.0 |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-attacher@sha256:8a46d7ecbb798f19d7ccd7e510a2efec00ae7ba50fd82cc2f5ac45cedbab0bc1 |

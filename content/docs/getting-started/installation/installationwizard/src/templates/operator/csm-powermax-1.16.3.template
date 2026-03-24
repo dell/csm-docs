@@ -18,7 +18,7 @@ metadata:
   name: powermax
   namespace: $NAMESPACE
 spec:
-  version: v1.16.2
+  version: v1.16.3
   # Add fields here
   driver:
     csiDriverType: "powermax"
