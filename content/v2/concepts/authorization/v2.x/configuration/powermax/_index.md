@@ -73,10 +73,10 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
         password: -
         skipCertificateValidation: true
         limits:
-          maxActiveRead: 10
-          maxActiveWrite: 10
-          maxOutstandingRead: 10
-          maxOutstandingWrite: 10
+          maxActiveRead: 5
+          maxActiveWrite: 4
+          maxOutstandingRead: 50
+          maxOutstandingWrite: 50
     ```
 
     **Helm**
@@ -98,10 +98,10 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
         password: -
         skipCertificateValidation: true
         limits:
-          maxActiveRead: 10
-          maxActiveWrite: 10
-          maxOutstandingRead: 10
-          maxOutstandingWrite: 10
+          maxActiveRead: 5
+          maxActiveWrite: 4
+          maxOutstandingRead: 50
+          maxOutstandingWrite: 50
     ```
 
 5. **Operator Only**: Prepare the reverse proxy configMap using sample [here](https://github.com/dell/csm-operator/tree/release/{{< version-v2 key="csm-operator_latest_version" >}}/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.

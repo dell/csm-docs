@@ -141,7 +141,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
 4. **Create the Reverse Proxy TLS Secret**
 
-    Referencing the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](./#csi-powermax-reverse-proxy) prerequisite, create the `csirevproxy-tls-secret` secret.
+    Referencing the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite/#csi-powermax-reverse-proxy) prerequisite, create the `csirevproxy-tls-secret` secret.
     ```bash
     oc create secret -n powermax tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
     ```
