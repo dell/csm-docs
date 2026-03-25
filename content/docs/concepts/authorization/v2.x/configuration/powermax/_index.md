@@ -8,7 +8,6 @@ description: >
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
-
 ## Configuring PowerMax CSI Driver with Container Storage Modules for Authorization
 
 Given a setup where Kubernetes, a storage system, and the Container Storage Modules for Authorization Proxy Server are deployed, follow these steps to configure the CSI Drivers to work with the Authorization sidecar:
