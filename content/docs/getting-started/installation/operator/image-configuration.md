@@ -18,7 +18,7 @@ Create a `ConfigMap` that defines **all container images** for the CSM version b
 
 **Important**: ConfigMap takes precedence over all other settings.
 
-**Certified OCP Example**: [OCP Example](https://github.com/dell/csm-operator/blob/main/samples/ocp/1.11.2/ocp_configmap.yaml)
+**Certified OCP Example**: [OCP Example](https://github.com/dell/csm-operator/blob/main/samples/ocp/1.11.3/ocp_configmap.yaml)
 
 **Example for upstream k8s and OCP environments.**:
  ```yaml
