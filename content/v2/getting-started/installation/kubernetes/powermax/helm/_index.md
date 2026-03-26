@@ -60,10 +60,10 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
         password: password
         skipCertificateValidation: true
         limits:
-          maxActiveRead: 10
-          maxActiveWrite: 10
-          maxOutstandingRead: 10
-          maxOutstandingWrite: 10
+          maxActiveRead: 5
+          maxActiveWrite: 4
+          maxOutstandingRead: 50
+          maxOutstandingWrite: 50
       - endpoint: https://backup-1.unisphe.re:8443
         username: admin2
         password: password2

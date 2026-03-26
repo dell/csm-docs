@@ -68,10 +68,10 @@ Create the karavi-authorization-config secret using this command:
         password: -
         skipCertificateValidation: true
         limits:
-          maxActiveRead: 10
-          maxActiveWrite: 10
-          maxOutstandingRead: 10
-          maxOutstandingWrite: 10
+          maxActiveRead: 5
+          maxActiveWrite: 4
+          maxOutstandingRead: 50
+          maxOutstandingWrite: 50
     ```
 
     **Operator**
@@ -93,10 +93,10 @@ Create the karavi-authorization-config secret using this command:
         password: -
         skipCertificateValidation: true
         limits:
-          maxActiveRead: 10
-          maxActiveWrite: 10
-          maxOutstandingRead: 10
-          maxOutstandingWrite: 10
+          maxActiveRead: 5
+          maxActiveWrite: 4
+          maxOutstandingRead: 50
+          maxOutstandingWrite: 50
     ```
 
 5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
