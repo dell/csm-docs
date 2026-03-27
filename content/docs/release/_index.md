@@ -28,9 +28,9 @@ Description: >
 
 ### Fixed Issues
 
-- CSM PowerMax - Fix Driver deleted volume before driver is able to attach with no DeleteVolume when driver is installed with multiple controllers.
-- CSM PowerMax - Fix failed detection of existing portgroups on v3 arrays.
-- CSM PowerFlex - Fix Support for ROX - MULTI_NODE_READER_ONLY access mode with CSI PowerFlex.
+- CSM PowerMax - Prevented volumes from being deleted before attachment in multi‑controller driver setups.
+- CSM PowerMax - Fixed incorrect detection of existing port groups on v3 arrays.
+- CSM PowerFlex - Fixed support for the MULTI_NODE_READER_ONLY (ROX) access mode.
 
 ## Release Notes for v1.16.2
 
