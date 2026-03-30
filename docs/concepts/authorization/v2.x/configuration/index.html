@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Configuration">
   <meta itemprop="description" content="Configure Container Storage Modules Authorization Proxy Server">
-  <meta itemprop="dateModified" content="2025-09-10T00:18:32+05:30">
-  <meta itemprop="wordCount" content="978">
+  <meta itemprop="dateModified" content="2026-03-25T14:06:44-04:00">
+  <meta itemprop="wordCount" content="990">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Configuration">
   <meta name="twitter:description" content="Configure Container Storage Modules Authorization Proxy Server">
@@ -73,10 +73,10 @@
       
     
     
-    1.16.2
+    1.16.3
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.3</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.4fe479a09f2f03f6f774272bd77d4adf.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.c0ed68bcc53ee1ae1e5e132e3aa32b70.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4099,6 +4099,7 @@ Configuring Storage <a class="header-link"  href="#configuring-storage" style=" 
 <p><strong>Note</strong>:</p>
 <ul>
 <li>You must specify exactly one option for the storageSystemCredentials field, e.g. secretProviderClass.</li>
+<li>For PowerStore, the endpoint must be appended with <code>/api/rest</code>. For example, <code>https://10.0.0.1/api/rest</code>.</li>
 </ul></blockquote>
 <p>Edit these parameters in the manifest:</p>
 <table>
