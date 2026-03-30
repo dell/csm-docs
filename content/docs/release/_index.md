@@ -24,6 +24,14 @@ Description: >
 > * <span><span/>{{< message text="16" >}}
 > * <span><span/>{{< message text="24" >}}
 
+## Release Notes for v1.16.3
+
+### Fixed Issues
+
+- CSM PowerMax - Prevented volumes from being deleted before attachment in multi‑controller driver setups.
+- CSM PowerMax - Fixed incorrect detection of existing port groups on v3 arrays.
+- CSM PowerFlex - Fixed support for the MULTI_NODE_READER_ONLY (ROX) access mode.
+
 ## Release Notes for v1.16.2
 
 ### Fixed Issues
