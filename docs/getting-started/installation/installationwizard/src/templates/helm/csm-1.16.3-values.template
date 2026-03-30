@@ -135,13 +135,13 @@ csi-powermax:
     transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
     useSecret: $REVPROXY_USE_SECRET
     managedArrays: "$POWERMAX_STORAGE_ARRAY_ID"
-  version: v2.16.1
+  version: v2.16.2
   images:
     # "driver" defines the container image, used for the driver container.
     driver: 
-      image: quay.io/dell/container-storage-modules/csi-powermax:v2.16.1
+      image: quay.io/dell/container-storage-modules/csi-powermax:v2.16.2
     csireverseproxy: 
-      image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.1
+      image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.2
     # CSI sidecars
     attacher: 
       image: registry.k8s.io/sig-storage/csi-attacher:v4.10.0
@@ -251,11 +251,11 @@ csi-powermax:
 ##########################################
 csi-vxflexos:
   enabled: $POWERFLEX_ENABLED
-  version: v2.16.0
+  version: v2.16.1
   images:
     # "driver" defines the container image, used for the driver container.
     driver: 
-      image: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.0
+      image: quay.io/dell/container-storage-modules/csi-vxflexos:v2.16.1
     # "powerflexSdc" defines the SDC image for init container.
     powerflexSdc: 
       image: dellemc/sdc:5.0

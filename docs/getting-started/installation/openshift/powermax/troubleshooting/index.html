@@ -21,7 +21,7 @@
   <meta itemprop="name" content="Troubleshooting">
   <meta itemprop="description" content="Operator Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI? How can I view detailed logs for the Container Storage Modules Operator? My Dell CSI Driver install failed. How do I fix it? My Container Storage Module Replication install fails to validate replication prechecks with ’no such host’. How to update resource limits for Container Storage Modules Operator when it is deployed using Operator hub Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? The Container Storage Modules Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage Module Operator">
   <meta itemprop="dateModified" content="2025-05-13T20:06:59+05:30">
-  <meta itemprop="wordCount" content="1551">
+  <meta itemprop="wordCount" content="1558">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Troubleshooting">
   <meta name="twitter:description" content="Operator Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI? How can I view detailed logs for the Container Storage Modules Operator? My Dell CSI Driver install failed. How do I fix it? My Container Storage Module Replication install fails to validate replication prechecks with ’no such host’. How to update resource limits for Container Storage Modules Operator when it is deployed using Operator hub Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? The Container Storage Modules Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage Module Operator">
@@ -73,10 +73,10 @@
       
     
     
-    1.16.2
+    1.16.3
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.3</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.4fe479a09f2f03f6f774272bd77d4adf.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.c0ed68bcc53ee1ae1e5e132e3aa32b70.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4310,7 +4310,7 @@ How to update resource limits for CSM Operator when it is deployed using Operato
       </tr>
       <tr>
           <td>Despite having <code>skipCertificateValidation</code> set to true, the driver fails to start with the following error appearing in the reverseproxy container logs: <code>[ERROR]  Failed to run server: secrets &quot;xxx&quot; not found</code></td>
-          <td>Remove the <code>certSecret</code> field from your secret/configmap</td>
+          <td>Upgrade PowerMax ReverseProxy image to v2.16.0 or remove the <code>certSecret</code> field from your secret/configmap</td>
       </tr>
   </tbody>
 </table>
