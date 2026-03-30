@@ -24,62 +24,15 @@ Description: >
 > * <span><span/>{{< message text="16" >}}
 > * <span><span/>{{< message text="24" >}}
 
-## Release Notes for v1.16.2
-
-### Fixed Issues
-
-- CSM PowerMax - Fix Clone API Failure on V3 Microcode Arrays by Enforcing Version-Based Fallback to Legacy Snapshot Workflow
-
-## Release Notes for v1.16.1
-
-### Fixed Issues
-
-- CSM Operator – Fixed CSI sidecar images not updating when using a custom registry.
-- CSM Operator – Fixed offline bundle creation failing to fetch `docker.io/openpolicyagent/kube-mgmt:9.3.0` on OpenShift.
-
-## Release Notes for v1.16.0
+## Release Notes for v1.17.0
 
 ### New Features/Changes
 
-- Support for NVMe‑over‑TCP protocol enablement in CSI PowerFlex 4.x and 5.x
-- Support for OIDC‑based Single Sign‑On (OpenID Connect SSO) integration with CSI PowerFlex
-- Support for using multiple storage groups with a single storage class in PowerMax
-- Support added for SUSE storage Virtualization for CSI PowerMax, CSI PowerStore and CSI PowerFlex
-- Support added for Kubernetes storage Virtualization (KubeVirt) for CSI PowerMax, CSI PowerStore and CSI PowerFlex
-- Support for upgrading through CSM Operator using CSM Version
-- Support PowerStore Metro Non-Uniform Host Connectivity
-- Support PowerStore High Availability and degraded modes for Metro volumes during Site Failure
-- Support for Metro Replication environments using the Optimize Both Host Registration setting with witness enabled
-- Enabled scalable Kubernetes system metrics collection for observability and visualization across PowerFlex, PowerMax, PowerStore and PowerScale
-- Enabled scalable KubeVirt VM metrics collection for observability and visualization across PowerStore, PowerMax and PowerFlex
-- Support Offline Installation with OLM
-- PowerStore Async File Replication
-- PowerStore Sync File Replication
-- Support for PowerFlex 5.0
-- Support for PowerScale 9.13
-- CSI Specification 1.7 compliance on PowerStore, PowerFlex
-- Support for condensing secret files during Auth v2 deployment for PowerStore, PowerFlex, PowerScale and PowerMax
-- Streamlined installation of CSI PowerStore via dellctl for CSM Operator
-- Container Object Storage Interface (COSI) driver compliance for ObjectScale 4.x
-- Optimize volume provisioning and publishing in CSI PowerMax Unisphere 10.3
+- Support for PowerMax Unisphere 10.4
+- Optimize volume provisioning and publishing in CSI PowerMax Unisphere 10.4
 
 ### Fixed Issues
 
-- CSI node pod crashes while unmounting PowerStore LUNs
-- CSI PowerStore NVMe doesn't work with multiple VLANs
-- Pod Recovery by CSM Resiliency fails with panic in CSI PowerMax controller during node failure
-- Volume metrics API returns no data when optional filtering is applied - PowerMax
-- CSI PowerMax fails to switch to embedded Unisphere during Primary Unisphere failure
-- NodeUnstageVolume reports success even though flushing the volume fails - Unity
-- NodeUnstageVolume reports success even though flushing the volume fails - PowerStore
-- FC StageVolume fails to rescan all multipath sd paths when stale WWIDs are present - PowerMax
-- CSM Replication PowerScale - failback operation do not swap PVC
-- Topology keys disappear after restart of CSI node pod in CSI-PowerStore driver for FC protocol
-- CSI PowerMax Driver: Storage pool metrics are not collected in a multi availability zone setup
-- Modify an NFS export for a NAS server’s file system- repeated Failed Messages - PowerStore
-- Fix NFS Volume access logic to enforce only user‑specified external access - PowerStore
-- Replication - Remote PV does not get MountOptions from SC
-- PowerStore - Incorrect Host is parsed from the NodeID
 
 ### Known Issues
 
