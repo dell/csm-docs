@@ -44,6 +44,8 @@ Starting from CSM version 1.16, users can utilize the <code>spec.version</code> 
 Starting with CSM v1.16 and CSM Authorization v2.4.0, users can utilize the <code>spec.version</code> parameter for automatic image management.</br> For more details click on <a href='{{ relref . "docs/getting-started/installation/operator/image-configuration.md" }}'>Advanced Image Configuration Options</a> section. </br> </br> </br> <b>If neither method is configured, the operator automatically falls back to using the default image set associated with the Authorization Proxy Server. This fallback only works for CSM 1.16 (Authorization v2.4.0).</b>
 {{ else if eq (.Get "text") "24" }}
 As of Container Storage Modules (CSM) v1.16, the Installation Wizard will be deprecated. To ensure a streamlined and fully supported deployment experience, User should transition to the automated installation workflow using <a href="/csm-docs/docs/tooling/cli/#dellctl-install">dellctl</a>
+{{ else if eq (.Get "text") "25" }}
+<span style="color: #036cc2;"><b>We are moving! Our Dell CSM documentation will be moving to Dell.com at the end of May 2026. Stay tuned for our new location. </b></span>
 {{else}}
 <p>Default text if no valid parameter is passed.</p>
 {{ end }}
