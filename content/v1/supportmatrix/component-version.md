@@ -20,7 +20,7 @@ weight: 1
 |<div style="text-align:left"> Resiliency | {{< version-v1 key="karavi-resiliency" >}} |
 {{</table>}}
 
-### Container Storage Modules Certified Operator 1.10.1 Images
+### Container Storage Modules Certified Operator 1.10.3 Images
 
 <ul>
 {{< collapse id="1" title="PowerStore" show="true">}}
