@@ -72,11 +72,11 @@
       
     
     
-    1.15.1
+    1.15.2
   </a>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.3</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
     </ul> 
@@ -202,7 +202,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.cb476f6703fa70d079856af3ee6fae4a.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.ff57eaf487b240a43b79c66b70a023c0.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3984,7 +3984,7 @@ vxflexos-config      Opaque      1      3h7m
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">csiDriverType</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;powerflex&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v2.15.1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v2.15.2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF </span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div> </div>
 <p><strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/release/v1.10.1/samples/v2.15.0/storage_csm_powerflex_v2151.yaml">sample file</a> for detailed settings.</p>
@@ -4210,7 +4210,7 @@ Check if ContainerStorageModule CR is created successfully:
 <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get csm vxflexos -n vxflexos
 
 NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                                           STATE
-vxflexos    3h             powerflex       v2.15.1         Succeeded
+vxflexos    3h             powerflex       v2.15.2         Succeeded
 </code></pre><p>Check the status of the CR to verify if the driver installation is in the <code>Succeeded</code> state. If the status is not <code>Succeeded</code>, see the <a href="../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it">Troubleshooting guide</a> for more information.</p>
 </ul>
 <br> 

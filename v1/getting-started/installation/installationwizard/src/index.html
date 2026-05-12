@@ -17,10 +17,10 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v1">
-    <meta property="article:modified_time" content="2025-11-06T13:25:34+05:30">
+    <meta property="article:modified_time" content="2026-05-13T00:37:13+05:30">
 
   <meta itemprop="description" content="&lt;!DOCTYPE html&gt; CSM Installation Wizard | Dell Technologies Container Storage Modules (CSM) Installation Wizard Configure installation settings and repository Installation Type Select the Installation type Helm Operator Array Select the Array PowerStore PowerMax PowerScale PowerFlex Unity XT Image Repository Reset to default CSM Version CSM 1.13 CSM 1.14 CSM 1.15 Select modules for installation Observability Observability Metrics Observability Observability Metrics Observability Topology Observability Otel Collector Replication Target Cluster ID Target Array ID Target Unisphere Resiliency Resiliency Label Value Reset to default Array Connectivity Poll Rate Reset to default Skip Array Connection Validation Leader Election Driver Pod Label Value Reset to default Ignore Volumeless Pods Array Connectivity ConnectionLoss Threshold Reset to default Select the features for installation Authorization Authorization Skip Certificate Validation Proxy Host Cert Manager Health Monitor Migration Resizer Snapshot Snap Name Prefix Reset to default Install SDC SDC is required for using block storage. Verify your environment is supported on the SDC Release Notes before selecting this option. If your environment is not supported, refer to the manual installation instructions on the CSM Documentation. Enable SDC SFTP Repo Address for SDC SFTP Repo Username for SDC SFTP Repo Private secret name for SDC SFTP Repo Public secret name for SDC SFTP Repo Allow driver to rename SDC to match name of node Prefix to apply for SDC names Allow driver to approve SDC Storage Capacity Tracking Volume Group Snapshot Max Volumes Per Node Reset to default NFS volume operations Quota Other configurations for installation Storage Array Id Storage Array Endpoint URL Storage Array Backup Endpoint URL Managed Array Id Managed Array Endpoint URL CSI Reverse Proxy Cluster Prefix Port Groups Transport Protocol iSCSI CHAP Node Topology vSphere fc Port Group fc Host Name vCenter Host vCenter Cred Secret Allow Monitoring Pod Certificate Secret Count FS Group Policy ReadWriteOnceWithFSType File None Controller Pods Count Reset to default Credentials Secret ConfigMap Volume Name Prefix Reset to default Multi NAS Failure Threshold Reset to default Multi NAS Cooldown Period Reset to default Install Controller Pods On Control Plane Install Node Pods On Control Plane Node Selector Label Reset to default Taint Reset to default Namespace Reset to default Generate YAML Copy Click on the documentation link for the steps to generate the certificates">
-  <meta itemprop="dateModified" content="2025-11-06T13:25:34+05:30">
+  <meta itemprop="dateModified" content="2026-05-13T00:37:13+05:30">
   <meta itemprop="wordCount" content="371">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Dell Technologies">
@@ -72,11 +72,11 @@
       
     
     
-    1.15.1
+    1.15.2
   </a>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.16.3</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.15.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.13.2</a></li>
     </ul> 
@@ -202,7 +202,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.cb476f6703fa70d079856af3ee6fae4a.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.ff57eaf487b240a43b79c66b70a023c0.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3957,7 +3957,7 @@ disable_footer: true
                       <select id="csm-version" class="form-select" onchange="onCSMVersionChange(); validateInput(validateForm, CONSTANTS)" required>
                         <option value="1.13.0">CSM 1.13</option>
                         <option value="1.14.0" >CSM 1.14</option>
-                        <option value="1.15.1" selected>CSM 1.15</option>
+                        <option value="1.15.2" selected>CSM 1.15</option>
                       </select>
                     </div>
                   </div>
