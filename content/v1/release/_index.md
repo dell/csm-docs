@@ -24,6 +24,12 @@ Description: >
 > * <span><span/>{{< message text="16" >}}
 
 
+## Release Notes for v1.15.2
+
+### Fixed Issues
+
+- PowerFlex - CVE remediation in CSM 1.15.X for PowerFlexDriver
+
 ## Release Notes for v1.15.1
 
 ### Fixed Issues
