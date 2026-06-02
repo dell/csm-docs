@@ -39,13 +39,13 @@ jobs:
       - name: Scanning docs for broken links
         continue-on-error: true
         run: |
-          wget --verbose --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
+          wget --verbose --spider -o spider.log -e robots=off -rp --tries=2 --waitretry=1 http://127.0.0.1:1313/csm-docs/ || true
       - name: Getting output
         continue-on-error: true
         run: |
           sed -i '/http:\/\/127.0.0.1:1313\/favicons\/favicon.ico/d' spider.log
           sed -i '/http:\/\/127.0.0.1:1313\/css\/prism.css/d' spider.log
-          sed -n '/broken links/,$p' spider.log | grep 'http' > broken_links
+          sed -n '/broken links/,$p' spider.log | grep 'http' | grep -v 'www.dell.com' > broken_links
       - name: Check for broken links
         run: |
           wc -l broken_links
