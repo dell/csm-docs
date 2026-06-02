@@ -11,6 +11,8 @@ weight: 2
 <hr>
 <br>
 
+{{< message text="25" >}}
+<br>
 This section provides detailed instructions on how to install, upgrade, and uninstall Container Storage Modules.
 
 {{< cardcontainer >}}
