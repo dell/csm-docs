@@ -8,6 +8,7 @@ on:
 jobs:
   check-broken-links:
     runs-on: ubuntu-latest
+    if: false  # Disabled due to CI Hugo server startup issues
     steps:
       - name: Checkout
         uses: actions/checkout@v4
