@@ -34,8 +34,9 @@ jobs:
          npm install -D --save postcss-cli
          npm install -D --save postcss
          hugo server --bind 127.0.0.1 &
+         sleep 30
       - name: Wait for Hugo server
-        run: curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
+        run: curl --head -X GET --retry 10 --retry-connrefused --retry-delay 5 http://127.0.0.1:1313/csm-docs/
       - name: Scanning docs for broken links
         continue-on-error: true
         run: |
