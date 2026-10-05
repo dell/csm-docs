@@ -6,6 +6,8 @@ no_list: true
 weight: 1
 ---
 
+{{< message text="25" >}}
+
 ## Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm tdleft">}}
