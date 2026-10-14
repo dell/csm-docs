@@ -781,14 +781,6 @@ Generate an administrator token for administrating CSM Authorization v2
 dellctl admin token -n <administrator-name> --jwt-signing-secret <signing-secret>
 ```
 
-```bash
-# dellctl admin token -n admin --jwt-signing-secret secret
-{
-  "Access": "<JWT-TOKEN-REMOVED>",
-  "Refresh": "<JWT-TOKEN-REMOVED>"
-}
-```
-
 ---
 
 ### dellctl generate token
@@ -813,17 +805,4 @@ Global Flags:
 
 ```bash
 dellctl generate token --admin-token <admin-token-file> --addr <csm-authorization-address> --tenant <tenant-name>
-```
-
-```bash
-# dellctl admin token -n admin --jwt-signing-secret secret
-apiVersion: v1
-data:
-  access: <BASE64-TOKEN-REMOVED>
-  refresh: <BASE64-TOKEN-REMOVED>
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: proxy-authz-tokens
-type: Opaque
 ```

@@ -121,21 +121,12 @@ karavictl admin token [flags]
 $ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m
 $ Enter JWT Signing Secret: ***********
 
-{
-  "Access": <ACCESS-TOKEN>,
-  "Refresh": <REFRESH-TOKEN>
-}
-
 ```
 Alternatively, one can supply JWT signing secret with command.
 
 ```bash
 
-$ karavictl admin token --name admin --jwt-signing-secret secret --access-token-expiration 30s --refresh-token-expiration 120m
-{
-  "Access": <ACCESS-TOKEN>,
-  "Refresh": <REFRESH-TOKEN>
-}
+$ karavictl admin token --name admin --jwt-signing-secret <signing-secret> --access-token-expiration 30s --refresh-token-expiration 120m
 
 ```
 

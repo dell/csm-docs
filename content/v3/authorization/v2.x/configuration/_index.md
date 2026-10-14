@@ -162,7 +162,7 @@ Once the tenant is created, an access/refresh token pair can be created for the 
 Generate an administrator token:
 
 ```bash
-dellctl admin token  -n <administrator-name> --access-token-expiration 1m30s --refresh-token-expiration 720h --jwt-signing-secret <secret> > admin.yaml
+dellctl admin token  -n <administrator-name> --access-token-expiration 1m30s --refresh-token-expiration 720h --jwt-signing-secret <signing-secret> > admin.yaml
 ```
 
 You can also pass in the `jwt-signing-secret` via terminal prompt by not supplying the `--jwt-signing-secret` argument:
@@ -172,21 +172,7 @@ dellctl admin token  -n <administrator-name> --access-token-expiration 1m30s --r
 ```
 
 ```bash
-  dellctl generate token --admin-token admin.yaml --addr csm-authorization.com:<ingress-controller-port> --insecure true --tenant <tenant> --access-token-expiration 30m0s --refresh-token-expiration 1480h0m0s > token.yaml
-```
-
-`token.yaml` will have a Kubernetes secret manifest that looks like this:
-
-```yaml
-apiVersion: v1
-data:
-  access: <BASE64-TOKEN-REMOVED>
-  refresh: <BASE64-TOKEN-REMOVED>
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: proxy-authz-tokens
-type: Opaque
+dellctl generate token --admin-token admin.yaml --addr csm-authorization.com:<ingress-controller-port> --insecure true --tenant <tenant> --access-token-expiration 30m0s --refresh-token-expiration 1480h0m0s > token.yaml
 ```
 
 This secret must be applied in the driver namespace.
