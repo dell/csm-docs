@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Configuration">
   <meta itemprop="description" content="Configure CSM Authorization Proxy Server">
-  <meta itemprop="dateModified" content="2025-06-05T13:26:25-04:00">
-  <meta itemprop="wordCount" content="919">
+  <meta itemprop="dateModified" content="2026-10-14T21:30:15+05:30">
+  <meta itemprop="wordCount" content="892">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Configuration">
   <meta name="twitter:description" content="Configure CSM Authorization Proxy Server">
@@ -202,7 +202,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.7ab80bd4d3807281df9bfe9fbcf139be.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.27f38b32b1588e6655a57bf5e09960c0.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -2951,21 +2951,11 @@ Generate a Token <a class="header-link"  href="#generate-a-token" style=" displa
             </svg>
         </a></h3><p>Once the tenant is created, an access/refresh token pair can be created for the tenant. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.</p>
 <p>Generate an administrator token:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dellctl admin token  -n &lt;administrator-name&gt; --access-token-expiration 1m30s --refresh-token-expiration 720h --jwt-signing-secret &lt;secret&gt; &gt; admin.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dellctl admin token  -n &lt;administrator-name&gt; --access-token-expiration 1m30s --refresh-token-expiration 720h --jwt-signing-secret &lt;signing-secret&gt; &gt; admin.yaml
 </span></span></code></pre></div><p>You can also pass in the <code>jwt-signing-secret</code> via terminal prompt by not supplying the <code>--jwt-signing-secret</code> argument:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dellctl admin token  -n &lt;administrator-name&gt; --access-token-expiration 1m30s --refresh-token-expiration 720h &gt; admin.yaml
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  dellctl generate token --admin-token admin.yaml --addr csm-authorization.com:&lt;ingress-controller-port&gt; --insecure <span style="color:#204a87">true</span> --tenant &lt;tenant&gt; --access-token-expiration 30m0s --refresh-token-expiration 1480h0m0s &gt; token.yaml
-</span></span></code></pre></div><p><code>token.yaml</code> will have a Kubernetes secret manifest that looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">access</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000"><BASE64-TOKEN-REMOVED></span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">refresh</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000"><BASE64-TOKEN-REMOVED></span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Secret</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">creationTimestamp</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">null</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">proxy-authz-tokens</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Opaque</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><p>This secret must be applied in the driver namespace.</p>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dellctl generate token --admin-token admin.yaml --addr csm-authorization.com:&lt;ingress-controller-port&gt; --insecure <span style="color:#204a87">true</span> --tenant &lt;tenant&gt; --access-token-expiration 30m0s --refresh-token-expiration 1480h0m0s &gt; token.yaml
+</span></span></code></pre></div><p>This secret must be applied in the driver namespace.</p>
 <blockquote>
 <p><strong>Note</strong>:</p>
 <ul>

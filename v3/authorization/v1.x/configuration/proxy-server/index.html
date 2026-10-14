@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Proxy Server">
   <meta itemprop="description" content="Configuring the CSM for Authorization Proxy Server">
-  <meta itemprop="dateModified" content="2025-06-05T13:26:25-04:00">
-  <meta itemprop="wordCount" content="884">
+  <meta itemprop="dateModified" content="2026-10-14T21:30:15+05:30">
+  <meta itemprop="wordCount" content="845">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Proxy Server">
   <meta name="twitter:description" content="Configuring the CSM for Authorization Proxy Server">
@@ -202,7 +202,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.7ab80bd4d3807281df9bfe9fbcf139be.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.27f38b32b1588e6655a57bf5e09960c0.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -2726,18 +2726,10 @@ Configuring Admin Token <a class="header-link"  href="#configuring-admin-token" 
 </span></span><span style="display:flex;"><span>$ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m &gt; admintoken.yaml
 </span></span><span style="display:flex;"><span>$ Enter JWT Signing Secret:
 </span></span><span style="display:flex;"><span>$ cat admintoken.yaml
-</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">&#34;Access&#34;</span>: <span style="color:#4e9a06">&#34;<JWT-TOKEN-REMOVED>&#34;</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">&#34;Refresh&#34;</span>: <span style="color:#4e9a06">&#34;<JWT-TOKEN-REMOVED>&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">}</span>
 </span></span></code></pre></div><p>Alternatively, the JWT signing secret can be specified with the CLI.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ karavictl admin token --name admin  --jwt-signing-secret supersecret --access-token-expiration 30s --refresh-token-expiration 120m &gt; admintoken.yaml
+</span></span><span style="display:flex;"><span>$ karavictl admin token --name admin  --jwt-signing-secret &lt;signing-secret&gt; --access-token-expiration 30s --refresh-token-expiration 120m &gt; admintoken.yaml
 </span></span><span style="display:flex;"><span>$ cat admintoken.yaml
-</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">&#34;Access&#34;</span>: <span style="color:#4e9a06">&#34;<JWT-TOKEN-REMOVED>&#34;</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">&#34;Refresh&#34;</span>: <span style="color:#4e9a06">&#34;<JWT-TOKEN-REMOVED>&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">}</span>
 </span></span></code></pre></div><blockquote>
 <p><strong>Note</strong>:</p>
 <ul>
@@ -2908,17 +2900,7 @@ Helm/Operator Deployment <a class="header-link"  href="#helmoperator-deployment-
             </svg>
         </a></h4><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:&lt;ingress-controller-port&gt; --admin-token admintoken.yaml &gt; token.yaml
-</span></span></code></pre></div><p><code>token.yaml</code> will have a Kubernetes secret manifest that looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">access</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000"><BASE64-TOKEN-REMOVED></span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">refresh</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000"><BASE64-TOKEN-REMOVED></span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Secret</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">creationTimestamp</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">null</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">proxy-authz-tokens</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Opaque</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><p>This secret must be applied in the driver namespace.</p>
+</span></span></code></pre></div><p>This secret must be applied in the driver namespace.</p>
 <blockquote>
 <p><strong>Note</strong>:</p>
 <ul>

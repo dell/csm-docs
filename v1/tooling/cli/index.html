@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="CLI">
   <meta itemprop="description" content="CLI for Dell Container Storage Modules (CSM)">
-  <meta itemprop="dateModified" content="2025-09-18T14:50:08-04:00">
-  <meta itemprop="wordCount" content="1123">
+  <meta itemprop="dateModified" content="2026-10-14T21:30:15+05:30">
+  <meta itemprop="wordCount" content="1085">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="CLI">
   <meta name="twitter:description" content="CLI for Dell Container Storage Modules (CSM)">
@@ -202,7 +202,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.7ab80bd4d3807281df9bfe9fbcf139be.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.27f38b32b1588e6655a57bf5e09960c0.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4191,11 +4191,6 @@ Flags</h5><div class="highlight"><pre tabindex="0" style="background-color:#f8f8
 </span></span><span style="display:flex;"><span>      --refresh-token-expiration duration   Expiration <span style="color:#204a87">time</span> of the refresh token, e.g. 48h <span style="color:#ce5c00;font-weight:bold">(</span>default 720h0m0s<span style="color:#ce5c00;font-weight:bold">)</span>
 </span></span></code></pre></div><h5 id="output-8">
 Output</h5><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dellctl admin token -n &lt;administrator-name&gt; --jwt-signing-secret &lt;signing-secret&gt;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># dellctl admin token -n admin --jwt-signing-secret secret</span>
-</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">&#34;Access&#34;</span>: <span style="color:#4e9a06">&#34;<JWT-TOKEN-REMOVED>&#34;</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">&#34;Refresh&#34;</span>: <span style="color:#4e9a06">&#34;<JWT-TOKEN-REMOVED>&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">}</span>
 </span></span></code></pre></div><hr>
 <h3 id="dellctl-generate-token">
 dellctl generate token <a class="header-link"  href="#dellctl-generate-token" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -4216,16 +4211,6 @@ Flags</h5><div class="highlight"><pre tabindex="0" style="background-color:#f8f8
 </span></span><span style="display:flex;"><span>      --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 </span></span></code></pre></div><h5 id="output-9">
 Output</h5><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dellctl generate token --admin-token &lt;admin-token-file&gt; --addr &lt;csm-authorization-address&gt; --tenant &lt;tenant-name&gt;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># dellctl admin token -n admin --jwt-signing-secret secret</span>
-</span></span><span style="display:flex;"><span>apiVersion: v1
-</span></span><span style="display:flex;"><span>data:
-</span></span><span style="display:flex;"><span>  access: <span style="color:#000"><BASE64-TOKEN-REMOVED></span><span style="color:#ce5c00;font-weight:bold">=</span>
-</span></span><span style="display:flex;"><span>  refresh: <span style="color:#000"><BASE64-TOKEN-REMOVED></span><span style="color:#ce5c00;font-weight:bold">=</span>
-</span></span><span style="display:flex;"><span>kind: Secret
-</span></span><span style="display:flex;"><span>metadata:
-</span></span><span style="display:flex;"><span>  creationTimestamp: null
-</span></span><span style="display:flex;"><span>  name: proxy-authz-tokens
-</span></span><span style="display:flex;"><span>type: Opaque
 </span></span></code></pre></div>
 	
         <div class="section-index">
