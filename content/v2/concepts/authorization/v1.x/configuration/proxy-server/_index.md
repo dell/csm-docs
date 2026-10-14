@@ -40,20 +40,12 @@ An admin token is required for executing `karavictl` commands, with the exceptio
 $ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
 $ Enter JWT Signing Secret:
 $ cat admintoken.yaml
-{
-  "Access": "<JWT-TOKEN-REMOVED>",
-  "Refresh": "<JWT-TOKEN-REMOVED>"
-}
 ```
 Alternatively, the JWT signing secret can be specified with the CLI.
 
 ```bash
-$ karavictl admin token --name admin  --jwt-signing-secret supersecret --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
+$ karavictl admin token --name admin  --jwt-signing-secret <signing-secret> --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
 $ cat admintoken.yaml
-{
-  "Access": "<JWT-TOKEN-REMOVED>",
-  "Refresh": "<JWT-TOKEN-REMOVED>"
-}
 ```
 
 >__Note__:
@@ -173,8 +165,8 @@ karavictl generate token --tenant Finance --insecure --addr csm-authorization.co
 ```yaml
 apiVersion: v1
 data:
-  access: <BASE64-TOKEN-REMOVED>
-  refresh: <BASE64-TOKEN-REMOVED>
+  access: <access-token>
+  refresh: <refresh-token>
 kind: Secret
 metadata:
   creationTimestamp: null
