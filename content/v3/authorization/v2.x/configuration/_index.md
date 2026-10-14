@@ -162,7 +162,7 @@ Once the tenant is created, an access/refresh token pair can be created for the 
 Generate an administrator token:
 
 ```bash
-dellctl admin token  -n <administrator-name> --access-token-expiration 1m30s --refresh-token-expiration 720h --jwt-signing-secret <secret> > admin.yaml
+dellctl admin token  -n <administrator-name> --access-token-expiration 1m30s --refresh-token-expiration 720h --jwt-signing-secret <signing-secret> > admin.yaml
 ```
 
 You can also pass in the `jwt-signing-secret` via terminal prompt by not supplying the `--jwt-signing-secret` argument:
@@ -172,21 +172,7 @@ dellctl admin token  -n <administrator-name> --access-token-expiration 1m30s --r
 ```
 
 ```bash
-  dellctl generate token --admin-token admin.yaml --addr csm-authorization.com:<ingress-controller-port> --insecure true --tenant <tenant> --access-token-expiration 30m0s --refresh-token-expiration 1480h0m0s > token.yaml
-```
-
-`token.yaml` will have a Kubernetes secret manifest that looks like this:
-
-```yaml
-apiVersion: v1
-data:
-  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKamMyMGlMQ0psZUhBaU9qRTNNVFkwTURRd016UXNJbWR5YjNWd0lqb2lZM050ZEdWdVlXNTBMWE5oYlhCc1pTSXNJbWx6Y3lJNkltTnZiUzVrWld4c0xtTnpiU0lzSW5KdmJHVnpJam9pY205c1pURWlMQ0p6ZFdJaU9pSmpjMjB0ZEdWdVlXNTBJbjAuRmtVTGotT01mSW9rN3ZWNmFKQURXR1dva1Bsd1huT2tZeWxSclZjN2F5Zw==
-  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKamMyMGlMQ0psZUhBaU9qRTNNakUzTXpBeU16UXNJbWR5YjNWd0lqb2lZM050ZEdWdVlXNTBMWE5oYlhCc1pTSXNJbWx6Y3lJNkltTnZiUzVrWld4c0xtTnpiU0lzSW5KdmJHVnpJam9pY205c1pURWlMQ0p6ZFdJaU9pSmpjMjB0ZEdWdVlXNTBJbjAudWRYSFZ3MGg1dTdoTjZaVGJlNHgyYXRMWWhIamQta1ZtTFBVUHpXOHNIaw==
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: proxy-authz-tokens
-type: Opaque
+dellctl generate token --admin-token admin.yaml --addr csm-authorization.com:<ingress-controller-port> --insecure true --tenant <tenant> --access-token-expiration 30m0s --refresh-token-expiration 1480h0m0s > token.yaml
 ```
 
 This secret must be applied in the driver namespace.
